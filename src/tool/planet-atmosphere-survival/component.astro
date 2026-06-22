@@ -1,0 +1,404 @@
+---
+import './planet-atmosphere-survival-calculator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+const uiData = JSON.stringify(ui);
+---
+
+<div class="survival-console" id="survival-console" data-ui={uiData}>
+  <section class="survival-summary-card" aria-label={ui.exposureSummary}>
+    <div>
+      <span class="survival-summary-kicker">{ui.atmosphericModel}</span>
+      <h2 id="survival-summary-title">{ui.atmosphericModel}</h2>
+    </div>
+    <div class="survival-summary-readouts">
+      <div>
+        <span>{ui.survival}</span>
+        <strong id="survival-summary-time">-</strong>
+      </div>
+      <div>
+        <span>{ui.limitingFactor}</span>
+        <strong id="survival-summary-limiter">-</strong>
+      </div>
+      <div>
+        <span>{ui.mode}</span>
+        <strong id="survival-summary-mode">{ui.metric}</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="survival-visor" aria-label={ui.riskMap}>
+    <div class="survival-planet">
+      <canvas class="survival-particle-canvas" id="survival-particle-canvas" aria-hidden="true"></canvas>
+      <svg class="survival-orbit" viewBox="0 0 460 460" role="img" aria-label={ui.riskMap}>
+        <defs>
+          <linearGradient id="survival-glow" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#8ee6d8"></stop>
+            <stop offset="55%" stop-color="#f6c85f"></stop>
+            <stop offset="100%" stop-color="#f05d5e"></stop>
+          </linearGradient>
+        </defs>
+        <circle class="survival-shell" cx="230" cy="230" r="172"></circle>
+        <circle class="survival-shell survival-shell-outer" cx="230" cy="230" r="205"></circle>
+        <g class="survival-particles" id="survival-particles"></g>
+        <path class="survival-risk-ring" id="survival-risk-ring" d=""></path>
+        <g id="survival-bars"></g>
+        <circle class="survival-core" cx="230" cy="230" r="92"></circle>
+        <text class="survival-core-time" id="survival-core-time" x="230" y="221">-</text>
+        <text class="survival-core-label" id="survival-core-label" x="230" y="252">-</text>
+      </svg>
+    </div>
+
+    <div class="survival-timeline" aria-label={ui.timeline}>
+      <svg viewBox="0 0 720 170" preserveAspectRatio="none">
+        <path class="survival-timeline-grid" d="M20 138 H700 M20 98 H700 M20 58 H700"></path>
+        <path class="survival-timeline-fill" id="survival-timeline-fill" d=""></path>
+        <path class="survival-timeline-cold" id="survival-timeline-cold" d=""></path>
+        <path class="survival-timeline-line" id="survival-timeline-line" d=""></path>
+        <text class="survival-axis-label survival-axis-y" x="28" y="30">{ui.vitalStress}</text>
+        <text class="survival-axis-label survival-axis-x" x="650" y="124">{ui.timeLabel}</text>
+        <text x="20" y="160">0</text>
+        <text x="160" y="160">20 s</text>
+        <text x="300" y="160">40 s</text>
+        <text x="440" y="160">60 s</text>
+        <text x="580" y="160">80 s</text>
+        <text x="690" y="160">100 s</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="survival-panel" aria-label={ui.controls}>
+    <div class="survival-panel-top">
+      <label class="survival-field survival-field-select" for="survival-body">
+        <span>{ui.destination}</span>
+        <select id="survival-body"></select>
+      </label>
+      <div class="survival-unit-toggle" aria-label={ui.unitSystem}>
+        <button class="is-active active" type="button" data-units="metric">{ui.metric}</button>
+        <button type="button" data-units="imperial">{ui.imperial}</button>
+      </div>
+    </div>
+
+    <p class="survival-note" id="survival-note"></p>
+
+    <div class="survival-grid">
+      <label class="survival-field" for="survival-pressure">
+        <span>{ui.pressure}</span>
+        <output id="survival-pressure-output"></output>
+        <input id="survival-pressure" type="range" min="0" max="9200" step="1" />
+      </label>
+
+      <label class="survival-field" for="survival-temperature">
+        <span>{ui.temperature}</span>
+        <output id="survival-temperature-output"></output>
+        <input id="survival-temperature" type="range" min="-190" max="470" step="1" />
+      </label>
+
+      <label class="survival-field" for="survival-oxygen">
+        <span>{ui.oxygen}</span>
+        <output id="survival-oxygen-output"></output>
+        <input id="survival-oxygen" type="range" min="0" max="25" step="0.1" />
+      </label>
+
+      <label class="survival-field" for="survival-co2">
+        <span>{ui.co2}</span>
+        <output id="survival-co2-output"></output>
+        <input id="survival-co2" type="range" min="0" max="98" step="0.1" />
+      </label>
+    </div>
+
+    <div class="survival-metrics">
+      <div>
+        <span>{ui.limitingFactor}</span>
+        <strong id="survival-limiter">-</strong>
+      </div>
+      <div>
+        <span>{ui.verdict}</span>
+        <strong id="survival-verdict">-</strong>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { ATMOSPHERE_PRESETS, estimateSurvival } from './logic';
+  import type { AtmosphereHazard, PlanetAtmospherePreset, SurvivalTimelinePoint } from './logic';
+
+  const bodySelect = document.getElementById('survival-body') as HTMLSelectElement | null;
+  const note = document.getElementById('survival-note');
+  const pressureInput = document.getElementById('survival-pressure') as HTMLInputElement | null;
+  const temperatureInput = document.getElementById('survival-temperature') as HTMLInputElement | null;
+  const oxygenInput = document.getElementById('survival-oxygen') as HTMLInputElement | null;
+  const co2Input = document.getElementById('survival-co2') as HTMLInputElement | null;
+  const pressureOutput = document.getElementById('survival-pressure-output');
+  const temperatureOutput = document.getElementById('survival-temperature-output');
+  const oxygenOutput = document.getElementById('survival-oxygen-output');
+  const co2Output = document.getElementById('survival-co2-output');
+  const particleCanvas = document.getElementById('survival-particle-canvas') as HTMLCanvasElement | null;
+  const coreTime = document.getElementById('survival-core-time');
+  const coreLabel = document.getElementById('survival-core-label');
+  const limiter = document.getElementById('survival-limiter');
+  const verdict = document.getElementById('survival-verdict');
+  const summaryTitle = document.getElementById('survival-summary-title');
+  const summaryTime = document.getElementById('survival-summary-time');
+  const summaryLimiter = document.getElementById('survival-summary-limiter');
+  const summaryMode = document.getElementById('survival-summary-mode');
+  const bars = document.getElementById('survival-bars');
+  const particles = document.getElementById('survival-particles');
+  const riskRing = document.getElementById('survival-risk-ring');
+  const timelineLine = document.getElementById('survival-timeline-line');
+  const timelineFill = document.getElementById('survival-timeline-fill');
+  const timelineCold = document.getElementById('survival-timeline-cold');
+  const unitButtons = document.querySelectorAll<HTMLButtonElement>('[data-units]');
+  let unitSystem: 'metric' | 'imperial' = 'metric';
+  const particleContext = particleCanvas?.getContext('2d') ?? null;
+  const particleState = {
+    pressure: 0.64,
+    wind: 18,
+    stress: 1,
+    particles: Array.from({ length: 180 }, (_, index) => ({
+      angle: index * 2.399,
+      radius: 0.18 + (index % 90) / 120,
+      speed: 0.001 + (index % 11) * 0.00016,
+      lane: index % 7,
+    })),
+  };
+  const uiData = JSON.parse(document.getElementById('survival-console')!.dataset.ui!);
+
+  const hazardLabels: Record<AtmosphereHazard, string> = { pressure: uiData.hazardPressure, temperature: uiData.hazardTemperature, oxygen: uiData.hazardOxygen, toxicity: uiData.hazardToxicity, wind: uiData.hazardWind };
+  const presetData: Record<string, { name: string; note: string }> = { mars: { name: uiData.presetMars, note: uiData.noteMars }, venus: { name: uiData.presetVenus, note: uiData.noteVenus }, titan: { name: uiData.presetTitan, note: uiData.noteTitan }, jupiter: { name: uiData.presetJupiter, note: uiData.noteJupiter }, 'earth-everest': { name: uiData.presetEverest, note: uiData.noteEverest } };
+  const verdictLabels: Record<string, string> = { seconds: uiData.verdictSeconds, minutes: uiData.verdictMinutes, hours: uiData.verdictHours, extended: uiData.verdictExtended };
+  function presetName(id: string): string { return presetData[id]?.name ?? id; }
+  function presetNote(id: string): string { return presetData[id]?.note ?? ''; }
+
+  function formatDuration(seconds: number): string {
+    if (seconds < 60) return `${Math.round(seconds)} s`;
+    if (seconds < 3600) return `${Math.round(seconds / 60)} min`;
+    if (seconds < 86400) return `${(seconds / 3600).toFixed(1)} h`;
+    return '24 h+';
+  }
+
+  function formatPressure(kpa: number): string {
+    if (unitSystem === 'imperial') return `${(kpa * 0.145038).toLocaleString('en', { maximumFractionDigits: 1 })} psi`;
+    return `${kpa.toLocaleString('en', { maximumFractionDigits: 0 })} kPa`;
+  }
+
+  function formatTemperature(celsius: number): string {
+    if (unitSystem === 'imperial') return `${(celsius * 9 / 5 + 32).toFixed(1)} \u00b0F`;
+    return `${Math.round(celsius)} \u00b0C`;
+  }
+
+  function polarPoint(angle: number, radius: number) {
+    const radians = (angle - 90) * Math.PI / 180;
+    return {
+      x: 230 + Math.cos(radians) * radius,
+      y: 230 + Math.sin(radians) * radius,
+    };
+  }
+
+  function arcPath(progress: number): string {
+    const endAngle = Math.max(0.01, progress) * 359.8;
+    const start = polarPoint(0, 188);
+    const end = polarPoint(endAngle, 188);
+    const largeArc = endAngle > 180 ? 1 : 0;
+    return `M ${start.x} ${start.y} A 188 188 0 ${largeArc} 1 ${end.x} ${end.y}`;
+  }
+
+  function drawBars(result: ReturnType<typeof estimateSurvival>) {
+    if (!bars) return;
+    bars.textContent = '';
+
+    result.hazards.forEach((hazard, index) => {
+      const angle = index * 72;
+      const inner = polarPoint(angle, 111);
+      const outer = polarPoint(angle, 118 + hazard.score * 84);
+      const label = polarPoint(angle, 214);
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', `${inner.x}`);
+      line.setAttribute('y1', `${inner.y}`);
+      line.setAttribute('x2', `${outer.x}`);
+      line.setAttribute('y2', `${outer.y}`);
+      line.classList.add('survival-hazard-spoke');
+      bars.append(line);
+
+      const node = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      node.setAttribute('cx', `${outer.x}`);
+      node.setAttribute('cy', `${outer.y}`);
+      node.setAttribute('r', `${3.2 + hazard.score * 2.8}`);
+      node.classList.add('survival-hazard-node');
+      bars.append(node);
+
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', `${label.x}`);
+      text.setAttribute('y', `${label.y}`);
+      text.textContent = hazardLabels[hazard.hazard];
+      text.classList.add('survival-spoke-label');
+      bars.append(text);
+    });
+  }
+
+  function drawParticles(result: ReturnType<typeof estimateSurvival>) {
+    if (!particles) return;
+    particles.textContent = '';
+
+    const stress = Math.max(...result.hazards.map((hazard) => hazard.score));
+    particles.style.setProperty('--particle-speed', `${Math.max(9, 24 - stress * 13)}s`);
+    particles.style.setProperty('--particle-chaos', `${stress * 8}px`);
+    for (let index = 0; index < 210; index += 1) {
+      const lane = index % 9;
+      const angle = index * 17.8 + lane * 11;
+      const radius = 124 + lane * 10 + Math.sin(index * 1.37) * 8;
+      const point = polarPoint(angle, radius);
+      const tangent = polarPoint(angle + 7 + stress * 12, radius + 6);
+      const dash = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      dash.setAttribute('x1', `${point.x.toFixed(2)}`);
+      dash.setAttribute('y1', `${point.y.toFixed(2)}`);
+      dash.setAttribute('x2', `${tangent.x.toFixed(2)}`);
+      dash.setAttribute('y2', `${tangent.y.toFixed(2)}`);
+      dash.style.setProperty('--particle-opacity', `${0.16 + ((index % 7) / 12) + stress * 0.16}`);
+      dash.style.setProperty('--particle-delay', `${index * -42}ms`);
+      dash.classList.add('survival-particle');
+      particles.append(dash);
+    }
+  }
+
+  function resizeParticleCanvas() {
+    if (!particleCanvas) return;
+    const rect = particleCanvas.getBoundingClientRect();
+    const scale = window.devicePixelRatio || 1;
+    particleCanvas.width = Math.max(1, Math.floor(rect.width * scale));
+    particleCanvas.height = Math.max(1, Math.floor(rect.height * scale));
+  }
+
+  function animateParticleCanvas() {
+    if (!particleCanvas || !particleContext) return;
+
+    const width = particleCanvas.width;
+    const height = particleCanvas.height;
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const orbitRadius = Math.min(width, height) * 0.36;
+    const density = Math.min(1.4, 0.55 + Math.log10(Math.max(1, particleState.pressure + 1)) * 0.18);
+    const chaos = particleState.stress * 0.014 + particleState.wind * 0.00008;
+
+    particleContext.clearRect(0, 0, width, height);
+    particleContext.lineCap = 'round';
+    particleContext.strokeStyle = `rgba(133, 231, 217, ${0.18 + particleState.stress * 0.16})`;
+    particleContext.lineWidth = Math.max(1, width / 520);
+
+    particleState.particles.forEach((particle) => {
+      particle.angle += particle.speed * (1 + particleState.wind / 32 + particleState.stress * 2.4);
+      const wave = Math.sin(particle.angle * 3 + particle.lane) * chaos;
+      const radius = orbitRadius * (particle.radius * density + wave);
+      const nextRadius = radius + 7 + particleState.wind * 0.045;
+      const x = centerX + Math.cos(particle.angle) * radius;
+      const y = centerY + Math.sin(particle.angle) * radius;
+      const x2 = centerX + Math.cos(particle.angle + 0.055 + chaos) * nextRadius;
+      const y2 = centerY + Math.sin(particle.angle + 0.055 + chaos) * nextRadius;
+
+      particleContext.beginPath();
+      particleContext.moveTo(x, y);
+      particleContext.lineTo(x2, y2);
+      particleContext.stroke();
+    });
+
+    window.requestAnimationFrame(animateParticleCanvas);
+  }
+
+  function drawTimeline(points: SurvivalTimelinePoint[]) {
+    const width = 680;
+    const height = 118;
+    const startX = 20;
+    const startY = 138;
+    const step = width / Math.max(1, points.length - 1);
+    const coordinates = points.map((point, index) => {
+      const x = startX + step * index;
+      const y = startY - point.total * height;
+      return `${x.toFixed(1)} ${y.toFixed(1)}`;
+    });
+    timelineLine?.setAttribute('d', `M ${coordinates.join(' L ')}`);
+    timelineFill?.setAttribute('d', `M ${startX} ${startY} L ${coordinates.join(' L ')} L 700 ${startY} Z`);
+    const coldCoordinates = points.map((point, index) => {
+      const x = startX + step * index;
+      const y = startY - Math.max(point.temperature, point.oxygen) * height * 0.74;
+      return `${x.toFixed(1)} ${y.toFixed(1)}`;
+    });
+    timelineCold?.setAttribute('d', `M ${startX} ${startY} L ${coldCoordinates.join(' L ')} L 700 ${startY} Z`);
+  }
+
+  function setPreset(preset: PlanetAtmospherePreset) {
+    if (!pressureInput || !temperatureInput || !oxygenInput || !co2Input) return;
+    pressureInput.value = `${preset.pressureKpa}`;
+    temperatureInput.value = `${preset.temperatureC}`;
+    oxygenInput.value = `${preset.oxygenFraction * 100}`;
+    co2Input.value = `${preset.co2Fraction * 100}`;
+    note!.textContent = presetNote(preset.id);
+  }  function findPreset(): PlanetAtmospherePreset {
+    return ATMOSPHERE_PRESETS.find((p) => p.id === bodySelect?.value) ?? ATMOSPHERE_PRESETS[0];
+  }
+
+  function update() {
+    if (!(pressureInput && temperatureInput && oxygenInput && co2Input)) return;
+    const selectedPreset = findPreset();
+    const result = estimateSurvival({
+      pressureKpa: Number(pressureInput!.value),
+      temperatureC: Number(temperatureInput!.value),
+      oxygenFraction: Number(oxygenInput!.value) / 100,
+      co2Fraction: Number(co2Input!.value) / 100,
+      toxicIndex: selectedPreset.toxicIndex,
+      windMps: selectedPreset.windMps,
+    });
+    particleState.pressure = Number(pressureInput!.value);
+    particleState.wind = selectedPreset.windMps;
+    particleState.stress = Math.max(...result.hazards.map((h) => h.score));
+    pressureOutput!.textContent = formatPressure(Number(pressureInput!.value)); temperatureOutput!.textContent = formatTemperature(Number(temperatureInput!.value));
+    oxygenOutput!.textContent = `${Number(oxygenInput!.value).toFixed(1)}%`;
+    co2Output!.textContent = `${Number(co2Input!.value).toFixed(1)}%`;
+    coreTime!.textContent = formatDuration(result.survivalSeconds);
+    coreLabel!.textContent = uiData.estimatedSurvival;
+    limiter!.textContent = hazardLabels[result.limitingHazard];
+    verdict!.textContent = verdictLabels[result.verdict];
+    summaryTitle!.textContent = `${presetName(selectedPreset.id)} ${uiData.survivalEnvelope}`;
+    summaryTime!.textContent = formatDuration(result.survivalSeconds);
+    summaryLimiter!.textContent = hazardLabels[result.limitingHazard];
+    summaryMode!.textContent = unitSystem === 'imperial' ? uiData.imperial : uiData.metric;
+    riskRing?.setAttribute('d', arcPath(Math.min(1, result.survivalSeconds / 3600)));
+    drawBars(result);
+    drawParticles(result);
+    drawTimeline(result.timeline);
+  }
+
+  ATMOSPHERE_PRESETS.forEach((preset) => {
+    const option = document.createElement('option');
+    option.value = preset.id;
+    option.textContent = presetName(preset.id);
+    bodySelect?.append(option);
+  });
+
+  bodySelect?.addEventListener('change', () => {
+    const preset = ATMOSPHERE_PRESETS.find((item) => item.id === bodySelect.value) ?? ATMOSPHERE_PRESETS[0];
+    setPreset(preset);
+    update();
+  });
+
+  [pressureInput, temperatureInput, oxygenInput, co2Input].forEach((input) => input?.addEventListener('input', update));
+  window.addEventListener('resize', resizeParticleCanvas);
+  unitButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      unitSystem = button.dataset.units === 'imperial' ? 'imperial' : 'metric';
+      unitButtons.forEach((item) => {
+        item.classList.toggle('is-active', item === button);
+        item.classList.toggle('active', item === button);
+      });
+      update();
+    });
+  });
+  setPreset(ATMOSPHERE_PRESETS[0]);
+  resizeParticleCanvas();
+  window.requestAnimationFrame(animateParticleCanvas);
+  update();
+</script>

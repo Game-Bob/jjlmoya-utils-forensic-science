@@ -1,0 +1,384 @@
+---
+import './epidemic-sir-simulator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div
+  class="sir-lab"
+  id="sir-lab"
+  data-day-label={ui.dayLabel}
+  data-days-unit={ui.daysUnit}
+  data-infectious-label={ui.infectiousLabel}
+  data-re-label={ui.reLabel}
+>
+  <div class="sir-card">
+    <header class="sir-map-top">
+      <div>
+        <p>{ui.liveScenario}</p>
+        <h2>{ui.curveChart}</h2>
+      </div>
+    </header>
+
+    <div class="sir-card-body">
+      <section class="sir-map" aria-label={ui.curveChart}>
+        <div class="sir-chart-shell">
+          <svg class="sir-chart" id="sir-chart" viewBox="0 0 760 430" role="img" aria-label={ui.curveChart}>
+            <defs>
+              <linearGradient id="sir-grid-fade" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#eef7f4" />
+                <stop offset="100%" stop-color="#ffffff" />
+              </linearGradient>
+            </defs>
+            <rect class="sir-chart-bg" x="0" y="0" width="760" height="430" rx="28"></rect>
+            <g class="sir-grid" id="sir-grid"></g>
+            <line class="sir-baseline" x1="40" x2="720" y1="364" y2="364"></line>
+            <path class="sir-area sir-area-susceptible" id="sir-area-susceptible"></path>
+            <path class="sir-area sir-area-infected" id="sir-area-infected"></path>
+            <path class="sir-area sir-area-recovered" id="sir-area-recovered"></path>
+            <path class="sir-line sir-line-susceptible" id="sir-line-susceptible"></path>
+            <path class="sir-line sir-line-infected" id="sir-line-infected"></path>
+            <path class="sir-line sir-line-recovered" id="sir-line-recovered"></path>
+            <path class="sir-line sir-line-deaths" id="sir-line-deaths"></path>
+            <g class="sir-day-marker" id="sir-day-marker">
+              <line y1="34" y2="364"></line>
+              <circle r="7"></circle>
+            </g>
+          </svg>
+          <div class="sir-readout" id="sir-readout" aria-hidden="true">
+            <strong id="sir-readout-day">{ui.dayLabel} 0</strong>
+            <span><i class="sir-key sir-key-s"></i><b id="sir-readout-s">0</b></span>
+            <span><i class="sir-key sir-key-i"></i><b id="sir-readout-i">0</b></span>
+            <span><i class="sir-key sir-key-r"></i><b id="sir-readout-r">0</b></span>
+          </div>
+        </div>
+
+        <div class="sir-timeline">
+          <input id="sir-day" type="range" min="0" max="160" value="80" aria-label={ui.inspectDay} />
+          <output id="sir-day-output">{ui.dayLabel} 80</output>
+        </div>
+
+        <div class="sir-legend" aria-label={ui.legend}>
+          <span><i class="sir-key sir-key-s"></i>{ui.susceptible}</span>
+          <span><i class="sir-key sir-key-i"></i>{ui.infected}</span>
+          <span><i class="sir-key sir-key-r"></i>{ui.recovered}</span>
+          <span><i class="sir-key sir-key-d"></i>{ui.deaths}</span>
+        </div>
+      </section>
+
+      <section class="sir-control-deck" aria-label={ui.controls}>
+        <div class="sir-control-header">
+          <div>
+            <p>{ui.controls}</p>
+            <strong>{ui.modelName}</strong>
+          </div>
+          <div class="sir-pill" id="sir-effective-r">{ui.reLabel} 0.00</div>
+        </div>
+
+        <div class="sir-metrics">
+          <div>
+            <span>{ui.peakInfected}</span>
+            <strong id="sir-peak">0</strong>
+          </div>
+          <div>
+            <span>{ui.peakDay}</span>
+            <strong id="sir-peak-day">0</strong>
+          </div>
+          <div>
+            <span>{ui.attackRate}</span>
+            <strong id="sir-attack">0%</strong>
+          </div>
+          <div>
+            <span>{ui.estimatedDeaths}</span>
+            <strong id="sir-deaths">0</strong>
+          </div>
+        </div>
+
+        <div class="sir-sliders">
+        <label class="sir-slider" for="sir-r0">
+          <span>{ui.r0}</span>
+          <output id="sir-r0-output">2.4</output>
+          <input id="sir-r0" type="range" min="0.6" max="7" step="0.1" value="2.4" />
+        </label>
+
+        <label class="sir-slider" for="sir-lethality">
+          <span>{ui.lethality}</span>
+          <output id="sir-lethality-output">1.0%</output>
+          <input id="sir-lethality" type="range" min="0" max="12" step="0.1" value="1" />
+        </label>
+
+        <label class="sir-slider" for="sir-vaccination">
+          <span>{ui.vaccination}</span>
+          <output id="sir-vaccination-output">35%</output>
+          <input id="sir-vaccination" type="range" min="0" max="95" step="1" value="35" />
+        </label>
+
+        <label class="sir-slider" for="sir-efficacy">
+          <span>{ui.vaccineEffectiveness}</span>
+          <output id="sir-efficacy-output">85%</output>
+          <input id="sir-efficacy" type="range" min="0" max="100" step="1" value="85" />
+        </label>
+
+        <label class="sir-slider" for="sir-infectious-days">
+          <span>{ui.infectiousDays}</span>
+          <output id="sir-infectious-output">7 {ui.daysUnit}</output>
+          <input id="sir-infectious-days" type="range" min="2" max="21" step="1" value="7" />
+        </label>
+
+        <label class="sir-slider" for="sir-initial">
+          <span>{ui.initialInfected}</span>
+          <output id="sir-initial-output">0.5%</output>
+          <input id="sir-initial" type="range" min="0.1" max="8" step="0.1" value="0.5" />
+        </label>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { runSirSimulation } from './logic';
+
+  const root = document.getElementById('sir-lab');
+  const r0Input = document.getElementById('sir-r0') as HTMLInputElement | null;
+  const lethalityInput = document.getElementById('sir-lethality') as HTMLInputElement | null;
+  const vaccinationInput = document.getElementById('sir-vaccination') as HTMLInputElement | null;
+  const efficacyInput = document.getElementById('sir-efficacy') as HTMLInputElement | null;
+  const infectiousInput = document.getElementById('sir-infectious-days') as HTMLInputElement | null;
+  const initialInput = document.getElementById('sir-initial') as HTMLInputElement | null;
+  const dayInput = document.getElementById('sir-day') as HTMLInputElement | null;
+  const chart = document.getElementById('sir-chart') as unknown as SVGSVGElement | null;
+  const grid = document.getElementById('sir-grid');
+  const readout = document.getElementById('sir-readout');
+  const marker = document.getElementById('sir-day-marker');
+  const markerLine = marker?.querySelector('line');
+  const markerCircle = marker?.querySelector('circle');
+  const numberFormat = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
+  const storageKey = 'epidemic-sir-simulator:last-state';
+  const labels = {
+    day: root?.dataset.dayLabel ?? '',
+    days: root?.dataset.daysUnit ?? '',
+    infectious: root?.dataset.infectiousLabel ?? '',
+    re: root?.dataset.reLabel ?? '',
+  };
+
+  const paths = {
+    susceptible: document.getElementById('sir-line-susceptible'),
+    infected: document.getElementById('sir-line-infected'),
+    recovered: document.getElementById('sir-line-recovered'),
+    deaths: document.getElementById('sir-line-deaths'),
+    susceptibleArea: document.getElementById('sir-area-susceptible'),
+    infectedArea: document.getElementById('sir-area-infected'),
+    recoveredArea: document.getElementById('sir-area-recovered'),
+  };
+
+  function getValue(input: HTMLInputElement | null, fallback: number) {
+    return input ? Number(input.value) : fallback;
+  }
+
+  function trackedInputs() {
+    return [r0Input, lethalityInput, vaccinationInput, efficacyInput, infectiousInput, initialInput, dayInput];
+  }
+
+  function restoreState() {
+    try {
+      const raw = window.localStorage.getItem(storageKey);
+      if (!raw) return;
+      const state = JSON.parse(raw) as Record<string, string>;
+
+      trackedInputs().forEach((input) => {
+        if (!input || typeof state[input.id] !== 'string') return;
+        input.value = state[input.id];
+      });
+    } catch {
+      window.localStorage.removeItem(storageKey);
+    }
+  }
+
+  function saveState() {
+    const state: Record<string, string> = {};
+    trackedInputs().forEach((input) => {
+      if (!input) return;
+      state[input.id] = input.value;
+    });
+    window.localStorage.setItem(storageKey, JSON.stringify(state));
+  }
+
+  function scalePoint(day: number, value: number, days: number, population: number) {
+    const width = 680;
+    const height = 330;
+    const x = 40 + day / days * width;
+    const y = 364 - value / population * height;
+    return { x, y };
+  }
+
+  function makePath(values: number[], days: number, population: number) {
+    return values.map((value, index) => {
+      const point = scalePoint(index, value, days, population);
+      return `${index === 0 ? 'M' : 'L'}${point.x.toFixed(2)} ${point.y.toFixed(2)}`;
+    }).join(' ');
+  }
+
+  function makeArea(values: number[], days: number, population: number) {
+    const line = makePath(values, days, population);
+    return `${line} L720 364 L40 364 Z`;
+  }
+
+  function currentConfig(days: number, population: number) {
+    return {
+      population,
+      initialInfectedPercent: getValue(initialInput, 0.5),
+      r0: getValue(r0Input, 2.4),
+      infectiousDays: getValue(infectiousInput, 7),
+      vaccinationPercent: getValue(vaccinationInput, 35),
+      vaccineEffectiveness: getValue(efficacyInput, 85),
+      fatalityPercent: getValue(lethalityInput, 1),
+      days,
+    };
+  }
+
+  function setText(id: string, text: string) {
+    const node = document.getElementById(id);
+    if (!node) return;
+    node.classList.toggle('sir-value-long', text.length >= 6);
+    node.classList.toggle('sir-value-extra-long', text.length >= 8);
+    if (node.textContent === text) return;
+    node.textContent = text;
+    node.classList.remove('sir-value-flash');
+    node.getBoundingClientRect();
+    node.classList.add('sir-value-flash');
+  }
+
+  function retraceCurves() {
+    Object.values(paths).forEach((path) => {
+      if (!path || path.id.includes('area')) return;
+      path.style.animation = 'none';
+      path.getBoundingClientRect();
+      path.style.animation = '';
+    });
+  }
+
+  function positionSliderValue(input: HTMLInputElement | null, outputId: string) {
+    const output = document.getElementById(outputId);
+    if (!input || !output) return;
+    const min = Number(input.min);
+    const max = Number(input.max);
+    const value = Number(input.value);
+    const progress = (value - min) / (max - min);
+    output.style.setProperty('--value-x', `${Math.max(0, Math.min(1, progress)) * 100}%`);
+  }
+
+  function drawGrid() {
+    if (!grid || grid.childElementCount > 0) return;
+    const ns = 'http://www.w3.org/2000/svg';
+
+    for (let row = 0; row <= 4; row += 1) {
+      const line = document.createElementNS(ns, 'line');
+      const y = 34 + row * 82.5;
+      line.setAttribute('x1', '40');
+      line.setAttribute('x2', '720');
+      line.setAttribute('y1', y.toString());
+      line.setAttribute('y2', y.toString());
+      grid.append(line);
+    }
+
+    for (let column = 0; column <= 5; column += 1) {
+      const line = document.createElementNS(ns, 'line');
+      const x = 40 + column * 136;
+      line.setAttribute('x1', x.toString());
+      line.setAttribute('x2', x.toString());
+      line.setAttribute('y1', '34');
+      line.setAttribute('y2', '364');
+      grid.append(line);
+    }
+  }
+
+  function drawCurves(result: ReturnType<typeof runSirSimulation>, days: number, population: number) {
+    const susceptible = result.points.map((point) => point.susceptible);
+    const infected = result.points.map((point) => point.infected);
+    const recovered = result.points.map((point) => point.recovered + point.vaccinated);
+    const deaths = result.points.map((point) => point.deaths);
+
+    paths.susceptible?.setAttribute('d', makePath(susceptible, days, population));
+    paths.infected?.setAttribute('d', makePath(infected, days, population));
+    paths.recovered?.setAttribute('d', makePath(recovered, days, population));
+    paths.deaths?.setAttribute('d', makePath(deaths, days, population));
+    paths.susceptibleArea?.setAttribute('d', makeArea(susceptible, days, population));
+    paths.infectedArea?.setAttribute('d', makeArea(infected, days, population));
+    paths.recoveredArea?.setAttribute('d', makeArea(recovered, days, population));
+  }
+
+  function updateSliderOutputs() {
+    setText('sir-r0-output', getValue(r0Input, 2.4).toFixed(1));
+    setText('sir-lethality-output', `${getValue(lethalityInput, 1).toFixed(1)}%`);
+    setText('sir-vaccination-output', `${getValue(vaccinationInput, 35).toFixed(0)}%`);
+    setText('sir-efficacy-output', `${getValue(efficacyInput, 85).toFixed(0)}%`);
+    setText('sir-infectious-output', `${getValue(infectiousInput, 7).toFixed(0)} ${labels.days}`);
+    setText('sir-initial-output', `${getValue(initialInput, 0.5).toFixed(1)}%`);
+    positionSliderValue(r0Input, 'sir-r0-output');
+    positionSliderValue(lethalityInput, 'sir-lethality-output');
+    positionSliderValue(vaccinationInput, 'sir-vaccination-output');
+    positionSliderValue(efficacyInput, 'sir-efficacy-output');
+    positionSliderValue(infectiousInput, 'sir-infectious-output');
+    positionSliderValue(initialInput, 'sir-initial-output');
+  }
+
+  function updateMetrics(result: ReturnType<typeof runSirSimulation>) {
+    setText('sir-peak', numberFormat.format(result.summary.peakInfected));
+    setText('sir-peak-day', result.summary.peakDay.toString());
+    setText('sir-attack', `${(result.summary.attackRate * 100).toFixed(1)}%`);
+    setText('sir-deaths', numberFormat.format(result.summary.finalDeaths));
+    setText('sir-effective-r', `${labels.re} ${result.summary.effectiveR0.toFixed(2)}`);
+  }
+
+  function updateInspection(result: ReturnType<typeof runSirSimulation>, days: number, population: number) {
+    const inspectedDay = Math.min(days, getValue(dayInput, 80));
+    const inspected = result.points[inspectedDay] ?? result.points[0];
+    const infectedPoint = scalePoint(inspectedDay, inspected.infected, days, population);
+    markerLine?.setAttribute('x1', infectedPoint.x.toFixed(2));
+    markerLine?.setAttribute('x2', infectedPoint.x.toFixed(2));
+    markerCircle?.setAttribute('cx', infectedPoint.x.toFixed(2));
+    markerCircle?.setAttribute('cy', infectedPoint.y.toFixed(2));
+    setText('sir-day-output', `${labels.day} ${inspectedDay}: ${numberFormat.format(inspected.infected)} ${labels.infectious}`);
+    setText('sir-readout-day', `${labels.day} ${inspectedDay}`);
+    setText('sir-readout-s', numberFormat.format(inspected.susceptible));
+    setText('sir-readout-i', numberFormat.format(inspected.infected));
+    setText('sir-readout-r', numberFormat.format(inspected.recovered + inspected.vaccinated));
+
+    if (readout) {
+      const x = infectedPoint.x / 760 * 100;
+      readout.style.setProperty('--readout-x', `${Math.max(4, Math.min(76, x))}%`);
+      readout.style.setProperty('--readout-y', `${Math.max(12, Math.min(82, infectedPoint.y / 430 * 100))}%`);
+    }
+  }
+
+  function update() {
+    saveState();
+    const days = 160;
+    const population = 100000;
+    const result = runSirSimulation(currentConfig(days, population));
+    drawCurves(result, days, population);
+    updateSliderOutputs();
+    updateMetrics(result);
+    updateInspection(result, days, population);
+    retraceCurves();
+  }
+
+  drawGrid();
+  restoreState();
+  [r0Input, lethalityInput, vaccinationInput, efficacyInput, infectiousInput, initialInput, dayInput].forEach((input) => {
+    input?.addEventListener('input', update);
+  });
+  chart?.addEventListener('pointermove', (event) => {
+    if (!dayInput) return;
+    const rect = chart.getBoundingClientRect();
+    const localX = Math.max(40, Math.min(720, (event.clientX - rect.left) / rect.width * 760));
+    dayInput.value = Math.round((localX - 40) / 680 * 160).toString();
+    update();
+  });
+  update();
+</script>

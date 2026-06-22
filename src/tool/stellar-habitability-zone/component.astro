@@ -1,0 +1,123 @@
+---
+import './stellar-habitability-zone.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="hz-calculator-root" id="hz-simulator-root">
+  <div class="hz-presets-container">
+    <div class="hz-presets">
+      <button class="hz-preset-btn active" data-type="G">G-Type (Sun-like)</button>
+      <button class="hz-preset-btn" data-type="M">M-Type (Red Dwarf)</button>
+      <button class="hz-preset-btn" data-type="K">K-Type (Orange Dwarf)</button>
+      <button class="hz-preset-btn" data-type="F">F-Type (Procyon-like)</button>
+      <button class="hz-preset-btn" data-type="A">A-Type (Sirius-like)</button>
+      <button class="hz-preset-btn" data-type="B">B-Type (Blue Giant)</button>
+      <button class="hz-preset-btn" data-type="O">O-Type (Blue Hypergiant)</button>
+      <div style="flex-grow: 1;"></div>
+      <button class="hz-preset-btn" id="hz-unit-toggle" style="opacity: 0.8; border-bottom: none;"></button>
+    </div>
+  </div>
+
+  <div class="hz-controls-section">
+    <div class="hz-input-group">
+      <label for="hz-temperature">{ui.starTemperature}</label>
+      <input type="range" id="hz-temperature" class="hz-slider" min="2000" max="50000" value="5778" step="100" />
+      <span id="hz-temperature-val" class="hz-input-val">5,778</span>
+    </div>
+
+    <div class="hz-input-group">
+      <label for="hz-luminosity">{ui.starLuminosity}</label>
+      <input type="range" id="hz-luminosity" class="hz-slider" min="-4" max="6" value="0" step="0.1" />
+      <span id="hz-luminosity-val" class="hz-input-val">1.0</span>
+    </div>
+
+    <div class="hz-input-group">
+      <label for="hz-mass">{ui.starMass}</label>
+      <input type="range" id="hz-mass" class="hz-slider" min="0.05" max="100" value="1.0" step="0.05" />
+      <span id="hz-mass-val" class="hz-input-val">1.0</span>
+    </div>
+
+    <div class="hz-input-group">
+      <label for="hz-radius">{ui.starRadius}</label>
+      <input type="range" id="hz-radius" class="hz-slider" min="0.05" max="30" value="1.0" step="0.05" />
+      <span id="hz-radius-val" class="hz-input-val">1.0</span>
+    </div>
+
+    <div class="hz-input-group">
+      <label for="hz-distance">{ui.planetDistance}</label>
+      <input type="range" id="hz-distance" class="hz-slider" min="-2" max="3" value="0" step="0.01" />
+      <span id="hz-distance-val" class="hz-input-val">1.00</span>
+    </div>
+
+    <div class="hz-input-group">
+      <label for="hz-albedo">{ui.planetAlbedo}</label>
+      <input type="range" id="hz-albedo" class="hz-slider" min="0.00" max="0.95" value="0.30" step="0.01" />
+      <span id="hz-albedo-val" class="hz-input-val">0.30</span>
+    </div>
+
+    <div class="hz-input-group">
+      <label for="hz-greenhouse">{ui.greenhouseDelta}</label>
+      <input type="range" id="hz-greenhouse" class="hz-slider" min="0" max="500" value="33" step="1" />
+      <span id="hz-greenhouse-val" class="hz-input-val">33</span>
+    </div>
+  </div>
+
+  <div class="hz-viewport-container">
+    <canvas id="hz-orbit-canvas"></canvas>
+    <div class="hz-canvas-section">
+      <h3>{ui.orbitCanvasTitle}</h3>
+      <div class="hz-canvas-container" id="hz-canvas-placeholder">
+      </div>
+    </div>
+
+    <div class="hz-results-section">
+      <div class="hz-result-grid">
+        <div class="hz-result-block">
+          <span class="hz-result-label">{ui.equilibriumTemperature}</span>
+          <span id="hz-eq-temp" class="hz-result-number">---</span>
+        </div>
+        <div class="hz-result-block">
+          <span class="hz-result-label">{ui.estimatedSurfaceTemp || ui.surfTempResult}</span>
+          <span id="hz-surf-temp" class="hz-result-number">---</span>
+        </div>
+        <div class="hz-result-block">
+          <span class="hz-result-label">{ui.stellarFluxResult}</span>
+          <span id="hz-stellar-flux" class="hz-result-number">---</span>
+        </div>
+        <div class="hz-result-block">
+          <span class="hz-result-label">{ui.orbitPeriodResult}</span>
+          <span id="hz-orbit-period" class="hz-result-number">---</span>
+        </div>
+        <div class="hz-result-block">
+          <span class="hz-result-label">{ui.orbitVelocityResult}</span>
+          <span id="hz-orbit-velocity" class="hz-result-number">---</span>
+        </div>
+        <div class="hz-result-block">
+          <span class="hz-result-label">{ui.innerLimit}</span>
+          <span id="hz-inner-limit" class="hz-result-number">---</span>
+        </div>
+        <div class="hz-result-block">
+          <span class="hz-result-label">{ui.outerLimit}</span>
+          <span id="hz-outer-limit" class="hz-result-number">---</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="hz-status-box habitable" id="hz-status-box">
+          <div class="hz-status-title" id="hz-status-title">---</div>
+          <div class="hz-status-desc">{ui.statusExplanation}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initStellarSimulator } from './script';
+  initStellarSimulator();
+</script>

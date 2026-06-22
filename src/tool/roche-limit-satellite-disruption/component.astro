@@ -1,0 +1,97 @@
+---
+import './roche-limit-satellite-disruption-calculator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+const uiData = JSON.stringify(ui);
+---
+
+<div class="roche-console" id="roche-console" data-ui={uiData}>
+  <div class="roche-status">
+    <strong id="roche-verdict">{ui.stable}</strong>
+    <span class="roche-distance-readout"><small>{ui.orbitDistance}</small><b id="roche-distance-output">-</b></span>
+  </div>
+
+  <section class="roche-visual" aria-label={ui.ringFormation}>
+    <div class="roche-orbit-stage">
+      <canvas id="roche-particle-canvas" class="roche-particle-canvas" aria-hidden="true"></canvas>
+      <svg class="roche-orbit-map" viewBox="0 0 560 560" role="img" aria-label={ui.rocheBoundary}>
+        <defs>
+          <radialGradient id="roche-planet-gradient" cx="42%" cy="35%">
+            <stop id="roche-planet-stop-a" offset="0%" stop-color="#f7efe2"></stop>
+            <stop id="roche-planet-stop-b" offset="42%" stop-color="#d19a66"></stop>
+            <stop id="roche-planet-stop-c" offset="100%" stop-color="#63425f"></stop>
+          </radialGradient>
+          <linearGradient id="roche-ring-gradient" x1="0" x2="1">
+            <stop offset="0%" stop-color="#7cd5ff"></stop>
+            <stop offset="48%" stop-color="#f8d66d"></stop>
+            <stop offset="100%" stop-color="#ff7f8a"></stop>
+          </linearGradient>
+        </defs>
+        <path class="roche-debris roche-debris-back" d="M 102 280 A 178 62 0 0 1 458 280"></path>
+        <path class="roche-debris roche-debris-back roche-debris-wide" d="M 66 280 A 214 74 0 0 1 494 280"></path>
+        <circle class="roche-boundary" id="roche-boundary" cx="280" cy="280" r="180"></circle>
+        <circle class="roche-orbit" id="roche-orbit" cx="280" cy="280" r="230"></circle>
+        <g id="roche-fragments"></g>
+        <circle class="roche-planet" id="roche-planet" cx="280" cy="280" r="88"></circle>
+        <path class="roche-debris roche-debris-front" d="M 458 280 A 178 62 0 0 1 102 280"></path>
+        <path class="roche-debris roche-debris-front roche-debris-wide" d="M 494 280 A 214 74 0 0 1 66 280"></path>
+        <g class="roche-moon" id="roche-moon">
+          <ellipse id="roche-moon-body" cx="0" cy="0" rx="22" ry="22"></ellipse>
+          <path id="roche-moon-scar" d="M -11 -13 C 5 -7 10 4 5 17"></path>
+        </g>
+        <text class="roche-map-label" x="280" y="512" id="roche-map-label">{ui.moonTrack}</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="roche-readouts" aria-label={ui.tidalStress}>
+    <div><span>{ui.activeLimit}</span><strong id="roche-active-limit">-</strong></div>
+    <div><span>{ui.safetyRatio}</span><strong id="roche-safety-ratio">-</strong></div>
+    <div><span>{ui.orbitalPeriod}</span><strong id="roche-period">-</strong></div>
+    <div><span>{ui.ringFormation}</span><strong id="roche-ring-progress">-</strong></div>
+  </section>
+
+  <section class="roche-controls" aria-label={ui.primaryBody}>
+    <div class="roche-field roche-picker" id="roche-primary-picker">
+      <span>{ui.primaryBody}</span>
+      <button class="roche-picker-trigger" type="button" id="roche-primary-trigger" aria-expanded="false">
+        <strong id="roche-primary-name">-</strong><small id="roche-primary-density">-</small><i aria-hidden="true"></i>
+      </button>
+      <div class="roche-picker-menu" id="roche-primary-menu" role="listbox"></div>
+    </div>
+
+    <div class="roche-field roche-picker" id="roche-satellite-picker">
+      <span>{ui.satelliteType}</span>
+      <button class="roche-picker-trigger" type="button" id="roche-satellite-trigger" aria-expanded="false">
+        <strong id="roche-satellite-name">-</strong><small id="roche-satellite-density">-</small><i aria-hidden="true"></i>
+      </button>
+      <div class="roche-picker-menu" id="roche-satellite-menu" role="listbox"></div>
+    </div>
+
+    <label class="roche-field roche-distance" for="roche-distance">
+      <span>{ui.orbitDistance}</span>
+      <input id="roche-distance" type="range" min="8000" max="260000" step="250" />
+    </label>
+
+    <div class="roche-button-row">
+      <button type="button" id="roche-close-pass">{ui.closePass}</button>
+      <button type="button" id="roche-reset">{ui.reset}</button>
+    </div>
+  </section>
+
+  <section class="roche-comparison" aria-label={ui.fluidLimit}>
+    <div class="roche-bar"><span>{ui.fluidLimit}</span><div><i id="roche-fluid-bar"></i></div><strong id="roche-fluid-limit">-</strong></div>
+    <div class="roche-bar"><span>{ui.rigidLimit}</span><div><i id="roche-rigid-bar"></i></div><strong id="roche-rigid-limit">-</strong></div>
+    <div class="roche-material">
+      <span id="roche-density">-</span>
+      <span id="roche-cohesion">-</span>
+      <span id="roche-radius">-</span>
+    </div>
+  </section>
+</div>
+
+<script src="./script.ts"></script>

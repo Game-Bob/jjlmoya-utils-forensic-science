@@ -1,0 +1,351 @@
+---
+import './exoplanet-biosignature-detector.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div
+  class="biosig-root"
+  id="biosig-root"
+  data-verdict-weak={ui.verdictWeak}
+  data-verdict-promising={ui.verdictPromising}
+  data-verdict-strong={ui.verdictStrong}
+  data-verdict-ambiguous={ui.verdictAmbiguous}
+  data-percent-unit={ui.percentUnit}
+  data-nanometer-unit={ui.nanometerUnit}
+>
+  <div class="biosig-live biosig-live-top"><span></span>{ui.dataLive}</div>
+  <section class="biosig-scope" aria-label={ui.visualization}>
+    <div class="biosig-planet">
+      <canvas id="biosig-planet-canvas" width="640" height="640" aria-hidden="true"></canvas>
+      <span></span>
+    </div>
+    <div class="biosig-float biosig-float-bio">
+      <span>{ui.biologicalIndex}</span>
+      <strong id="biosig-bio">{ui.pendingValue}</strong>
+    </div>
+    <div class="biosig-float biosig-float-tech">
+      <span>{ui.technologicalIndex}</span>
+      <strong id="biosig-tech">{ui.pendingValue}</strong>
+    </div>
+    <div class="biosig-float biosig-float-risk">
+      <span>{ui.falsePositiveRisk}</span>
+      <strong id="biosig-risk">{ui.pendingValue}</strong>
+    </div>
+    <div class="biosig-spectrum" id="biosig-spectrum">
+      <i class="biosig-line biosig-line-o2"></i>
+      <i class="biosig-line biosig-line-ch4"></i>
+      <i class="biosig-line biosig-line-o3"></i>
+      <b id="biosig-marker-o2"></b>
+      <b id="biosig-marker-ch4"></b>
+      <b id="biosig-marker-o3"></b>
+    </div>
+    <div class="biosig-readout biosig-float">
+      <span>{ui.habitabilityIndex}</span>
+      <strong id="biosig-habitability">{ui.pendingValue}</strong>
+    </div>
+  </section>
+
+  <section class="biosig-console">
+    <div class="biosig-controls">
+      <label class="biosig-select-row">
+        <span>{ui.starClass}</span>
+        <select id="biosig-star">
+          <option value="k-dwarf">{ui.starK}</option>
+          <option value="sun-like" selected>{ui.starSun}</option>
+          <option value="m-dwarf">{ui.starM}</option>
+        </select>
+      </label>
+      <label>
+        <span>{ui.noise}</span>
+        <strong id="biosig-noise-value">{ui.percentUnit.replace('{value}', '18')}</strong>
+        <input id="biosig-noise" type="range" min="0" max="70" value="18" step="1" />
+      </label>
+      <label>
+        <span>{ui.oxygenLine}</span>
+        <strong id="biosig-o2-value">{ui.nanometerUnit.replace('{value}', '760')}</strong>
+        <input id="biosig-o2" type="range" min="630" max="820" value="760" step="1" />
+      </label>
+      <label>
+        <span>{ui.methaneLine}</span>
+        <strong id="biosig-ch4-value">{ui.nanometerUnit.replace('{value}', '1660')}</strong>
+        <input id="biosig-ch4" type="range" min="820" max="1780" value="1660" step="2" />
+      </label>
+      <label>
+        <span>{ui.ozoneLine}</span>
+        <strong id="biosig-o3-value">{ui.nanometerUnit.replace('{value}', '960')}</strong>
+        <input id="biosig-o3" type="range" min="230" max="1040" value="960" step="1" />
+      </label>
+      <div class="biosig-context">
+        <label>
+          <span>{ui.waterVapor}</span>
+          <strong id="biosig-water-value">{ui.percentUnit.replace('{value}', '64')}</strong>
+          <input id="biosig-water" type="range" min="0" max="100" value="64" step="1" />
+        </label>
+        <label>
+          <span>{ui.carbonDioxide}</span>
+          <strong id="biosig-co2-value">{ui.percentUnit.replace('{value}', '34')}</strong>
+          <input id="biosig-co2" type="range" min="0" max="100" value="34" step="1" />
+        </label>
+      </div>
+    </div>
+
+    <div class="biosig-evidence">
+      <div class="biosig-conclusion">
+        <span>{ui.conclusion}</span>
+        <p id="biosig-verdict">{ui.statusReady}</p>
+      </div>
+      <div class="biosig-evidence-grid">
+        <div><span>{ui.oxygenShort}</span><i id="biosig-o2-bar"></i><b id="biosig-o2-pct">{ui.pendingValue}</b></div>
+        <div><span>{ui.methaneShort}</span><i id="biosig-ch4-bar"></i><b id="biosig-ch4-pct">{ui.pendingValue}</b></div>
+        <div><span>{ui.ozoneShort}</span><i id="biosig-o3-bar"></i><b id="biosig-o3-pct">{ui.pendingValue}</b></div>
+      </div>
+    </div>
+    <div class="biosig-live biosig-live-bottom"><span></span>{ui.dataLive}</div>
+  </section>
+</div>
+
+<script>
+  import { analyzeBiosignatures } from './logic';
+  import type { StarClass } from './logic';
+
+  const root = document.getElementById('biosig-root');
+  if (root) {
+    const star = document.getElementById('biosig-star') as HTMLSelectElement;
+    const noise = document.getElementById('biosig-noise') as HTMLInputElement;
+    const oxygen = document.getElementById('biosig-o2') as HTMLInputElement;
+    const methane = document.getElementById('biosig-ch4') as HTMLInputElement;
+    const ozone = document.getElementById('biosig-o3') as HTMLInputElement;
+    const water = document.getElementById('biosig-water') as HTMLInputElement;
+    const co2 = document.getElementById('biosig-co2') as HTMLInputElement;
+
+    const setText = (id: string, text: string) => {
+      const node = document.getElementById(id);
+      if (node) node.textContent = text;
+    };
+
+    const formatUnit = (template: string | undefined, value: string) => (template || '{value}').replace('{value}', value);
+
+    const setBar = (id: string, value: number) => {
+      const node = document.getElementById(id);
+      if (node) node.style.setProperty('--meter-value', `${Math.min(100, Math.max(0, value))}%`);
+    };
+
+    const setMarker = (id: string, value: number, min: number, max: number) => {
+      const node = document.getElementById(id);
+      if (node) node.style.left = `${((value - min) / (max - min)) * 100}%`;
+    };
+
+    const setControlFill = (input: HTMLInputElement) => {
+      const min = Number(input.min || 0);
+      const max = Number(input.max || 100);
+      const value = Number(input.value);
+      input.style.setProperty('--control-fill', `${((value - min) / (max - min)) * 100}%`);
+    };
+
+    const planetCanvas = document.getElementById('biosig-planet-canvas') as HTMLCanvasElement | null;
+    const planetContext = planetCanvas?.getContext('2d') ?? null;
+    let planetState = {
+      habitability: 55,
+      risk: 18,
+      noise: 18,
+    };
+    let animationFrame = 0;
+
+    function clamp01(value: number) {
+      return Math.max(0, Math.min(1, value));
+    }
+
+    function getPlanetPalette(time: number) {
+      const vitality = clamp01(planetState.habitability / 100);
+      const warning = clamp01(planetState.risk / 100);
+      const noiseLevel = clamp01(planetState.noise / 70);
+
+      return {
+        vitality,
+        warning,
+        noiseLevel,
+        pulse: Math.sin(time / 900) * 0.5 + 0.5,
+        orbit: time / 2200,
+        hue: 150 - (warning * 70) + (vitality * 46),
+        saturation: 22 + (vitality * 66) - (warning * 12),
+        light: 26 + (vitality * 34) - (warning * 8),
+      };
+    }
+
+    function paintAtmosphere(centerX: number, centerY: number, radius: number, palette: ReturnType<typeof getPlanetPalette>) {
+      if (!planetContext) return;
+
+      const atmosphere = planetContext.createRadialGradient(centerX, centerY, radius * 0.72, centerX, centerY, radius * 1.42);
+      atmosphere.addColorStop(0, `hsla(${palette.hue}, 92%, 70%, ${0.22 + palette.vitality * 0.34 + palette.pulse * 0.08})`);
+      atmosphere.addColorStop(0.62, `hsla(${palette.hue}, 86%, 62%, ${0.12 + palette.vitality * 0.2})`);
+      atmosphere.addColorStop(1, 'rgba(255,255,255,0)');
+      planetContext.fillStyle = atmosphere;
+      planetContext.beginPath();
+      planetContext.arc(centerX, centerY, radius * (1.32 + palette.pulse * 0.1), 0, Math.PI * 2);
+      planetContext.fill();
+    }
+
+    function paintBody(centerX: number, centerY: number, radius: number, palette: ReturnType<typeof getPlanetPalette>) {
+      if (!planetContext) return;
+
+      const body = planetContext.createRadialGradient(centerX - radius * 0.38, centerY - radius * 0.28, radius * 0.05, centerX, centerY, radius);
+      body.addColorStop(0, `hsl(${palette.hue + 42}, ${palette.saturation + 8}%, ${Math.min(82, palette.light + 26)}%)`);
+      body.addColorStop(0.26, `hsl(${palette.hue}, ${palette.saturation}%, ${palette.light}%)`);
+      body.addColorStop(0.58, `hsl(${palette.hue - 32}, ${Math.max(22, palette.saturation - 18)}%, ${Math.max(19, palette.light - 18)}%)`);
+      body.addColorStop(1, `hsl(${220 + palette.warning * 22}, 42%, ${8 + palette.vitality * 4}%)`);
+      planetContext.fillStyle = body;
+      planetContext.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
+    }
+
+    function paintShadow(centerX: number, centerY: number, radius: number, palette: ReturnType<typeof getPlanetPalette>) {
+      if (!planetContext) return;
+
+      const shadow = planetContext.createRadialGradient(centerX + radius * 0.28, centerY + radius * 0.12, radius * 0.2, centerX + radius * 0.48, centerY + radius * 0.32, radius * 1.08);
+      shadow.addColorStop(0, 'rgba(0,0,0,0)');
+      shadow.addColorStop(0.55, `rgba(0,0,0,${0.18 + palette.warning * 0.14})`);
+      shadow.addColorStop(1, `rgba(0,0,0,${0.68 + palette.warning * 0.16})`);
+      planetContext.fillStyle = shadow;
+      planetContext.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
+    }
+
+    function paintCloudBands(centerX: number, centerY: number, radius: number, palette: ReturnType<typeof getPlanetPalette>) {
+      if (!planetContext) return;
+
+      for (let i = 0; i < 8; i += 1) {
+        const drift = Math.sin(palette.orbit + i * 0.9) * radius * 0.035;
+        planetContext.beginPath();
+        planetContext.ellipse(centerX - radius * (0.27 + i * 0.035) + drift, centerY - radius * (0.18 - i * 0.047), radius * (0.26 - i * 0.016), radius * (0.048 + palette.noiseLevel * 0.018), -0.55, 0, Math.PI * 2);
+        planetContext.fillStyle = `hsla(${palette.hue + 68}, 78%, 80%, ${0.08 + palette.vitality * 0.16 - palette.warning * 0.03})`;
+        planetContext.fill();
+      }
+    }
+
+    function paintAtmosphericSparkles(centerX: number, centerY: number, radius: number, palette: ReturnType<typeof getPlanetPalette>) {
+      if (!planetContext) return;
+
+      planetContext.globalCompositeOperation = 'screen';
+      for (let i = 0; i < 18; i += 1) {
+        const angle = palette.orbit * 0.32 + i * 2.399;
+        const distance = radius * (0.18 + ((i * 37) % 71) / 100);
+        planetContext.beginPath();
+        planetContext.arc(centerX + Math.cos(angle) * distance, centerY + Math.sin(angle * 1.17) * distance * 0.72, 1.2 + palette.noiseLevel * 1.8, 0, Math.PI * 2);
+        planetContext.fillStyle = `hsla(${palette.hue + 20}, 90%, 78%, ${0.04 + palette.vitality * 0.08 + palette.noiseLevel * 0.06})`;
+        planetContext.fill();
+      }
+      planetContext.globalCompositeOperation = 'source-over';
+    }
+
+    function drawPlanet(time: number) {
+      if (!planetCanvas || !planetContext) return;
+
+      const width = planetCanvas.width;
+      const height = planetCanvas.height;
+      const centerX = width * 0.5;
+      const centerY = height * 0.5;
+      const radius = width * 0.38;
+      const palette = getPlanetPalette(time);
+
+      planetContext.clearRect(0, 0, width, height);
+      paintAtmosphere(centerX, centerY, radius, palette);
+      planetContext.save();
+      planetContext.beginPath();
+      planetContext.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      planetContext.clip();
+      paintBody(centerX, centerY, radius, palette);
+      paintShadow(centerX, centerY, radius, palette);
+      paintCloudBands(centerX, centerY, radius, palette);
+      paintAtmosphericSparkles(centerX, centerY, radius, palette);
+      planetContext.restore();
+    }
+
+    function animatePlanet(time: number) {
+      drawPlanet(time);
+      animationFrame = requestAnimationFrame(animatePlanet);
+    }
+
+    function renderControlValues() {
+      setText('biosig-noise-value', formatUnit(root.dataset.percentUnit, noise.value));
+      setText('biosig-o2-value', formatUnit(root.dataset.nanometerUnit, oxygen.value));
+      setText('biosig-ch4-value', formatUnit(root.dataset.nanometerUnit, methane.value));
+      setText('biosig-o3-value', formatUnit(root.dataset.nanometerUnit, ozone.value));
+      setText('biosig-water-value', formatUnit(root.dataset.percentUnit, water.value));
+      setText('biosig-co2-value', formatUnit(root.dataset.percentUnit, co2.value));
+      [noise, oxygen, methane, ozone, water, co2].forEach(setControlFill);
+    }
+
+    function renderScores(result: ReturnType<typeof analyzeBiosignatures>) {
+      setText('biosig-habitability', `${result.habitabilityIndex.toFixed(0)}`);
+      setText('biosig-bio', `${result.biologicalIndex.toFixed(0)}`);
+      setText('biosig-tech', `${result.technologicalIndex.toFixed(0)}`);
+      setText('biosig-risk', formatUnit(root.dataset.percentUnit, result.falsePositiveRisk.toFixed(0)));
+      setText('biosig-verdict', root.dataset[`verdict${result.verdict.charAt(0).toUpperCase()}${result.verdict.slice(1)}`] || '');
+    }
+
+    function evidenceConfidence(score: ReturnType<typeof analyzeBiosignatures>['evidence'][number] | undefined) {
+      return score?.confidence ?? 0;
+    }
+
+    function renderEvidence(result: ReturnType<typeof analyzeBiosignatures>) {
+      [
+        ['biosig-o2-bar', 'biosig-o2-pct', result.evidence[0]],
+        ['biosig-ch4-bar', 'biosig-ch4-pct', result.evidence[1]],
+        ['biosig-o3-bar', 'biosig-o3-pct', result.evidence[2]],
+      ].forEach(([barId, textId, evidence]) => {
+        const confidence = evidenceConfidence(evidence);
+        setBar(barId, confidence);
+        setText(textId, formatUnit(root.dataset.percentUnit, confidence.toFixed(0)));
+      });
+    }
+
+    function renderMarkers() {
+      setMarker('biosig-marker-o2', Number(oxygen.value), 630, 820);
+      setMarker('biosig-marker-ch4', Number(methane.value), 820, 1780);
+      setMarker('biosig-marker-o3', Number(ozone.value), 230, 1040);
+    }
+
+    function updatePlanetState(result: ReturnType<typeof analyzeBiosignatures>) {
+      root.dataset.verdict = result.verdict;
+      root.style.setProperty('--biosig-noise', `${Number(noise.value) / 100}`);
+      root.style.setProperty('--biosig-life', `${result.biologicalIndex}%`);
+      root.style.setProperty('--biosig-atmo-hue', `${172 - (result.falsePositiveRisk * 0.42) + (result.habitabilityIndex * 0.18)}`);
+      root.style.setProperty('--biosig-atmo-alpha', `${0.18 + (result.habitabilityIndex / 420)}`);
+      planetState = {
+        habitability: result.habitabilityIndex,
+        risk: result.falsePositiveRisk,
+        noise: Number(noise.value),
+      };
+    }
+
+    function update() {
+      const result = analyzeBiosignatures({
+        oxygenAlignmentNm: Number(oxygen.value),
+        methaneAlignmentNm: Number(methane.value),
+        ozoneAlignmentNm: Number(ozone.value),
+        noisePercent: Number(noise.value),
+        stellarClass: star.value as StarClass,
+        waterVaporPercent: Number(water.value),
+        carbonDioxidePercent: Number(co2.value),
+      });
+
+      renderControlValues();
+      renderScores(result);
+      renderEvidence(result);
+      renderMarkers();
+      updatePlanetState(result);
+    }
+
+    [star, noise, oxygen, methane, ozone, water, co2].forEach((control) => {
+      control.addEventListener('input', update);
+      control.addEventListener('change', update);
+    });
+
+    update();
+    cancelAnimationFrame(animationFrame);
+    animationFrame = requestAnimationFrame(animatePlanet);
+  }
+</script>

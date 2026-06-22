@@ -1,0 +1,242 @@
+---
+import './mandelbrot-fractal-calculator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="mandelbrot-root" id="mandelbrot-root">
+  <section class="mandelbrot-stage" aria-label={ui.canvasLabel}>
+    <canvas id="mandelbrot-canvas" class="mandelbrot-canvas"></canvas>
+    <div class="mandelbrot-reticle" aria-hidden="true"></div>
+    <div class="mandelbrot-coordinate-strip">
+      <span>{ui.centerPoint}</span>
+      <strong id="mandelbrot-center">-0.500000 + 0.000000i</strong>
+    </div>
+  </section>
+
+  <section class="mandelbrot-panel">
+    <div class="mandelbrot-presets" aria-label={ui.presetsLabel}>
+      <button class="mandelbrot-preset active" data-x="-0.5" data-y="0" data-scale="1">{ui.presetFull}</button>
+      <button class="mandelbrot-preset" data-x="-0.743643887" data-y="0.131825904" data-scale="550">{ui.presetSeahorse}</button>
+      <button class="mandelbrot-preset" data-x="-0.101096" data-y="0.956286" data-scale="190">{ui.presetSpiral}</button>
+    </div>
+
+    <button id="mandelbrot-reset" class="mandelbrot-reset-button">{ui.reset}</button>
+
+    <div class="mandelbrot-readouts">
+      <div class="mandelbrot-readout mandelbrot-readout-hero">
+        <span>{ui.magnification}</span>
+        <strong id="mandelbrot-zoom">1x</strong>
+      </div>
+      <div class="mandelbrot-readout">
+        <span>{ui.visibleWindow}</span>
+        <strong id="mandelbrot-window">3.500 x 2.000</strong>
+      </div>
+      <div class="mandelbrot-readout">
+        <span>{ui.renderBudget}</span>
+        <strong id="mandelbrot-budget">180</strong>
+      </div>
+    </div>
+
+    <div class="mandelbrot-controls">
+      <label class="mandelbrot-control">
+        <span>{ui.iterationsLabel}</span>
+        <input id="mandelbrot-iterations" type="range" min="60" max="900" value="180" step="20" />
+      </label>
+      <label class="mandelbrot-control">
+        <span>{ui.contrastLabel}</span>
+        <input id="mandelbrot-contrast" type="range" min="0.55" max="2.4" value="1.15" step="0.05" />
+      </label>
+      <label class="mandelbrot-control">
+        <span>{ui.colorLabel}</span>
+        <select id="mandelbrot-palette">
+          <option value="ember">{ui.paletteEmber}</option>
+          <option value="lagoon">{ui.paletteLagoon}</option>
+          <option value="ink">{ui.paletteInk}</option>
+        </select>
+      </label>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { MandelbrotEngine } from './logic/MandelbrotEngine';
+
+  const root = document.getElementById('mandelbrot-root');
+
+  if (root) {
+    const canvas = document.getElementById('mandelbrot-canvas') as HTMLCanvasElement;
+    const iterationsInput = document.getElementById('mandelbrot-iterations') as HTMLInputElement;
+    const contrastInput = document.getElementById('mandelbrot-contrast') as HTMLInputElement;
+    const paletteInput = document.getElementById('mandelbrot-palette') as HTMLSelectElement;
+    const centerOutput = document.getElementById('mandelbrot-center');
+    const zoomOutput = document.getElementById('mandelbrot-zoom');
+    const windowOutput = document.getElementById('mandelbrot-window');
+    const budgetOutput = document.getElementById('mandelbrot-budget');
+    const presets = document.querySelectorAll<HTMLButtonElement>('.mandelbrot-preset');
+    const resetButton = document.getElementById('mandelbrot-reset');
+    const engine = new MandelbrotEngine();
+    const storageKey = 'mandelbrot-fractal-calculator-state';
+
+    const state = {
+      centerX: -0.5,
+      centerY: 0,
+      scale: 1,
+      width: 0,
+      height: 0,
+    };
+
+    function restoreNumber(value: unknown, fallback: number, min = -Infinity): number {
+      return Number.isFinite(value) && Number(value) >= min ? Number(value) : fallback;
+    }
+
+    function restoreInput(input: HTMLInputElement | HTMLSelectElement, value: unknown) {
+      if (typeof value === 'string') input.value = value;
+    }
+
+    function loadState() {
+      try {
+        const saved = window.localStorage.getItem(storageKey);
+        if (!saved) return;
+
+        const parsed = JSON.parse(saved);
+        state.centerX = restoreNumber(parsed.centerX, state.centerX);
+        state.centerY = restoreNumber(parsed.centerY, state.centerY);
+        state.scale = restoreNumber(parsed.scale, state.scale, 1);
+        restoreInput(iterationsInput, parsed.iterations);
+        restoreInput(contrastInput, parsed.contrast);
+        restoreInput(paletteInput, parsed.palette);
+        presets.forEach((preset) => preset.classList.remove('active'));
+      } catch {
+        window.localStorage.removeItem(storageKey);
+      }
+    }
+
+    function saveState() {
+      const payload = {
+        centerX: state.centerX,
+        centerY: state.centerY,
+        scale: state.scale,
+        iterations: iterationsInput.value,
+        contrast: contrastInput.value,
+        palette: paletteInput.value,
+      };
+      window.localStorage.setItem(storageKey, JSON.stringify(payload));
+    }
+
+    function channel(t: number, phase: number, palette: string): number {
+      const wave = Math.sin((t + phase) * Math.PI * 2) * 0.5 + 0.5;
+      if (palette === 'lagoon') return Math.round(32 + wave * 196);
+      if (palette === 'ink') return Math.round(18 + Math.pow(wave, 2.2) * 230);
+      return Math.round(42 + wave * 210);
+    }
+
+    function colorFor(sample: ReturnType<MandelbrotEngine['sample']>, max: number, contrast: number, palette: string): [number, number, number] {
+      if (!sample.escaped) return palette === 'ink' ? [4, 8, 18] : [8, 10, 14];
+      const t = Math.pow(sample.smooth / max, contrast);
+      if (palette === 'lagoon') return [channel(t, 0.52, palette), channel(t, 0.1, palette), channel(t, 0.82, palette)];
+      if (palette === 'ink') return [channel(t, 0.78, palette), channel(t, 0.55, palette), channel(t, 0.18, palette)];
+      return [channel(t, 0.02, palette), channel(t, 0.72, palette), channel(t, 0.42, palette)];
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      state.width = Math.max(320, Math.floor(rect.width));
+      state.height = Math.max(260, Math.floor(rect.height));
+      canvas.width = Math.floor(state.width * dpr);
+      canvas.height = Math.floor(state.height * dpr);
+    }
+
+    function render() {
+      resizeCanvas();
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const maxIterations = parseInt(iterationsInput.value, 10);
+      const contrast = parseFloat(contrastInput.value);
+      const palette = paletteInput.value;
+      const image = ctx.createImageData(canvas.width, canvas.height);
+      const dpr = canvas.width / state.width;
+
+      for (let py = 0; py < canvas.height; py += 1) {
+        for (let px = 0; px < canvas.width; px += 1) {
+          const complex = engine.pixelToComplex(px / dpr, py / dpr, state);
+          const sample = engine.sample(complex.real, complex.imaginary, maxIterations);
+          const color = colorFor(sample, maxIterations, contrast, palette);
+          const index = (py * canvas.width + px) * 4;
+          image.data[index] = color[0];
+          image.data[index + 1] = color[1];
+          image.data[index + 2] = color[2];
+          image.data[index + 3] = 255;
+        }
+      }
+
+      ctx.putImageData(image, 0, 0);
+      updateStats(maxIterations);
+      saveState();
+    }
+
+    function updateStats(maxIterations: number) {
+      const stats = engine.getStats(state);
+      if (centerOutput) centerOutput.textContent = stats.centerLabel;
+      if (zoomOutput) zoomOutput.textContent = `${stats.magnification.toLocaleString(undefined, { maximumFractionDigits: 1 })}x`;
+      if (windowOutput) windowOutput.textContent = `${formatSpan(stats.visibleWidth)} x ${formatSpan(stats.visibleHeight)}`;
+      if (budgetOutput) budgetOutput.textContent = maxIterations.toString();
+    }
+
+    function formatSpan(value: number): string {
+      if (value < 0.001) return value.toExponential(3);
+      if (value < 0.1) return value.toFixed(6);
+      return value.toFixed(4);
+    }
+
+    function setViewport(centerX: number, centerY: number, scale: number) {
+      state.centerX = centerX;
+      state.centerY = centerY;
+      state.scale = scale;
+      render();
+    }
+
+    function resetState() {
+      window.localStorage.removeItem(storageKey);
+      iterationsInput.value = '180';
+      contrastInput.value = '1.15';
+      paletteInput.value = 'ember';
+      presets.forEach((preset) => preset.classList.remove('active'));
+      presets[0]?.classList.add('active');
+      setViewport(-0.5, 0, 1);
+    }
+
+    presets.forEach((button) => {
+      button.addEventListener('click', () => {
+        presets.forEach((preset) => preset.classList.remove('active'));
+        button.classList.add('active');
+        setViewport(
+          parseFloat(button.dataset.x || '-0.5'),
+          parseFloat(button.dataset.y || '0'),
+          parseFloat(button.dataset.scale || '1'),
+        );
+      });
+    });
+
+    canvas.addEventListener('click', (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const complex = engine.pixelToComplex(event.clientX - rect.left, event.clientY - rect.top, state);
+      presets.forEach((preset) => preset.classList.remove('active'));
+      setViewport(complex.real, complex.imaginary, state.scale * 2.25);
+    });
+
+    iterationsInput.addEventListener('input', render);
+    contrastInput.addEventListener('input', render);
+    paletteInput.addEventListener('change', render);
+    resetButton?.addEventListener('click', resetState);
+    window.addEventListener('resize', render);
+    loadState();
+    render();
+  }
+</script>

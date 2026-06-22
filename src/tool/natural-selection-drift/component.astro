@@ -1,0 +1,135 @@
+---
+import "./natural-selection-drift.css";
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="ns-app" data-alive-label={ui.aliveLabel} data-allele-default={ui.alleleDefault}>
+  <section class="ns-card">
+    <canvas id="simulation-canvas" class="ns-canvas"></canvas>
+    <div class="ns-canvas-badge" id="alive-badge">0 {ui.aliveLabel}</div>
+    <header class="ns-top-hud">
+      <div class="ns-top-hud-item">
+        <span>{ui.dominantTrait}</span>
+        <strong id="dominant-trait">{ui.alleleDefault}</strong>
+      </div>
+      <div class="ns-top-hud-item">
+        <span>{ui.diversity}</span>
+        <strong id="diversity-score">0%</strong>
+      </div>
+    </header>
+
+    <section class="ns-alleles" id="allele-ranking" aria-label={ui.alleleCountsLabel}></section>
+
+    <button class="ns-console-trigger" id="ns-console-trigger" aria-label={ui.controls} aria-expanded="false">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h8M2 12h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      {ui.controls}
+    </button>
+
+    <aside class="ns-console" id="ns-console" aria-label="Simulation controls">
+      <div class="ns-console-header">
+        <div class="ns-console-header-row">
+          <span class="ns-console-kicker">{ui.evolutionConsole}</span>
+          <button class="ns-console-close" id="ns-console-close" aria-label="Close controls">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <h3>{ui.title}</h3>
+      </div>
+
+      <div class="ns-slider-row">
+        <label for="population"><span>{ui.population}</span><span id="population-value" class="ns-slider-value">120</span></label>
+        <input id="population" type="range" min="20" max="500" value="120" />
+      </div>
+      <div class="ns-slider-row">
+        <label for="generations"><span>{ui.generations}</span><span id="generations-value" class="ns-slider-value">60</span></label>
+        <input id="generations" type="range" min="10" max="200" value="60" />
+      </div>
+      <div class="ns-slider-row">
+        <label for="mutation"><span>{ui.mutationRate}</span><span id="mutation-value" class="ns-slider-value">12%</span></label>
+        <input id="mutation" type="range" min="0" max="100" value="12" />
+      </div>
+      <div class="ns-slider-row">
+        <label for="pressure"><span>{ui.selectionPressure}</span><span id="pressure-value" class="ns-slider-value">55%</span></label>
+        <input id="pressure" type="range" min="0" max="100" value="55" />
+      </div>
+      <div class="ns-slider-row">
+        <label for="drift"><span>{ui.driftIntensity}</span><span id="drift-value" class="ns-slider-value">28%</span></label>
+        <input id="drift" type="range" min="0" max="100" value="28" />
+      </div>
+      <div class="ns-slider-row">
+        <label for="alleles"><span>{ui.alleleCount}</span><span id="alleles-value" class="ns-slider-value">3</span></label>
+        <input id="alleles" type="range" min="2" max="8" value="3" />
+      </div>
+      <div class="ns-slider-row">
+        <label for="innovation"><span>{ui.innovationRate}</span><span id="innovation-value" class="ns-slider-value">2%</span></label>
+        <input id="innovation" type="range" min="0" max="20" value="2" />
+      </div>
+    </aside>
+
+    <footer class="ns-hud">
+      <div class="ns-hud-item">
+        <span>{ui.fitness}</span>
+        <strong id="fitness-score">0%</strong>
+      </div>
+      <div class="ns-hud-item">
+        <span>{ui.populationLabel}</span>
+        <strong id="population-score">0</strong>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<script>
+  import { createNaturalSelectionRuntime } from './runtime';
+
+  const root = document.querySelector('.ns-app');
+  createNaturalSelectionRuntime({
+    populationInput: document.getElementById('population'),
+    generationsInput: document.getElementById('generations'),
+    mutationInput: document.getElementById('mutation'),
+    pressureInput: document.getElementById('pressure'),
+    driftInput: document.getElementById('drift'),
+    allelesInput: document.getElementById('alleles'),
+    innovationInput: document.getElementById('innovation'),
+    populationValue: document.getElementById('population-value'),
+    generationsValue: document.getElementById('generations-value'),
+    mutationValue: document.getElementById('mutation-value'),
+    pressureValue: document.getElementById('pressure-value'),
+    driftValue: document.getElementById('drift-value'),
+    allelesValue: document.getElementById('alleles-value'),
+    innovationValue: document.getElementById('innovation-value'),
+    canvas: document.getElementById('simulation-canvas'),
+    aliveBadge: document.getElementById('alive-badge'),
+    dominantTrait: document.getElementById('dominant-trait'),
+    fitnessScore: document.getElementById('fitness-score'),
+    diversityScore: document.getElementById('diversity-score'),
+    populationScore: document.getElementById('population-score'),
+    alleleRanking: document.getElementById('allele-ranking'),
+    ui: {
+      aliveLabel: root?.dataset.aliveLabel ?? '',
+      alleleDefault: root?.dataset.alleleDefault ?? '',
+    },
+  });
+
+  const trigger = document.getElementById('ns-console-trigger');
+  const closeBtn = document.getElementById('ns-console-close');
+  const console = document.getElementById('ns-console');
+
+  function openConsole() {
+    console?.classList.add('is-open');
+    trigger?.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeConsole() {
+    console?.classList.remove('is-open');
+    trigger?.setAttribute('aria-expanded', 'false');
+  }
+
+  trigger?.addEventListener('click', openConsole);
+  closeBtn?.addEventListener('click', closeConsole);
+</script>

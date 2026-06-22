@@ -1,0 +1,346 @@
+---
+import './radioactive-decay-half-life-calculator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="decay-lab" id="decay-lab">
+  <section class="decay-stage" aria-label={ui.atomField}>
+    <div class="decay-stage-header">
+      <div>
+        <p class="decay-kicker">{ui.expectedCurve}</p>
+        <h2>{ui.atomField}</h2>
+      </div>
+      <button class="decay-seed-button" id="decay-seed-button" type="button">{ui.resetSeed}</button>
+    </div>
+    <svg class="decay-curve" viewBox="0 0 640 150" aria-hidden="true">
+      <path class="decay-curve-ghost" id="decay-curve-ghost" d="M18 26 C 155 32, 236 78, 326 104 S 520 129, 622 137"></path>
+      <path class="decay-curve-line" id="decay-curve-line" d="M18 26 C 155 32, 236 78, 326 104 S 520 129, 622 137"></path>
+      <circle class="decay-curve-marker" id="decay-curve-marker" cx="169" cy="61" r="8"></circle>
+    </svg>
+    <svg class="decay-field-art" id="decay-field-art" viewBox="0 0 640 360" role="img" aria-label={ui.atomField}></svg>
+    <div class="decay-legend">
+      <span><i class="decay-dot decay-dot-live"></i>{ui.liveAtoms}</span>
+      <span><i class="decay-dot decay-dot-spent"></i>{ui.decayedAtoms}</span>
+    </div>
+  </section>
+
+  <section class="decay-console" aria-label="Radioactive decay controls">
+    <div class="decay-select-block">
+      <label class="decay-field decay-field--select" for="decay-isotope">
+        <span>{ui.isotope}</span>
+        <span class="decay-select-shell">
+          <select id="decay-isotope"></select>
+        </span>
+      </label>
+
+      <div class="decay-use" id="decay-use"></div>
+    </div>
+
+    <label class="decay-field" for="decay-atoms">
+      <span>{ui.sampleAtoms}</span>
+      <output id="decay-atoms-output">160</output>
+      <input id="decay-atoms" type="range" min="40" max="400" step="20" value="160" />
+    </label>
+
+    <label class="decay-field" for="decay-time">
+      <span>{ui.elapsedTime}</span>
+      <output id="decay-time-output">0</output>
+      <input id="decay-time" type="range" min="0" max="4" step="0.01" value="1" />
+    </label>
+
+    <div class="decay-jumps" aria-label="Half-life shortcuts">
+      <button type="button" data-half-lives="1">{ui.oneHalfLife}</button>
+      <button type="button" data-half-lives="2">{ui.twoHalfLives}</button>
+      <button type="button" data-half-lives="4">{ui.fourHalfLives}</button>
+    </div>
+
+    <div class="decay-results">
+      <div class="decay-metric">
+        <span>{ui.halfLife}</span>
+        <strong id="decay-half-life">-</strong>
+      </div>
+      <div class="decay-metric">
+        <span>{ui.remaining}</span>
+        <strong id="decay-remaining">-</strong>
+      </div>
+      <div class="decay-metric">
+        <span>{ui.decayed}</span>
+        <strong id="decay-decayed">-</strong>
+      </div>
+      <div class="decay-metric">
+        <span>{ui.activity}</span>
+        <strong id="decay-activity">-</strong>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { ISOTOPE_PRESETS, simulateDecay } from './logic';
+  import type { IsotopePreset } from './logic';
+
+  const root = document.getElementById('decay-lab');
+  const isotopeSelect = document.getElementById('decay-isotope') as HTMLSelectElement | null;
+  const useText = document.getElementById('decay-use');
+  const atomsInput = document.getElementById('decay-atoms') as HTMLInputElement | null;
+  const atomsOutput = document.getElementById('decay-atoms-output');
+  const timeInput = document.getElementById('decay-time') as HTMLInputElement | null;
+  const timeOutput = document.getElementById('decay-time-output');
+  const atomField = document.getElementById('decay-field-art');
+  const halfLifeText = document.getElementById('decay-half-life');
+  const remainingText = document.getElementById('decay-remaining');
+  const decayedText = document.getElementById('decay-decayed');
+  const activityText = document.getElementById('decay-activity');
+  const marker = document.getElementById('decay-curve-marker') as SVGCircleElement | null;
+  const curveLine = document.getElementById('decay-curve-line') as SVGPathElement | null;
+  const curveGhost = document.getElementById('decay-curve-ghost') as SVGPathElement | null;
+  const seedButton = document.getElementById('decay-seed-button');
+
+  let seed = 1487;
+  let currentDecayed = new Set<number>();
+  const atomNodes = new Map<number, SVGCircleElement>();
+  const atomBase = new Map<number, ReturnType<typeof atomPosition>>();
+  const decayTimers = new Map<number, number>();
+  const svgNamespace = 'http://www.w3.org/2000/svg';
+  const curveState = {
+    progress: 0.25,
+    remainingFraction: 0.5,
+    targetProgress: 0.25,
+    targetRemainingFraction: 0.5,
+    frame: 0,
+  };
+
+  function getPreset(): IsotopePreset {
+    return ISOTOPE_PRESETS.find((preset) => preset.id === isotopeSelect?.value) ?? ISOTOPE_PRESETS[0];
+  }
+
+  function formatNumber(value: number): string {
+    if (Math.abs(value) >= 1_000_000) {
+      return new Intl.NumberFormat('en', {
+        notation: 'compact',
+        maximumFractionDigits: 2,
+      }).format(value);
+    }
+
+    return new Intl.NumberFormat('en', { maximumFractionDigits: 2 }).format(value);
+  }
+
+  function atomPosition(atomId: number) {
+    const columnCount = 20;
+    const row = Math.floor(atomId / columnCount);
+    const column = atomId % columnCount;
+    const jitterX = Math.sin((atomId + seed) * 12.9898) * 7;
+    const jitterY = Math.cos((atomId + seed) * 78.233) * 7;
+
+    return {
+      x: 30 + column * 30.6 + jitterX,
+      y: 30 + row * 25.5 + jitterY,
+      radius: 4.8 + Math.abs(Math.sin(atomId * 1.7)) * 3.2,
+    };
+  }
+
+  function setAtomBase(circle: SVGCircleElement, atomId: number) {
+    const position = atomPosition(atomId);
+    atomBase.set(atomId, position);
+    circle.setAttribute('cx', position.x.toFixed(2));
+    circle.setAttribute('cy', position.y.toFixed(2));
+    circle.setAttribute('r', position.radius.toFixed(2));
+  }
+
+  function createAtom(atomId: number) {
+    const circle = document.createElementNS(svgNamespace, 'circle');
+    circle.classList.add('decay-atom');
+    circle.style.setProperty('--delay', `${atomId % 37}ms`);
+    setAtomBase(circle, atomId);
+    atomField?.append(circle);
+    atomNodes.set(atomId, circle);
+
+    return circle;
+  }
+
+  function setAtomLive(circle: SVGCircleElement, atomId: number) {
+    const timer = decayTimers.get(atomId);
+    if (timer) {
+      window.clearTimeout(timer);
+      decayTimers.delete(atomId);
+    }
+
+    circle.classList.remove('decay-atom-decaying', 'decay-atom-spent');
+  }
+
+  function setAtomDecayed(circle: SVGCircleElement, atomId: number, justDecayed: boolean) {
+    if (!justDecayed) {
+      circle.classList.add('decay-atom-spent');
+      circle.classList.remove('decay-atom-decaying');
+      return;
+    }
+
+    circle.classList.remove('decay-atom-spent');
+    circle.classList.add('decay-atom-decaying');
+
+    const existingTimer = decayTimers.get(atomId);
+    if (existingTimer) window.clearTimeout(existingTimer);
+
+    const timer = window.setTimeout(() => {
+      if (!currentDecayed.has(atomId)) return;
+      circle.classList.remove('decay-atom-decaying');
+      circle.classList.add('decay-atom-spent');
+      decayTimers.delete(atomId);
+    }, 600);
+    decayTimers.set(atomId, timer);
+  }
+
+  function renderAtoms(result: ReturnType<typeof simulateDecay>) {
+    if (!atomField) return;
+
+    const nextDecayed = new Set(result.atoms.filter((atom) => atom.decayed).map((atom) => atom.id));
+    const liveIds = new Set(result.atoms.map((atom) => atom.id));
+
+    atomNodes.forEach((circle, atomId) => {
+      if (liveIds.has(atomId)) return;
+      circle.remove();
+      atomNodes.delete(atomId);
+      atomBase.delete(atomId);
+      currentDecayed.delete(atomId);
+    });
+
+    result.atoms.forEach((atom) => {
+      const circle = atomNodes.get(atom.id) ?? createAtom(atom.id);
+      if (!atomBase.has(atom.id)) setAtomBase(circle, atom.id);
+
+      if (atom.decayed) {
+        setAtomDecayed(circle, atom.id, !currentDecayed.has(atom.id));
+      } else {
+        setAtomLive(circle, atom.id);
+      }
+    });
+
+    currentDecayed = nextDecayed;
+  }
+
+  function curvePath(remainingFraction: number): string {
+    const lift = remainingFraction * 18;
+    const sag = (1 - remainingFraction) * 16;
+
+    return `M18 ${26 + sag} C 154 ${30 + lift}, 238 ${77 - lift}, 326 ${104 - lift * 0.35} S 520 ${128 + sag * 0.22}, 622 ${137 - lift * 0.12}`;
+  }
+
+  function drawCurve(progress: number, remainingFraction: number) {
+    if (!curveLine || !marker) return;
+
+    const path = curvePath(remainingFraction);
+    curveLine.setAttribute('d', path);
+    curveGhost?.setAttribute('d', path);
+
+    const totalLength = curveLine.getTotalLength();
+    const point = curveLine.getPointAtLength(totalLength * progress);
+
+    curveLine.style.strokeDasharray = `${totalLength}`;
+    curveLine.style.strokeDashoffset = `${totalLength * (1 - progress)}`;
+    marker.setAttribute('cx', point.x.toFixed(2));
+    marker.setAttribute('cy', point.y.toFixed(2));
+    marker.style.opacity = `${Math.max(0.42, remainingFraction)}`;
+  }
+
+  function animateCurve() {
+    const deltaProgress = curveState.targetProgress - curveState.progress;
+    const deltaRemaining = curveState.targetRemainingFraction - curveState.remainingFraction;
+    curveState.progress += deltaProgress * 0.18;
+    curveState.remainingFraction += deltaRemaining * 0.18;
+    drawCurve(curveState.progress, curveState.remainingFraction);
+
+    if (Math.abs(deltaProgress) > 0.001 || Math.abs(deltaRemaining) > 0.001) {
+      curveState.frame = window.requestAnimationFrame(animateCurve);
+      return;
+    }
+
+    curveState.progress = curveState.targetProgress;
+    curveState.remainingFraction = curveState.targetRemainingFraction;
+    drawCurve(curveState.progress, curveState.remainingFraction);
+    curveState.frame = 0;
+  }
+
+  function updateCurve(halfLifeCount: number, remainingFraction: number) {
+    curveState.targetProgress = Math.min(1, halfLifeCount / 4);
+    curveState.targetRemainingFraction = remainingFraction;
+
+    if (!curveState.frame) {
+      curveState.frame = window.requestAnimationFrame(animateCurve);
+    }
+  }
+
+  function floatAtoms(time: number) {
+    atomNodes.forEach((circle, atomId) => {
+      if (circle.classList.contains('decay-atom-spent')) return;
+
+      const base = atomBase.get(atomId);
+      if (!base) return;
+
+      const driftX = Math.sin(time * 0.0012 + atomId * 1.91) * 1.5;
+      const driftY = Math.cos(time * 0.0015 + atomId * 2.37) * 1.25;
+      circle.setAttribute('cx', (base.x + driftX).toFixed(2));
+      circle.setAttribute('cy', (base.y + driftY).toFixed(2));
+    });
+
+    window.requestAnimationFrame(floatAtoms);
+  }
+
+  function update() {
+    if (!root || !isotopeSelect || !atomsInput || !timeInput) return;
+
+    const preset = getPreset();
+    const halfLifeCount = Number(timeInput.value);
+    const elapsedTime = halfLifeCount * preset.halfLife;
+    const result = simulateDecay({
+      initialAtoms: Number(atomsInput.value),
+      halfLife: preset.halfLife,
+      elapsedTime,
+      seed,
+    });
+
+    atomsOutput!.textContent = atomsInput.value;
+    timeOutput!.textContent = `${formatNumber(elapsedTime)} ${preset.unit}`;
+    useText!.textContent = preset.useCase;
+    halfLifeText!.textContent = `${formatNumber(preset.halfLife)} ${preset.unit}`;
+    remainingText!.textContent = `${result.remainingAtoms} (${(result.remainingFraction * 100).toFixed(1)}%)`;
+    decayedText!.textContent = `${result.decayedAtoms} (${(result.decayedFraction * 100).toFixed(1)}%)`;
+    activityText!.textContent = `${(result.activityFraction * 100).toFixed(1)}%`;
+
+    updateCurve(halfLifeCount, result.remainingFraction);
+    renderAtoms(result);
+  }
+
+  ISOTOPE_PRESETS.forEach((preset) => {
+    const option = document.createElement('option');
+    option.value = preset.id;
+    option.textContent = preset.name;
+    isotopeSelect?.append(option);
+  });
+
+  isotopeSelect?.addEventListener('change', update);
+  atomsInput?.addEventListener('input', update);
+  timeInput?.addEventListener('input', update);
+  seedButton?.addEventListener('click', () => {
+    seed += 9973;
+    atomNodes.forEach((circle, atomId) => {
+      setAtomBase(circle, atomId);
+    });
+    update();
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-half-lives]').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!timeInput) return;
+      timeInput.value = button.dataset.halfLives ?? '1';
+      update();
+    });
+  });
+
+  update();
+  window.requestAnimationFrame(floatAtoms);
+</script>

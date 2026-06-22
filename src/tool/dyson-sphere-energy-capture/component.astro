@@ -1,0 +1,253 @@
+---
+import './dyson-sphere-energy-capture.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div
+  class="dyson-root"
+  id="dyson-root"
+  data-status-underbuilt={ui.statusUnderbuilt}
+  data-status-balanced={ui.statusBalanced}
+  data-status-extreme={ui.statusExtreme}
+  data-mercury-masses={ui.mercuryMasses}
+  data-kilograms={ui.kilograms}
+  data-days-unit={ui.daysUnit}
+>
+  <section class="dyson-stage" aria-label={ui.visualization}>
+    <div class="dyson-starfield">
+      <div class="dyson-orbit dyson-orbit-outer"></div>
+      <div class="dyson-orbit dyson-orbit-inner"></div>
+      <div class="dyson-star"></div>
+      <div class="dyson-collectors" id="dyson-collectors"></div>
+      <div class="dyson-power-beam"></div>
+    </div>
+    <div class="dyson-stage-readout">
+      <span>{ui.kardashevRating}</span>
+      <strong id="dyson-kardashev">---</strong>
+    </div>
+  </section>
+
+  <section class="dyson-panel">
+    <div class="dyson-selector-grid">
+      <label>
+        <span>{ui.starType}</span>
+        <select id="dyson-star-select">
+          <option value="m-dwarf">{ui.starMDwarf}</option>
+          <option value="sun" selected>{ui.starSun}</option>
+          <option value="a-star">{ui.starA}</option>
+          <option value="red-giant">{ui.starRedGiant}</option>
+          <option value="blue-giant">{ui.starBlueGiant}</option>
+        </select>
+      </label>
+      <label>
+        <span>{ui.structureType}</span>
+        <select id="dyson-structure-select">
+          <option value="swarm" selected>{ui.structureSwarm}</option>
+          <option value="ring">{ui.structureRing}</option>
+          <option value="shell">{ui.structureShell}</option>
+          <option value="statite-cloud">{ui.structureStatite}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="dyson-slider-stack">
+      <label class="dyson-slider-row" for="dyson-coverage">
+        <span>{ui.coverage}</span>
+        <strong id="dyson-coverage-value">35%</strong>
+        <input id="dyson-coverage" type="range" min="1" max="100" value="35" step="1" />
+      </label>
+      <label class="dyson-slider-row" for="dyson-temperature">
+        <span>{ui.operatingTemp}</span>
+        <strong id="dyson-temperature-value">600 K</strong>
+        <input id="dyson-temperature" type="range" min="250" max="1200" value="600" step="10" />
+      </label>
+      <label class="dyson-slider-row" for="dyson-target">
+        <span>{ui.kardashevTarget}</span>
+        <strong id="dyson-target-value">1.7</strong>
+        <input id="dyson-target" type="range" min="1" max="2" value="1.7" step="0.01" />
+      </label>
+    </div>
+  </section>
+
+  <section class="dyson-results">
+    <article>
+      <span>{ui.capturedPower}</span>
+      <strong id="dyson-captured">---</strong>
+    </article>
+    <article>
+      <span>{ui.optimalRadius}</span>
+      <strong id="dyson-radius">---</strong>
+    </article>
+    <article>
+      <span>{ui.targetCoverage}</span>
+      <strong id="dyson-target-coverage">---</strong>
+    </article>
+    <article>
+      <span>{ui.materialMass}</span>
+      <strong id="dyson-mass">---</strong>
+    </article>
+  </section>
+
+  <section class="dyson-diagnostics">
+    <div class="dyson-meter">
+      <span>{ui.captureMeter}</span>
+      <div><i id="dyson-meter-fill"></i></div>
+    </div>
+    <p id="dyson-status">{ui.statusReady}</p>
+    <dl>
+      <div>
+        <dt>{ui.orbitalPeriod}</dt>
+        <dd id="dyson-period">---</dd>
+      </div>
+      <div>
+        <dt>{ui.collectorArea}</dt>
+        <dd id="dyson-area">---</dd>
+      </div>
+    </dl>
+  </section>
+</div>
+
+<script>
+  import { calculateDyson } from './logic';
+  import type { StarType, StructureType } from './logic';
+
+  const root = document.getElementById('dyson-root');
+  if (root) {
+    const storageKey = 'dyson-sphere-energy-capture:v1';
+    const starSelect = document.getElementById('dyson-star-select') as HTMLSelectElement;
+    const structureSelect = document.getElementById('dyson-structure-select') as HTMLSelectElement;
+    const coverageInput = document.getElementById('dyson-coverage') as HTMLInputElement;
+    const temperatureInput = document.getElementById('dyson-temperature') as HTMLInputElement;
+    const targetInput = document.getElementById('dyson-target') as HTMLInputElement;
+    const collectors = document.getElementById('dyson-collectors');
+    const statusText: Record<string, string> = {
+      underbuilt: root.dataset.statusUnderbuilt || '',
+      balanced: root.dataset.statusBalanced || '',
+      extreme: root.dataset.statusExtreme || '',
+    };
+
+    const setText = (id: string, text: string) => {
+      const node = document.getElementById(id);
+      if (node) node.textContent = text;
+    };
+
+    const formatPower = (value: number) => `${value.toExponential(2).replace('e+', 'e')} W`;
+
+    function formatMass(kg: number, mercury: number) {
+      if (mercury > 0.01) return (root.dataset.mercuryMasses || '{value}').replace('{value}', mercury.toFixed(2));
+      return (root.dataset.kilograms || '{value} kg').replace('{value}', kg.toExponential(2));
+    }
+
+    function getCoverageBand(coveragePercent: number) {
+      if (coveragePercent > 92) return 'full';
+      if (coveragePercent > 62) return 'dense';
+      return 'open';
+    }
+
+    function getCollectorCount(coveragePercent: number) {
+      const baseCount = Math.max(6, Math.round(coveragePercent * 1.2));
+      if (structureSelect.value === 'ring') return Math.max(10, Math.round(coveragePercent * 0.7));
+      if (structureSelect.value === 'shell') return Math.max(18, Math.round(coveragePercent * 1.7));
+      if (structureSelect.value === 'statite-cloud') return Math.max(14, Math.round(coveragePercent * 1.45));
+      return baseCount;
+    }
+
+    function buildCollectors(count: number) {
+      if (!collectors) return;
+      collectors.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const dot = document.createElement('span');
+        const band = i % 4;
+        dot.style.setProperty('--angle', `${(360 / count) * i}deg`);
+        dot.style.setProperty('--depth', `${86 + band * 17}px`);
+        dot.style.setProperty('--delay', `${i * -0.18}s`);
+        dot.style.setProperty('--tilt', `${band * 9 - 13}deg`);
+        collectors.append(dot);
+      }
+    }
+
+    function renderReadouts(result: ReturnType<typeof calculateDyson>, coveragePercent: number, operatingTempK: number, kardashevTarget: number) {
+      setText('dyson-coverage-value', `${coveragePercent}%`);
+      setText('dyson-temperature-value', `${operatingTempK} K`);
+      setText('dyson-target-value', kardashevTarget.toFixed(2));
+      setText('dyson-kardashev', `K${result.kardashevRating.toFixed(2)}`);
+      setText('dyson-captured', formatPower(result.capturedWatts));
+      setText('dyson-radius', `${result.optimalRadiusAu.toFixed(2)} AU`);
+      setText('dyson-target-coverage', `${result.targetCoveragePercent.toFixed(1)}%`);
+      setText('dyson-mass', formatMass(result.materialMassKg, result.mercuryMasses));
+      setText('dyson-period', (root.dataset.daysUnit || '{value} days').replace('{value}', result.orbitalPeriodDays.toLocaleString(undefined, { maximumFractionDigits: 0 })));
+      setText('dyson-area', `${result.collectorAreaM2.toExponential(2)} m2`);
+      setText('dyson-status', statusText[result.status]);
+    }
+
+    function renderVisuals(result: ReturnType<typeof calculateDyson>, coveragePercent: number) {
+      const fill = document.getElementById('dyson-meter-fill');
+      if (fill) fill.style.width = `${Math.min(100, (coveragePercent / Math.max(1, result.targetCoveragePercent)) * 100)}%`;
+
+      const radiusScale = Math.min(1.34, Math.max(0.68, 0.78 + Math.log10(Math.max(0.08, result.optimalRadiusAu)) * 0.18));
+      const orbitSpeedSeconds = Math.min(34, Math.max(5, Math.log10(Math.max(2, result.orbitalPeriodDays)) * 8));
+      root.style.setProperty('--dyson-coverage', `${coveragePercent}%`);
+      root.style.setProperty('--dyson-orbit-scale', radiusScale.toFixed(3));
+      root.style.setProperty('--dyson-orbit-speed', `${orbitSpeedSeconds.toFixed(2)}s`);
+      root.style.setProperty('--dyson-glow-strength', `${Math.min(0.82, 0.28 + coveragePercent / 160)}`);
+      root.dataset.star = starSelect.value;
+      root.dataset.structure = structureSelect.value;
+      root.dataset.status = result.status;
+      root.dataset.coverage = getCoverageBand(coveragePercent);
+      buildCollectors(getCollectorCount(coveragePercent));
+    }
+
+    function saveState() {
+      const payload = {
+        star: starSelect.value,
+        structure: structureSelect.value,
+        coverage: coverageInput.value,
+        temperature: temperatureInput.value,
+        target: targetInput.value,
+      };
+      localStorage.setItem(storageKey, JSON.stringify(payload));
+    }
+
+    function restoreState() {
+      const raw = localStorage.getItem(storageKey);
+      if (!raw) return;
+
+      const payload = JSON.parse(raw) as Record<string, string>;
+      if (payload.star) starSelect.value = payload.star;
+      if (payload.structure) structureSelect.value = payload.structure;
+      if (payload.coverage) coverageInput.value = payload.coverage;
+      if (payload.temperature) temperatureInput.value = payload.temperature;
+      if (payload.target) targetInput.value = payload.target;
+    }
+
+    function update() {
+      const coveragePercent = Number(coverageInput.value);
+      const operatingTempK = Number(temperatureInput.value);
+      const kardashevTarget = Number(targetInput.value);
+      const result = calculateDyson({
+        star: starSelect.value as StarType,
+        structure: structureSelect.value as StructureType,
+        coveragePercent,
+        operatingTempK,
+        kardashevTarget,
+      });
+
+      renderReadouts(result, coveragePercent, operatingTempK, kardashevTarget);
+      renderVisuals(result, coveragePercent);
+      saveState();
+    }
+
+    [starSelect, structureSelect, coverageInput, temperatureInput, targetInput].forEach((control) => {
+      control.addEventListener('input', update);
+      control.addEventListener('change', update);
+    });
+
+    restoreState();
+    update();
+  }
+</script>

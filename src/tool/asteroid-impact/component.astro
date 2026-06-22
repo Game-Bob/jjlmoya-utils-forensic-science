@@ -1,0 +1,449 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<div class="asteroid-app" id="asteroid-app">
+	<div id="asteroid-game-map" class="asteroid-game-map" style="touch-action: none;"></div>
+
+	<div id="asteroid-map-target-overlay" class="asteroid-map-target-overlay">
+		<div class="asteroid-target-crosshair"></div>
+		<div class="asteroid-target-crosshair vertical"></div>
+		<div class="asteroid-target-box"></div>
+	</div>
+
+	<div class="asteroid-top-bar">
+		<div>
+			<button id="asteroid-gps-btn" class="asteroid-gps-btn">
+				<div id="asteroid-gps-dot" class="asteroid-gps-dot"></div>
+				<span id="asteroid-gps-text">{ui.activateGPS}</span>
+			</button>
+		</div>
+
+		<div id="asteroid-verdict-pill" class="asteroid-verdict-pill">
+			<div id="asteroid-verdict-container" class="asteroid-verdict-container">
+				<div id="asteroid-verdict-icon" class="asteroid-verdict-icon"></div>
+				<div class="asteroid-verdict-text">
+					<div id="asteroid-verdict-label" class="asteroid-verdict-label">{ui.analysisLabel}</div>
+					<div id="asteroid-verdict-value" class="asteroid-verdict-value">--</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="asteroid-desktop-lab">
+		<div class="asteroid-lab-panel">
+			<div class="asteroid-lab-header">
+				<div class="asteroid-lab-title">
+					<div class="asteroid-lab-icon">
+						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12,2L11,7H13L12,2M6.5,5.27L5.77,6L9.5,9.73L10.23,9L6.5,5.27M17.5,5.27L13.77,9L14.5,9.73L18.23,6L17.5,5.27M2,11V13H7V11H2M17,11V13H22V11H17M9.5,14.27L5.77,18L6.5,18.73L10.23,15L9.5,14.27M14.5,14.27L13.77,15L17.5,18.73L18.23,18L14.5,14.27M11,17L12,22L13,17H11Z"></path>
+						</svg>
+					</div>
+					<div>
+						<h2 class="asteroid-lab-name">Asteroid</h2>
+						<span class="asteroid-lab-subtitle">Factory</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="asteroid-lab-content">
+				<div class="asteroid-drag-source" id="drag-source-desktop">
+					<div class="asteroid-drag-bg"></div>
+					<div class="asteroid-drag-tooltip">
+						<span class="asteroid-drag-tooltip-text">{ui.dragToMap}</span>
+					</div>
+					<div class="asteroid-params-badge">
+						<div id="asteroid-param-size" class="asteroid-param-item">{ui.diameterLabel}: <span id="asteroid-param-size-val">50m</span></div>
+						<div id="asteroid-param-vel" class="asteroid-param-item">{ui.velocityLabel}: <span id="asteroid-param-vel-val">15 km/s</span></div>
+						<div id="asteroid-param-type" class="asteroid-param-item">Tipo: <span id="asteroid-param-type-val">{ui.rock}</span></div>
+					</div>
+					<div class="asteroid-drag-icon-parent">
+						<Icon name="mdi:drag" class="w-6 h-6" />
+					</div>
+					<div class="asteroid-drag-visual">
+						<div class="asteroid-drag-grid"></div>
+						<div id="asteroid-visual" class="asteroid-visual">
+							<div id="asteroid-surface" class="asteroid-surface">
+								<div class="asteroid-surface-gradient"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="asteroid-control-label" style="margin-bottom: 1rem;">
+						<span class="asteroid-control-text">{ui.historicalData}</span>
+					</div>
+					<div class="asteroid-presets">
+						<button class="asteroid-preset-btn" data-dia="20" data-vel="19" data-comp="rock">
+							<div class="asteroid-preset-title">CHELYABINSK</div>
+							<div class="asteroid-preset-subtitle">20m · {ui.presetAerial}</div>
+						</button>
+						<button class="asteroid-preset-btn" data-dia="50" data-vel="15" data-comp="rock">
+							<div class="asteroid-preset-title">TUNGUSKA</div>
+							<div class="asteroid-preset-subtitle">50m · {ui.presetForest}</div>
+						</button>
+						<button class="asteroid-preset-btn" data-dia="200" data-vel="25" data-comp="ice">
+							<div class="asteroid-preset-title">3I ATLAS</div>
+							<div class="asteroid-preset-subtitle">200m · {ui.presetComet}</div>
+						</button>
+						<button class="asteroid-preset-btn" data-dia="10000" data-vel="20" data-comp="rock">
+							<div class="asteroid-preset-title">CHICXULUB</div>
+							<div class="asteroid-preset-subtitle">10km · E.L.E.</div>
+						</button>
+					</div>
+				</div>
+
+				<div class="asteroid-control-group">
+					<div class="asteroid-control-label">
+						<span class="asteroid-control-text">{ui.diameterLabel}</span>
+						<span id="display-size" class="asteroid-control-value">100m</span>
+					</div>
+					<input type="range" id="input-size" min="10" max="5000" step="10" value="5000" class="asteroid-slider" />
+				</div>
+
+				<div class="asteroid-control-group">
+					<div class="asteroid-control-label">
+						<span class="asteroid-control-text">{ui.velocityLabel}</span>
+						<span id="display-velocity" class="asteroid-control-value">20 km/s</span>
+					</div>
+					<input type="range" id="input-velocity" min="10" max="70" step="1" value="20" class="asteroid-slider" />
+				</div>
+
+				<div>
+					<div class="asteroid-control-text" style="margin-bottom: 0.5rem; display: block;">{ui.composition}</div>
+					<div class="asteroid-material-buttons">
+						<button class="asteroid-material-btn active" data-type="rock">
+							<div class="asteroid-material-dot" style="background: #64748b;"></div>
+							<span class="asteroid-material-name">{ui.rock}</span>
+						</button>
+						<button class="asteroid-material-btn" data-type="iron">
+							<div class="asteroid-material-dot" style="background: #1e293b;"></div>
+							<span class="asteroid-material-name">{ui.iron}</span>
+						</button>
+						<button class="asteroid-material-btn" data-type="ice">
+							<div class="asteroid-material-dot" style="background: #67e8f9;"></div>
+							<span class="asteroid-material-name">{ui.ice}</span>
+						</button>
+					</div>
+				</div>
+
+				<button id="clear-btn" class="asteroid-clear-btn">
+					<Icon name="mdi:trash-can-outline" class="w-4 h-4" />
+					{ui.clearAll}
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div style="display: none;">
+	<div id="icon-safe">
+		<svg class="w-6 h-6" style="color: #34d399;" fill="currentColor" viewBox="0 0 24 24">
+			<path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
+		</svg>
+	</div>
+	<div id="icon-shock">
+		<svg class="w-6 h-6" style="color: #60a5fa;" fill="currentColor" viewBox="0 0 24 24">
+			<path d="M3,12A9,9 0 0,0 12,21A9,9 0 0,0 21,12A9,9 0 0,0 12,3A9,9 0 0,0 3,12M5,12A7,7 0 0,1 12,5A7,7 0 0,1 19,12A7,7 0 0,1 12,19A7,7 0 0,1 5,12M11,17H13V15H11V17M11,13H13V7H11V13Z"></path>
+		</svg>
+	</div>
+	<div id="icon-burn">
+		<svg class="w-6 h-6" style="color: #fb923c;" fill="currentColor" viewBox="0 0 24 24">
+			<path d="M17.66,11.2C17.43,10.9 17.15,10.64 16.89,10.38C16.22,9.78 15.46,9.35 14.82,8.72C13.33,7.26 13,4.85 13.95,3C13,3.23 12.17,3.75 11.46,4.32C8.87,6.4 7.85,10.07 9.07,13.22C9.11,13.32 9.15,13.42 9.15,13.55C9.15,13.77 9,13.97 8.8,14.05C8.57,14.15 8.33,14.09 8.14,13.93C8.08,13.88 8.04,13.83 8,13.76C6.87,12.33 6.69,10.28 7.45,8.64C5.78,10 4.87,12.3 5,14.47C5.06,14.97 5.12,15.47 5.29,15.97C5.43,16.57 5.7,17.17 6,17.7C7.08,19.43 8.95,20.67 10.96,20.92C13.1,21.19 15.39,20.8 17.03,19.32C18.86,17.66 19.5,15 18.56,12.72L18.43,12.46C18.22,12 17.66,11.2 17.66,11.2Z"></path>
+		</svg>
+	</div>
+	<div id="icon-death">
+		<svg class="w-6 h-6" style="color: #f87171;" fill="currentColor" viewBox="0 0 24 24">
+			<path d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"></path>
+		</svg>
+	</div>
+</div>
+
+<script>
+	import L from "leaflet";
+	import { ImpactPhysics, type Composition } from "./logic/impactPhysics";
+	import { VERDICT_CONFIGS } from "./constants";
+	import { getCompositionColor } from "./utils";
+	import { updateControlUI } from "./ui-helpers";
+
+	let map: L.Map;
+
+	interface ImpactData {
+		craterDiameter: number;
+		thermalRadius: number;
+		shockwave1psi: number;
+	}
+
+	const impacts: {
+		id: string;
+		circles: L.LayerGroup;
+		marker: L.Marker;
+		data: ImpactData;
+		config: typeof config;
+	}[] = [];
+
+	const config = {
+		diameter: 10000,
+		velocity: 20,
+		composition: "rock" as Composition,
+	};
+
+	function init() {
+		map = L.map("asteroid-game-map", {
+			zoomControl: false,
+			attributionControl: false,
+			dragging: true,
+		}).setView([40.4168, -3.7038], 6);
+
+		L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.webp", {
+			subdomains: "abcd",
+			maxZoom: 20,
+			attribution: "&copy; OpenStreetMap &copy; CARTO",
+		}).addTo(map);
+
+		setupControls();
+		setupGhostDrag();
+		setupGPS();
+
+		map.on("click", () => {
+			map.dragging.enable();
+		});
+	}
+
+	function setupControls() {
+		const sizeInput = document.getElementById("input-size") as HTMLInputElement;
+		const velInput = document.getElementById("input-velocity") as HTMLInputElement;
+		const matBtns = document.querySelectorAll(".asteroid-material-btn");
+		const presetBtns = document.querySelectorAll(".asteroid-preset-btn");
+		const clearBtn = document.getElementById("clear-btn");
+
+		sizeInput?.addEventListener("input", (e) => {
+			config.diameter = parseInt((e.target as HTMLInputElement).value);
+			updateControlUI(config);
+		});
+
+		velInput?.addEventListener("input", (e) => {
+			config.velocity = parseInt((e.target as HTMLInputElement).value);
+			updateControlUI(config);
+		});
+
+		matBtns.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				config.composition = btn.getAttribute("data-type") as Composition;
+				updateControlUI(config);
+			});
+		});
+
+		presetBtns.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				config.diameter = parseInt(btn.getAttribute("data-dia")!);
+				config.velocity = parseInt(btn.getAttribute("data-vel")!);
+				config.composition = btn.getAttribute("data-comp") as Composition;
+				updateControlUI(config);
+			});
+		});
+
+		clearBtn?.addEventListener("click", clearAll);
+	}
+
+	function getEventCoordinates(e: MouseEvent | TouchEvent) {
+		const touch = (e as TouchEvent).changedTouches?.[0];
+		const clientX = (e as MouseEvent).clientX || touch?.clientX || 0;
+		const clientY = (e as MouseEvent).clientY || touch?.clientY || 0;
+		return { clientX, clientY };
+	}
+
+	function setupGhostDrag() {
+		const source = document.getElementById("drag-source-desktop");
+		if (!source) return;
+
+		const start = (e: MouseEvent | TouchEvent) => {
+			e.preventDefault();
+			const targetOverlay = document.getElementById("asteroid-map-target-overlay");
+			if (targetOverlay) targetOverlay.classList.add("active");
+
+			const onMove = (moveEvent: MouseEvent | TouchEvent) => {
+				moveEvent.preventDefault();
+			};
+
+			const onEnd = (endEvent: MouseEvent | TouchEvent) => {
+				if (targetOverlay) targetOverlay.classList.remove("active");
+
+				const coords = getEventCoordinates(endEvent);
+				const point = map.mouseEventToContainerPoint(coords as MouseEvent);
+				const latlng = map.containerPointToLatLng(point);
+				spawnImpact(latlng);
+
+				window.removeEventListener("mousemove", onMove);
+				window.removeEventListener("mouseup", onEnd);
+				window.removeEventListener("touchmove", onMove);
+				window.removeEventListener("touchend", onEnd);
+			};
+
+			window.addEventListener("mousemove", onMove);
+			window.addEventListener("mouseup", onEnd);
+			window.addEventListener("touchmove", onMove, { passive: false });
+			window.addEventListener("touchend", onEnd);
+		};
+
+		source.addEventListener("mousedown", start);
+		source.addEventListener("touchstart", start);
+	}
+
+	function createMarkerIcon(color: string): L.DivIcon {
+		return L.divIcon({
+			className: "asteroid-marker",
+			iconSize: [32, 32],
+			iconAnchor: [16, 16],
+			html: `<div style="width: 2rem; height: 2rem; border-radius: 50%; background-color: ${color}; border: 2px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"></div>`,
+		});
+	}
+
+	function setupMarkerDragHandlers(marker: L.Marker, group: L.LayerGroup, physics: ImpactData) {
+		marker.on("dragstart", () => {
+			map.dragging.disable();
+		});
+
+		marker.on("drag", (e: L.LeafletEvent) => {
+			const newPos = (e.target as L.Marker).getLatLng();
+			group.clearLayers();
+			renderCircles(newPos, physics, group);
+			updateVerdict();
+		});
+
+		marker.on("dragend", (e: L.LeafletEvent) => {
+			map.dragging.enable();
+			const newPos = (e.target as L.Marker).getLatLng();
+			group.clearLayers();
+			renderCircles(newPos, physics, group);
+			updateVerdict();
+		});
+	}
+
+	function spawnImpact(latlng: L.LatLng) {
+		const physics = ImpactPhysics.calculate({
+			diameter: config.diameter,
+			velocity: config.velocity * 1000,
+			composition: config.composition,
+			distance: 0,
+		});
+
+		const group = L.layerGroup();
+		addCircleLayers(latlng, physics, group);
+		group.addTo(map);
+
+		const markerColor = getCompositionColor(config.composition);
+		const marker = L.marker(latlng, {
+			draggable: true,
+			icon: createMarkerIcon(markerColor),
+		}).addTo(map);
+
+		impacts.push({ id: Date.now().toString(), circles: group, marker, data: physics, config });
+		setupMarkerDragHandlers(marker, group, physics);
+		updateVerdict();
+	}
+
+	function addCircleLayers(latlng: L.LatLng, physics: ImpactData, group: L.LayerGroup) {
+		L.circle(latlng, {
+			radius: physics.craterDiameter / 2,
+			color: "#ef4444",
+			fillColor: "#ef4444",
+			fillOpacity: 0.6,
+			weight: 0,
+		}).addTo(group);
+
+		L.circle(latlng, {
+			radius: physics.thermalRadius,
+			color: "#f97316",
+			fillColor: "#f97316",
+			fillOpacity: 0.15,
+			weight: 1,
+			dashArray: "5 5",
+		}).addTo(group);
+
+		L.circle(latlng, {
+			radius: physics.shockwave1psi,
+			color: "#3b82f6",
+			fillColor: "#3b82f6",
+			fillOpacity: 0.05,
+			weight: 1,
+		}).addTo(group);
+	}
+
+	function renderCircles(latlng: L.LatLng, physics: ImpactData, group: L.LayerGroup) {
+		addCircleLayers(latlng, physics, group);
+	}
+
+	function setupGPS() {
+		const btn = document.getElementById("asteroid-gps-btn");
+		btn?.addEventListener("click", () => {
+			const gpsText = document.getElementById("asteroid-gps-text");
+			if (gpsText) gpsText.textContent = "Buscando...";
+
+			navigator.geolocation.getCurrentPosition(
+				(pos) => {
+					const ll = new L.LatLng(pos.coords.latitude, pos.coords.longitude);
+					if (gpsText) gpsText.textContent = "GPS Activo";
+					map.flyTo(ll, 9);
+				},
+				() => {
+					if (gpsText) gpsText.textContent = "Error GPS";
+				}
+			);
+		});
+	}
+
+	function updateVerdictUI(verdict: string) {
+		const label = document.getElementById("asteroid-verdict-label");
+		const value = document.getElementById("asteroid-verdict-value");
+		const icon = document.getElementById("asteroid-verdict-icon");
+		const container = document.getElementById("asteroid-verdict-container");
+
+		const c = VERDICT_CONFIGS[verdict];
+		if (c) {
+			if (value) value.textContent = c.text;
+			if (label) label.textContent = c.label;
+			if (container) container.className = `asteroid-verdict-container ${c.class}`;
+
+			const iconSource = document.getElementById(c.iconId);
+			if (icon && iconSource) icon.innerHTML = iconSource.innerHTML;
+		}
+	}
+
+	function updateVerdict() {
+		const pill = document.getElementById("asteroid-verdict-pill");
+		if (impacts.length === 0) {
+			pill?.classList.remove("active");
+			return;
+		}
+
+		pill?.classList.add("active");
+		updateVerdictUI("safe");
+	}
+
+	function clearAll() {
+		impacts.forEach((i) => {
+			map.removeLayer(i.circles);
+			map.removeLayer(i.marker);
+		});
+		impacts.length = 0;
+		updateVerdict();
+	}
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", init);
+	} else {
+		init();
+	}
+</script>
+
+

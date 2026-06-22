@@ -1,0 +1,289 @@
+---
+import './planet-temperature-timeline.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="timeline-root" id="temperature-timeline-root" data-ui={JSON.stringify(ui)}>
+  <div class="timeline-canvas-container" id="timeline-canvas-area">
+    <canvas id="timeline-thermal-canvas"></canvas>
+  </div>
+
+  <div class="timeline-ruler-container" id="timeline-ruler">
+    <div class="timeline-ruler-track"></div>
+    <div class="timeline-ruler-notch" data-index="5">
+      <span class="timeline-notch-label">ANT</span>
+      <div class="timeline-notch-line"></div>
+    </div>
+    <div class="timeline-ruler-notch" data-index="4">
+      <span class="timeline-notch-label">CEN</span>
+      <div class="timeline-notch-line"></div>
+    </div>
+    <div class="timeline-ruler-notch" data-index="3">
+      <span class="timeline-notch-label">MES</span>
+      <div class="timeline-notch-line"></div>
+    </div>
+    <div class="timeline-ruler-notch" data-index="2">
+      <span class="timeline-notch-label">PAL</span>
+      <div class="timeline-notch-line"></div>
+    </div>
+    <div class="timeline-ruler-notch" data-index="1">
+      <span class="timeline-notch-label">PRO</span>
+      <div class="timeline-notch-line"></div>
+    </div>
+    <div class="timeline-ruler-notch" data-index="0">
+      <span class="timeline-notch-label">ARC</span>
+      <div class="timeline-notch-line"></div>
+    </div>
+  </div>
+
+  <div class="timeline-info-panel">
+    <div class="timeline-meta-header">
+      <span id="timeline-era-age" class="timeline-age">---</span>
+      <h3 id="timeline-era-title" class="timeline-era-name">---</h3>
+    </div>
+
+    <div class="timeline-temp">
+      <span id="timeline-era-temp-val">---</span><span class="timeline-temp-unit">°C</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { TemperatureTimelineEngine } from './logic/TemperatureTimelineEngine';
+
+  const root = document.getElementById('temperature-timeline-root');
+  if (root) {
+    const ageEl = document.getElementById('timeline-era-age');
+    const titleEl = document.getElementById('timeline-era-title');
+    const tempValEl = document.getElementById('timeline-era-temp-val');
+    const canvas = document.getElementById('timeline-thermal-canvas') as HTMLCanvasElement;
+    const canvasArea = document.getElementById('timeline-canvas-area');
+    const notches = document.querySelectorAll('.timeline-ruler-notch');
+
+    const uiData = JSON.parse(root.getAttribute('data-ui') || '{}');
+    const engine = new TemperatureTimelineEngine();
+    const epochs = engine.getEpochs().map(epoch => ({
+      ...epoch,
+      name: uiData[`epoch_${epoch.id}_name`] || epoch.name,
+      ageRange: uiData[`epoch_${epoch.id}_age`] || epoch.ageRange,
+      description: uiData[`epoch_${epoch.id}_desc`] || epoch.description,
+    }));
+
+    let currentEraIndex = 4;
+    let targetRadius = 130;
+    let currentRadius = 130;
+    let targetSpeed = 0.015;
+    let currentSpeed = 0.015;
+    const targetColor = { r: 56, g: 189, b: 248 };
+    const currentColor = { r: 56, g: 189, b: 248 };
+    let isCold = false;
+
+    function getThemeConfig(temp: number, isDark: boolean) {
+      if (temp >= 25) {
+        return { color: { r: 234, g: 88, b: 12 }, radius: 160, speed: 0.04, cold: false };
+      } else if (temp >= 20) {
+        return { color: { r: 249, g: 115, b: 22 }, radius: 140, speed: 0.03, cold: false };
+      } else if (temp >= 15) {
+        return { color: { r: 217, g: 119, b: 6 }, radius: 130, speed: 0.02, cold: false };
+      } else if (temp >= 13) {
+        return { color: isDark ? { r: 56, g: 189, b: 248 } : { r: 2, g: 132, b: 199 }, radius: 110, speed: 0.01, cold: true };
+      }
+      return { color: isDark ? { r: 224, g: 242, b: 254 } : { r: 15, g: 23, b: 42 }, radius: 90, speed: 0.005, cold: true };
+    }
+
+    function updateNotchStates(index: number, color: { r: number; g: number; b: number }) {
+      notches.forEach(n => {
+        const notchIdx = parseInt(n.getAttribute('data-index') || '0');
+        const label = n.querySelector('.timeline-notch-label') as HTMLElement;
+        if (notchIdx === index) {
+          n.classList.add('active');
+          if (label) {
+            label.style.textShadow = `0 0 12px rgba(${color.r}, ${color.g}, ${color.b}, 0.8)`;
+          }
+        } else {
+          n.classList.remove('active');
+          if (label) {
+            label.style.textShadow = 'none';
+          }
+        }
+      });
+    }
+
+    function selectEpoch(index: number) {
+      if (index < 0) index = 0;
+      if (index >= epochs.length) index = epochs.length - 1;
+      currentEraIndex = index;
+
+      const epoch = epochs[index];
+      if (!epoch) return;
+
+      if (ageEl) ageEl.textContent = epoch.ageRange;
+      if (titleEl) titleEl.textContent = epoch.name;
+      if (tempValEl) tempValEl.textContent = epoch.avgTemp.toFixed(1);
+
+      const isDark = document.body.classList.contains('theme-dark') || document.documentElement.classList.contains('theme-dark');
+      const config = getThemeConfig(epoch.avgTemp, isDark);
+
+      targetColor.r = config.color.r;
+      targetColor.g = config.color.g;
+      targetColor.b = config.color.b;
+      targetRadius = config.radius;
+      targetSpeed = config.speed;
+      isCold = config.cold;
+
+      updateNotchStates(index, targetColor);
+    }
+
+    let isDragging = false;
+    let startY = 0;
+    let startEraIndex = 4;
+
+    function handleStart(y: number) {
+      isDragging = true;
+      startY = y;
+      startEraIndex = currentEraIndex;
+    }
+
+    function handleMove(y: number) {
+      if (!isDragging) return;
+      const dy = y - startY;
+      const height = root?.clientHeight || 600;
+      const deltaEra = -Math.round((dy / height) * epochs.length * 1.8);
+      let nextIndex = startEraIndex + deltaEra;
+      if (nextIndex < 0) nextIndex = 0;
+      if (nextIndex >= epochs.length) nextIndex = epochs.length - 1;
+      if (nextIndex !== currentEraIndex) {
+        selectEpoch(nextIndex);
+      }
+    }
+
+    canvasArea?.addEventListener('mousedown', (e: MouseEvent) => handleStart(e.clientY));
+    window.addEventListener('mousemove', (e: MouseEvent) => handleMove(e.clientY));
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    canvasArea?.addEventListener('touchstart', (e: TouchEvent) => {
+      if (e.touches[0]) handleStart(e.touches[0].clientY);
+    });
+    window.addEventListener('touchmove', (e: TouchEvent) => {
+      if (e.touches[0]) handleMove(e.touches[0].clientY);
+    });
+    window.addEventListener('touchend', () => { isDragging = false; });
+
+    notches.forEach(notch => {
+      notch.addEventListener('click', () => {
+        const idx = parseInt(notch.getAttribute('data-index') || '0');
+        selectEpoch(idx);
+      });
+    });
+
+    const particles: { angle: number; speed: number; radiusOffset: number; size: number }[] = [];
+    for (let i = 0; i < 150; i++) {
+      particles.push({
+        angle: Math.random() * Math.PI * 2,
+        speed: 0.005 + Math.random() * 0.015,
+        radiusOffset: -40 + Math.random() * 80,
+        size: 1.5 + Math.random() * 2.5
+      });
+    }
+
+    let phase = 0;
+
+    function renderParticles(ctx: CanvasRenderingContext2D, cx: number, cy: number, colorString: string) {
+      particles.forEach(p => {
+        p.angle += p.speed * (currentSpeed * 50 + 0.5);
+        
+        let warp = 0;
+        if (!isCold) {
+          warp = Math.sin(p.angle * 6 + phase) * 15;
+        }
+
+        const rad = currentRadius + p.radiusOffset + warp;
+        const px = cx + Math.cos(p.angle) * rad;
+        const py = cy + Math.sin(p.angle) * rad * 0.7;
+
+        ctx.beginPath();
+        ctx.fillStyle = colorString + `, ${0.15 + (1 - Math.abs(p.radiusOffset) / 80) * 0.65})`;
+        ctx.arc(px, py, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    function renderAtmosphereCircles(ctx: CanvasRenderingContext2D, cx: number, cy: number, colorString: string) {
+      if (isCold) {
+        ctx.strokeStyle = colorString + ', 0.45)';
+        ctx.lineWidth = 1.5;
+        for (let i = 1; i < 4; i++) {
+          ctx.beginPath();
+          ctx.arc(cx, cy, currentRadius * (i / 4), 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      } else {
+        ctx.strokeStyle = colorString + ', 0.25)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(cx, cy, currentRadius + 30, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+
+    function updateCurrentColor() {
+      currentColor.r += (targetColor.r - currentColor.r) * 0.08;
+      currentColor.g += (targetColor.g - currentColor.g) * 0.08;
+      currentColor.b += (targetColor.b - currentColor.b) * 0.08;
+    }
+
+    function animate() {
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvas.clientWidth * dpr;
+      canvas.height = canvas.clientHeight * dpr;
+      ctx.scale(dpr, dpr);
+
+      const w = canvas.width / dpr;
+      const h = canvas.height / dpr;
+
+      ctx.clearRect(0, 0, w, h);
+
+      currentRadius += (targetRadius - currentRadius) * 0.08;
+      currentSpeed += (targetSpeed - currentSpeed) * 0.08;
+      updateCurrentColor();
+
+      phase += currentSpeed;
+
+      const cx = w / 2;
+      const cy = h / 2;
+
+      const colorString = `rgba(${Math.floor(currentColor.r)}, ${Math.floor(currentColor.g)}, ${Math.floor(currentColor.b)}`;
+
+      if (root) {
+        root.style.boxShadow = `0 20px 40px rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0.06)`;
+      }
+
+      renderParticles(ctx, cx, cy, colorString);
+      renderAtmosphereCircles(ctx, cx, cy, colorString);
+
+      ctx.beginPath();
+      ctx.strokeStyle = colorString + ', 0.8)';
+      ctx.lineWidth = 2.5;
+      ctx.arc(cx, cy, currentRadius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      requestAnimationFrame(animate);
+    }
+
+    selectEpoch(4);
+    animate();
+
+    window.addEventListener('resize', () => {
+      selectEpoch(currentEraIndex);
+    });
+  }
+</script>

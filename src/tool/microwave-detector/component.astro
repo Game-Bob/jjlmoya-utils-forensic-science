@@ -1,0 +1,238 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="microwave-detector-container" id="microwave-detector-root" data-detecting-interference={ui.detectingInterference}>
+    <div class="microwave-modal" id="initial-modal">
+        <div class="microwave-modal-content">
+            <div class="microwave-modal-icon">
+                <Icon name="mdi:wifi-alert" />
+            </div>
+            <h2>{ui.physicalRequirement}</h2>
+            <p set:html={ui.physicalDesc}></p>
+            <button id="start-btn" class="microwave-btn-start">
+                {ui.understandStart}
+            </button>
+        </div>
+    </div>
+
+    <div class="microwave-detector-panel">
+        <div class="microwave-header">
+            <div>
+                <span class="microwave-label">{ui.rfInterferenceMonitor}</span>
+                <h3 class="microwave-title">{ui.mwLeakDetector}</h3>
+            </div>
+            <div class="microwave-status-badge">
+                <div id="status-dot" class="microwave-status-dot"></div>
+                <span id="status-text" class="microwave-status-text">{ui.static}</span>
+            </div>
+        </div>
+
+        <div class="microwave-canvas-container">
+            <canvas id="interference-canvas"></canvas>
+            <div class="microwave-canvas-overlay">
+                <div id="big-value-bg" class="microwave-big-value">00</div>
+                <div class="microwave-jitter-display">
+                    <span id="jitter-value" class="microwave-jitter-value">0.0</span>
+                    <span class="microwave-jitter-unit">{ui.jitterUnit}</span>
+                </div>
+            </div>
+            <div class="microwave-canvas-grid"></div>
+        </div>
+
+        <div class="microwave-content-grid">
+            <div>
+                <div id="verdict-container" class="microwave-verdict">
+                    <h4 id="verdict-label" class="microwave-verdict-label">{ui.systemReady}</h4>
+                    <p id="verdict-description" class="microwave-verdict-desc">
+                        {ui.connectToAnalyze}
+                    </p>
+                </div>
+                <div class="microwave-latency-info">
+                    <div class="microwave-latency-badge">
+                        <Icon name="mdi:pulse" />
+                        LAT: <span id="latency-val">0ms</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="microwave-audio-section">
+                <div class="microwave-audio-label">
+                    <span>{ui.audioFeedback}</span>
+                    <span id="audio-status">ON</span>
+                </div>
+                <button id="toggle-audio-btn" class="microwave-btn-audio">
+                    <Icon name="mdi:volume-high" />
+                    {ui.muteUnmute}
+                </button>
+            </div>
+        </div>
+
+        <div class="microwave-scanline"></div>
+    </div>
+</div>
+
+
+
+<script>
+    import { MicrowaveEngine } from './logic/MicrowaveEngine';
+
+    const root = document.getElementById("microwave-detector-root");
+    if (root) {
+        const startBtn = document.getElementById("start-btn");
+        const modal = document.getElementById("initial-modal");
+        const canvas = document.getElementById("interference-canvas") as HTMLCanvasElement | null;
+        const ctx = canvas?.getContext("2d");
+
+        const jitterDisplay = document.getElementById("jitter-value");
+        const bigValueBg = document.getElementById("big-value-bg");
+        const latencyVal = document.getElementById("latency-val");
+        const verdictLabel = document.getElementById("verdict-label");
+        const verdictDesc = document.getElementById("verdict-description");
+        const verdictContainer = document.getElementById("verdict-container");
+        const statusDot = document.getElementById("status-dot");
+        const statusText = document.getElementById("status-text");
+        const toggleAudioBtn = document.getElementById("toggle-audio-btn");
+
+        const currentLang = document.documentElement.lang || 'es';
+        const engine = new MicrowaveEngine(currentLang);
+        let running = false;
+        let audioEnabled = true;
+        let audioCtx: AudioContext | null = null;
+
+        const history = new Array(60).fill(0);
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = canvas.clientWidth;
+            canvas.height = canvas.clientHeight;
+        }
+
+        function drawGraph() {
+            if (!ctx || !canvas) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.beginPath();
+            ctx.strokeStyle = "#4f46e5";
+            ctx.lineWidth = 3;
+            ctx.lineJoin = "round";
+
+            const step = canvas.width / (history.length - 1);
+            const maxHistory = Math.max(...history, 50);
+
+            history.forEach((val, i) => {
+                const x = i * step;
+                const y = canvas.height - (val / maxHistory) * canvas.height * 0.8 - 20;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, "rgba(79, 70, 229, 0.2)");
+            gradient.addColorStop(1, "transparent");
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+        }
+
+        async function playClick(_intensity: number) {
+            if (!audioEnabled) return;
+            if (!audioCtx) {
+                 const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+                 audioCtx = new AudioContextClass();
+            }
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = "square";
+            osc.frequency.setValueAtTime(40 + Math.random() * 20, audioCtx.currentTime);
+
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.05);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.05);
+        }
+
+        function updateVerdictDisplay(level: { label: string; description: string; color: string }) {
+            if (verdictLabel) verdictLabel.textContent = level.label;
+            if (verdictDesc) verdictDesc.textContent = level.description;
+
+            const colorMap = {
+                emerald: { bg: "rgba(16, 185, 129, 0.1)", border: "rgba(16, 185, 129, 0.3)", text: "#10b981" },
+                yellow: { bg: "rgba(234, 179, 8, 0.1)", border: "rgba(234, 179, 8, 0.3)", text: "#eab308" },
+                orange: { bg: "rgba(249, 115, 22, 0.1)", border: "rgba(249, 115, 22, 0.3)", text: "#f97316" },
+                red: { bg: "rgba(220, 38, 38, 0.2)", border: "rgba(220, 38, 38, 0.5)", text: "#dc2626" },
+            };
+
+            if (verdictContainer) {
+                const colors = colorMap[level.color as keyof typeof colorMap] || colorMap.emerald;
+                verdictContainer.style.backgroundColor = colors.bg;
+                verdictContainer.style.borderColor = colors.border;
+                verdictContainer.style.color = colors.text;
+            }
+
+            if (statusDot) {
+                const colorValues = {
+                    emerald: "#10b981",
+                    yellow: "#eab308",
+                    orange: "#f97316",
+                    red: "#dc2626",
+                };
+                statusDot.style.backgroundColor = colorValues[level.color as keyof typeof colorValues] || colorValues.emerald;
+            }
+        }
+
+        async function scan() {
+            if (!running) return;
+
+            const result = await engine.measurePing();
+            history.push(result.jitter);
+            history.shift();
+
+            if (jitterDisplay) jitterDisplay.textContent = result.jitter.toFixed(1);
+            if (bigValueBg) bigValueBg.textContent = Math.floor(result.jitter).toString().padStart(2, "0");
+            if (latencyVal) latencyVal.textContent = `${Math.floor(result.latency)}ms`;
+
+            const level = engine.getInterferenceLevel(result.jitter);
+            updateVerdictDisplay(level);
+
+            if (result.jitter > 1) {
+                playClick(result.jitter);
+            }
+
+            drawGraph();
+            setTimeout(scan, 200 + Math.random() * 100);
+        }
+
+        const detectingInterferenceText = root?.getAttribute('data-detecting-interference') || 'Detectando interferencias...';
+
+        startBtn?.addEventListener("click", () => {
+            if (modal) modal.classList.add("hidden");
+            running = true;
+            resizeCanvas();
+            if (statusText) statusText.textContent = detectingInterferenceText;
+            scan();
+        });
+
+        toggleAudioBtn?.addEventListener("click", () => {
+            audioEnabled = !audioEnabled;
+            const statusLabel = document.getElementById("audio-status");
+            if (statusLabel) statusLabel.textContent = audioEnabled ? "ON" : "OFF";
+        });
+
+        window.addEventListener("resize", resizeCanvas);
+    }
+</script>

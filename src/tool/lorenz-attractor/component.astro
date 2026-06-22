@@ -1,0 +1,146 @@
+---
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="lorenz-app">
+  <div class="lorenz-card">
+    <div class="lorenz-grid">
+      <div class="lorenz-canvas-container">
+        <canvas id="lorenzCanvas" class="lorenz-canvas"></canvas>
+      </div>
+
+      <div class="lorenz-controls-section">
+        <div class="lorenz-sliders-block">
+          <div class="lorenz-slider-group">
+            <div class="lorenz-slider-header">
+              <span class="lorenz-slider-label">Sigma (&sigma;)</span>
+              <span class="lorenz-slider-val" id="valSigma">10.0</span>
+            </div>
+            <input
+              type="range"
+              id="slideSigma"
+              class="lorenz-slider"
+              min="1"
+              max="30"
+              step="0.1"
+              value="10.0"
+              aria-label="Sigma"
+            />
+          </div>
+
+          <div class="lorenz-slider-group">
+            <div class="lorenz-slider-header">
+              <span class="lorenz-slider-label">Rho (&rho;)</span>
+              <span class="lorenz-slider-val" id="valRho">28.0</span>
+            </div>
+            <input
+              type="range"
+              id="slideRho"
+              class="lorenz-slider"
+              min="1"
+              max="50"
+              step="0.1"
+              value="28.0"
+              aria-label="Rho"
+            />
+          </div>
+
+          <div class="lorenz-slider-group">
+            <div class="lorenz-slider-header">
+              <span class="lorenz-slider-label">Beta (&beta;)</span>
+              <span class="lorenz-slider-val" id="valBeta">2.67</span>
+            </div>
+            <input
+              type="range"
+              id="slideBeta"
+              class="lorenz-slider"
+              min="0.1"
+              max="10"
+              step="0.01"
+              value="2.67"
+              aria-label="Beta"
+            />
+          </div>
+
+          <div class="lorenz-slider-group">
+            <div class="lorenz-slider-header">
+              <span class="lorenz-slider-label">{ui.simulationSpeed}</span>
+              <span class="lorenz-slider-val" id="valDt">0.005</span>
+            </div>
+            <input
+              type="range"
+              id="slideDt"
+              class="lorenz-slider"
+              min="0.001"
+              max="0.02"
+              step="0.001"
+              value="0.005"
+              aria-label="dt"
+            />
+          </div>
+
+          <div class="lorenz-slider-group">
+            <div class="lorenz-slider-header">
+              <span class="lorenz-slider-label">{ui.initialPerturbation}</span>
+              <span class="lorenz-slider-val" id="valPerturb">0.00010</span>
+            </div>
+            <input
+              type="range"
+              id="slidePerturb"
+              class="lorenz-slider"
+              min="0.00001"
+              max="0.01"
+              step="0.00001"
+              value="0.00010"
+              aria-label="Perturbation"
+            />
+          </div>
+        </div>
+
+        <div class="lorenz-button-row">
+          <button id="btnPlayPause" class="lorenz-btn lorenz-btn-active-state">{ui.pause}</button>
+          <button id="btnReset" class="lorenz-btn">{ui.resetDefault}</button>
+          <button id="btnClear" class="lorenz-btn">{ui.clearPath}</button>
+        </div>
+
+        <div class="lorenz-stats-block">
+          <div class="lorenz-coords-row">
+            <div class="lorenz-coord-item">
+              T1: <span id="statT1" class="lorenz-coord-val">X:0.0 Y:0.0 Z:0.0</span>
+            </div>
+            <div class="lorenz-coord-item">
+              T2: <span id="statT2" class="lorenz-coord-val">X:0.0 Y:0.0 Z:0.0</span>
+            </div>
+          </div>
+
+          <div class="lorenz-divergence-display">
+            <span class="lorenz-divergence-title">{ui.distance}</span>
+            <div class="lorenz-divergence-main">
+              <span class="lorenz-divergence-num" id="statDist">0.0000</span>
+              <span class="lorenz-divergence-delta" id="statDelta">--</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lorenz-chart-block">
+          <div class="lorenz-chart-header">
+            <span>{ui.exponentialGrowth}</span>
+            <div class="lorenz-tooltip-container">
+              <span class="lorenz-info-icon">i</span>
+              <div class="lorenz-tooltip-text">{ui.divergenceExplanation}</div>
+            </div>
+          </div>
+          <div class="lorenz-chart-canvas-wrapper">
+            <canvas id="chartCanvas" class="lorenz-chart-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./script.ts"></script>

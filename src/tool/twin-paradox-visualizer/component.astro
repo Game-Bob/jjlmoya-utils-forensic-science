@@ -1,0 +1,205 @@
+---
+import './twin-paradox-visualizer.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="twin-lab" id="twin-lab" data-years-unit={ui.yearsUnit} data-years-short-unit={ui.yearsShortUnit}>
+  <section class="twin-viewport" aria-label={ui.visualTitle}>
+    <div class="twin-orbit">
+      <div class="twin-earth">
+        <span>{ui.earthTwin}</span>
+        <strong id="twin-earth-age">30.0</strong>
+      </div>
+      <div class="twin-path" aria-hidden="true">
+        <div class="twin-turnaround" id="twin-turnaround"></div>
+        <div class="twin-ship" id="twin-ship"></div>
+      </div>
+      <div class="twin-ship-clock">
+        <span>{ui.travelingTwin}</span>
+        <strong id="twin-ship-age">30.0</strong>
+      </div>
+    </div>
+    <svg class="twin-worldline" id="twin-worldline" viewBox="0 0 640 260" role="img" aria-label={ui.worldlineLabel}>
+      <g class="twin-lab-grid" id="twin-lab-grid" aria-hidden="true"></g>
+      <path class="twin-earth-line" d="M112 220 V38"></path>
+      <path class="twin-ship-line" id="twin-ship-line" d="M112 220 L350 74 L588 220"></path>
+      <circle class="twin-event" cx="112" cy="220" r="7"></circle>
+      <circle class="twin-event twin-event-return" id="twin-return-event" cx="588" cy="220" r="7"></circle>
+    </svg>
+  </section>
+
+  <section class="twin-console" aria-label={ui.controlsTitle}>
+    <div class="twin-presets">
+      <button type="button" data-velocity="0.50" data-years="12">{ui.presetCruise}</button>
+      <button type="button" data-velocity="0.86" data-years="20" class="active">{ui.presetRelativistic}</button>
+      <button type="button" data-velocity="0.98" data-years="40">{ui.presetExtreme}</button>
+    </div>
+
+    <label class="twin-field" for="twin-velocity">
+      <span>{ui.velocityLabel}</span>
+      <output id="twin-velocity-output">0.86c</output>
+      <input id="twin-velocity" type="range" min="0.05" max="0.99" value="0.86" step="0.01" />
+    </label>
+
+    <label class="twin-field" for="twin-years">
+      <span>{ui.earthYearsLabel}</span>
+      <output id="twin-years-output">20 {ui.yearsUnit}</output>
+      <input id="twin-years" type="range" min="2" max="80" value="20" step="1" />
+    </label>
+
+    <div class="twin-readout">
+      <div class="twin-reunion">
+        <span>{ui.ageGapLabel}</span>
+        <strong><span id="twin-age-gap-value">-</span><small>{ui.yearsShortUnit}</small></strong>
+      </div>
+      <div class="twin-results">
+        <div class="twin-metric">
+          <span>{ui.gammaLabel}</span>
+          <strong id="twin-gamma">-</strong>
+        </div>
+        <div class="twin-metric">
+          <span>{ui.shipTimeLabel}</span>
+          <strong id="twin-ship-time">-</strong>
+        </div>
+        <div class="twin-metric">
+          <span>{ui.distanceLabel}</span>
+          <strong id="twin-distance">-</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { calculateTwinParadox } from './logic';
+
+  const root = document.getElementById('twin-lab');
+  const velocityInput = document.getElementById('twin-velocity') as HTMLInputElement | null;
+  const yearsInput = document.getElementById('twin-years') as HTMLInputElement | null;
+  const velocityOutput = document.getElementById('twin-velocity-output');
+  const yearsOutput = document.getElementById('twin-years-output');
+  const earthAge = document.getElementById('twin-earth-age');
+  const shipAge = document.getElementById('twin-ship-age');
+  const ageGap = document.getElementById('twin-age-gap-value');
+  const gammaText = document.getElementById('twin-gamma');
+  const shipTime = document.getElementById('twin-ship-time');
+  const distanceText = document.getElementById('twin-distance');
+  const ship = document.getElementById('twin-ship');
+  const turnaround = document.getElementById('twin-turnaround');
+  const shipLine = document.getElementById('twin-ship-line');
+  const returnEvent = document.getElementById('twin-return-event');
+  const grid = document.getElementById('twin-lab-grid');
+  const worldline = document.getElementById('twin-worldline');
+  const presetButtons = document.querySelectorAll<HTMLButtonElement>('.twin-presets button');
+  const departureAge = 30;
+  const svgNamespace = 'http://www.w3.org/2000/svg';
+  const yearsUnit = root?.dataset.yearsUnit ?? '';
+  const yearsShortUnit = root?.dataset.yearsShortUnit ?? '';
+
+  function formatYears(value: number): string {
+    return value.toFixed(value >= 10 ? 1 : 2);
+  }
+
+  function setFill(input: HTMLInputElement) {
+    const min = Number(input.min);
+    const max = Number(input.max);
+    const value = Number(input.value);
+    const progress = ((value - min) / (max - min)) * 100;
+    input.style.setProperty('--fill', `${progress}%`);
+  }
+
+  function buildGrid() {
+    if (!grid) return;
+
+    for (let y = 44; y <= 220; y += 22) {
+      for (let x = 92; x <= 592; x += 28) {
+        const dot = document.createElementNS(svgNamespace, 'circle');
+        dot.setAttribute('cx', x.toString());
+        dot.setAttribute('cy', y.toString());
+        dot.setAttribute('r', ((x + y) % 3 === 0 ? 1.55 : 1.05).toString());
+        dot.dataset.x = x.toString();
+        dot.dataset.y = y.toString();
+        grid.append(dot);
+      }
+    }
+  }
+
+  function warpGrid(velocity: number, gamma: number) {
+    if (!grid || !worldline) return;
+
+    const contraction = 1 / gamma;
+    const skew = velocity * 0.32;
+    grid.querySelectorAll<SVGCircleElement>('circle').forEach((dot) => {
+      const rawX = Number(dot.dataset.x);
+      const rawY = Number(dot.dataset.y);
+      const centerX = 112;
+      const centerY = 220;
+      const dx = rawX - centerX;
+      const dy = rawY - centerY;
+      const warpedX = centerX + dx * (0.72 + contraction * 0.28) + dy * skew;
+      const warpedY = centerY + dy * (1.04 - velocity * 0.16);
+      dot.setAttribute('cx', warpedX.toFixed(2));
+      dot.setAttribute('cy', warpedY.toFixed(2));
+      dot.style.opacity = `${0.12 + velocity * 0.25}`;
+    });
+
+    worldline.style.setProperty('--grid-compression', contraction.toFixed(3));
+  }
+
+  function update() {
+    if (!velocityInput || !yearsInput) return;
+
+    const velocity = Number(velocityInput.value);
+    const earthYears = Number(yearsInput.value);
+    const result = calculateTwinParadox({ earthYears, velocityFractionC: velocity });
+    const shipProgress = Math.min(94, Math.max(8, 9 + velocity * 72));
+    const bendY = Math.max(52, 168 - velocity * 104);
+    const returnX = Math.min(598, 270 + earthYears * 4);
+
+    velocityOutput!.textContent = `${velocity.toFixed(2)}c`;
+    yearsOutput!.textContent = `${earthYears} ${yearsUnit}`;
+    earthAge!.textContent = (departureAge + earthYears).toFixed(1);
+    shipAge!.textContent = (departureAge + result.shipYears).toFixed(1);
+    ageGap!.textContent = formatYears(result.ageGapYears);
+    gammaText!.textContent = `${result.gamma.toFixed(3)}x`;
+    shipTime!.textContent = `${formatYears(result.shipYears)} ${yearsShortUnit}`;
+    distanceText!.textContent = `${result.earthDistanceLightYears.toFixed(1)} ly`;
+
+    ship?.style.setProperty('--ship-progress', `${shipProgress}%`);
+    ship?.style.setProperty('--clock-rate', `"${result.shipClockRatePercent.toFixed(1)}%"`);
+    turnaround?.style.setProperty('--turnaround-progress', `${shipProgress}%`);
+    shipLine?.setAttribute('d', `M112 220 L350 ${bendY.toFixed(1)} L${returnX.toFixed(1)} 220`);
+    returnEvent?.setAttribute('cx', returnX.toFixed(1));
+    warpGrid(velocity, result.gamma);
+    setFill(velocityInput);
+    setFill(yearsInput);
+  }
+
+  velocityInput?.addEventListener('input', () => {
+    presetButtons.forEach((button) => button.classList.remove('active'));
+    update();
+  });
+  yearsInput?.addEventListener('input', () => {
+    presetButtons.forEach((button) => button.classList.remove('active'));
+    update();
+  });
+
+  presetButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!velocityInput || !yearsInput) return;
+      presetButtons.forEach((item) => item.classList.remove('active'));
+      button.classList.add('active');
+      velocityInput.value = button.dataset.velocity ?? velocityInput.value;
+      yearsInput.value = button.dataset.years ?? yearsInput.value;
+      update();
+    });
+  });
+
+  buildGrid();
+  update();
+</script>
