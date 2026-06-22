@@ -1,0 +1,123 @@
+﻿---
+import './forensic-age-estimator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="forensic-age" id="forensic-age">
+  <section class="forensic-age__visual" aria-label={ui.caseBoard}>
+    <div class="forensic-age__stamp">{ui.screeningOnly}</div>
+    <div class="forensic-age__silhouette" aria-hidden="true">
+      <span class="forensic-age__skull"></span>
+      <span class="forensic-age__spine"></span>
+      <span class="forensic-age__rib forensic-age__rib--left"></span>
+      <span class="forensic-age__rib forensic-age__rib--right"></span>
+      <span class="forensic-age__tooth forensic-age__tooth--a"></span>
+      <span class="forensic-age__tooth forensic-age__tooth--b"></span>
+    </div>
+    <div class="forensic-age__band">
+      <span>{ui.minimumAge}</span>
+      <strong id="forensic-minimum">-</strong>
+    </div>
+    <div class="forensic-age__band forensic-age__band--main">
+      <span>{ui.likelyAge}</span>
+      <strong id="forensic-likely">-</strong>
+    </div>
+    <div class="forensic-age__band">
+      <span>{ui.maximumAge}</span>
+      <strong id="forensic-maximum">-</strong>
+    </div>
+  </section>
+
+  <section class="forensic-age__panel" aria-label={ui.controls}>
+    <label class="forensic-age__field" for="forensic-evidence">
+      <span>{ui.evidenceType}</span>
+      <select id="forensic-evidence">
+        <option value="mixed">{ui.mixedEvidence}</option>
+        <option value="dental">{ui.dentalPriority}</option>
+        <option value="skeletal">{ui.skeletalPriority}</option>
+      </select>
+    </label>
+
+    <label class="forensic-age__field" for="forensic-dental">
+      <span>{ui.dentalStage}</span>
+      <output id="forensic-dental-output">4</output>
+      <input id="forensic-dental" type="range" min="0" max="8" step="1" value="4" />
+    </label>
+
+    <label class="forensic-age__field" for="forensic-epiphyseal">
+      <span>{ui.epiphysealStage}</span>
+      <output id="forensic-epiphyseal-output">4</output>
+      <input id="forensic-epiphyseal" type="range" min="0" max="8" step="1" value="4" />
+    </label>
+
+    <label class="forensic-age__field" for="forensic-molar">
+      <span>{ui.thirdMolarStage}</span>
+      <output id="forensic-molar-output">4</output>
+      <input id="forensic-molar" type="range" min="0" max="8" step="1" value="4" />
+    </label>
+
+    <div class="forensic-age__score">
+      <span>{ui.maturityScore}</span>
+      <div class="forensic-age__meter"><i id="forensic-meter"></i></div>
+      <strong id="forensic-score">-</strong>
+    </div>
+
+    <div class="forensic-age__notes">
+      <strong id="forensic-confidence">-</strong>
+      <p id="forensic-notes">-</p>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { estimateForensicAge } from './logic';
+  import type { EvidenceType } from './logic';
+
+  const evidence = document.getElementById('forensic-evidence') as HTMLSelectElement | null;
+  const dental = document.getElementById('forensic-dental') as HTMLInputElement | null;
+  const epiphyseal = document.getElementById('forensic-epiphyseal') as HTMLInputElement | null;
+  const molar = document.getElementById('forensic-molar') as HTMLInputElement | null;
+  const dentalOutput = document.getElementById('forensic-dental-output');
+  const epiphysealOutput = document.getElementById('forensic-epiphyseal-output');
+  const molarOutput = document.getElementById('forensic-molar-output');
+  const minimum = document.getElementById('forensic-minimum');
+  const likely = document.getElementById('forensic-likely');
+  const maximum = document.getElementById('forensic-maximum');
+  const confidence = document.getElementById('forensic-confidence');
+  const notes = document.getElementById('forensic-notes');
+  const score = document.getElementById('forensic-score');
+  const meter = document.getElementById('forensic-meter');
+
+  function update() {
+    if (!evidence || !dental || !epiphyseal || !molar) return;
+
+    const result = estimateForensicAge({
+      dentalStage: Number(dental.value),
+      epiphysealStage: Number(epiphyseal.value),
+      thirdMolarStage: Number(molar.value),
+      evidenceType: evidence.value as EvidenceType,
+    });
+
+    dentalOutput!.textContent = dental.value;
+    epiphysealOutput!.textContent = epiphyseal.value;
+    molarOutput!.textContent = molar.value;
+    minimum!.textContent = `${result.minimumAge} y`;
+    likely!.textContent = `${result.likelyAge} y`;
+    maximum!.textContent = `${result.maximumAge} y`;
+    confidence!.textContent = result.confidence;
+    notes!.textContent = result.notes.join(' ');
+    score!.textContent = `${result.maturityScore}%`;
+    meter!.style.width = `${result.maturityScore}%`;
+  }
+
+  evidence?.addEventListener('change', update);
+  dental?.addEventListener('input', update);
+  epiphyseal?.addEventListener('input', update);
+  molar?.addEventListener('input', update);
+  update();
+</script>

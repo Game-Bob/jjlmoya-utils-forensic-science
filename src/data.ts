@@ -1,4 +1,4 @@
-export { scienceCategory } from './category';
+﻿export { forensicCategory, forensicCategory as scienceCategory } from './category';
 
 export type {
   KnownLocale,
@@ -8,4 +8,3 @@ export type {
   ScienceToolEntry,
   ScienceCategoryEntry,
 } from './types';
-

@@ -1,26 +1,26 @@
-import type { CategoryLocaleContent } from '../../types';
+﻿import type { CategoryLocaleContent } from '../../types';
 
 export const content: CategoryLocaleContent = {
   slug: "forensic-science",
-  title: "Forensic Science Tools",
-  description: "Forensic utilities for structured case triage, transparent calculations, and evidence-aware reporting.",
+  title: "æ³•åŒ»ç§‘å­¦å·¥å…·",
+  description: "ç”¨äºŽç»“æž„åŒ–æ¡ˆä»¶åˆ†æµã€é€æ˜Žè®¡ç®—å’Œè¯æ®æ„è¯†æŠ¥å‘Šçš„æ³•åŒ»å·¥å…·ã€‚",
   seo: [
     {
       type: 'title',
-      text: "Forensic science tools for evidence-aware calculations and case triage",
+      text: "ç”¨äºŽè¯æ®æ„è¯†è®¡ç®—å’Œæ¡ˆä»¶åˆ†æµçš„æ³•åŒ»ç§‘å­¦å·¥å…·",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "This forensic science tools library is built for practical search intent: users need calculators and structured utilities that help them interpret evidence, document assumptions, and avoid false precision. The focus is not on replacing experts, laboratories, or validated protocols. The focus is on making early case review clearer: what data are available, what the calculation assumes, what the result can support, and where uncertainty remains.",
+      html: "æœ¬ç±»åˆ«æ”¶é›†æ³•åŒ»è®¡ç®—å™¨å’Œç»“æž„åŒ–å·¥å…·ï¼Œç”¨äºŽè§£é‡Šè¯æ®ã€è®°å½•å‡è®¾å¹¶é¿å…è™šå‡ç²¾ç¡®æ€§ã€‚å®ƒä¸æ›¿ä»£ä¸“å®¶æˆ–éªŒè¯æµç¨‹ï¼Œè€Œæ˜¯è®©æ—©æœŸæ¡ˆä»¶å®¡æŸ¥æ›´æ¸…æ¥šã€‚",
     },
     {
       type: 'paragraph',
-      html: "Forensic work often involves high-stakes decisions, so every utility in this category should make limitations visible. A useful forensic calculator should show ranges instead of pretending certainty, separate screening from formal reporting, and help the user identify missing evidence before a conclusion is written.",
+      html: "æ³•åŒ»å·¥ä½œå¯èƒ½å½±å“é‡è¦å†³å®šï¼Œå› æ­¤å·¥å…·åº”åœ¨å†™å‡ºç»“è®ºå‰æ˜¾ç¤ºèŒƒå›´ã€é™åˆ¶å’Œç¼ºå¤±æ•°æ®ã€‚",
     },
     {
       type: 'title',
-      text: "What belongs in this forensic utilities category",
+      text: "æœ¬ç±»åˆ«åŒ…å«ä»€ä¹ˆ",
       level: 3,
     },
     {
@@ -34,12 +34,12 @@ export const content: CategoryLocaleContent = {
     },
     {
       type: 'title',
-      text: "How to use forensic calculators responsibly",
+      text: "è´Ÿè´£ä»»åœ°ä½¿ç”¨æ³•åŒ»è®¡ç®—å™¨",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "Use these tools as decision-support and explanation aids. They can help students, developers, analysts, and forensic teams understand a method, compare scenarios, or prepare a case note. They should not be treated as final authority for criminal, civil, medical, immigration, safeguarding, or disaster victim identification decisions.",
+      html: "è¯·å°†è¿™äº›å·¥å…·ä½œä¸ºå†³ç­–å’Œè§£é‡Šè¾…åŠ©ï¼Œä¸è¦ä½œä¸ºæ³•å¾‹ã€åŒ»ç–—ã€ç§»æ°‘æˆ–èº«ä»½è¯†åˆ«å†³å®šçš„æœ€ç»ˆä¾æ®ã€‚",
     },
     {
       type: 'table',
@@ -53,3 +53,4 @@ export const content: CategoryLocaleContent = {
     },
   ],
 };
+

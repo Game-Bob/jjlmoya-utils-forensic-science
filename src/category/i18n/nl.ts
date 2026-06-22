@@ -1,26 +1,26 @@
 import type { CategoryLocaleContent } from '../../types';
 
 export const content: CategoryLocaleContent = {
-  slug: "forensic-science",
-  title: "Forensic Science Tools",
-  description: "Forensic utilities for structured case triage, transparent calculations, and evidence-aware reporting.",
+  slug: "forensische-wetenschap",
+  title: "Forensische hulpmiddelen",
+  description: "Forensische hulpmiddelen voor gestructureerde zaaktriage, transparante berekeningen en bewijsbewuste rapportage.",
   seo: [
     {
       type: 'title',
-      text: "Forensic science tools for evidence-aware calculations and case triage",
+      text: "Forensische hulpmiddelen voor bewijsbewuste berekeningen en zaaktriage",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "This forensic science tools library is built for practical search intent: users need calculators and structured utilities that help them interpret evidence, document assumptions, and avoid false precision. The focus is not on replacing experts, laboratories, or validated protocols. The focus is on making early case review clearer: what data are available, what the calculation assumes, what the result can support, and where uncertainty remains.",
+      html: "Deze categorie verzamelt forensische calculators en gestructureerde hulpmiddelen om bewijs te interpreteren, aannames te documenteren en schijnnauwkeurigheid te vermijden. Ze vervangt geen experts of gevalideerde protocollen; ze maakt vroege zaakbeoordeling duidelijker.",
     },
     {
       type: 'paragraph',
-      html: "Forensic work often involves high-stakes decisions, so every utility in this category should make limitations visible. A useful forensic calculator should show ranges instead of pretending certainty, separate screening from formal reporting, and help the user identify missing evidence before a conclusion is written.",
+      html: "Forensisch werk kan belangrijke beslissingen beinvloeden. Daarom tonen deze tools bereiken, beperkingen en ontbrekende gegevens voordat een conclusie wordt geschreven.",
     },
     {
       type: 'title',
-      text: "What belongs in this forensic utilities category",
+      text: "Wat hoort in deze categorie forensische hulpmiddelen",
       level: 3,
     },
     {
@@ -34,12 +34,12 @@ export const content: CategoryLocaleContent = {
     },
     {
       type: 'title',
-      text: "How to use forensic calculators responsibly",
+      text: "Forensische calculators verantwoord gebruiken",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "Use these tools as decision-support and explanation aids. They can help students, developers, analysts, and forensic teams understand a method, compare scenarios, or prepare a case note. They should not be treated as final authority for criminal, civil, medical, immigration, safeguarding, or disaster victim identification decisions.",
+      html: "Gebruik deze tools als beslis- en uitlegondersteuning, niet als eindautoriteit voor juridische, medische, migratie- of identificatiebeslissingen.",
     },
     {
       type: 'table',

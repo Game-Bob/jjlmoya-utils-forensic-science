@@ -1,14 +1,14 @@
 ﻿---
 import { SEORenderer } from '@jjlmoya/utils-shared';
-import { forensicCategory } from './index';
-import type { KnownLocale } from '../types';
+import { forensicAgeEstimator } from './index';
+import type { KnownLocale } from '../../types';
 
 interface Props {
   locale?: KnownLocale;
 }
 
 const { locale = 'en' } = Astro.props;
-const content = await forensicCategory.i18n[locale]?.();
+const content = await forensicAgeEstimator.i18n[locale]?.();
 if (!content) return null;
 ---
 

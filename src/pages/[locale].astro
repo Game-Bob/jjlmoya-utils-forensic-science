@@ -1,4 +1,4 @@
----
+﻿---
 import PreviewLayout from '../layouts/PreviewLayout.astro';
 import PreviewNavSidebar from '../components/PreviewNavSidebar.astro';
 import { templateCategory, ALL_TOOLS } from '../index';
@@ -6,30 +6,38 @@ import { Icon } from 'astro-icon/components';
 import type { KnownLocale, ToolLocaleContent } from '../types';
 
 export async function getStaticPaths() {
-  const locales = ['en', 'es', 'fr'] as KnownLocale[];
-  return locales.map(locale => ({ params: { locale } }));
+  const locales = Object.keys(templateCategory.i18n) as KnownLocale[];
+  return locales.map((locale) => ({ params: { locale } }));
 }
 
-const { locale: currentLocale } = Astro.params as { locale: KnownLocale };
+const categoryLocales = Object.keys(templateCategory.i18n) as KnownLocale[];
 
-const categoryContent = await templateCategory.i18n[currentLocale]!();
+const { locale: requestedLocale } = Astro.params as { locale: KnownLocale };
+const currentLocale = categoryLocales.includes(requestedLocale) ? requestedLocale : 'en';
+const categoryLoader = templateCategory.i18n[currentLocale] ?? templateCategory.i18n.en;
 
+if (!categoryLoader) {
+  throw new Error('No category locale loader is registered.');
+}
+
+const categoryContent = await categoryLoader();
 const tools = ALL_TOOLS || [];
 
 const toolsWithContent = tools.length > 0
   ? await Promise.all(
       tools.map(async ({ entry, Component }) => {
-        const languages = Object.keys(entry.i18n);
+        const languages = Object.keys(entry.i18n) as KnownLocale[];
         const localeEntries = await Promise.all(
           languages.map(async (l) => {
-            const content = await entry.i18n[l as KnownLocale]!();
-            return [l, content];
+            const loader = entry.i18n[l];
+            if (!loader) return null;
+            const content = await loader();
+            return [l, content] as const;
           })
         );
 
-        const localeContents = Object.fromEntries(localeEntries) as Record<string, ToolLocaleContent<Record<string, string>>>;
-
-        const currentLocaleContent = localeContents[currentLocale] || localeContents['en'] || localeContents['es'];
+        const localeContents = Object.fromEntries(localeEntries.filter(Boolean)) as Record<string, ToolLocaleContent<Record<string, string>>>;
+        const currentLocaleContent = localeContents[currentLocale] || localeContents.en;
         const availableLocales: Record<string, string> = {};
 
         for (const l of languages) {
@@ -64,7 +72,7 @@ const toolsWithContent = tools.length > 0
   />
   <div class="dashboard">
     <header class="preview-header">
-      <span class="badge">preview · @jjlmoya/utils-template</span>
+      <span class="badge">preview - @jjlmoya/utils-forensic-science</span>
       <h1>{categoryContent.title}</h1>
       <p>{categoryContent.description}</p>
     </header>
@@ -93,7 +101,7 @@ const toolsWithContent = tools.length > 0
           {availableLocales && Object.keys(availableLocales).length > 1 && (
             <div class="tool-locales">
               {Object.entries(availableLocales).map(([l, url]) => (
-                <a href={url} class="locale-badge" title={`Ver en ${l.toUpperCase()}`} class:list={{ active: l === currentLocale }}>
+                <a href={url} class="locale-badge" title={`View in ${l.toUpperCase()}`} class:list={{ active: l === currentLocale }}>
                   {l.toUpperCase()}
                 </a>
               ))}
@@ -249,3 +257,5 @@ const toolsWithContent = tools.length > 0
     background: rgba(244, 63, 94, 0.1);
   }
 </style>
+
+
