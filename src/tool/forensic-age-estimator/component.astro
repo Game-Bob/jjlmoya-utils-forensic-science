@@ -150,7 +150,11 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
   const notes = document.getElementById('forensic-notes');
   const score = document.getElementById('forensic-score');
   const progressFill = document.querySelector<SVGCircleElement>('.forensic-age-progress-fill');
+  const instrument = document.querySelector<SVGSVGElement>('.forensic-age-instrument');
+  const interval = document.querySelector<HTMLElement>('.forensic-age-interval');
   const storageKey = 'forensic-age-estimator:last-input';
+  const renderedValues = new WeakMap<HTMLElement, number>();
+  let renderedScore = 0;
 
   function selectedStage(name: string): number {
     const input = document.querySelector<HTMLInputElement>(`[data-stage-input="${name}"]:checked`);
@@ -163,9 +167,13 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
     if (input) input.checked = true;
   }
 
-  function renderAge(target: HTMLElement | null, value: number) {
+  function renderAge(target: HTMLElement | null, value: number, animate = true) {
     if (!target) return;
-    target.innerHTML = `<span class="forensic-age-number">${value.toFixed(1)}</span><span class="forensic-age-unit">${ui.ageUnit}</span>`;
+    const from = renderedValues.get(target) ?? value;
+    renderedValues.set(target, value);
+    animateNumber(from, value, (current) => {
+      target.innerHTML = `<span class="forensic-age-number">${current.toFixed(1)}</span><span class="forensic-age-unit">${ui.ageUnit}</span>`;
+    }, animate);
   }
 
   function isEvidenceType(value: string | undefined): value is EvidenceType {
@@ -206,6 +214,49 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
     }));
   }
 
+  function pulseInstrument() {
+    if (!instrument) return;
+    instrument.classList.remove('forensic-age-instrument-pulse');
+    requestAnimationFrame(() => instrument.classList.add('forensic-age-instrument-pulse'));
+  }
+
+  function pulseInterval() {
+    if (!interval) return;
+    interval.classList.remove('forensic-age-interval-pulse');
+    requestAnimationFrame(() => interval.classList.add('forensic-age-interval-pulse'));
+  }
+
+  function animateNumber(from: number, to: number, render: (value: number) => void, animate = true) {
+    if (!animate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      render(to);
+      return;
+    }
+
+    const started = performance.now();
+    const duration = 420;
+    const tick = (time: number) => {
+      const progress = Math.min(1, (time - started) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      render(from + (to - from) * eased);
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  function renderResult(result: ReturnType<typeof estimateForensicAge>) {
+    renderAge(minimum, result.minimumAge);
+    renderAge(likely, result.likelyAge);
+    renderAge(likelyMarker, result.likelyAge);
+    renderAge(maximum, result.maximumAge);
+    confidence!.textContent = ui[`confidence${result.confidence}`];
+    notes!.textContent = result.notes.map((note) => ui[note]).join(' ');
+    animateNumber(renderedScore, result.maturityScore, (current) => {
+      score!.textContent = `${Math.round(current)}%`;
+    });
+    renderedScore = result.maturityScore;
+    progressFill?.classList.toggle('forensic-age-progress-fill-complete', result.maturityScore >= 100);
+  }
+
   function update() {
     if (!evidence || !root) return;
 
@@ -223,19 +274,21 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
     dentalOutput!.textContent = `${ui.stageLabel} ${dentalStage}`;
     epiphysealOutput!.textContent = `${ui.stageLabel} ${epiphysealStage}`;
     molarOutput!.textContent = `${ui.stageLabel} ${molarStage}`;
-    renderAge(minimum, result.minimumAge);
-    renderAge(likely, result.likelyAge);
-    renderAge(likelyMarker, result.likelyAge);
-    renderAge(maximum, result.maximumAge);
-    confidence!.textContent = ui[`confidence${result.confidence}`];
-    notes!.textContent = result.notes.map((note) => ui[note]).join(' ');
-    score!.textContent = `${result.maturityScore}%`;
-    progressFill?.classList.toggle('forensic-age-progress-fill-complete', result.maturityScore >= 100);
+    renderResult(result);
     root.style.setProperty('--dental-maturity', String(dentalStage / 8));
     root.style.setProperty('--epiphyseal-maturity', String(epiphysealStage / 8));
     root.style.setProperty('--molar-maturity', String(molarStage / 8));
     root.style.setProperty('--overall-maturity', String(result.maturityScore / 100));
     saveInput(dentalStage, epiphysealStage, molarStage);
+    pulseInstrument();
+    pulseInterval();
+  }
+
+  function closeStageLists() {
+    document.querySelectorAll<HTMLElement>('.forensic-age-stage-list').forEach((item) => { item.hidden = true; });
+    document.querySelectorAll<HTMLButtonElement>('.forensic-age-stage-select').forEach((item) => {
+      item.setAttribute('aria-expanded', 'false');
+    });
   }
 
   restoreInput();
@@ -244,10 +297,7 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
     button.addEventListener('click', () => {
       const list = document.getElementById(button.getAttribute('aria-controls') ?? '');
       const shouldOpen = button.getAttribute('aria-expanded') !== 'true';
-      document.querySelectorAll<HTMLElement>('.forensic-age-stage-list').forEach((item) => { item.hidden = true; });
-      document.querySelectorAll<HTMLButtonElement>('.forensic-age-stage-select').forEach((item) => {
-        item.setAttribute('aria-expanded', 'false');
-      });
+      closeStageLists();
       if (list) list.hidden = !shouldOpen;
       button.setAttribute('aria-expanded', String(shouldOpen));
     });
@@ -259,6 +309,13 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
       field!.querySelector<HTMLButtonElement>('.forensic-age-stage-select')!.setAttribute('aria-expanded', 'false');
       update();
     });
+  });
+  document.addEventListener('click', (event) => {
+    if ((event.target as HTMLElement).closest('.forensic-age-stage-field')) return;
+    closeStageLists();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeStageLists();
   });
   update();
 </script>

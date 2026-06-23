@@ -8,42 +8,42 @@ const description = 'Estimate a forensic age interval from dental development, s
 const howTo = [
   {
     name: 'Select the evidence emphasis',
-    text: 'Choose mixed evidence for balanced triage, dental priority when dental findings are stronger, or skeletal priority when radiographic skeletal indicators are the main source.',
+    text: 'Choose mixed evidence for balanced triage, dental priority when dental findings are more robust, or skeletal priority when radiographic skeletal indicators provide the primary evidence.',
   },
   {
     name: 'Score each maturity indicator',
-    text: 'Move each stage from 0 to 8. Lower stages represent early development, middle stages represent adolescent maturation, and higher stages represent mature or near-mature findings.',
+    text: 'Assign each indicator a stage from 0 to 8. Lower stages represent early development, middle stages reflect adolescent maturation, and higher stages indicate mature or near-mature findings.',
   },
   {
-    name: 'Read the interval, not only the central age',
-    text: 'Use the minimum, likely, and maximum age values together. Forensic age assessment should be expressed as an interval because biological development varies between individuals.',
+    name: 'Interpret the interval, not just the central age',
+    text: 'Consider the minimum, likely, and maximum age values together. Forensic age assessment should always be expressed as an interval, as biological development varies significantly between individuals.',
   },
   {
-    name: 'Check disagreement between indicators',
-    text: 'If dental, skeletal, and third molar stages point to different age ranges, treat the result as exploratory and collect better evidence before drawing conclusions.',
+    name: 'Check for disagreement between indicators',
+    text: 'If dental, skeletal, and third molar stages point to conflicting age ranges, treat the output as exploratory and seek further corroborating evidence before forming conclusions.',
   },
 ];
 
 const faq = [
   {
     question: 'Can this forensic age estimator determine legal adulthood?',
-    answer: 'No. It is a screening calculator for educational and triage use. Legal age determination requires validated local protocols, qualified experts, documented identity work, and jurisdiction-specific standards.',
+    answer: 'No. This is a screening tool for educational and triage purposes. Legal age determination requires validated local protocols, qualified forensic experts, comprehensive identity documentation, and adherence to jurisdiction-specific standards.',
   },
   {
-    question: 'Why does the result show an age interval?',
-    answer: 'Dental eruption, skeletal fusion, and third molar development vary by ancestry, nutrition, health, sex, population reference, and imaging method. An interval is more honest than a single exact age.',
+    question: 'Why does the result display an age interval?',
+    answer: 'Dental eruption, skeletal fusion, and third molar development are influenced by ancestry, nutrition, health status, sex, reference population, and imaging modality. An interval provides a more accurate and transparent representation of biological variability than a single point estimate.',
   },
   {
-    question: 'What does mixed evidence mean?',
-    answer: 'Mixed evidence balances dental development, skeletal maturity, and third molar stage. Use it when no single indicator is clearly more reliable for the case file.',
+    question: 'What does "mixed evidence" mean?',
+    answer: 'Mixed evidence mode balances the inputs from dental development, skeletal maturity, and third molar stages. Use this setting when no single indicator is clearly more reliable or complete for the specific case.',
   },
   {
     question: 'Are third molars reliable for every case?',
-    answer: 'Third molars are useful in late adolescence and young adulthood, but they are variable. Missing third molars, pathology, population differences, and radiographic quality can limit their value.',
+    answer: 'Third molars are valuable in late adolescence and young adulthood, but they are highly variable. Factors such as agenesis, pathology, population-specific traits, and radiographic quality can significantly limit their utility.',
   },
   {
-    question: 'Should this be used with real casework?',
-    answer: 'Only as a preliminary aid. Real casework should use validated methods, calibrated reference data, independent review, and transparent reporting of uncertainty and limitations.',
+    question: 'Should this tool be used for formal casework?',
+    answer: 'It should serve only as a preliminary aid. Formal forensic casework must utilize validated methods, calibrated reference data, independent peer review, and transparent reporting of all uncertainties and limitations.',
   },
 ];
 
@@ -106,104 +106,105 @@ export const content: ToolLocaleContent = {
     confidenceexploratory: 'Exploratory',
     confidencemoderate: 'Moderate',
     confidencestrong: 'Strong',
-    noteTriage: 'Use as a triage estimate, not as a legal age determination.',
-    noteFinalAssessment: 'Final forensic age assessment should combine radiology, dental examination, documented history, and jurisdiction-specific standards.',
-    noteWideInterval: 'The indicators disagree by more than four years, so the interval has been widened.',
+    noteTriage: 'Use as a triage estimate; not a legal age determination.',
+    noteFinalAssessment: 'Final forensic age assessment must integrate radiology, clinical dental examination, history, and jurisdiction-specific standards.',
+    noteWideInterval: 'Indicators disagree by more than four years; the interval has been widened.',
   },
   seo: [
     {
       type: 'title',
-      text: 'Forensic age estimator: dental, skeletal, and third molar screening calculator',
+      text: 'Forensic Age Estimator: Dental, Skeletal, and Third Molar Screening Calculator',
       level: 2,
     },
     {
       type: 'paragraph',
-      html: 'Use this forensic age estimator when you need a quick, transparent way to organize biological maturity evidence before a formal assessment. The calculator combines dental development, epiphyseal fusion, and third molar stage into an estimated age interval. It is built for the search intent behind questions such as <strong>forensic age estimation calculator</strong>, <strong>dental age assessment</strong>, <strong>skeletal maturity age estimate</strong>, and <strong>third molar age estimation</strong>: users want to know what the indicators mean, how they can be combined, and how much uncertainty should be attached to the result.',
+      html: 'This forensic age estimator provides a transparent framework for organizing biological maturity evidence prior to a formal assessment. The tool integrates dental development, epiphyseal fusion, and third molar stages to produce an estimated age interval. It addresses common inquiries such as <strong>forensic age estimation</strong>, <strong>dental maturity assessment</strong>, and <strong>skeletal age estimation</strong>, helping users understand how indicators are combined and the inherent uncertainty involved.',
     },
     {
       type: 'paragraph',
-      html: 'The output is intentionally expressed as <strong>minimum age, likely age, and maximum age</strong>. A single exact age would be misleading because biological development does not progress at the same speed in every person. Nutrition, health, ancestry, sex, reference population, imaging quality, dental pathology, missing molars, and observer variation can all change interpretation. Treat the calculator as a structured screening aid, not as a legal conclusion.',
+      html: 'Results are presented as <strong>minimum, likely, and maximum ages</strong>. Point estimates are often misleading because biological development varies widely due to nutrition, health, ancestry, and environmental factors. This tool should be used as a structured screening aid, not as a definitive legal conclusion.',
     },
     {
       type: 'title',
-      text: 'What the three maturity indicators mean',
+      text: 'Understanding Maturity Indicators',
       level: 3,
     },
     {
       type: 'paragraph',
-      html: 'The three sliders represent broad developmental stages from 0 to 8. Stage 0 means very early or absent maturity evidence; stage 8 means complete or near-complete maturity for that indicator. The stages are not tied to one named clinical method. Instead, they provide a practical abstraction so users can compare how dental, skeletal, and third molar evidence affects an interval estimate.',
+      html: 'The maturity scales (0–8) provide a practical abstraction to compare different biological systems. Stage 0 indicates early or absent evidence of maturity, while stage 8 represents completion. These stages do not replace named clinical methods but facilitate a cross-system comparison.',
     },
+    ,
     {
       type: 'table',
-      headers: ['Indicator', 'What it represents', 'Useful search intent', 'Main caution'],
+      headers: ['Indicator', 'Description', 'Context', 'Caution'],
       rows: [
-        ['Dental development', 'Formation, eruption, and maturity of teeth other than third molars.', 'Estimate age from dental maturity in children and adolescents.', 'Dental disease, missing teeth, restorations, and population reference mismatch can bias interpretation.'],
-        ['Epiphyseal fusion', 'Progressive closure of growth plates in skeletal structures.', 'Estimate adolescent or young adult age from skeletal maturity.', 'Fusion timing depends on the bone observed, sex, nutrition, endocrine health, and imaging modality.'],
-        ['Third molar stage', 'Formation and maturation of wisdom teeth.', 'Assess late adolescent or young adult age when other teeth are mature.', 'Third molars are highly variable; agenesis, extraction, impaction, and image quality matter.'],
+        ['Dental development', 'Formation and eruption (excluding third molars).', 'Primary metric for children and adolescents.', 'Can be biased by dental disease, extractions, or population-specific differences.'],
+        ['Epiphyseal fusion', 'Progressive closure of growth plates.', 'Key indicator for late adolescence and young adulthood.', 'Highly dependent on the specific bone, sex, and health status.'],
+        ['Third molar stage', 'Formation and maturation of wisdom teeth.', 'Critical for late adolescent and young adult assessment.', 'Highly variable; requires careful analysis of agenesis and impaction.'],
       ],
     },
     {
       type: 'title',
-      text: 'How to interpret the age interval',
+      text: 'Interpreting the Age Interval',
       level: 3,
     },
     {
       type: 'paragraph',
-      html: 'Read the three age values together. The <strong>likely age</strong> is the weighted central estimate from the selected evidence emphasis. The <strong>minimum</strong> and <strong>maximum</strong> values show a practical uncertainty band. When the indicators agree, the band becomes narrower; when dental, skeletal, and third molar signals point to different ages, the band widens and the confidence label drops.',
+      html: 'The <strong>likely age</strong> represents the weighted central estimate based on your chosen evidence emphasis. The <strong>minimum</strong> and <strong>maximum</strong> values define the uncertainty band. Agreement between indicators results in a narrower band; conflicting signals widen the interval and decrease the confidence rating.',
     },
     {
       type: 'table',
-      headers: ['Result pattern', 'What it suggests', 'Recommended next step'],
+      headers: ['Pattern', 'Suggestion', 'Action'],
       rows: [
-        ['Narrow interval with strong confidence', 'The indicators broadly agree and point to a similar developmental range.', 'Document the source indicators and consider whether a validated method is still required for the case.'],
-        ['Moderate interval', 'There is some disagreement or the selected evidence emphasis changes the central estimate.', 'Review image quality, stage assignment, and whether dental or skeletal evidence should be prioritized.'],
-        ['Wide exploratory interval', 'The maturity indicators conflict or point to different developmental periods.', 'Do not rely on the estimate alone; seek better records, additional imaging, or specialist review.'],
+        ['Narrow interval / Strong confidence', 'Indicators align.', 'Document findings and assess if formal validation is required.'],
+        ['Moderate interval', 'Disagreement or evidence weight impacts result.', 'Verify image quality and stage assignments.'],
+        ['Wide exploratory interval', 'Indicators conflict.', 'Seek corroborating records or specialist review.'],
       ],
     },
     {
       type: 'title',
-      text: 'Choosing dental, skeletal, or mixed evidence mode',
+      text: 'Selecting the Evidence Mode',
       level: 3,
     },
     {
       type: 'paragraph',
-      html: '<strong>Mixed evidence</strong> is the default mode for general screening because it balances all three indicators. Choose <strong>dental priority</strong> when dental observations are complete, well documented, and more reliable than skeletal information. Choose <strong>skeletal priority</strong> when radiographic skeletal findings are the strongest part of the file or when dental data are incomplete. The mode does not make weak evidence strong; it only changes how available indicators are weighted.',
+      html: '<strong>Mixed evidence</strong> is the default, balancing all indicators. Select <strong>dental priority</strong> when dental records are exceptionally robust. Select <strong>skeletal priority</strong> when radiographic skeletal evidence is the most comprehensive data point. These modes do not enhance the quality of weak evidence; they only adjust the mathematical weighting.',
     },
     {
       type: 'list',
       items: [
-        '<strong>Use dental priority</strong> for cases where tooth development is clearly staged and third molar evidence is available.',
-        '<strong>Use skeletal priority</strong> when epiphyseal fusion is the best documented maturity signal.',
-        '<strong>Use mixed evidence</strong> when the goal is a balanced first-pass review rather than a specialist conclusion.',
-        '<strong>Use the confidence label</strong> to notice disagreement before over-interpreting the central age.',
+        '<strong>Dental Priority:</strong> Use when dental development is clearly staged and third molar evidence is present.',
+        '<strong>Skeletal Priority:</strong> Use when epiphyseal fusion is the best-documented signal.',
+        '<strong>Mixed Evidence:</strong> Ideal for a balanced initial screening.',
+        '<strong>Confidence Label:</strong> Monitor this to identify discrepancies before interpretation.',
       ],
     },
     {
       type: 'title',
-      text: 'Forensic age estimation is not identity proof',
+      text: 'Limitations in Forensic Contexts',
       level: 3,
     },
     {
       type: 'paragraph',
-      html: 'Age estimation can support a case file, but it cannot prove identity or replace documentary investigation. In migration, safeguarding, criminal responsibility, disaster victim identification, and missing-person contexts, the assessment should be multidisciplinary. A responsible report normally states the method used, the reference population, the imaging source, observer qualifications, confidence or probability language, and known limitations.',
+      html: 'Age estimation is supportive, never conclusive proof of identity. In legal or safeguarding contexts—such as disaster victim identification or migration—assessments must be multidisciplinary. Responsible reports must detail the specific methodology, reference population, observer qualifications, and known limitations.',
     },
     {
       type: 'paragraph',
-      html: 'This tool is therefore best used for <strong>education, triage, protocol planning, and transparent communication</strong>. It helps explain why age conclusions should be cautious, why conflicting indicators matter, and why a legally important threshold such as 18 years should never be decided by a simplified calculator alone.',
+      html: 'This tool is designed for <strong>education and triage</strong>. It reinforces why age conclusions require caution and why critical thresholds—such as the 18th birthday—should never be determined solely by a simplified calculator.',
     },
     {
       type: 'title',
-      text: 'Checklist before using the estimate in a report',
+      text: 'Forensic Reporting Checklist',
       level: 3,
     },
     {
       type: 'list',
       items: [
-        '<strong>Confirm the evidence source:</strong> note whether the stages come from dental exam, panoramic radiograph, hand-wrist image, clavicle imaging, or another protocol.',
-        '<strong>Record missing or weak data:</strong> absent third molars, poor image quality, developmental anomalies, and incomplete records should be visible in the report.',
-        '<strong>Use validated methods for decisions:</strong> select jurisdiction-appropriate dental or skeletal methods before any legal or safeguarding conclusion.',
-        '<strong>Report uncertainty plainly:</strong> include a range, explain disagreement, and avoid language that implies exact chronological age.',
-        '<strong>Seek specialist review:</strong> high-stakes cases should be reviewed by qualified forensic odontologists, radiologists, anthropologists, or paediatric specialists as appropriate.',
+        '<strong>Source Documentation:</strong> Explicitly note if stages are based on dental exams, panoramic X-rays, or skeletal imaging (e.g., hand-wrist, clavicle).',
+        '<strong>Missing/Weak Data:</strong> Document absences, poor quality imagery, or anomalies clearly.',
+        '<strong>Methodological Validation:</strong> Ensure selected methods are recognized within the local jurisdiction.',
+        '<strong>Uncertainty Communication:</strong> Always present a range; avoid language implying exact chronological age.',
+        '<strong>Specialist Review:</strong> High-stakes cases must be reviewed by forensic odontologists, radiologists, or anthropologists.',
       ],
     },
   ],
@@ -243,5 +244,3 @@ export const content: ToolLocaleContent = {
     },
   ],
 };
-
-
