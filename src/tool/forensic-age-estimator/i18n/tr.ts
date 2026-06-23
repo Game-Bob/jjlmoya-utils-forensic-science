@@ -1,7 +1,7 @@
 import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'dental-skeletal-third-molar-age-estimator';
+const slug = 'dis-iskelet-ucuncu-azi-yasi-tahmin-edici';
 const title = 'Diş, İskelet ve Üçüncü Azı Yaşı Tahmin Edici';
 const description = 'Diş gelişimi, iskelet olgunluğu ve üçüncü azı dişi göstergelerinden adli yaş aralığı tahmini yaparak triyaj ve vaka sınıflandırmasına yardımcı olur.';
 

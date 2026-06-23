@@ -1,7 +1,7 @@
 import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'dental-skeletal-third-molar-age-estimator';
+const slug = 'estimateur-age-dentaire-squelettique-troisieme-molaire';
 const title = 'Estimateur d\'âge dentaire, squelettique et troisième molaire';
 const description = 'Estimez un intervalle d\'âge médico-légal basé sur le développement dentaire, la maturité squelettique et les indicateurs des troisièmes molaires pour le criblage et le triage des cas.';
 
@@ -113,7 +113,7 @@ export const content: ToolLocaleContent = {
   seo: [
     {
       type: 'title',
-      text: 'Estimateur d\'âge médico-légal : Calculateur de criblage dentaire et squelettique',
+      text: 'Estimateur d\'âge médico-légal: Calculateur de criblage dentaire et squelettique',
       level: 2,
     },
     {
@@ -133,7 +133,6 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'Les stades (0 à 8) offrent une abstraction pratique permettant de comparer différents systèmes biologiques. Le stade 0 indique une maturité absente ou très précoce ; le stade 8 une maturité complète. Ces stades facilitent la comparaison croisée sans se limiter à une unique méthode clinique.',
     },
-    ,
     {
       type: 'table',
       headers: ['Indicateur', 'Description', 'Utilité', 'Précautions'],

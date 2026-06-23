@@ -1,7 +1,7 @@
 import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'dental-skeletal-third-molar-age-estimator';
+const slug = 'estimador-edad-dental-esqueletica-tercer-molar';
 const title = 'Estimador de edad dental, esquelética y tercer molar';
 const description = 'Estima un intervalo de edad forense a partir del desarrollo dental, la madurez esquelética y los indicadores del tercer molar para cribado y clasificación de casos.';
 

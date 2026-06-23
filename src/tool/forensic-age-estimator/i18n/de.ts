@@ -1,8 +1,8 @@
 import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'dental-skeletal-third-molar-age-estimator';
-const title = 'Zahnärztlicher, skelettaler und Weisheitszahn-Altersschätzer';
+const slug = 'altersschatzung-zahn-skelett-weisheitszahn';
+const title = 'Altersschätzer für Zahnentwicklung, Skelettreife und Weisheitszähne';
 const description = 'Schätzen Sie ein forensisches Altersintervall anhand der Zahnentwicklung, der Skelettreife und der Weisheitszahn-Indikatoren für Screening und Falltriage.';
 
 const howTo = [

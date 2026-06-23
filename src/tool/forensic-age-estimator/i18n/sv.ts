@@ -1,8 +1,8 @@
 import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'dental-skeletal-third-molar-age-estimator';
-const title = 'Tand-, skelett- och visdomstandsåldersskattare';
+const slug = 'aldersskattare-tander-skelett-visdomstand';
+const title = 'Åldersskattare för tänder, skelett och visdomständer';
 const description = 'Uppskatta ett forensiskt åldersintervall baserat på tandutveckling, skelettmognad och visdomstandsindikatorer för screening och falltriage.';
 
 const howTo = [
@@ -131,9 +131,8 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Mognadsskalorna (0–8) ger en praktisk abstraktion för att jämföra olika biologiska system. Stadium 0 signalerar tidig eller frånvarande mognad, medan stadium 8 representerar fullständighet. Dessa stadier ersätter inte namngivna kliniska metoder utan möjliggör en korsreferensanalys.',
+      html: 'Mognadsskalorna (0-8) ger en praktisk abstraktion för att jämföra olika biologiska system. Stadium 0 signalerar tidig eller frånvarande mognad, medan stadium 8 representerar fullständighet. Dessa stadier ersätter inte namngivna kliniska metoder utan möjliggör en korsreferensanalys.',
     },
-    ,
     {
       type: 'table',
       headers: ['Indikator', 'Beskrivning', 'Kontext', 'Varning'],
@@ -186,11 +185,11 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Åldersuppskattning är ett stöd, aldrig ett slutet identitetsbevis. I juridiska eller skyddsmässiga sammanhang — såsom identifiering av katastrofoffer eller migrationsärenden — måste bedömningar vara multidisciplinära. Ansvariga rapporter måste detaljera den specifika metoden, referenspopulationen, observatörens kvalifikationer och kända begränsningar.',
+      html: 'Åldersuppskattning är ett stöd, aldrig ett slutet identitetsbevis. I juridiska eller skyddsmässiga sammanhang - såsom identifiering av katastrofoffer eller migrationsärenden - måste bedömningar vara multidisciplinära. Ansvariga rapporter måste detaljera den specifika metoden, referenspopulationen, observatörens kvalifikationer och kända begränsningar.',
     },
     {
       type: 'paragraph',
-      html: 'Detta verktyg är utformat för <strong>utbildning, triage och transparent kommunikation</strong>. Det förstärker varför åldersslutsatser kräver försiktighet och varför kritiska trösklar — såsom 18-årsdagen — aldrig bör avgöras enbart av en förenklad kalkylator.',
+      html: 'Detta verktyg är utformat för <strong>utbildning, triage och transparent kommunikation</strong>. Det förstärker varför åldersslutsatser kräver försiktighet och varför kritiska trösklar - såsom 18-årsdagen - aldrig bör avgöras enbart av en förenklad kalkylator.',
     },
     {
       type: 'title',

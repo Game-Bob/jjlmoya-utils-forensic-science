@@ -1,7 +1,7 @@
 import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'dental-skeletal-third-molar-age-estimator';
+const slug = 'estymator-wieku-zebow-szkieletu-trzeciego-trzonowca';
 const title = 'Estymator wieku na podstawie rozwoju zębów, szkieletu i trzeciego trzonowca';
 const description = 'Oszacuj kryminalistyczny przedział wieku w oparciu o rozwój zębów, dojrzałość szkieletową oraz wskaźniki trzeciego trzonowca dla potrzeb badań przesiewowych i triażu.';
 
@@ -131,7 +131,7 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Suwaki etapów (0–8) pozwalają na praktyczną abstrakcję danych w celu porównania różnych systemów biologicznych. Etap 0 oznacza wczesny stan lub brak dowodów dojrzałości; etap 8 oznacza pełną dojrzałość. Te etapy ułatwiają porównanie danych dentystycznych, szkieletowych i zębów mądrości w ramach jednego przedziału wiekowego.',
+      html: 'Suwaki etapów (0-8) pozwalają na praktyczną abstrakcję danych w celu porównania różnych systemów biologicznych. Etap 0 oznacza wczesny stan lub brak dowodów dojrzałości; etap 8 oznacza pełną dojrzałość. Te etapy ułatwiają porównanie danych dentystycznych, szkieletowych i zębów mądrości w ramach jednego przedziału wiekowego.',
     },
     {
       type: 'table',

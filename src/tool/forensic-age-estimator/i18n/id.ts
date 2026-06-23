@@ -1,7 +1,7 @@
 import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'dental-skeletal-third-molar-age-estimator';
+const slug = 'estimator-usia-gigi-skelet-molar-ketiga';
 const title = 'Estimator Usia Gigi, Skelet, dan Molar Ketiga';
 const description = 'Perkirakan interval usia forensik berdasarkan perkembangan gigi, kematangan skelet, dan indikator molar ketiga untuk keperluan skrining serta triase kasus.';
 
@@ -131,7 +131,7 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Skala tahap (0–8) memberikan abstraksi praktis untuk membandingkan sistem biologis yang berbeda. Tahap 0 menunjukkan bukti kematangan awal atau tidak ada, sementara tahap 8 menunjukkan kematangan lengkap. Tahap ini dirancang untuk perbandingan lintas sistem, bukan untuk menggantikan metode klinis spesifik.',
+      html: 'Skala tahap (0-8) memberikan abstraksi praktis untuk membandingkan sistem biologis yang berbeda. Tahap 0 menunjukkan bukti kematangan awal atau tidak ada, sementara tahap 8 menunjukkan kematangan lengkap. Tahap ini dirancang untuk perbandingan lintas sistem, bukan untuk menggantikan metode klinis spesifik.',
     },
     {
       type: 'table',
@@ -189,7 +189,7 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Alat ini dirancang untuk <strong>edukasi, triase, dan komunikasi transparan</strong>. Kami menekankan bahwa keputusan penting secara hukum—seperti ambang batas usia 18 tahun—tidak boleh didasarkan hanya pada kalkulator yang disederhanakan.',
+      html: 'Alat ini dirancang untuk <strong>edukasi, triase, dan komunikasi transparan</strong>. Kami menekankan bahwa keputusan penting secara hukum-seperti ambang batas usia 18 tahun-tidak boleh didasarkan hanya pada kalkulator yang disederhanakan.',
     },
     {
       type: 'title',

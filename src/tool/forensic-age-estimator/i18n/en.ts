@@ -1,4 +1,4 @@
-﻿import { bibliography } from '../bibliography';
+import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
 const slug = 'dental-skeletal-third-molar-age-estimator';
@@ -131,9 +131,8 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'The maturity scales (0–8) provide a practical abstraction to compare different biological systems. Stage 0 indicates early or absent evidence of maturity, while stage 8 represents completion. These stages do not replace named clinical methods but facilitate a cross-system comparison.',
+      html: 'The maturity scales (0-8) provide a practical abstraction to compare different biological systems. Stage 0 indicates early or absent evidence of maturity, while stage 8 represents completion. These stages do not replace named clinical methods but facilitate a cross-system comparison.',
     },
-    ,
     {
       type: 'table',
       headers: ['Indicator', 'Description', 'Context', 'Caution'],
@@ -186,11 +185,11 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Age estimation is supportive, never conclusive proof of identity. In legal or safeguarding contexts—such as disaster victim identification or migration—assessments must be multidisciplinary. Responsible reports must detail the specific methodology, reference population, observer qualifications, and known limitations.',
+      html: 'Age estimation is supportive, never conclusive proof of identity. In legal or safeguarding contexts-such as disaster victim identification or migration-assessments must be multidisciplinary. Responsible reports must detail the specific methodology, reference population, observer qualifications, and known limitations.',
     },
     {
       type: 'paragraph',
-      html: 'This tool is designed for <strong>education and triage</strong>. It reinforces why age conclusions require caution and why critical thresholds—such as the 18th birthday—should never be determined solely by a simplified calculator.',
+      html: 'This tool is designed for <strong>education and triage</strong>. It reinforces why age conclusions require caution and why critical thresholds-such as the 18th birthday-should never be determined solely by a simplified calculator.',
     },
     {
       type: 'title',

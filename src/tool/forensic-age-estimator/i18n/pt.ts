@@ -1,7 +1,7 @@
 import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'dental-skeletal-third-molar-age-estimator';
+const slug = 'estimador-idade-dentaria-esqueletica-terceiro-molar';
 const title = 'Estimador de Idade Dentária, Esquelética e Terceiro Molar';
 const description = 'Estime um intervalo de idade forense com base no desenvolvimento dentário, maturidade esquelética e indicadores do terceiro molar para triagem e classificação de casos.';
 
@@ -131,9 +131,8 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Os estágios (0–8) fornecem uma abstração prática para comparar sistemas biológicos diversos. O estágio 0 indica maturidade ausente ou muito precoce; o estágio 8 indica maturação completa. Estes estágios facilitam a comparação cruzada sem estarem confinados a um único método clínico.',
+      html: 'Os estágios (0-8) fornecem uma abstração prática para comparar sistemas biológicos diversos. O estágio 0 indica maturidade ausente ou muito precoce; o estágio 8 indica maturação completa. Estes estágios facilitam a comparação cruzada sem estarem confinados a um único método clínico.',
     },
-    ,
     {
       type: 'table',
       headers: ['Indicador', 'Descrição', 'Contexto', 'Precaução'],

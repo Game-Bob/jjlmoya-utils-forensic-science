@@ -1,8 +1,8 @@
 import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'dental-skeletal-third-molar-age-estimator';
-const title = 'Gebits-, skelet- en verstandskiesleeftijdsschatter';
+const slug = 'leeftijdsschatter-gebit-skelet-verstandskies';
+const title = 'Leeftijdsschatter voor gebit, skelet en verstandskiezen';
 const description = 'Schat een forensisch leeftijdsinterval op basis van gebitsontwikkeling, skeletale maturiteit en verstandskiesindicatoren voor screening en casustriage.';
 
 const howTo = [
@@ -131,7 +131,7 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'De schuifregelaars (0–8) bieden een praktische abstractie voor het vergelijken van verschillende biologische systemen. Stadium 0 duidt op zeer vroege of afwezige maturiteit; stadium 8 op volledige maturiteit. Deze stadia zijn niet gebonden aan één specifieke klinische methode, maar faciliteren cross-systeem vergelijkingen binnen een intervalschatting.',
+      html: 'De schuifregelaars (0-8) bieden een praktische abstractie voor het vergelijken van verschillende biologische systemen. Stadium 0 duidt op zeer vroege of afwezige maturiteit; stadium 8 op volledige maturiteit. Deze stadia zijn niet gebonden aan één specifieke klinische methode, maar faciliteren cross-systeem vergelijkingen binnen een intervalschatting.',
     },
     {
       type: 'table',

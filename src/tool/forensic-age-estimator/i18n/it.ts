@@ -1,7 +1,7 @@
 import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'dental-skeletal-third-molar-age-estimator';
+const slug = 'stimatore-eta-dentale-scheletrica-terzo-molare';
 const title = 'Stimatore dell\'età dentale, scheletrica e del terzo molare';
 const description = 'Stima un intervallo di età forense basato sullo sviluppo dentale, la maturità scheletrica e gli indicatori del terzo molare per il triage e lo screening dei casi.';
 
@@ -131,7 +131,7 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Gli stadi (0–8) forniscono un\'astrazione pratica per confrontare sistemi biologici diversi. Lo stadio 0 indica una maturità assente o molto precoce, lo stadio 8 una maturità completa. Questi stadi facilitano il confronto incrociato senza essere vincolati a un singolo metodo clinico.',
+      html: 'Gli stadi (0-8) forniscono un\'astrazione pratica per confrontare sistemi biologici diversi. Lo stadio 0 indica una maturità assente o molto precoce, lo stadio 8 una maturità completa. Questi stadi facilitano il confronto incrociato senza essere vincolati a un singolo metodo clinico.',
     },
     {
       type: 'table',
