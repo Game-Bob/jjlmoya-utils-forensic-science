@@ -1,5 +1,5 @@
 ﻿---
-import './forensic-age-estimator.css';
+import './dental-skeletal-third-molar-age-estimator.css';
 
 interface Props {
   ui: Record<string, string>;
@@ -95,8 +95,8 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
 
   <section class="forensic-age-visual" aria-label={ui.caseBoard}>
     <svg class="forensic-age-instrument" viewBox="0 0 430 430" role="img" aria-label={ui.maturityProfile}>
-      <circle class="forensic-age-progress-track" cx="215" cy="176" r="126" />
-      <circle class="forensic-age-progress-fill" cx="215" cy="176" r="126" />
+      <circle class="forensic-age-progress-track" cx="215" cy="176" r="126" pathLength="100" />
+      <circle class="forensic-age-progress-fill" cx="215" cy="176" r="126" pathLength="100" />
       <text class="forensic-age-score-label" x="215" y="160">{ui.maturityScore}</text>
       <text class="forensic-age-score-value" id="forensic-score" x="215" y="203">-</text>
       <g class="forensic-age-signals">
@@ -129,10 +129,14 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
   </section>
 </div>
 
+<script id="forensic-age-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+
 <script>
   import { estimateForensicAge } from './logic';
   import type { EvidenceType } from './logic';
 
+  const uiElement = document.getElementById('forensic-age-ui');
+  const ui = JSON.parse(uiElement?.textContent ?? '{}') as Record<string, string>;
   const evidence = document.getElementById('forensic-evidence') as HTMLSelectElement | null;
   const root = document.getElementById('forensic-age') as HTMLElement | null;
   const dentalOutput = document.getElementById('forensic-dental-output');
@@ -145,6 +149,7 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
   const confidence = document.getElementById('forensic-confidence');
   const notes = document.getElementById('forensic-notes');
   const score = document.getElementById('forensic-score');
+  const progressFill = document.querySelector<SVGCircleElement>('.forensic-age-progress-fill');
   const storageKey = 'forensic-age-estimator:last-input';
 
   function selectedStage(name: string): number {
@@ -163,6 +168,10 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
     target.innerHTML = `<span class="forensic-age-number">${value.toFixed(1)}</span><span class="forensic-age-unit">${ui.ageUnit}</span>`;
   }
 
+  function isEvidenceType(value: string | undefined): value is EvidenceType {
+    return value === 'dental' || value === 'skeletal' || value === 'mixed';
+  }
+
   function restoreInput() {
     if (!evidence) return;
 
@@ -174,7 +183,7 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
         molarStage?: number;
       };
 
-      if (saved.evidenceType && ['dental', 'skeletal', 'mixed'].includes(saved.evidenceType)) {
+      if (isEvidenceType(saved.evidenceType)) {
         evidence.value = saved.evidenceType;
       }
 
@@ -221,6 +230,7 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
     confidence!.textContent = ui[`confidence${result.confidence}`];
     notes!.textContent = result.notes.map((note) => ui[note]).join(' ');
     score!.textContent = `${result.maturityScore}%`;
+    progressFill?.classList.toggle('forensic-age-progress-fill-complete', result.maturityScore >= 100);
     root.style.setProperty('--dental-maturity', String(dentalStage / 8));
     root.style.setProperty('--epiphyseal-maturity', String(epiphysealStage / 8));
     root.style.setProperty('--molar-maturity', String(molarStage / 8));

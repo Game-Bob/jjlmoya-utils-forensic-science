@@ -1,8 +1,8 @@
 ﻿import { bibliography } from '../bibliography';
 import type { ToolLocaleContent } from '../../../types';
 
-const slug = 'forensic-age-estimator';
-const title = 'Forensic Age Estimator';
+const slug = 'dental-skeletal-third-molar-age-estimator';
+const title = 'Dental, Skeletal, and Third Molar Age Estimator';
 const description = 'Estimate a forensic age interval from dental development, skeletal maturity, and third molar indicators for screening and case triage.';
 
 const howTo = [

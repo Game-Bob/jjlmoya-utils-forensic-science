@@ -266,9 +266,14 @@
 
 .forensic-age-progress-fill {
   stroke: var(--forensic-amber);
-  stroke-dasharray: 792;
-  stroke-dashoffset: calc(792 * (1 - var(--overall-maturity)));
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 * (1 - var(--overall-maturity)));
   transition: stroke-dashoffset 0.3s ease-out;
+}
+
+.forensic-age-progress-fill-complete {
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
 }
 
 .forensic-age-signal {
