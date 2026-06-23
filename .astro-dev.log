@@ -1,0 +1,18 @@
+[vite] connected.
+[2m19:23:59[22m [34m[types][39m Generated [2m2ms[22m
+[vite] connected.
+[42m[1m astro [22m[49m [32mv6.4.8[39m [2mready in[22m 4408 [2mms[22m
+[2m┃[22m Local    [36mhttp://127.0.0.1:4322/[39m
+[2m19:23:59[22m [32mwatching for file changes...[39m
+[2m19:24:26[22m [34m[200][39m /en/forensic-age-estimator [2m208ms[22m
+[33m[1m19:24:26[22m [WARN] [router][39m A `getStaticPaths()` route pattern was matched, but no matching static path was found for requested path `/favicon.ico`.
+
+Possible dynamic routes being matched: src/pages/[locale].astro.
+[2m19:24:38[22m [34m[watch][39m /src/tool/forensic-age-estimator/forensic-age-estimator.css
+[2m19:24:39[22m [34m[200][39m /en/forensic-age-estimator [2m33ms[22m
+[2m19:25:31[22m [34m[watch][39m src/tool/forensic-age-estimator/component.astro
+[2m19:25:31[22m [34m[200][39m /en/forensic-age-estimator [2m42ms[22m
+[2m19:26:10[22m [34m[watch][39m /src/tool/forensic-age-estimator/forensic-age-estimator.css
+[2m19:26:10[22m [34m[200][39m /en/forensic-age-estimator [2m44ms[22m
+[2m19:26:23[22m [34m[watch][39m /src/tool/forensic-age-estimator/forensic-age-estimator.css
+[2m19:26:23[22m [34m[200][39m /en/forensic-age-estimator [2m57ms[22m

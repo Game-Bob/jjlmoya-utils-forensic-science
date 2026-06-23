@@ -6,35 +6,13 @@ interface Props {
 }
 
 const { ui } = Astro.props;
+
+const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
 ---
 
 <div class="forensic-age" id="forensic-age">
-  <section class="forensic-age__visual" aria-label={ui.caseBoard}>
-    <div class="forensic-age__stamp">{ui.screeningOnly}</div>
-    <div class="forensic-age__silhouette" aria-hidden="true">
-      <span class="forensic-age__skull"></span>
-      <span class="forensic-age__spine"></span>
-      <span class="forensic-age__rib forensic-age__rib--left"></span>
-      <span class="forensic-age__rib forensic-age__rib--right"></span>
-      <span class="forensic-age__tooth forensic-age__tooth--a"></span>
-      <span class="forensic-age__tooth forensic-age__tooth--b"></span>
-    </div>
-    <div class="forensic-age__band">
-      <span>{ui.minimumAge}</span>
-      <strong id="forensic-minimum">-</strong>
-    </div>
-    <div class="forensic-age__band forensic-age__band--main">
-      <span>{ui.likelyAge}</span>
-      <strong id="forensic-likely">-</strong>
-    </div>
-    <div class="forensic-age__band">
-      <span>{ui.maximumAge}</span>
-      <strong id="forensic-maximum">-</strong>
-    </div>
-  </section>
-
-  <section class="forensic-age__panel" aria-label={ui.controls}>
-    <label class="forensic-age__field" for="forensic-evidence">
+  <section class="forensic-age-panel" aria-label={ui.controls}>
+    <label class="forensic-age-field" for="forensic-evidence">
       <span>{ui.evidenceType}</span>
       <select id="forensic-evidence">
         <option value="mixed">{ui.mixedEvidence}</option>
@@ -43,31 +21,108 @@ const { ui } = Astro.props;
       </select>
     </label>
 
-    <label class="forensic-age__field" for="forensic-dental">
-      <span>{ui.dentalStage}</span>
-      <output id="forensic-dental-output">4</output>
-      <input id="forensic-dental" type="range" min="0" max="8" step="1" value="4" />
-    </label>
-
-    <label class="forensic-age__field" for="forensic-epiphyseal">
-      <span>{ui.epiphysealStage}</span>
-      <output id="forensic-epiphyseal-output">4</output>
-      <input id="forensic-epiphyseal" type="range" min="0" max="8" step="1" value="4" />
-    </label>
-
-    <label class="forensic-age__field" for="forensic-molar">
-      <span>{ui.thirdMolarStage}</span>
-      <output id="forensic-molar-output">4</output>
-      <input id="forensic-molar" type="range" min="0" max="8" step="1" value="4" />
-    </label>
-
-    <div class="forensic-age__score">
-      <span>{ui.maturityScore}</span>
-      <div class="forensic-age__meter"><i id="forensic-meter"></i></div>
-      <strong id="forensic-score">-</strong>
+    <div class="forensic-age-stage-field" data-stage-field="dental">
+      <button class="forensic-age-stage-select" type="button" aria-expanded="false" aria-controls="forensic-dental-list">
+        <span>
+          <b>{ui.dentalStage}</b>
+          <small>{ui.dentalStageHelp}</small>
+        </span>
+        <output id="forensic-dental-output">{ui.stageLabel} 4</output>
+      </button>
+      <div class="forensic-age-stage-list" id="forensic-dental-list" hidden>
+        {stageValues.map((stage) => (
+          <label class="forensic-age-stage-card">
+            <input name="forensic-dental-stage" data-stage-input="forensic-dental" type="radio" value={stage} checked={stage === 4} />
+            <svg viewBox="0 0 44 44" aria-hidden="true">
+              <path d="M16 10c4-3 8-3 12 0 4 4 4 11 1 19l-3 7h-8l-3-7c-3-8-3-15 1-19Z" />
+              <path style={`opacity:${0.18 + stage * 0.1}`} d="M17 26h10" />
+            </svg>
+            <strong>{ui.stageLabel} {stage}</strong>
+            <span>{ui[`dentalStage${stage}`]}</span>
+          </label>
+        ))}
+      </div>
     </div>
 
-    <div class="forensic-age__notes">
+    <div class="forensic-age-stage-field" data-stage-field="epiphyseal">
+      <button class="forensic-age-stage-select" type="button" aria-expanded="false" aria-controls="forensic-epiphyseal-list">
+        <span>
+          <b>{ui.epiphysealStage}</b>
+          <small>{ui.epiphysealStageHelp}</small>
+        </span>
+        <output id="forensic-epiphyseal-output">{ui.stageLabel} 4</output>
+      </button>
+      <div class="forensic-age-stage-list" id="forensic-epiphyseal-list" hidden>
+        {stageValues.map((stage) => (
+          <label class="forensic-age-stage-card">
+            <input name="forensic-epiphyseal-stage" data-stage-input="forensic-epiphyseal" type="radio" value={stage} checked={stage === 4} />
+            <svg viewBox="0 0 44 44" aria-hidden="true">
+              <path d="M13 12h18M13 32h18" />
+              <path style={`opacity:${0.12 + stage * 0.1}`} d="M14 22h16" />
+              <path style={`opacity:${stage / 8}`} d="M22 12v20" />
+            </svg>
+            <strong>{ui.stageLabel} {stage}</strong>
+            <span>{ui[`epiphysealStage${stage}`]}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+
+    <div class="forensic-age-stage-field" data-stage-field="molar">
+      <button class="forensic-age-stage-select" type="button" aria-expanded="false" aria-controls="forensic-molar-list">
+        <span>
+          <b>{ui.thirdMolarStage}</b>
+          <small>{ui.molarStageHelp}</small>
+        </span>
+        <output id="forensic-molar-output">{ui.stageLabel} 4</output>
+      </button>
+      <div class="forensic-age-stage-list" id="forensic-molar-list" hidden>
+        {stageValues.map((stage) => (
+          <label class="forensic-age-stage-card">
+            <input name="forensic-molar-stage" data-stage-input="forensic-molar" type="radio" value={stage} checked={stage === 4} />
+            <svg viewBox="0 0 44 44" aria-hidden="true">
+              <circle cx="22" cy="18" r="8" />
+              <path style={`opacity:${0.12 + stage * 0.1}`} d="M17 27c3 5 7 5 10 0" />
+              <path style={`opacity:${stage / 8}`} d="M22 26v9" />
+            </svg>
+            <strong>{ui.stageLabel} {stage}</strong>
+            <span>{ui[`molarStage${stage}`]}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="forensic-age-visual" aria-label={ui.caseBoard}>
+    <svg class="forensic-age-instrument" viewBox="0 0 430 430" role="img" aria-label={ui.maturityProfile}>
+      <circle class="forensic-age-progress-track" cx="215" cy="176" r="126" />
+      <circle class="forensic-age-progress-fill" cx="215" cy="176" r="126" />
+      <text class="forensic-age-score-label" x="215" y="160">{ui.maturityScore}</text>
+      <text class="forensic-age-score-value" id="forensic-score" x="215" y="203">-</text>
+      <g class="forensic-age-signals">
+        <line class="forensic-age-signal" x1="108" y1="320" x2="322" y2="320" />
+        <circle class="forensic-age-signal-dot forensic-age-signal-dot-dental" cx="108" cy="320" r="5" />
+        <circle class="forensic-age-signal-dot forensic-age-signal-dot-epiphyseal" cx="215" cy="320" r="5" />
+        <circle class="forensic-age-signal-dot forensic-age-signal-dot-molar" cx="322" cy="320" r="5" />
+        <text x="108" y="350">{ui.dentalShort}</text>
+        <text x="215" y="350">{ui.boneShort}</text>
+        <text x="322" y="350">{ui.molarShort}</text>
+      </g>
+    </svg>
+  </section>
+
+  <section class="forensic-age-results" aria-label={ui.results}>
+    <div class="forensic-age-band forensic-age-band-main">
+      <strong id="forensic-likely">-</strong>
+    </div>
+    <div class="forensic-age-interval">
+      <strong id="forensic-minimum">-</strong>
+      <strong id="forensic-likely-marker">-</strong>
+      <i></i>
+      <strong id="forensic-maximum">-</strong>
+    </div>
+
+    <div class="forensic-age-notes">
       <strong id="forensic-confidence">-</strong>
       <p id="forensic-notes">-</p>
     </div>
@@ -79,45 +134,121 @@ const { ui } = Astro.props;
   import type { EvidenceType } from './logic';
 
   const evidence = document.getElementById('forensic-evidence') as HTMLSelectElement | null;
-  const dental = document.getElementById('forensic-dental') as HTMLInputElement | null;
-  const epiphyseal = document.getElementById('forensic-epiphyseal') as HTMLInputElement | null;
-  const molar = document.getElementById('forensic-molar') as HTMLInputElement | null;
+  const root = document.getElementById('forensic-age') as HTMLElement | null;
   const dentalOutput = document.getElementById('forensic-dental-output');
   const epiphysealOutput = document.getElementById('forensic-epiphyseal-output');
   const molarOutput = document.getElementById('forensic-molar-output');
   const minimum = document.getElementById('forensic-minimum');
   const likely = document.getElementById('forensic-likely');
+  const likelyMarker = document.getElementById('forensic-likely-marker');
   const maximum = document.getElementById('forensic-maximum');
   const confidence = document.getElementById('forensic-confidence');
   const notes = document.getElementById('forensic-notes');
   const score = document.getElementById('forensic-score');
-  const meter = document.getElementById('forensic-meter');
+  const storageKey = 'forensic-age-estimator:last-input';
+
+  function selectedStage(name: string): number {
+    const input = document.querySelector<HTMLInputElement>(`[data-stage-input="${name}"]:checked`);
+    return Number(input?.value ?? 4);
+  }
+
+  function selectStage(name: string, value: number) {
+    const stage = Math.min(8, Math.max(0, Math.round(value)));
+    const input = document.querySelector<HTMLInputElement>(`[data-stage-input="${name}"][value="${stage}"]`);
+    if (input) input.checked = true;
+  }
+
+  function renderAge(target: HTMLElement | null, value: number) {
+    if (!target) return;
+    target.innerHTML = `<span class="forensic-age-number">${value.toFixed(1)}</span><span class="forensic-age-unit">${ui.ageUnit}</span>`;
+  }
+
+  function restoreInput() {
+    if (!evidence) return;
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey) ?? '{}') as {
+        dentalStage?: number;
+        epiphysealStage?: number;
+        evidenceType?: EvidenceType;
+        molarStage?: number;
+      };
+
+      if (saved.evidenceType && ['dental', 'skeletal', 'mixed'].includes(saved.evidenceType)) {
+        evidence.value = saved.evidenceType;
+      }
+
+      selectStage('forensic-dental', saved.dentalStage ?? 4);
+      selectStage('forensic-epiphyseal', saved.epiphysealStage ?? 4);
+      selectStage('forensic-molar', saved.molarStage ?? 4);
+    } catch {
+      localStorage.removeItem(storageKey);
+    }
+  }
+
+  function saveInput(dentalStage: number, epiphysealStage: number, molarStage: number) {
+    if (!evidence) return;
+
+    localStorage.setItem(storageKey, JSON.stringify({
+      dentalStage,
+      epiphysealStage,
+      evidenceType: evidence.value,
+      molarStage,
+    }));
+  }
 
   function update() {
-    if (!evidence || !dental || !epiphyseal || !molar) return;
+    if (!evidence || !root) return;
+
+    const dentalStage = selectedStage('forensic-dental');
+    const epiphysealStage = selectedStage('forensic-epiphyseal');
+    const molarStage = selectedStage('forensic-molar');
 
     const result = estimateForensicAge({
-      dentalStage: Number(dental.value),
-      epiphysealStage: Number(epiphyseal.value),
-      thirdMolarStage: Number(molar.value),
+      dentalStage,
+      epiphysealStage,
+      thirdMolarStage: molarStage,
       evidenceType: evidence.value as EvidenceType,
     });
 
-    dentalOutput!.textContent = dental.value;
-    epiphysealOutput!.textContent = epiphyseal.value;
-    molarOutput!.textContent = molar.value;
-    minimum!.textContent = `${result.minimumAge} y`;
-    likely!.textContent = `${result.likelyAge} y`;
-    maximum!.textContent = `${result.maximumAge} y`;
-    confidence!.textContent = result.confidence;
-    notes!.textContent = result.notes.join(' ');
+    dentalOutput!.textContent = `${ui.stageLabel} ${dentalStage}`;
+    epiphysealOutput!.textContent = `${ui.stageLabel} ${epiphysealStage}`;
+    molarOutput!.textContent = `${ui.stageLabel} ${molarStage}`;
+    renderAge(minimum, result.minimumAge);
+    renderAge(likely, result.likelyAge);
+    renderAge(likelyMarker, result.likelyAge);
+    renderAge(maximum, result.maximumAge);
+    confidence!.textContent = ui[`confidence${result.confidence}`];
+    notes!.textContent = result.notes.map((note) => ui[note]).join(' ');
     score!.textContent = `${result.maturityScore}%`;
-    meter!.style.width = `${result.maturityScore}%`;
+    root.style.setProperty('--dental-maturity', String(dentalStage / 8));
+    root.style.setProperty('--epiphyseal-maturity', String(epiphysealStage / 8));
+    root.style.setProperty('--molar-maturity', String(molarStage / 8));
+    root.style.setProperty('--overall-maturity', String(result.maturityScore / 100));
+    saveInput(dentalStage, epiphysealStage, molarStage);
   }
 
+  restoreInput();
   evidence?.addEventListener('change', update);
-  dental?.addEventListener('input', update);
-  epiphyseal?.addEventListener('input', update);
-  molar?.addEventListener('input', update);
+  document.querySelectorAll<HTMLButtonElement>('.forensic-age-stage-select').forEach((button) => {
+    button.addEventListener('click', () => {
+      const list = document.getElementById(button.getAttribute('aria-controls') ?? '');
+      const shouldOpen = button.getAttribute('aria-expanded') !== 'true';
+      document.querySelectorAll<HTMLElement>('.forensic-age-stage-list').forEach((item) => { item.hidden = true; });
+      document.querySelectorAll<HTMLButtonElement>('.forensic-age-stage-select').forEach((item) => {
+        item.setAttribute('aria-expanded', 'false');
+      });
+      if (list) list.hidden = !shouldOpen;
+      button.setAttribute('aria-expanded', String(shouldOpen));
+    });
+  });
+  document.querySelectorAll<HTMLInputElement>('[data-stage-input]').forEach((input) => {
+    input.addEventListener('change', () => {
+      const field = input.closest<HTMLElement>('.forensic-age-stage-field');
+      field!.querySelector<HTMLElement>('.forensic-age-stage-list')!.hidden = true;
+      field!.querySelector<HTMLButtonElement>('.forensic-age-stage-select')!.setAttribute('aria-expanded', 'false');
+      update();
+    });
+  });
   update();
 </script>
