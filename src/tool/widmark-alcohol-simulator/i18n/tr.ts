@@ -8,27 +8,47 @@ const description = 'Widmark formülünü kullanarak insan vücudundaki alkol em
 const howTo = [
   {
     name: 'Kişi profilini ayarlayın',
-    text: 'Widmark faktörünü (r) belirlemek için kilo, biyolojik cinsiyet ve dehidrasyon durumunu girin.',
+    text: 'Widmark faktörünü (r) belirlemek için kilo, biyolojik cinsiyet ve dehidrasyon durumunu girin. Bu değişkenler etanolün vücuttaki dağılım hacmini belirler.',
   },
   {
     name: 'Mide durumunu seçin',
-    text: 'Emilim oranını değiştirmek için boş mide, hafif yemek veya ağır yemek seçeneğini seçin.',
+    text: 'Emilim oranını değiştirmek için boş mide, hafif yemek veya ağır yemek seçeneğini seçin. Bu, gıdaların emilim hız sabiti (ka) üzerindeki yavaşlatıcı etkisini gösterir.',
   },
   {
     name: 'İçecek ekleyin',
-    text: 'Eklenen içecek hacmini, alkol oranını ve saati girin.',
+    text: 'Tüketilen içecek hacmini (ml), alkol oranını (ABV) ve tüketim saatini simülasyon başlangıcına göre girin.',
   },
   {
     name: 'Grafiği inceleyin',
-    text: 'Kan alkol seviyesi ve tahmini ayılma sürelerini kontrol edin.',
+    text: '12 saatlik kan alkol seviyesi (BAC) grafiğini inceleyin. Zirve seviyesini, zirveye ulaşma süresini ve yasal sınırlara göre tahmini ayılma sürelerini kontrol edin.',
   },
 ];
 
 const faq = [
   {
     key: 'faq-1',
-    question: 'Widmark formülü nedir?',
-    answer: 'Widmark formülü, kandaki alkol konsantrasyonunu tahmin etmeye yarayan matematiksel bir modeldir.',
+    question: 'Widmark formülü nedir ve adli tıpta nasıl kullanılır?',
+    answer: 'Widmark formülü, 1932 yılında Erik M. P. Widmark tarafından geliştirilen matematiksel bir modeldir. Tüketilen alkol miktarı, vücut ağırlığı, cinsiyete bağlı dağılım faktörü (r) ve doğrusal eliminasyon hızına dayanarak kandaki alkol konsantrasyonunu tahmin eder. Adli toksikologlar bu formülü kaza anındaki alkol seviyesini geriye dönük hesaplamak için kullanırlar.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Midede besin bulunması kan alkol eğrisini nasıl etkiler?',
+    answer: 'Midedeki yiyecekler mide boşalmasını geciktirerek alkolün emilim bölgesi olan ince bağırsağa geçişini yavaşlatır. Simülasyonda bu durum emilim hız sabitinin (ka) düşürülmesiyle modellenir; bu da alkolün zirveye ulaşma süresini öteler ve zirvedeki alkol konsantrasyonunu önemli ölçüde azaltır.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Alkolün vücuttan atılımı neden birinci derece yerine sıfırıncı derece kinetiğe uyar?',
+    answer: 'Birçok ilaç vücuttan birinci derece kinetikle (konsantrasyonla orantılı olarak) atılır. Alkol ise sıfırıncı derece kinetikle atılır çünkü karaciğerde alkolü yıkan birincil enzim olan alkol dehidrogenaz (ADH), çok düşük alkol seviyelerinde bile (yaklaşık 0.02 g/L) tamamen doygunluğa ulaşır. Bu nedenle karaciğer, kandaki alkol miktarından bağımsız olarak sabit bir hızda alkolü elime eder.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Hangi biyolojik faktörler Widmark r faktöründe bireysel farklılıklara yol açar?',
+    answer: 'Widmark r faktörü, vücuttaki toplam su miktarının toplam ağırlığa oranını temsil eder. Etanol hidrofilik (suda çözünen) ve lipofobik (yağda çözünmeyen) olduğundan sadece vücut suyunda dağılır. Kas dokusu yüksek oranda su içerirken, yağ dokusunda su miktarı çok azdır. Vücut yağı yüksek veya susuz kalmış bireylerde r faktörü daha küçüktür ve bu da daha yüksek alkol seviyesine yol açar.',
+  },
+  {
+    key: 'faq-5',
+    question: 'Bu simülatörün sonuçlarını yasal olarak araç kullanabileceğimin kanıtı olarak sunabilir miyim?',
+    answer: 'Kesinlikle hayır. Bu simülatör yalnızca eğitim amaçlı bir araçtır. Gerçek hayatta karaciğer sağlığı, enzim genetiği, ilaç etkileşimleri, yorgunluk ve mide içeriği gibi değişkenler büyük bireysel farklılıklar yaratır. Araç kullanma kararınızı asla matematiksel bir simülasyona dayandırmamalısınız.',
   },
 ];
 
@@ -87,11 +107,52 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Etanolün insan vücudundaki emilimi, dağılımı ve eliminasyonu adli toksikolojinin en temel konularından biridir. Alkolün büyük kısmı ince bağırsakta emilir. Midede besin bulunması mide boşalmasını geciktirerek zirve kan alkol seviyesini düşürür.',
+      html: 'Etanolün insan vücudundaki <strong>emilimi, dağılımı ve eliminasyonu</strong> adli tıp ve trafik kazası analizlerinin en temel konularından biridir. Tüketilen alkolün küçük bir kısmı mideden emilirken, büyük kısmı geniş yüzey alanı nedeniyle ince bağırsakta kana karışır. Mide boşalma hızı alkol emilimini sınırlayan en önemli faktördür; bu nedenle midede besin bulunması emilim hızını ve kandaki alkol konsantrasyonunun tepe noktasını önemli ölçüde düşürür.',
     },
     {
       type: 'paragraph',
-      html: 'Bu simülatör, şu denklemle çalışır: <strong>BAC = (A / (W * r)) - (&beta; * t)</strong>. Karaciğer metabolizması sıfırıncı derece kinetiğe uyar ve saatte yaklaşık 0.15 g/L oranında doğrusal olarak azalır.',
+      html: 'Bu simülatör, Erik Widmark\'ın klasik denklemlerini 12 saatlik kesintisiz bir kompartman modeliyle birleştirir. Bireysel fizyolojik parametreler ayarlanarak alkolün zamana bağlı birikimi ve ardından karaciğer tarafından doğrusal olarak temizlenmesi gözlemlenebilir.',
+    },
+    {
+      type: 'title',
+      text: 'Widmark Denkleminin Matematiksel Çıkarımı',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Temel Widmark denklemi, alkolün vücut suyunda anında dağıldığını varsayarak teorik kan alkol seviyesini hesaplar: <strong>BAC = (A / (W * r)) - (&beta; * t)</strong>. Burada <em>A</em> tüketilen saf etanolün gram cinsinden kütlesi, <em>W</em> kg cinsinden vücut ağırlığı ve <em>r</em> Widmark dağılım faktörüdür. <em>&beta;</em> saatlik eliminasyon hızını, <em>t</em> ise emilim başlangıcından itibaren geçen süreyi ifade eder.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Sıvı içecek hacminin saf etanol gramına dönüştürülmesi, hacmin (ml) alkol derecesiyle (ABV) ve etanol yoğunluğuyla (yaklaşık 0,8 g/ml) çarpılmasıyla yapılır. Örneğin, %5 alkollü 330 ml bir bira 13,2 gram saf alkol içerir. Bu kütle toplam vücut suyunda seyreltilir. Simülatör, r faktörünü biyolojik cinsiyete (erkeklerde 0,68 ve kadınlarda 0,55) ve hidrasyon durumuna göre dinamik olarak uyarlar.',
+    },
+    {
+      type: 'title',
+      text: 'Fizyolojik Değişkenler ve Dağılım Hacmi',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Etanolün dağılım hacmi doğrudan vücut bileşimine bağlıdır. Alkol suda çözünür ancak yağda çözünmez. Kas dokusu yaklaşık %75 su içerirken, yağ dokusu neredeyse hiç su barındırmaz. Dolayısıyla kaslı bir bireyin r faktörü daha yüksek olup, aynı kilodaki yağ oranı yüksek bir bireye göre daha düşük alkol zirvesi gösterir. Dehidrasyon da toplam vücut suyunu azaltarak zirve BAC değerini yükseltir.',
+    },
+    {
+      type: 'table',
+      headers: ['Fizyolojik Değişken', 'Biyolojik Mekanizma', 'Farmakokinetik Etki', 'Adli Tıp Açısından Önemi'],
+      rows: [
+        ['Vücut Ağırlığı', 'Vücuttaki toplam su havuzunun hacmini belirler.', 'Zirve BAC seviyesiyle ters orantılıdır.', 'Geriye dönük adli hesaplamalar için temel oluşturur.'],
+        ['Biyolojik Cinsiyet', 'Kas ve yağ dokusunun tipik dağılımını belirler.', 'Kadınlarda r faktörü daha düşüktür (0,55), bu da zirveyi artırır.', 'Kadınların alkole karşı biyolojik duyarlılığını açıklar.'],
+        ['Hidrasyon Seviyesi', 'Dokulardaki serbest su miktarını değiştirir.', 'Dehidrasyon r faktörünü 0,05 azaltarak eğriyi yükseltir.', 'Ağır efor veya susuzluk durumlarında hesaplamayı ayarlar.'],
+        ['Mide Doluluğu', 'Besinler midenin boşalma hızını yavaşlatır.', 'Emilim sabiti ka\'yı düşürerek eğriyi düzleştirir.', 'Yemek sonrası yüksek miktarda alkol alımında düşük değerleri açıklar.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Eliminasyon Kinetiği: Karaciğerde Sıfırıncı Derece Temizlenme',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Kana karışan alkolün büyük kısmı karaciğerde alkol dehidrogenaz (ADH) enzimi tarafından parçalanır. Bu enzim çok düşük konsantrasyonlarda (0,02 g/L) bile tamamen doygunluğa ulaştığı için sıfırıncı derece kinetik devreye girer. Yani karaciğer, kandaki alkol miktarından bağımsız olarak zaman birimi başına sabit bir miktar alkolü yok eder. Yasal kabul gören ortalama eliminasyon hızı (&beta;<sub>60</sub>) saatte 0,15 g/L\'dir. Bu doğrusal düşüş grafikteki düz aşağı yönlü eğriyi oluşturur.',
     },
   ],
   faq,

@@ -8,27 +8,47 @@ const description = 'Symuluj wchłanianie, dystrybucję i eliminację alkoholu w
 const howTo = [
   {
     name: 'Skonfiguruj profil fizyczny',
-    text: 'Wprowadź masę ciała, płeć biologiczną oraz stopień nawodnienia, aby wyznaczyć współczynnik Widmarka (r).',
+    text: 'Wprowadź wagę ciała, płeć biologiczną oraz stopień nawodnienia. Te parametry biologiczne bezpośrednio obliczają współczynnik Widmarka (r), który określa objętość dystrybucji etanolu w organizmie.',
   },
   {
     name: 'Wybierz zawartość żołądka',
-    text: 'Wybierz pusty żołądek, lekki lub pełny posiłek, co wpłynie na tempo wchłaniania alkoholu.',
+    text: 'Wybierz pusty żołądek, lekki posiłek lub pełny posiłek. Dostosowuje to dynamicznie stałą szybkości wchłaniania (ka), aby pokazać opóźniający wpływ żywności na krzywą stężenia alkoholu.',
   },
   {
-    name: 'Dodaj napoje alkoholowe',
-    text: 'Wprowadź objętość, zawartość procentową alkoholu oraz czas konsumpcji.',
+    name: 'Dodaj napoje do linii czasu',
+    text: 'Dodaj poszczególne napoje, określając objętość w mililitrach, procentową zawartość alkoholu (ABV) oraz godzinę spożycia względem początku symulacji.',
   },
   {
-    name: 'Analizuj wyniki',
-    text: 'Zweryfikuj zmiany stężenia i prognozowany czas trzeźwienia.',
+    name: 'Analizuj wykres stężenia alkoholu',
+    text: 'Zweryfikuj zmiany stężenia alkoholu we krwi (BAC) w ciągu 12 godzin. Porównaj stężenie szczytowe, czas do jego osiągnięcia oraz prognozowany czas trzeźwienia.',
   },
 ];
 
 const faq = [
   {
     key: 'faq-1',
-    question: 'Czym jest wzór Widmarka?',
-    answer: 'Wzór Widmarka to model matematyczny służący do szacowania stężenia alkoholu we krwi.',
+    question: 'Czym jest wzór Widmarka i jak jest stosowany w toksykologii sądowej?',
+    answer: 'Wzór Widmarka to model matematyczny opracowany przez Erika M. P. Widmarka w 1932 roku. Szacuje on stężenie alkoholu we krwi na podstawie spożytej masy alkoholu, masy ciała, współczynnika dystrybucji (r) oraz liniowego tempa eliminacji. Toksykolodzy sądowi używają go do obliczeń retrospektywnych w celu określenia stanu trzeźwości w momencie wypadku.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Jak jedzenie w żołądku wpływa na kształt krzywej stężenia alkoholu?',
+    answer: 'Jedzenie w żołądku opóźnia opróżnianie żołądkowe, spowalniając przechodzenie alkoholu do jelita cienkiego, gdzie zachodzi główne wchłanianie. W symulacji zmniejsza to stałą szybkości wchłaniania (ka), co przesuwa szczyt stężenia w czasie i znacznie obniża jego maksymalną wartość.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Dlaczego eliminacja alkoholu przebiega według kinetyki rzędu zerowego?',
+    answer: 'Większość substancji leczniczych jest eliminowana według kinetyki pierwszego rzędu. Eliminacja alkoholu przebiega według kinetyki rzędu zerowego, ponieważ główny enzym wątrobowy odpowiedzialny za jego rozkład (dehydrogenaza alkoholowa - ADH) ulega nasyceniu przy bardzo niskich stężeniach (około 0,02 g/l). Wątroba przetwarza alkohol ze stałą maksymalną prędkością.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Jakie czynniki biologiczne wpływają na współczynnik dystrybucji Widmarka r?',
+    answer: 'Współczynnik r reprezentuje stosunek wody w organizmie do masy ciała. Ponieważ etanol rozpuszcza się tylko w wodzie, tkanka mięśniowa (bogata w wodę) zwiększa ten współczynnik, a tkanka tłuszczowa (uboga w wodę) go zmniejsza. Osoby z wyższą zawartością tłuszczu lub odwodnione osiągają wyższe BAC.',
+  },
+  {
+    key: 'faq-5',
+    question: 'Czy ten symulator może być prawnym dowodem zdolności do prowadzenia pojazdów?',
+    answer: 'Absolutnie nie. Jest to wyłącznie narzędzie edukacyjne. Rzeczywisty metabolizm zależy od genetyki, stanu wątroby, leków i dokładnego składu posiłków. Nigdy nie należy polegać na obliczeniach matematycznych przed decyzją o prowadzeniu pojazdu.',
   },
 ];
 
@@ -87,11 +107,52 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Wchłanianie, dystrybucja i eliminacja etanolu w organizmie człowieka to kluczowe zagadnienia toksykologii sądowej. Większość alkoholu wchłania się w jelicie cienkim. Obecność pokarmu opóźnia opróżnianie żołądka, spłaszczając szczyt stężenia alkoholu we krwi.',
+      html: 'Zrozumienie procesów <strong>wchłaniania, dystrybucji i eliminacji etanolu</strong> stanowi kluczowy wymóg w toksykologii sądowej oraz przy rekonstrukcji wypadków drogowych. Po spożyciu alkohol trafia do żołądka, skąd wchłania się jedynie niewielka część. Ponad 80% dawki wchłania się w dwunastnicy i jelicie cienkim ze względu na ich ogromną powierzchnię. Szybkość opróżniania żołądka jest głównym czynnikiem limitującym, co tłumaczy, dlaczego posiłek spłaszcza i opóźnia szczyt krzywej alcoholemia.',
     },
     {
       type: 'paragraph',
-      html: 'Nasz symulator modeluje ten proces przy użyciu równania: <strong>BAC = (A / (W * r)) - (&beta; * t)</strong>. Eliminacja wątrobowa zachodzi według kinetyki rzędu zerowego z liniowym spadkiem stężenia o około 0.15 g/L na godzinę.',
+      html: 'Prezentowany interaktywny symulator implementuje klasyczne równania Erika Widmarka w połączeniu z ciągłym modelem przedziałowym w oknie 12 godzin. Dopasowanie parametrów fizycznych pozwala zaobserwować akumulację oraz liniowy spadek stężenia we krwi.',
+    },
+    {
+      type: 'title',
+      text: 'Matematyczne wyprowadzenie wzoru Widmarka',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Podstawowe równanie Widmarka oblicza teoretyczne stężenie alkoholu we krwi przy założeniu natychmiastowego wchłaniania: <strong>BAC = (A / (W * r)) - (&beta; * t)</strong>. W tym równaniu <em>A</em> oznacza masę czystego etanolu w gramach, <em>W</em> wagę ciała w kilogramach, a <em>r</em> współczynnik dystrybucji. Stała <em>&beta;</em> reprezentuje stężeniowy ubytek na godzinę, a <em>t</em> czas od rozpoczęcia eliminacji.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Objętość napoju przelicza się na masę czystego etanolu poprzez pomnożenie objętości (ml) przez stężenie (ABV) oraz gęstość etanolu (około 0,8 g/ml). Na przykład 330 ml piwa o mocy 5% zawiera 13,2 g czystego etanolu. Masa ta ulega rozcieńczeniu w całkowitej wodzie organizmu. Symulator dostosowuje współczynnik r do płci (0,68 dla mężczyzn i 0,55 dla kobiet) oraz stopnia nawodnienia.',
+    },
+    {
+      type: 'title',
+      text: 'Zmienne fizjologiczne i objętość dystrybucji',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Objętość dystrybucji etanolu zależy bezpośrednio od składu ciała. Etanol rozpuszcza się w wodzie, a nie w tłuszczu. Mięśnie zawierają około 75% wody, podczas gdy tkanka tłuszczowa prawie wcale jej nie posiada. Osoba umięśniona ma wyższy współczynnik r i osiąga niższe stężenie szczytowe niż osoba o tej samej wadze z większym poziomem tłuszczu. Odwodnienie zmniejsza ilość wody w organizmie, podnosząc szczyt BAC.',
+    },
+    {
+      type: 'table',
+      headers: ['Zmienna fizjologiczna', 'Mechanizm biologiczny', 'Efekt farmakokinetyczny', 'Znaczenie sądowe'],
+      rows: [
+        ['Masa ciała', 'Określa całkowitą objętość wody w organizmie.', 'Odwrotnie proporcjonalna do maksymalnego BAC.', 'Stanowi punkt wyjścia dla retrospektywnych obliczeń sądowych.'],
+        ['Płeć biologiczna', 'Wpływa na typowy stosunek masy mięśniowej do tłuszczowej.', 'Współczynnik r jest niższy u kobiet (0,55), co podnosi szczyt.', 'Wyjaśnia różnice w podatności biologicznej na tę samą dawkę.'],
+        ['Stan nawodnienia', 'Zmienia wolną objętość wody w organizmie.', 'Odwodnienie obniża r o 0,05, podnosząc krzywą.', 'Pozwala skorygować obliczenia po dużym wysiłku.'],
+        ['Zawartość żołądka', 'Jedzenie spowalnia opróżnianie żołądkowe.', 'Zmniejsza stałą ka, spłaszczając szczyt krzywej.', 'Tłumaczy niskie stężenia przy dużym spożyciu po posiłku.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Kinetyka eliminacji: Clearance rzędu zerowego w wątrobie',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Po wniknięciu do krwi alkohol jest metabolizowany w wątrobie przez dehydrogenazę alkoholową (ADH). Enzym ten ulega całkowitemu nasyceniu przy bardzo niskich stężeniach (0,02 g/L), co wymusza kinetykę eliminacji rzędu zerowego. Wątroba rozkłada stałą ilość alkoholu na jednostkę czasu. Średnie tempo eliminacji (&beta;<sub>60</sub>) wynosi w sądownictwie 0,15 g/L na godzinę, co powoduje stały, liniowy spadek stężenia na wykresie.',
     },
   ],
   faq,

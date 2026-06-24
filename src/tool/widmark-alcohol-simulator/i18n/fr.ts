@@ -27,18 +27,28 @@ const howTo = [
 const faq = [
   {
     key: 'faq-1',
-    question: 'Qu\'est-ce que la formule de Widmark ?',
-    answer: 'La formule de Widmark est un modèle mathématique développé par le chimiste suédois Erik M. P. Widmark. Elle estime la concentration d\'alcool dans le sang en fonction de la masse d\'alcool consommée, du poids corporel, d\'un facteur de distribution par genre (r) et d\'une élimination linéaire au fil du temps.',
+    question: 'Qu\'est-ce que la formule de Widmark et comment est-elle utilisée en médecine légale ?',
+    answer: 'La formule de Widmark est un modèle mathématique développé par Erik M. P. Widmark en 1932. Elle estime la concentration d\'alcool dans le sang en fonction de la masse d\'alcool consommée, du poids corporel, d\'un facteur de distribution (r) et d\'une élimination linéaire au fil du temps. Les toxicologues légistes utilisent cette formule pour effectuer des calculs rétrogrades afin d\'estimer le taux d\'alcoolémie d\'un suspect au moment d\'un accident ou d\'une infraction.',
   },
   {
     key: 'faq-2',
-    question: 'Comment la nourriture affecte-t-elle l\'alcoolémie ?',
-    answer: 'La nourriture ralentit la vidange gastrique, retardant l\'entrée de l\'alcool dans l\'intestin grêle. Dans la simulation, cela réduit la constante d\'absorption (ka), aplatissant et retardant le pic d\'alcoolémie.',
+    question: 'Comment la nourriture affecte-t-elle la courbe de taux d\'alcoolémie ?',
+    answer: 'La nourriture dans l\'estomac ralentit la vidange gastrique, ce qui empêche l\'alcool de passer rapidement dans l\'intestin grêle, le site principal d\'absorption. Dans notre simulation, ce retard est modélisé en réduisant la constante de vitesse d\'absorption (ka), ce qui décale le pic d\'alcoolémie et réduit considérablement sa valeur maximale.',
   },
   {
     key: 'faq-3',
-    question: 'Pourquoi l\'élimination de l\'alcool est-elle linéaire ?',
-    answer: 'Contrairement à d\'autres substances, l\'alcool est métabolisé par cinétique d\'ordre zéro parce que les enzymes du foie se saturent très vite. Il est donc éliminé à un taux constant, typiquement 0,15 g/L par heure.',
+    question: 'Pourquoi l\'élimination de l\'alcool suit-elle une cinétique d\'ordre zéro ?',
+    answer: 'La plupart des médicaments sont éliminés selon une cinétique de premier ordre (proportionnelle à la concentration). L\'alcool suit une cinétique d\'ordre zéro car l\'enzyme principale responsable de son métabolisme, l\'alcool déshydrogénase (ADH), est saturée à des concentrations très basses (environ 0,02 g/L). Ainsi, le foie métabolise l\'alcool à une vitesse maximale constante.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Quels facteurs biologiques influencent le facteur de distribution r de Widmark ?',
+    answer: 'Le facteur r représente le rapport entre l\'eau corporelle et le poids total. L\'éthanol étant hydrophile et lipophobe, il se dissout uniquement dans l\'eau. Comme le tissu musculaire contient beaucoup d\'eau et le tissu adipeux très peu, les personnes ayant une masse grasse plus élevée ou un état de déshydratation présentent un volume de distribution plus petit, ce qui augmente le taux d\'alcoolémie.',
+  },
+  {
+    key: 'faq-5',
+    question: 'Puis-je utiliser ce simulateur pour prouver légalement que je pouvais conduire ?',
+    answer: 'Non. Ce simulateur est un outil éducatif. Dans la réalité, la génétique enzymatique, l\'état de santé du foie, les médicaments, la fatigue et les repas réels créent des variations majeures. Vous ne devez jamais vous fier à un modèle mathématique pour évaluer votre aptitude à conduire.',
   },
 ];
 
@@ -92,12 +102,57 @@ export const content: ToolLocaleContent = {
   seo: [
     {
       type: 'title',
-      text: 'Toxicologie médico-légale: Le simulateur d\'alcoolémie Widmark',
+      text: 'Toxicologie médico-légale et pharmacocinétique de l\'éthanol',
       level: 2,
     },
     {
       type: 'paragraph',
-      html: 'Ce simulateur illustre les processus physiologiques de l\'<strong>absorption, de la distribution et de l\'élimination de l\'éthanol</strong> dans le corps humain.',
+      html: 'La compréhension de l\'<strong>absorption, de la distribution et de l\'élimination de l\'éthanol</strong> est essentielle en médecine légale et pour la reconstruction des accidents de la route. Lorsque de l\'alcool est consommé, il descend par l\'œsophage jusqu\'à l\'estomac, où une faible fraction est absorbée. Cependant, la majeure partie de l\'absorption s\'effectue dans le duodénum et l\'intestin grêle en raison de leur grande surface. La vitesse de vidange gastrique est le facteur limitant principal, ce qui explique pourquoi la présence de nourriture réduit et retarde le pic de la courbe de taux d\'alcoolémie.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Ce simulateur interactif implémente les équations classiques d\'Erik M. P. Widmark avec un modèle compartimental continu sur 12 heures. En ajustant le poids, le sexe et l\'hydratation, les utilisateurs visualisent l\'accumulation et le déclin linéaire de la concentration d\'alcool.',
+    },
+    {
+      type: 'title',
+      text: 'Dérivation mathématique de l\'équation de Widmark',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'L\'équation fondamentale de Widmark calcule la concentration d\'alcool dans le sang en supposant une absorption instantanée: <strong>BAC = (A / (W * r)) - (&beta; * t)</strong>. Ici, <em>A</em> est la masse d\'éthanol pur en grammes, <em>W</em> est le poids corporel en kg, et <em>r</em> est le facteur de distribution (volume de distribution). La variable <em>&beta;</em> représente le taux d\'élimination par heure et <em>t</em> est le temps écoulé.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Pour convertir le volume de boisson en grammes d\'alcool pur, on multiplie le volume en millilitres par le degré d\'alcool (ABV) et par la densité de l\'éthanol (0,8 g/ml). Par exemple, 330 ml de bière à 5% contient 13,2 g d\'éthanol. Cette masse est diluée dans l\'eau corporelle totale du sujet. Le simulateur adapte le facteur r selon le sexe (0,68 pour les hommes et 0,55 pour les femmes) et le niveau d\'hydratation.',
+    },
+    {
+      type: 'title',
+      text: 'Facteurs physiologiques influençant le volume de distribution',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Le volume de distribution de l\'éthanol dépend de la composition corporelle. L\'éthanol est hydrophile et se répartit dans l\'eau corporelle. Les muscles contiennent environ 75% d\'eau, tandis que le tissu adipeux en contient très peu. Ainsi, un sujet musclé aura un facteur r plus grand et un pic d\'alcoolémie plus faible qu\'un sujet de même poids ayant plus de masse grasse. La déshydratation diminue l\'eau corporelle totale, ce qui rétrécit le volume de distribution et augmente le pic de concentration pour une même dose.',
+    },
+    {
+      type: 'table',
+      headers: ['Variable physiologique', 'Mécanisme biologique', 'Effet pharmacocinétique', 'Implications médico-légales'],
+      rows: [
+        ['Poids corporel', 'Détermine la masse totale du pool d\'eau corporelle.', 'Inversement proportionnel à la concentration maximale d\'alcool.', 'Établit la base de dilution pour les calculs rétrogrades.'],
+        ['Sexe biologique', 'Influence le ratio muscle/graisse typique.', 'Le facteur r est plus bas chez les femmes (0,55), augmentant le pic.', 'Explique la susceptibilité physique accrue chez les femmes.'],
+        ['Hydratation', 'Modifie le volume d\'eau libre dans le corps.', 'La déshydratation baisse r de 0,05, élevant la courbe.', 'Ajuste la tolérance mathématique selon l\'état physique.'],
+        ['Contenu gastrique', 'La nourriture ralentit la vidange de l\'estomac.', 'Diminue la vitesse d\'absorption ka, aplatissant le pic.', 'Explique les taux bas après des repas copieux.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Cinétique d\'élimination d\'ordre zéro',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Une fois dans le sang, l\'éthanol est métabolisé par le foie, principalement par l\'alcool déshydrogénase (ADH). Cette enzyme se sature à des taux très bas (0,02 g/L), ce qui produit une cinétique d\'élimination d\'ordre zéro: le foie élimine une quantité fixe d\'alcool par heure, quelle que soit la quantité ingérée. La vitesse d\'élimination moyenne acceptée est de 0,15 g/L par heure, ce qui engendre la décroissance linéaire caractéristique sur le graphique.',
     },
   ],
   faq,
