@@ -197,7 +197,8 @@ export const content: ToolLocaleContent = {
       level: 3,
     },
     {
-      list: [
+      type: 'list',
+      items: [
         '<strong>Źródło dowodów:</strong> Określ, czy etapy wynikają z badania klinicznego, RTG pantomograficznego, czy obrazowania kości (np. ręka, obojczyk).',
         '<strong>Dane niekompletne:</strong> Udokumentuj brakujące zawiązki zębów, niską jakość obrazów czy anomalie.',
         '<strong>Walidacja metod:</strong> Upewnij się, że wybrane metody są uznawane w danej jurysdykcji.',

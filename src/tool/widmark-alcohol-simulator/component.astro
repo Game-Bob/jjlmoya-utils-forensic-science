@@ -56,9 +56,9 @@ const { ui } = Astro.props;
     </h3>
 
     <div class="widmark-quick-drinks">
-      <button type="button" class="widmark-quick-btn" data-preset="beer">{ui.beer.split(' ')[0]}</button>
-      <button type="button" class="widmark-quick-btn" data-preset="wine">{ui.wine.split(' ')[0]}</button>
-      <button type="button" class="widmark-quick-btn" data-preset="spirits">{ui.spirits.split(' ')[0]}</button>
+      <button type="button" class="widmark-quick-btn" data-preset="beer">{(ui.beer || '').split(' ')[0]}</button>
+      <button type="button" class="widmark-quick-btn" data-preset="wine">{(ui.wine || '').split(' ')[0]}</button>
+      <button type="button" class="widmark-quick-btn" data-preset="spirits">{(ui.spirits || '').split(' ')[0]}</button>
     </div>
 
     <div class="widmark-drink-form-grid">
@@ -249,8 +249,8 @@ const { ui } = Astro.props;
   function renderEmptyState() {
     if (valCurrentBac) valCurrentBac.innerHTML = `0.000<span class="widmark-metric-unit">g/L</span>`;
     if (valPeakBac) valPeakBac.innerHTML = `0.000<span class="widmark-metric-unit">g/L</span>`;
-    if (valSoberTime) valSoberTime.textContent = ui.sober;
-    if (valDrivingStatus) valDrivingStatus.textContent = ui.safeLimit;
+    if (valSoberTime) valSoberTime.textContent = ui.sober ?? null;
+    if (valDrivingStatus) valDrivingStatus.textContent = ui.safeLimit ?? null;
     setMetricCardClass(cardCurrentBac, 'safe');
     setMetricCardClass(cardDrivingStatus, 'safe');
     if (chartPath) chartPath.setAttribute('d', '');
@@ -261,15 +261,15 @@ const { ui } = Astro.props;
   function renderStatusText(currentBacVal: number) {
     if (!valDrivingStatus) return;
     if (currentBacVal >= 0.5) {
-      valDrivingStatus.textContent = ui.dangerLimit;
+      valDrivingStatus.textContent = ui.dangerLimit ?? null;
       setMetricCardClass(cardCurrentBac, 'danger');
       setMetricCardClass(cardDrivingStatus, 'danger');
     } else if (currentBacVal >= 0.2) {
-      valDrivingStatus.textContent = ui.warningLimit;
+      valDrivingStatus.textContent = ui.warningLimit ?? null;
       setMetricCardClass(cardCurrentBac, 'warning');
       setMetricCardClass(cardDrivingStatus, 'warning');
     } else {
-      valDrivingStatus.textContent = ui.safeLimit;
+      valDrivingStatus.textContent = ui.safeLimit ?? null;
       setMetricCardClass(cardCurrentBac, 'safe');
       setMetricCardClass(cardDrivingStatus, 'safe');
     }
@@ -285,9 +285,9 @@ const { ui } = Astro.props;
     }
     if (valSoberTime) {
       if (result.soberTime === -1) {
-        valSoberTime.textContent = ui.sober;
+        valSoberTime.textContent = ui.sober ?? null;
       } else if (result.soberTime === -2) {
-        valSoberTime.textContent = ui.neverSober;
+        valSoberTime.textContent = ui.neverSober ?? null;
       } else {
         valSoberTime.textContent = `${result.soberTime.toFixed(1)} h`;
       }
@@ -389,7 +389,7 @@ const { ui } = Astro.props;
       const removeBtn = document.createElement('button');
       removeBtn.type = 'button';
       removeBtn.className = 'widmark-btn-remove';
-      removeBtn.textContent = ui.remove;
+      removeBtn.textContent = ui.remove ?? null;
       removeBtn.addEventListener('click', () => {
         activeDrinks.splice(index, 1);
         updateSimulation();

@@ -1,4 +1,4 @@
-﻿---
+---
 import './dental-skeletal-third-molar-age-estimator.css';
 
 interface Props {
@@ -248,8 +248,8 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
     renderAge(likely, result.likelyAge);
     renderAge(likelyMarker, result.likelyAge);
     renderAge(maximum, result.maximumAge);
-    confidence!.textContent = ui[`confidence${result.confidence}`];
-    notes!.textContent = result.notes.map((note) => ui[note]).join(' ');
+    confidence!.textContent = ui[`confidence${result.confidence}`] ?? null;
+    notes!.textContent = result.notes.map((note) => ui[note]).join(' ') || null;
     animateNumber(renderedScore, result.maturityScore, (current) => {
       score!.textContent = `${Math.round(current)}%`;
     });
