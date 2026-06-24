@@ -1,11 +1,17 @@
-import type { ScienceCategoryEntry } from '../types';
-import { forensicAgeEstimator } from '../tool/forensic-age-estimator/index';
-import { widmarkAlcoholSimulator } from '../tool/widmark-alcohol-simulator/index';
-import { forensicSexDeterminator } from '../tool/forensic-sex-determinator/index';
+import type { ScienceToolEntry, ToolLocaleContent } from '../../types';
 
-export const forensicCategory: ScienceCategoryEntry = {
-  icon: 'mdi:fingerprint',
-  tools: [forensicAgeEstimator, widmarkAlcoholSimulator, forensicSexDeterminator],
+export interface SexDeterminatorUI {
+  [key: string]: string;
+}
+
+export type SexDeterminatorLocaleContent = ToolLocaleContent<SexDeterminatorUI>;
+
+export const forensicSexDeterminator: ScienceToolEntry<SexDeterminatorUI> = {
+  id: 'forensic-sex-determinator',
+  icons: {
+    bg: 'mdi:gender-male-female',
+    fg: 'mdi:skull-outline',
+  },
   i18n: {
     de: () => import('./i18n/de').then((m) => m.content),
     en: () => import('./i18n/en').then((m) => m.content),
@@ -24,5 +30,3 @@ export const forensicCategory: ScienceCategoryEntry = {
     zh: () => import('./i18n/zh').then((m) => m.content),
   },
 };
-
-export const scienceCategory = forensicCategory;

@@ -2,7 +2,10 @@ export { forensicAgeEstimator } from './tool/forensic-age-estimator/entry';
 export type { ForensicAgeEstimatorUI, ForensicAgeEstimatorLocaleContent } from './tool/forensic-age-estimator/entry';
 export { widmarkAlcoholSimulator } from './tool/widmark-alcohol-simulator/entry';
 export type { WidmarkAlcoholSimulatorUI, WidmarkAlcoholSimulatorLocaleContent } from './tool/widmark-alcohol-simulator/entry';
+export { forensicSexDeterminator } from './tool/forensic-sex-determinator/entry';
+export type { SexDeterminatorUI, SexDeterminatorLocaleContent } from './tool/forensic-sex-determinator/entry';
 import { forensicAgeEstimator } from './tool/forensic-age-estimator/entry';
 import { widmarkAlcoholSimulator } from './tool/widmark-alcohol-simulator/entry';
+import { forensicSexDeterminator } from './tool/forensic-sex-determinator/entry';
 
-export const ALL_ENTRIES = [forensicAgeEstimator, widmarkAlcoholSimulator];
+export const ALL_ENTRIES = [forensicAgeEstimator, widmarkAlcoholSimulator, forensicSexDeterminator];

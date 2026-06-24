@@ -1,0 +1,463 @@
+---
+import './forensic-sex-determinator.css';
+import { forensicSexDeterminator } from './index';
+import type { KnownLocale } from '../../types';
+
+interface Props {
+  locale?: KnownLocale;
+}
+
+const { locale = 'en' } = Astro.props;
+const content = await forensicSexDeterminator.i18n[locale]?.();
+if (!content) return null;
+const { ui } = content;
+
+const regions = [
+  {
+    title: ui.pelvisRegion,
+    desc: ui.pelvisDesc,
+    fields: [
+      {
+        id: 'subpubicAngle',
+        label: ui.subpubicAngle,
+        desc: ui.subpubicAngleDesc,
+        femText: ui.subpubicAngleFem,
+        mascText: ui.subpubicAngleMasc
+      },
+      {
+        id: 'sciaticNotch',
+        label: ui.sciaticNotch,
+        desc: ui.sciaticNotchDesc,
+        femText: ui.sciaticNotchFem,
+        mascText: ui.sciaticNotchMasc
+      },
+      {
+        id: 'ventralArc',
+        label: ui.ventralArc,
+        desc: ui.ventralArcDesc,
+        femText: ui.ventralArcFem,
+        mascText: ui.ventralArcMasc
+      },
+      {
+        id: 'preauricularSulcus',
+        label: ui.preauricularSulcus,
+        desc: ui.preauricularSulcusDesc,
+        femText: ui.preauricularSulcusFem,
+        mascText: ui.preauricularSulcusMasc
+      }
+    ]
+  },
+  {
+    title: ui.craniumRegion,
+    desc: ui.cranialDesc,
+    fields: [
+      {
+        id: 'mastoidProcess',
+        label: ui.mastoidProcess,
+        desc: ui.mastoidProcessDesc,
+        femText: ui.mastoidProcessFem,
+        mascText: ui.mastoidProcessMasc
+      },
+      {
+        id: 'supraorbitalRidge',
+        label: ui.supraorbitalRidge,
+        desc: ui.supraorbitalRidgeDesc,
+        femText: ui.supraorbitalRidgeFem,
+        mascText: ui.supraorbitalRidgeMasc
+      },
+      {
+        id: 'mentalEminence',
+        label: ui.mentalEminence,
+        desc: ui.mentalEminenceDesc,
+        femText: ui.mentalEminenceFem,
+        mascText: ui.mentalEminenceMasc
+      },
+      {
+        id: 'nuchalCrest',
+        label: ui.nuchalCrest,
+        desc: ui.nuchalCrestDesc,
+        femText: ui.nuchalCrestFem,
+        mascText: ui.nuchalCrestMasc
+      }
+    ]
+  }
+];
+---
+
+<div class="forensic-sex-card">
+  <div class="forensic-sex-grid">
+    <div class="forensic-sex-inputs">
+      <div class="forensic-sex-anatomy-grid">
+        {regions.map((region) => (
+          <div class="forensic-sex-region">
+            <h3 class="forensic-sex-region-title">{region.title}</h3>
+            <p class="forensic-sex-region-desc">{region.desc}</p>
+            
+            <div class="forensic-sex-fields-list">
+              {region.fields.map((field) => (
+                <div class="forensic-sex-field state-unevaluated" id={`field-card-${field.id}`}>
+                  <div class="forensic-sex-field-header">
+                    <span class="forensic-sex-label">{field.label}</span>
+                    <span class="forensic-sex-desc">{field.desc}</span>
+                  </div>
+                  <div class="forensic-sex-field-body">
+                    <div class="forensic-sex-control-side">
+                      <div class="forensic-sex-slider-container">
+                        <input type="range" id={`input-${field.id}`} name={field.id} min="0" max="5" value="0" class="forensic-sex-slider" />
+                        <div class="forensic-sex-slider-labels">
+                          <span>Ø</span>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                        </div>
+                      </div>
+                      <div class="forensic-sex-status-label" id={`status-${field.id}`}>{ui.notEvaluated}</div>
+                    </div>
+                    <div class="forensic-sex-visual-side">
+                      <svg viewBox="0 0 100 60" class="forensic-sex-svg">
+                        {field.id === 'subpubicAngle' && (
+                          <path id="svg-subpubicAngle" d="M 20 50 Q 50 20 80 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                        )}
+                        {field.id === 'sciaticNotch' && (
+                          <path id="svg-sciaticNotch" d="M 10 15 C 25 15, 30 45, 60 45" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                        )}
+                        {field.id === 'ventralArc' && (
+                          <g>
+                            <path d="M 25 15 L 75 15 L 65 45 L 35 45 Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+                            <path id="svg-ventralArc" d="M 35 20 Q 50 30 65 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                          </g>
+                        )}
+                        {field.id === 'preauricularSulcus' && (
+                          <g>
+                            <path d="M 15 15 L 85 15 C 80 30, 80 40, 85 45 L 15 45 Z" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+                            <path id="svg-preauricularSulcus" d="M 40 25 Q 50 35 60 25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                          </g>
+                        )}
+                        {field.id === 'mastoidProcess' && (
+                          <g>
+                            <path d="M 10 15 L 90 15" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" />
+                            <path id="svg-mastoidProcess" d="M 30 15 L 45 22 L 60 15 Z" fill="currentColor" stroke="none" />
+                          </g>
+                        )}
+                        {field.id === 'supraorbitalRidge' && (
+                          <path id="svg-supraorbitalRidge" d="M 20 10 L 20 30 L 22 45 L 35 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                        )}
+                        {field.id === 'mentalEminence' && (
+                          <path id="svg-mentalEminence" d="M 20 20 Q 50 45 80 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                        )}
+                        {field.id === 'nuchalCrest' && (
+                          <g>
+                            <path d="M 20 10 Q 50 30 80 50" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" />
+                            <path id="svg-nuchalCrest" d="M 50 30 L 50 30 L 50 30 Z" fill="currentColor" stroke="none" />
+                          </g>
+                        )}
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="forensic-sex-field-footer">
+                    <span class="extreme-label fem-label">{field.femText}</span>
+                    <span class="extreme-label masc-label">{field.mascText}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="forensic-sex-outputs">
+      <h3 class="forensic-sex-outputs-title">{ui.resultsTitle}</h3>
+
+      <div class="forensic-sex-gauge-container">
+        <div class="forensic-sex-gauge-bar">
+          <div id="sex-gauge-marker" class="forensic-sex-gauge-marker"></div>
+        </div>
+        <div class="forensic-sex-gauge-labels">
+          <span>{ui.femaleClass}</span>
+          <span>50/50</span>
+          <span>{ui.maleClass}</span>
+        </div>
+      </div>
+
+      <div class="forensic-sex-metrics">
+        <div class="forensic-sex-metric-row">
+          <span class="forensic-sex-metric-label">{ui.femaleProbLabel}</span>
+          <span id="sex-female-prob" class="forensic-sex-metric-value">50%</span>
+        </div>
+        <div class="forensic-sex-metric-row">
+          <span class="forensic-sex-metric-label">{ui.maleProbLabel}</span>
+          <span id="sex-male-prob" class="forensic-sex-metric-value">50%</span>
+        </div>
+        <div class="forensic-sex-metric-row">
+          <span class="forensic-sex-metric-label">{ui.predominantLabel}</span>
+          <span id="sex-predominant" class="forensic-sex-metric-value">{ui.indeterminateClass}</span>
+        </div>
+        <div class="forensic-sex-metric-row">
+          <span class="forensic-sex-metric-label">{ui.confidenceLabel}</span>
+          <span id="sex-confidence" class="forensic-sex-metric-value">{ui.weakConf}</span>
+        </div>
+      </div>
+
+      <div id="sex-notes-container" class="forensic-sex-notes">
+        <p class="forensic-sex-note">{ui.noteNoData}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script id="sex-ui-data" type="application/json" set:html={JSON.stringify(ui)}></script>
+
+<script>
+  import { determineSex } from './logic';
+  import type { SexDeterminatorInput } from './logic';
+
+  const uiDataEl = document.getElementById('sex-ui-data');
+  const ui = uiDataEl ? JSON.parse(uiDataEl.textContent || '{}') : {};
+
+  const fields = [
+    'subpubicAngle',
+    'sciaticNotch',
+    'ventralArc',
+    'preauricularSulcus',
+    'mastoidProcess',
+    'supraorbitalRidge',
+    'mentalEminence',
+    'nuchalCrest'
+  ];
+
+  const svgConfigs = {
+    subpubicAngle: {
+      el: document.getElementById('svg-subpubicAngle'),
+      type: 'd',
+      values: {
+        0: 'M 20 50 Q 50 20 80 50',
+        1: 'M 15 50 Q 50 15 85 50',
+        2: 'M 20 50 Q 50 20 80 50',
+        3: 'M 28 50 Q 50 25 72 50',
+        4: 'M 35 50 Q 50 30 65 50',
+        5: 'M 40 50 Q 50 35 60 50'
+      }
+    },
+    sciaticNotch: {
+      el: document.getElementById('svg-sciaticNotch'),
+      type: 'd',
+      values: {
+        0: 'M 10 15 C 25 15, 30 45, 60 45',
+        1: 'M 10 15 C 25 15, 30 45, 60 45',
+        2: 'M 10 15 C 22 15, 27 45, 55 45',
+        3: 'M 10 15 C 20 15, 23 45, 48 45',
+        4: 'M 10 15 C 16 15, 18 45, 42 45',
+        5: 'M 10 15 C 12 15, 14 45, 35 45'
+      }
+    },
+    ventralArc: {
+      el: document.getElementById('svg-ventralArc'),
+      type: 'stroke-width',
+      values: {
+        0: '2',
+        1: '6',
+        2: '4',
+        3: '2',
+        4: '1',
+        5: '0'
+      }
+    },
+    preauricularSulcus: {
+      el: document.getElementById('svg-preauricularSulcus'),
+      type: 'stroke-dasharray',
+      values: {
+        0: '0',
+        1: '3,3',
+        2: '2,4',
+        3: '1,5',
+        4: '0',
+        5: '0'
+      }
+    },
+    mastoidProcess: {
+      el: document.getElementById('svg-mastoidProcess'),
+      type: 'd',
+      values: {
+        0: 'M 30 15 L 45 22 L 60 15 Z',
+        1: 'M 30 15 L 45 22 L 60 15 Z',
+        2: 'M 30 15 L 45 28 L 60 15 Z',
+        3: 'M 30 15 L 45 35 L 60 15 Z',
+        4: 'M 30 15 L 45 42 L 60 15 Z',
+        5: 'M 30 15 L 45 50 L 60 15 Z'
+      }
+    },
+    supraorbitalRidge: {
+      el: document.getElementById('svg-supraorbitalRidge'),
+      type: 'd',
+      values: {
+        0: 'M 20 10 L 20 30 L 22 45 L 35 50',
+        1: 'M 20 10 L 20 30 L 22 45 L 35 50',
+        2: 'M 20 10 L 20 28 Q 23 33 22 40 L 35 50',
+        3: 'M 20 10 L 20 26 Q 26 31 22 40 L 35 50',
+        4: 'M 20 10 L 20 24 Q 29 29 22 40 L 35 50',
+        5: 'M 20 10 L 20 22 Q 33 27 22 40 L 35 50'
+      }
+    },
+    mentalEminence: {
+      el: document.getElementById('svg-mentalEminence'),
+      type: 'd',
+      values: {
+        0: 'M 20 20 Q 50 45 80 20',
+        1: 'M 20 20 Q 50 45 80 20',
+        2: 'M 22 20 Q 50 43 78 20',
+        3: 'M 25 20 C 35 38, 65 38, 75 20',
+        4: 'M 27 20 C 35 40, 65 40, 73 20',
+        5: 'M 30 20 L 35 38 L 65 38 L 70 20 Z'
+      }
+    },
+    nuchalCrest: {
+      el: document.getElementById('svg-nuchalCrest'),
+      type: 'd',
+      values: {
+        0: 'M 50 30 L 50 30 L 50 30 Z',
+        1: 'M 50 30 L 50 30 L 50 30 Z',
+        2: 'M 50 30 L 53 27 L 52 32 Z',
+        3: 'M 50 30 L 56 25 L 53 34 Z',
+        4: 'M 50 30 L 60 22 L 54 36 Z',
+        5: 'M 50 30 Q 63 20 58 18 Q 57 23 54 36 Z'
+      }
+    }
+  };
+
+  const femaleProbEl = document.getElementById('sex-female-prob');
+  const maleProbEl = document.getElementById('sex-male-prob');
+  const predominantEl = document.getElementById('sex-predominant');
+  const confidenceEl = document.getElementById('sex-confidence');
+  const notesContainer = document.getElementById('sex-notes-container');
+  const marker = document.getElementById('sex-gauge-marker');
+  const STORAGE_KEY = 'forensic-sex-determinator-input';
+
+  function getSelectedValue(field: string): number {
+    const el = document.getElementById(`input-${field}`) as HTMLInputElement | null;
+    return el ? parseInt(el.value, 10) : 0;
+  }
+
+  function renderPredominantSex(predominantSex: string) {
+    if (!predominantEl) return;
+    if (predominantSex === 'female') {
+      predominantEl.textContent = ui.femaleClass || 'Female';
+    } else if (predominantSex === 'male') {
+      predominantEl.textContent = ui.maleClass || 'Male';
+    } else {
+      predominantEl.textContent = ui.indeterminateClass || 'Indeterminate';
+    }
+  }
+
+  function renderConfidence(confidence: string) {
+    if (!confidenceEl) return;
+    if (confidence === 'strong') {
+      confidenceEl.textContent = ui.strongConf || 'Strong';
+    } else if (confidence === 'moderate') {
+      confidenceEl.textContent = ui.moderateConf || 'Moderate';
+    } else {
+      confidenceEl.textContent = ui.weakConf || 'Weak';
+    }
+  }
+
+  function renderNotes(notes: string[]) {
+    if (!notesContainer) return;
+    notesContainer.innerHTML = '';
+    notes.forEach(noteKey => {
+      const p = document.createElement('p');
+      p.className = 'forensic-sex-note';
+      p.textContent = ui[noteKey] || '';
+      notesContainer.appendChild(p);
+    });
+  }
+
+  const scoreLabels: Record<number, string> = {
+    0: 'notEvaluated', 1: 'score1', 2: 'score2', 3: 'score3', 4: 'score4', 5: 'score5',
+  };
+
+  const cardStates: Record<number, string> = {
+    0: 'state-unevaluated', 1: 'state-feminine', 2: 'state-feminine',
+    3: 'state-neutral', 4: 'state-masculine', 5: 'state-masculine',
+  };
+
+  function applyCardState(field: string, val: number) {
+    const card = document.getElementById(`field-card-${field}`);
+    if (!card) return;
+    card.className = 'forensic-sex-field';
+    card.classList.add(cardStates[val] ?? 'state-unevaluated');
+  }
+
+  function applyStatusText(field: string, val: number) {
+    const statusEl = document.getElementById(`status-${field}`);
+    if (!statusEl) return;
+    statusEl.textContent = ui[scoreLabels[val]] ?? '';
+  }
+
+  function applySvgState(field: string, val: number) {
+    const config = svgConfigs[field as keyof typeof svgConfigs];
+    if (!config || !config.el) return;
+    const valueStr = config.values[val as keyof typeof config.values];
+    config.el.setAttribute(config.type === 'd' ? 'd' : config.type, valueStr);
+  }
+
+  function updateFieldState(field: string, val: number) {
+    applyCardState(field, val);
+    applyStatusText(field, val);
+    applySvgState(field, val);
+  }
+
+  function update() {
+    const input: SexDeterminatorInput = {
+      subpubicAngle: getSelectedValue('subpubicAngle'),
+      sciaticNotch: getSelectedValue('sciaticNotch'),
+      ventralArc: getSelectedValue('ventralArc'),
+      preauricularSulcus: getSelectedValue('preauricularSulcus'),
+      mastoidProcess: getSelectedValue('mastoidProcess'),
+      supraorbitalRidge: getSelectedValue('supraorbitalRidge'),
+      mentalEminence: getSelectedValue('mentalEminence'),
+      nuchalCrest: getSelectedValue('nuchalCrest'),
+    };
+
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(input));
+    } catch {}
+
+    fields.forEach(field => {
+      updateFieldState(field, input[field as keyof SexDeterminatorInput]);
+    });
+
+    const result = determineSex(input);
+
+    if (femaleProbEl) femaleProbEl.textContent = `${result.femaleProbability}%`;
+    if (maleProbEl) maleProbEl.textContent = `${result.maleProbability}%`;
+    renderPredominantSex(result.predominantSex);
+    renderConfidence(result.confidence);
+    if (marker) marker.style.left = `${result.maleProbability}%`;
+    renderNotes(result.notes);
+  }
+
+  fields.forEach(field => {
+    const input = document.getElementById(`input-${field}`);
+    if (input) {
+      input.addEventListener('input', update);
+    }
+  });
+
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      fields.forEach(field => {
+        const val = parsed[field];
+        if (typeof val === 'number') {
+          const el = document.getElementById(`input-${field}`) as HTMLInputElement | null;
+          if (el) el.value = val.toString();
+        }
+      });
+    }
+  } catch {}
+
+  update();
+</script>
