@@ -1,6 +1,7 @@
-﻿export { forensicCategory, forensicCategory as templateCategory } from './category';
+export { forensicCategory, forensicCategory as templateCategory } from './category';
 export const ForensicCategorySEO = () => import('./category/seo.astro').then((m) => m.default);
 export { FORENSIC_AGE_ESTIMATOR_TOOL } from './tool/forensic-age-estimator/index';
+export { WIDMARK_ALCOHOL_SIMULATOR_TOOL } from './tool/widmark-alcohol-simulator/index';
 
 export type {
   KnownLocale,

@@ -1,10 +1,17 @@
-import type { ScienceCategoryEntry } from '../types';
-import { forensicAgeEstimator } from '../tool/forensic-age-estimator/index';
-import { widmarkAlcoholSimulator } from '../tool/widmark-alcohol-simulator/index';
+import type { ScienceToolEntry, ToolLocaleContent } from '../../types';
 
-export const forensicCategory: ScienceCategoryEntry = {
-  icon: 'mdi:fingerprint',
-  tools: [forensicAgeEstimator, widmarkAlcoholSimulator],
+export interface WidmarkAlcoholSimulatorUI {
+  [key: string]: string;
+}
+
+export type WidmarkAlcoholSimulatorLocaleContent = ToolLocaleContent<WidmarkAlcoholSimulatorUI>;
+
+export const widmarkAlcoholSimulator: ScienceToolEntry<WidmarkAlcoholSimulatorUI> = {
+  id: 'widmark-alcohol-simulator',
+  icons: {
+    bg: 'mdi:glass-cocktail',
+    fg: 'mdi:chart-bell-curve',
+  },
   i18n: {
     de: () => import('./i18n/de').then((m) => m.content),
     en: () => import('./i18n/en').then((m) => m.content),
@@ -23,5 +30,3 @@ export const forensicCategory: ScienceCategoryEntry = {
     zh: () => import('./i18n/zh').then((m) => m.content),
   },
 };
-
-export const scienceCategory = forensicCategory;

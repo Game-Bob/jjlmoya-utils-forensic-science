@@ -4,8 +4,8 @@ import { scienceCategory } from '../data';
 
 describe('Tool Validation Suite', () => {
   describe('Library Registration', () => {
-    it('should have 27 tools in ALL_TOOLS', () => {
-      expect(ALL_TOOLS.length).toBe(1);
+    it('should have 2 tools in ALL_TOOLS', () => {
+      expect(ALL_TOOLS.length).toBe(2);
     });
 
     it('scienceCategory should be defined', () => {

@@ -1,0 +1,442 @@
+---
+import './widmark-alcohol-simulator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="widmark-simulator" id="widmark-simulator-root">
+  <aside class="widmark-panel">
+    <h3 class="widmark-section-title">
+      <span>{ui.subjectProfile}</span>
+    </h3>
+    
+    <div class="widmark-field">
+      <span>{ui.weight}</span>
+      <input type="number" id="widmark-weight" class="widmark-input" min="30" max="250" value="80" />
+    </div>
+
+    <div class="widmark-field">
+      <span>{ui.sex}</span>
+      <div class="widmark-radio-group">
+        <label class="widmark-radio-card">
+          <input type="radio" name="widmark-sex" value="male" checked />
+          <span>{ui.male}</span>
+        </label>
+        <label class="widmark-radio-card">
+          <input type="radio" name="widmark-sex" value="female" />
+          <span>{ui.female}</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="widmark-field">
+      <span>{ui.hydration}</span>
+      <select id="widmark-hydration" class="widmark-select">
+        <option value="low">{ui.hydrationLow}</option>
+        <option value="normal" selected>{ui.hydrationNormal}</option>
+        <option value="high">{ui.hydrationHigh}</option>
+      </select>
+    </div>
+
+    <div class="widmark-field">
+      <span>{ui.stomachState}</span>
+      <select id="widmark-stomach" class="widmark-select">
+        <option value="empty">{ui.stomachEmpty}</option>
+        <option value="light" selected>{ui.stomachLight}</option>
+        <option value="full">{ui.stomachFull}</option>
+      </select>
+    </div>
+
+    <h3 class="widmark-section-title">
+      <span>{ui.drinksTimeline}</span>
+    </h3>
+
+    <div class="widmark-quick-drinks">
+      <button type="button" class="widmark-quick-btn" data-preset="beer">{ui.beer.split(' ')[0]}</button>
+      <button type="button" class="widmark-quick-btn" data-preset="wine">{ui.wine.split(' ')[0]}</button>
+      <button type="button" class="widmark-quick-btn" data-preset="spirits">{ui.spirits.split(' ')[0]}</button>
+    </div>
+
+    <div class="widmark-drink-form-grid">
+      <div class="widmark-field">
+        <span>{ui.drinkVolume}</span>
+        <input type="number" id="widmark-drink-vol" class="widmark-input" value="330" min="10" max="2000" />
+      </div>
+      <div class="widmark-field">
+        <span>{ui.drinkAbv}</span>
+        <input type="number" id="widmark-drink-abv" class="widmark-input" value="5" min="0.1" max="100" step="0.1" />
+      </div>
+      <div class="widmark-field">
+        <span>{ui.drinkTime}</span>
+        <input type="number" id="widmark-drink-time" class="widmark-input" value="0" min="0" max="11.9" step="0.1" />
+      </div>
+      <button type="button" id="widmark-add-drink" class="widmark-btn-primary">
+        <span>{ui.addDrink}</span>
+      </button>
+    </div>
+
+    <h3 class="widmark-section-title">
+      <span>{ui.drinksList}</span>
+    </h3>
+    <div id="widmark-drinks-container" class="widmark-drinks-list"></div>
+  </aside>
+
+  <main class="widmark-dashboard">
+    <div class="widmark-metrics-grid">
+      <div class="widmark-metric-card" id="card-current-bac">
+        <span class="widmark-metric-label">{ui.currentBac}</span>
+        <span class="widmark-metric-value" id="val-current-bac">0.000<span class="widmark-metric-unit">g/L</span></span>
+      </div>
+      <div class="widmark-metric-card">
+        <span class="widmark-metric-label">{ui.peakBac}</span>
+        <span class="widmark-metric-value" id="val-peak-bac">0.000<span class="widmark-metric-unit">g/L</span></span>
+      </div>
+      <div class="widmark-metric-card">
+        <span class="widmark-metric-label">{ui.timeToSober}</span>
+        <span class="widmark-metric-value" id="val-sober-time">-</span>
+      </div>
+      <div class="widmark-metric-card" id="card-driving-status">
+        <span class="widmark-metric-label">{ui.drivingLimitAlert}</span>
+        <span class="widmark-metric-value" id="val-driving-status" style="font-size: 1.15rem; font-weight: 700;">-</span>
+      </div>
+    </div>
+
+    <div class="widmark-visual-container">
+      <div class="widmark-chart-wrapper">
+        <svg class="widmark-chart-svg" viewBox="0 0 800 280" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          
+          <line class="widmark-grid-line" x1="50" y1="20" x2="780" y2="20" />
+          <line class="widmark-grid-line" x1="50" y1="85" x2="780" y2="85" />
+          <line class="widmark-grid-line" x1="50" y1="150" x2="780" y2="150" />
+          <line class="widmark-grid-line" x1="50" y1="215" x2="780" y2="215" />
+          <line class="widmark-grid-line" x1="50" y1="240" x2="780" y2="240" />
+
+          <text class="widmark-grid-text" x="15" y="24">1.5</text>
+          <text class="widmark-grid-text" x="15" y="89">1.0</text>
+          <text class="widmark-grid-text" x="15" y="154">0.5</text>
+          <text class="widmark-grid-text" x="15" y="219">0.1</text>
+          <text class="widmark-grid-text" x="20" y="244">0.0</text>
+
+          <line class="widmark-limit-line" x1="50" y1="150" x2="780" y2="150" />
+
+          <line class="widmark-grid-line" x1="50" y1="20" x2="50" y2="240" />
+          <line class="widmark-grid-line" x1="171.6" y1="20" x2="171.6" y2="240" />
+          <line class="widmark-grid-line" x1="293.3" y1="20" x2="293.3" y2="240" />
+          <line class="widmark-grid-line" x1="415" y1="20" x2="415" y2="240" />
+          <line class="widmark-grid-line" x1="536.6" y1="20" x2="536.6" y2="240" />
+          <line class="widmark-grid-line" x1="658.3" y1="20" x2="658.3" y2="240" />
+          <line class="widmark-grid-line" x1="780" y1="20" x2="780" y2="240" />
+
+          <text class="widmark-grid-text" x="45" y="260">0h</text>
+          <text class="widmark-grid-text" x="166" y="260">2h</text>
+          <text class="widmark-grid-text" x="288" y="260">4h</text>
+          <text class="widmark-grid-text" x="410" y="260">6h</text>
+          <text class="widmark-grid-text" x="531" y="260">8h</text>
+          <text class="widmark-grid-text" x="653" y="260">10h</text>
+          <text class="widmark-grid-text" x="775" y="260">12h</text>
+
+          <path id="widmark-chart-path" class="widmark-curve-path" d="" />
+          <path id="widmark-chart-fill" class="widmark-curve-fill" d="" />
+        </svg>
+
+        <div id="widmark-chart-overlay" class="widmark-no-drinks">
+          <span>{ui.noDrinksText}</span>
+        </div>
+      </div>
+
+      <div class="widmark-disclaimer">
+        <strong>{ui.legalLimitText} (0.5 g/L)</strong>
+        <span>{ui.noteDisclaimer}</span>
+        <span style="font-size: 0.75rem; opacity: 0.8;">{ui.noteWidmark}</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script id="widmark-ui-data" type="application/json" set:html={JSON.stringify(ui)}></script>
+
+<script>
+  import { WidmarkEngine } from './logic';
+  import type { DrinkInput, SubjectProfile } from './logic';
+
+  const uiDataEl = document.getElementById('widmark-ui-data');
+  const ui = JSON.parse(uiDataEl?.textContent || '{}') as Record<string, string>;
+
+  const weightInput = document.getElementById('widmark-weight') as HTMLInputElement;
+  const hydrationInput = document.getElementById('widmark-hydration') as HTMLSelectElement;
+  const stomachInput = document.getElementById('widmark-stomach') as HTMLSelectElement;
+  const drinkVolInput = document.getElementById('widmark-drink-vol') as HTMLInputElement;
+  const drinkAbvInput = document.getElementById('widmark-drink-abv') as HTMLInputElement;
+  const drinkTimeInput = document.getElementById('widmark-drink-time') as HTMLInputElement;
+  const addDrinkBtn = document.getElementById('widmark-add-drink');
+  const drinksContainer = document.getElementById('widmark-drinks-container');
+
+  const valCurrentBac = document.getElementById('val-current-bac');
+  const valPeakBac = document.getElementById('val-peak-bac');
+  const valSoberTime = document.getElementById('val-sober-time');
+  const valDrivingStatus = document.getElementById('val-driving-status');
+  
+  const cardCurrentBac = document.getElementById('card-current-bac');
+  const cardDrivingStatus = document.getElementById('card-driving-status');
+  
+  const chartPath = document.getElementById('widmark-chart-path') as SVGPathElement | null;
+  const chartFill = document.getElementById('widmark-chart-fill') as SVGPathElement | null;
+  const chartOverlay = document.getElementById('widmark-chart-overlay');
+
+  const storageKeyProfile = 'widmark:profile';
+  const storageKeyDrinks = 'widmark:drinks';
+
+  let activeDrinks: DrinkInput[] = [];
+
+  function loadSavedState() {
+    try {
+      const savedProfile = localStorage.getItem(storageKeyProfile);
+      const savedDrinks = localStorage.getItem(storageKeyDrinks);
+
+      if (savedProfile) {
+        const profile = JSON.parse(savedProfile);
+        weightInput.value = String(profile.weight);
+        hydrationInput.value = profile.hydration;
+        stomachInput.value = profile.stomach;
+        const sexRadio = document.querySelector(`input[name="widmark-sex"][value="${profile.sex}"]`) as HTMLInputElement;
+        if (sexRadio) sexRadio.checked = true;
+      }
+
+      if (savedDrinks) {
+        activeDrinks = JSON.parse(savedDrinks);
+      }
+    } catch {
+      localStorage.removeItem(storageKeyProfile);
+      localStorage.removeItem(storageKeyDrinks);
+    }
+  }
+
+  function saveCurrentState() {
+    const profile: SubjectProfile = {
+      weight: Number(weightInput.value),
+      sex: (document.querySelector('input[name="widmark-sex"]:checked') as HTMLInputElement)?.value as 'male' | 'female',
+      hydration: hydrationInput.value as 'low' | 'normal' | 'high',
+      stomach: stomachInput.value as 'empty' | 'light' | 'full',
+    };
+    localStorage.setItem(storageKeyProfile, JSON.stringify(profile));
+    localStorage.setItem(storageKeyDrinks, JSON.stringify(activeDrinks));
+  }
+
+  function getProfile(): SubjectProfile {
+    return {
+      weight: Number(weightInput.value) || 80,
+      sex: (document.querySelector('input[name="widmark-sex"]:checked') as HTMLInputElement)?.value as 'male' | 'female',
+      hydration: hydrationInput.value as 'low' | 'normal' | 'high',
+      stomach: stomachInput.value as 'empty' | 'light' | 'full',
+    };
+  }
+
+  function setMetricCardClass(card: HTMLElement | null, status: 'safe' | 'warning' | 'danger') {
+    if (!card) return;
+    card.className = `widmark-metric-card alert-${status}`;
+  }
+
+  function renderEmptyState() {
+    if (valCurrentBac) valCurrentBac.innerHTML = `0.000<span class="widmark-metric-unit">g/L</span>`;
+    if (valPeakBac) valPeakBac.innerHTML = `0.000<span class="widmark-metric-unit">g/L</span>`;
+    if (valSoberTime) valSoberTime.textContent = ui.sober;
+    if (valDrivingStatus) valDrivingStatus.textContent = ui.safeLimit;
+    setMetricCardClass(cardCurrentBac, 'safe');
+    setMetricCardClass(cardDrivingStatus, 'safe');
+    if (chartPath) chartPath.setAttribute('d', '');
+    if (chartFill) chartFill.setAttribute('d', '');
+    if (chartOverlay) chartOverlay.style.display = 'flex';
+  }
+
+  function renderStatusText(currentBacVal: number) {
+    if (!valDrivingStatus) return;
+    if (currentBacVal >= 0.5) {
+      valDrivingStatus.textContent = ui.dangerLimit;
+      setMetricCardClass(cardCurrentBac, 'danger');
+      setMetricCardClass(cardDrivingStatus, 'danger');
+    } else if (currentBacVal >= 0.2) {
+      valDrivingStatus.textContent = ui.warningLimit;
+      setMetricCardClass(cardCurrentBac, 'warning');
+      setMetricCardClass(cardDrivingStatus, 'warning');
+    } else {
+      valDrivingStatus.textContent = ui.safeLimit;
+      setMetricCardClass(cardCurrentBac, 'safe');
+      setMetricCardClass(cardDrivingStatus, 'safe');
+    }
+  }
+
+  function renderMetrics(result: ReturnType<typeof WidmarkEngine.simulate>) {
+    const currentBacVal = result.datapoints[0]?.bac || 0;
+    if (valCurrentBac) {
+      valCurrentBac.innerHTML = `${currentBacVal.toFixed(3)}<span class="widmark-metric-unit">g/L</span>`;
+    }
+    if (valPeakBac) {
+      valPeakBac.innerHTML = `${result.peakBac.toFixed(3)}<span class="widmark-metric-unit">g/L</span>`;
+    }
+    if (valSoberTime) {
+      if (result.soberTime === -1) {
+        valSoberTime.textContent = ui.sober;
+      } else if (result.soberTime === -2) {
+        valSoberTime.textContent = ui.neverSober;
+      } else {
+        valSoberTime.textContent = `${result.soberTime.toFixed(1)} h`;
+      }
+    }
+    renderStatusText(currentBacVal);
+  }
+
+  function updateChartGrid(maxBacGraph: number, offsetY: number, height: number) {
+    const gridLinesY = [1.5, 1.0, 0.5, 0.1, 0.0];
+    const gridTexts = document.querySelectorAll('.widmark-grid-text');
+    gridLinesY.forEach((val, idx) => {
+      const y = offsetY + height - (val / maxBacGraph) * height;
+      const line = document.querySelectorAll('.widmark-grid-line')[idx];
+      if (line) {
+        line.setAttribute('y1', String(y));
+        line.setAttribute('y2', String(y));
+      }
+      const text = gridTexts[idx];
+      if (text) {
+        text.setAttribute('y', String(y + 4));
+        text.textContent = val.toFixed(1);
+      }
+    });
+  }
+
+  function updateChart(result: ReturnType<typeof WidmarkEngine.simulate>) {
+    const maxBacGraph = Math.max(1.6, result.peakBac * 1.15);
+    const width = 730;
+    const height = 220;
+    const offsetX = 50;
+    const offsetY = 20;
+    let pathD = '';
+    let fillD = `M ${offsetX} ${offsetY + height} `;
+
+    for (let i = 0; i < result.datapoints.length; i++) {
+      const dp = result.datapoints[i]!;
+      const x = offsetX + (dp.time / 12.0) * width;
+      const y = offsetY + height - (dp.bac / maxBacGraph) * height;
+      if (i === 0) {
+        pathD += `M ${x} ${y} `;
+      } else {
+        pathD += `L ${x} ${y} `;
+      }
+      fillD += `L ${x} ${y} `;
+    }
+
+    fillD += `L ${offsetX + width} ${offsetY + height} Z`;
+    if (chartPath) chartPath.setAttribute('d', pathD);
+    if (chartFill) chartFill.setAttribute('d', fillD);
+
+    const limitY = offsetY + height - (0.5 / maxBacGraph) * height;
+    const limitLine = document.querySelector('.widmark-limit-line');
+    if (limitLine) {
+      limitLine.setAttribute('y1', String(limitY));
+      limitLine.setAttribute('y2', String(limitY));
+    }
+    updateChartGrid(maxBacGraph, offsetY, height);
+  }
+
+  function updateSimulation() {
+    const profile = getProfile();
+    if (activeDrinks.length === 0) {
+      renderEmptyState();
+      renderDrinksList();
+      saveCurrentState();
+      return;
+    }
+
+    if (chartOverlay) chartOverlay.style.display = 'none';
+
+    const result = WidmarkEngine.simulate(profile, activeDrinks);
+    renderMetrics(result);
+    updateChart(result);
+    renderDrinksList();
+    saveCurrentState();
+  }
+
+  function renderDrinksList() {
+    if (!drinksContainer) return;
+    drinksContainer.innerHTML = '';
+    activeDrinks.forEach((drink, index) => {
+      const item = document.createElement('div');
+      item.className = 'widmark-drink-item';
+      
+      const details = document.createElement('div');
+      details.className = 'widmark-drink-details';
+      
+      const title = document.createElement('span');
+      title.className = 'widmark-drink-title';
+      title.textContent = `${drink.volume}ml @ ${drink.abv}%`;
+      
+      const meta = document.createElement('span');
+      meta.className = 'widmark-drink-meta';
+      meta.textContent = `Hour ${drink.time.toFixed(1)}`;
+      
+      details.appendChild(title);
+      details.appendChild(meta);
+      
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'widmark-btn-remove';
+      removeBtn.textContent = ui.remove;
+      removeBtn.addEventListener('click', () => {
+        activeDrinks.splice(index, 1);
+        updateSimulation();
+      });
+      
+      item.appendChild(details);
+      item.appendChild(removeBtn);
+      drinksContainer.appendChild(item);
+    });
+  }
+
+  addDrinkBtn?.addEventListener('click', () => {
+    const volume = Number(drinkVolInput.value);
+    const abv = Number(drinkAbvInput.value);
+    const time = Number(drinkTimeInput.value);
+
+    if (volume > 0 && abv >= 0 && time >= 0) {
+      activeDrinks.push({ volume, abv, time });
+      activeDrinks.sort((a, b) => a.time - b.time);
+      updateSimulation();
+    }
+  });
+
+  document.querySelectorAll('[data-preset]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const preset = btn.getAttribute('data-preset');
+      if (preset === 'beer') {
+        drinkVolInput.value = '330';
+        drinkAbvInput.value = '5.0';
+      } else if (preset === 'wine') {
+        drinkVolInput.value = '150';
+        drinkAbvInput.value = '12.0';
+      } else if (preset === 'spirits') {
+        drinkVolInput.value = '40';
+        drinkAbvInput.value = '40.0';
+      }
+    });
+  });
+
+  [weightInput, hydrationInput, stomachInput].forEach((input) => {
+    input.addEventListener('change', updateSimulation);
+  });
+
+  document.querySelectorAll('input[name="widmark-sex"]').forEach((radio) => {
+    radio.addEventListener('change', updateSimulation);
+  });
+
+  loadSavedState();
+  updateSimulation();
+</script>
