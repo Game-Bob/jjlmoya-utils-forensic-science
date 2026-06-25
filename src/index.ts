@@ -4,6 +4,7 @@ export { FORENSIC_AGE_ESTIMATOR_TOOL } from './tool/forensic-age-estimator/index
 export { WIDMARK_ALCOHOL_SIMULATOR_TOOL } from './tool/widmark-alcohol-simulator/index';
 export { FORENSIC_SEX_DETERMINATOR_TOOL } from './tool/forensic-sex-determinator/index';
 export { FORENSIC_STATURE_ESTIMATOR_TOOL } from './tool/forensic-stature-estimator/index';
+export { FORENSIC_BLOOD_TEST_SIMULATOR_TOOL } from './tool/forensic-blood-test-simulator/index';
 
 export type {
   KnownLocale,

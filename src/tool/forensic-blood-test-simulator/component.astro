@@ -1,0 +1,168 @@
+---
+import './forensic-presumptive-blood-testing-luminol-kastle-meyer-simulator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+<div class="forensic-chemical-card">
+
+  <div class="chemical-workbench">
+    <div class="workbench-left">
+      <div class="specimen-rack-container">
+        <h4 class="section-title">{ui.sampleLabel}</h4>
+        <div class="specimen-rack">
+          <button class="specimen-tube selected" data-sample="blood">
+            <span class="tube-glass">
+              <span class="tube-liquid tube-liquid-blood"></span>
+            </span>
+            <span class="tube-label">{ui.sampleBlood}</span>
+          </button>
+
+          <button class="specimen-tube" data-sample="rust">
+            <span class="tube-glass">
+              <span class="tube-liquid tube-liquid-rust"></span>
+            </span>
+            <span class="tube-label">{ui.sampleRust}</span>
+          </button>
+
+          <button class="specimen-tube" data-sample="bleach">
+            <span class="tube-glass">
+              <span class="tube-liquid tube-liquid-bleach"></span>
+            </span>
+            <span class="tube-label">{ui.sampleBleach}</span>
+          </button>
+
+          <button class="specimen-tube" data-sample="potato">
+            <span class="tube-glass">
+              <span class="tube-liquid tube-liquid-potato"></span>
+            </span>
+            <span class="tube-label">{ui.samplePotato}</span>
+          </button>
+
+          <button class="specimen-tube" data-sample="saliva">
+            <span class="tube-glass">
+              <span class="tube-liquid tube-liquid-saliva"></span>
+            </span>
+            <span class="tube-label">{ui.sampleSaliva}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="reagents-shelf-container">
+        <h4 class="section-title">{ui.configTitle}</h4>
+        <div class="reagents-shelf">
+          <div class="reagent-bottle">
+            <div class="bottle-visual bottle-km">
+              <div class="bottle-neck"></div>
+              <div class="bottle-body">
+                <div class="bottle-liquid"></div>
+                <div class="bottle-label-sticker">KM</div>
+              </div>
+            </div>
+            <div class="reagent-details">
+              <span class="reagent-name">{ui.reagentKM}</span>
+              <span class="reagent-desc">{ui.descKM}</span>
+            </div>
+            <button class="btn-dispense-fluid" data-reagent="km">
+              {ui.dropReagentBtn}
+            </button>
+          </div>
+
+          <div class="reagent-bottle">
+            <div class="bottle-visual bottle-h2o2">
+              <div class="bottle-neck"></div>
+              <div class="bottle-body">
+                <div class="bottle-liquid"></div>
+                <div class="bottle-label-sticker">H₂O₂</div>
+              </div>
+            </div>
+            <div class="reagent-details">
+              <span class="reagent-name">{ui.reagentH2O2}</span>
+              <span class="reagent-desc">{ui.descH2O2}</span>
+            </div>
+            <button class="btn-dispense-fluid" data-reagent="h2o2">
+              {ui.dropReagentBtn}
+            </button>
+          </div>
+
+          <div class="reagent-bottle">
+            <div class="bottle-visual bottle-luminol">
+              <div class="bottle-neck"></div>
+              <div class="bottle-body">
+                <div class="bottle-liquid"></div>
+                <div class="bottle-label-sticker">LUM</div>
+              </div>
+            </div>
+            <div class="reagent-details">
+              <span class="reagent-name">{ui.reagentLuminol}</span>
+              <span class="reagent-desc">{ui.descLuminol}</span>
+            </div>
+            <button class="btn-dispense-fluid" data-reagent="luminol">
+              {ui.dropReagentBtn}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="workbench-right">
+      <div class="workbench-viewport" id="workbench-viewport">
+        <button class="btn-toggle-lights" id="btn-toggle-lights" type="button" title={ui.lightsLabel}>
+          <span class="light-switch-icon"></span>
+        </button>
+        <div class="petri-dish" id="petri-dish">
+          <div class="petri-specimen" id="petri-specimen"></div>
+          <div class="specimen-texture-overlay" id="specimen-texture-overlay"></div>
+        </div>
+        <div class="chemical-drop" id="chemical-drop"></div>
+      </div>
+
+      <div class="analysis-console">
+        <div class="console-header">
+          <div class="status-indicator-group">
+            <span class="console-label">{ui.statusLabel}</span>
+            <div class="status-badge" id="status-badge"></div>
+          </div>
+          <button class="btn-clear-lab" id="btn-reset-workbench">
+            {ui.btnReset}
+          </button>
+        </div>
+
+        <div class="console-body">
+          <div class="indicator-row">
+            <span class="console-label">{ui.reactionLabel}</span>
+            <div class="reaction-explanation-panel" id="explanation-text"></div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-cell">
+              <span class="stat-label">{ui.activeCompounds}</span>
+              <div class="stat-value" id="val-compounds">-</div>
+            </div>
+            <div class="stat-cell">
+              <span class="stat-label">{ui.reactionSpeed}</span>
+              <div class="stat-value" id="val-speed">-</div>
+            </div>
+            <div class="stat-cell">
+              <span class="stat-label">{ui.reactionDuration}</span>
+              <div class="stat-value" id="val-duration">-</div>
+            </div>
+            <div class="stat-cell">
+              <span class="stat-label">{ui.specimenBase}</span>
+              <div class="stat-value" id="val-specimen-base">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script id="blood-test-ui-data" type="application/json" set:html={JSON.stringify(ui)}></script>
+
+<script>
+  import './script';
+</script>
