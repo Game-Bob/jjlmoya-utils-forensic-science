@@ -8,17 +8,21 @@ export { forensicStatureEstimator } from './tool/forensic-stature-estimator/entr
 export type { StatureEstimatorUI, StatureEstimatorLocaleContent } from './tool/forensic-stature-estimator/entry';
 export { forensicBloodTestSimulator } from './tool/forensic-blood-test-simulator/entry';
 export type { BloodTestUI, BloodTestLocaleContent } from './tool/forensic-blood-test-simulator/entry';
+export { forensicImageAuthenticityAnalyzer } from './tool/forensic-image-authenticity-analyzer/entry';
+export type { ImageAuthenticityUI, ImageAuthenticityLocaleContent } from './tool/forensic-image-authenticity-analyzer/entry';
 
 import { forensicAgeEstimator } from './tool/forensic-age-estimator/entry';
 import { widmarkAlcoholSimulator } from './tool/widmark-alcohol-simulator/entry';
 import { forensicSexDeterminator } from './tool/forensic-sex-determinator/entry';
 import { forensicStatureEstimator } from './tool/forensic-stature-estimator/entry';
 import { forensicBloodTestSimulator } from './tool/forensic-blood-test-simulator/entry';
+import { forensicImageAuthenticityAnalyzer } from './tool/forensic-image-authenticity-analyzer/entry';
 
 export const ALL_ENTRIES = [
   forensicAgeEstimator,
   widmarkAlcoholSimulator,
   forensicSexDeterminator,
   forensicStatureEstimator,
-  forensicBloodTestSimulator
+  forensicBloodTestSimulator,
+  forensicImageAuthenticityAnalyzer
 ];

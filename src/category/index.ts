@@ -4,6 +4,7 @@ import { widmarkAlcoholSimulator } from '../tool/widmark-alcohol-simulator/index
 import { forensicSexDeterminator } from '../tool/forensic-sex-determinator/index';
 import { forensicStatureEstimator } from '../tool/forensic-stature-estimator/index';
 import { forensicBloodTestSimulator } from '../tool/forensic-blood-test-simulator/index';
+import { forensicImageAuthenticityAnalyzer } from '../tool/forensic-image-authenticity-analyzer/index';
 
 export const forensicCategory: ScienceCategoryEntry = {
   icon: 'mdi:fingerprint',
@@ -12,7 +13,8 @@ export const forensicCategory: ScienceCategoryEntry = {
     widmarkAlcoholSimulator,
     forensicSexDeterminator,
     forensicStatureEstimator,
-    forensicBloodTestSimulator
+    forensicBloodTestSimulator,
+    forensicImageAuthenticityAnalyzer
   ],
   i18n: {
     de: () => import('./i18n/de').then((m) => m.content),

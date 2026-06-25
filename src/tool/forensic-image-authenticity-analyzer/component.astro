@@ -1,0 +1,250 @@
+---
+import './forensic-image-metadata-authenticity-analyzer.css';
+import { forensicImageAuthenticityAnalyzer } from './index';
+import type { KnownLocale } from '../../types';
+
+interface Props { locale?: KnownLocale; }
+
+const { locale = 'en' } = Astro.props;
+const content = await forensicImageAuthenticityAnalyzer.i18n[locale]?.();
+if (!content) return null;
+const { ui } = content;
+---
+<section class="fia-lab" data-image-analyzer>
+  <header class="fia-header">
+    <span class="fia-kicker">{ui.privacy}</span>
+    <div class="fia-pulse"><i></i><span id="fia-state">{ui.waiting}</span></div>
+  </header>
+
+  <label class="fia-drop" id="fia-drop" data-has-image="false">
+    <input id="fia-input" type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" />
+    <span class="fia-scene" aria-hidden="true">
+      <span class="fia-orbit fia-orbit-a"></span>
+      <span class="fia-orbit fia-orbit-b"></span>
+      <span class="fia-aperture"><i></i></span>
+      <span class="fia-scan-line"></span>
+      <span class="fia-scene-label fia-label-exif">EXIF</span>
+      <span class="fia-scene-label fia-label-gps">GPS</span>
+      <span class="fia-scene-label fia-label-hex">FF D8</span>
+    </span>
+    <span class="fia-drop-copy">
+      <strong>{ui.dropTitle}</strong>
+      <small>{ui.dropHint}</small>
+      <span class="fia-button" id="fia-button">
+        <span class="fia-button-icon" id="fia-button-icon">+</span>
+        <span class="fia-button-label" id="fia-button-label">{ui.chooseFile}</span>
+      </span>
+    </span>
+  </label>
+
+  <div class="fia-workbench" id="fia-workbench" hidden>
+    <article class="fia-panel fia-file">
+      <div class="fia-preview"><img id="fia-preview" alt="" /></div>
+      <dl>
+        <div><dt>{ui.fileName}</dt><dd id="fia-name">-</dd></div>
+        <div><dt>{ui.fileSize}</dt><dd id="fia-size">-</dd></div>
+        <div><dt>{ui.fileType}</dt><dd id="fia-format">-</dd></div>
+      </dl>
+    </article>
+
+    <article class="fia-panel fia-integrity">
+      <div class="fia-panel-title"><span>02</span><h3>{ui.integrity}</h3></div>
+      <div class="fia-score-ring">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="51"></circle>
+          <circle id="fia-score-arc" cx="60" cy="60" r="51"></circle>
+        </svg>
+        <div class="fia-score">
+          <strong id="fia-score">-</strong>
+          <span>/ 100</span>
+          <small>{ui.score}</small>
+        </div>
+      </div>
+      <div class="fia-status" id="fia-status">-</div>
+      <div class="fia-findings" id="fia-findings"></div>
+    </article>
+
+    <article class="fia-panel fia-metadata">
+      <div class="fia-panel-title"><span>01</span><h3>{ui.metadata}</h3></div>
+      <dl>
+        <div><dt>{ui.camera}</dt><dd id="fia-camera">{ui.noData}</dd></div>
+        <div><dt>{ui.captured}</dt><dd id="fia-date">{ui.noData}</dd></div>
+        <div><dt>{ui.software}</dt><dd id="fia-software">{ui.noData}</dd></div>
+        <div><dt>{ui.coordinates}</dt><dd id="fia-coordinates">{ui.noData}</dd></div>
+      </dl>
+    </article>
+
+    <article class="fia-panel fia-location">
+      <div class="fia-panel-title"><span>03</span><h3>{ui.location}</h3></div>
+      <div class="fia-map" id="fia-map"><div class="fia-grid"></div><div class="fia-equator"></div><div class="fia-meridian"></div><div class="fia-pin" id="fia-pin" hidden></div></div>
+      <p id="fia-no-gps">{ui.noGps}</p>
+      <a id="fia-map-link" target="_blank" rel="noopener noreferrer" hidden>{ui.mapLink}</a>
+    </article>
+
+    <article class="fia-panel fia-hex">
+      <div class="fia-panel-title"><span>04</span><div><h3>{ui.hex}</h3><p>{ui.hexHint}</p></div></div>
+      <pre id="fia-hex-output"></pre>
+    </article>
+  </div>
+
+  <p class="fia-disclaimer">{ui.disclaimer}</p>
+</section>
+
+<script id="fia-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script>
+  import { ExifExtractor, IntegrityChecker, createHexSegments } from './logic';
+  import type { ExifMetadata, IntegrityFinding, IntegrityResult } from './logic';
+
+  const ui = JSON.parse(document.getElementById('fia-ui')?.textContent || '{}');
+  const input = document.getElementById('fia-input') as HTMLInputElement | null;
+  const drop = document.getElementById('fia-drop') as HTMLElement | null;
+  const workbench = document.getElementById('fia-workbench');
+  const extractor = new ExifExtractor();
+  const checker = new IntegrityChecker();
+
+  const text = (id: string, value: string) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  };
+
+  function renderHex(buffer: ArrayBuffer): void {
+    const output = document.getElementById('fia-hex-output');
+    if (!output) return;
+    output.innerHTML = '';
+    for (const segment of createHexSegments(buffer)) {
+      const row = document.createElement('span');
+      row.className = `fia-hex-row fia-${segment.kind}`;
+      row.textContent = `${segment.offset.toString(16).padStart(8, '0')}  ${segment.bytes.map((byte) => byte.toString(16).padStart(2, '0')).join(' ').padEnd(47, ' ')}  ${segment.bytes.map((byte) => byte >= 32 && byte <= 126 ? String.fromCharCode(byte) : '.').join('')}\n`;
+      output.appendChild(row);
+    }
+  }
+
+  function getStatusLabel(classification: IntegrityResult['classification']): string {
+    if (classification === 'editing-signatures-detected') return ui.statusEditing;
+    if (classification === 'review-recommended') return ui.statusReview;
+    return ui.statusNoObvious;
+  }
+
+  function formatCoordinates(latitude?: number, longitude?: number): string {
+    if (latitude === undefined || longitude === undefined) return ui.noData;
+    return `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+  }
+
+  function updateSummary(file: File, metadata: ExifMetadata, result: IntegrityResult): void {
+    text('fia-name', file.name);
+    text('fia-size', `${(file.size / 1024).toFixed(1)} KB`);
+    text('fia-format', result.format);
+    text('fia-camera', [metadata.make, metadata.model].filter(Boolean).join(' ') || ui.noData);
+    text('fia-date', metadata.dateTime || ui.noData);
+    text('fia-software', metadata.software || ui.noData);
+    text('fia-coordinates', formatCoordinates(metadata.latitude, metadata.longitude));
+  }
+
+  function updateIntegrity(result: IntegrityResult): void {
+    const scoreArc = document.getElementById('fia-score-arc') as SVGCircleElement | null;
+    const status = document.getElementById('fia-status');
+    text('fia-score', String(result.score));
+    text('fia-status', getStatusLabel(result.classification));
+    if (scoreArc) scoreArc.style.strokeDashoffset = String(320 - result.score * 3.2);
+    if (status) status.dataset.level = result.classification;
+  }
+
+  function appendFinding(findings: HTMLElement, finding: IntegrityFinding): void {
+    const item = document.createElement('div');
+    const strong = document.createElement('strong');
+    const small = document.createElement('small');
+    item.className = `fia-finding fia-${finding.severity}`;
+    strong.textContent = finding.title;
+    small.textContent = finding.detail;
+    item.append(strong, small);
+    findings.appendChild(item);
+  }
+
+  function renderFindings(result: IntegrityResult): void {
+    const findings = document.getElementById('fia-findings');
+    if (!findings) return;
+    findings.innerHTML = '';
+    result.findings.forEach((finding) => appendFinding(findings, finding));
+  }
+
+  function updatePreview(file: File): void {
+    const preview = document.getElementById('fia-preview') as HTMLImageElement | null;
+    if (preview) preview.src = URL.createObjectURL(file);
+  }
+
+  function resetMap(): void {
+    const pin = document.getElementById('fia-pin') as HTMLElement | null;
+    const noGps = document.getElementById('fia-no-gps');
+    const link = document.getElementById('fia-map-link') as HTMLAnchorElement | null;
+    if (pin) pin.hidden = true;
+    if (link) link.hidden = true;
+    if (noGps) noGps.hidden = false;
+  }
+
+  function updateMap(metadata: ExifMetadata): void {
+    const pin = document.getElementById('fia-pin') as HTMLElement | null;
+    const noGps = document.getElementById('fia-no-gps');
+    const link = document.getElementById('fia-map-link') as HTMLAnchorElement | null;
+    if (!pin || !link || metadata.latitude === undefined || metadata.longitude === undefined) {
+      resetMap();
+      return;
+    }
+
+    pin.hidden = false;
+    pin.style.left = `${((metadata.longitude ?? 0) + 180) / 360 * 100}%`;
+    pin.style.top = `${(90 - (metadata.latitude ?? 0)) / 180 * 100}%`;
+    link.hidden = false;
+    link.href = `https://www.openstreetmap.org/?mlat=${metadata.latitude}&mlon=${metadata.longitude}#map=14/${metadata.latitude}/${metadata.longitude}`;
+    if (noGps) noGps.hidden = true;
+  }
+
+  function showLoadedState(file: File): void {
+    if (workbench) workbench.hidden = false;
+    if (drop) drop.dataset.hasImage = 'true';
+    text('fia-button-label', ui.replaceFile);
+    text('fia-button-icon', '\u21bb');
+    text('fia-state', file.name);
+  }
+
+  async function analyze(file: File): Promise<void> {
+    text('fia-state', ui.processing);
+    try {
+      const buffer = await file.arrayBuffer();
+      const metadata = extractor.extract(buffer);
+      const result = checker.inspect(buffer, metadata);
+      showLoadedState(file);
+      updateSummary(file, metadata, result);
+      updateIntegrity(result);
+      renderFindings(result);
+      updatePreview(file);
+      updateMap(metadata);
+      renderHex(buffer);
+    } catch {
+      text('fia-state', ui.loadError);
+    }
+  }
+
+  input?.addEventListener('change', () => {
+    const file = input.files?.[0];
+    if (file) void analyze(file);
+  });
+
+  for (const eventName of ['dragenter', 'dragover']) {
+    drop?.addEventListener(eventName, (event) => {
+      event.preventDefault();
+      drop.classList.add('is-dragging');
+    });
+  }
+
+  for (const eventName of ['dragleave', 'drop']) {
+    drop?.addEventListener(eventName, (event) => {
+      event.preventDefault();
+      drop.classList.remove('is-dragging');
+    });
+  }
+
+  drop?.addEventListener('drop', (event) => {
+    const file = (event as DragEvent).dataTransfer?.files[0];
+    if (file) void analyze(file);
+  });
+</script>

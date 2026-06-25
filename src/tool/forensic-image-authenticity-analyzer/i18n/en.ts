@@ -1,0 +1,105 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'forensic-image-metadata-authenticity-analyzer';
+const title = 'Forensic Image Metadata and Authenticity Analyzer';
+const description = 'Inspect image headers, EXIF capture details, GPS coordinates, editing-software signatures, and raw bytes locally in your browser.';
+
+const howTo = [
+  { name: 'Preserve the original evidence', text: 'Work from a forensic copy and retain the source file and its cryptographic hash outside this browser tool.' },
+  { name: 'Load an image locally', text: 'Drop or select a JPEG or PNG. The file is read in browser memory and is not uploaded by this tool.' },
+  { name: 'Review metadata and location', text: 'Compare capture time, camera identity, software, and GPS fields with the case narrative and acquisition records.' },
+  { name: 'Interpret integrity indicators', text: 'Treat editor signatures and missing fields as investigative leads, not proof of manipulation.' },
+  { name: 'Examine the hexadecimal preview', text: 'Use the highlighted header and metadata zones to identify container structure and document offsets for deeper examination.' },
+];
+
+const faq = [
+  { question: 'Can metadata prove that a photograph is authentic?', answer: 'No. Metadata can be removed, copied, or changed. Authentication requires combining file structure, provenance, hashes, visual examination, compression analysis, and validated forensic methods.' },
+  { question: 'Does an Adobe or GIMP signature prove malicious editing?', answer: 'No. It indicates that software may have written or exported the file. Legitimate color correction, newsroom processing, or evidence preparation can produce the same signature.' },
+  { question: 'Is the image uploaded?', answer: 'No. Analysis is performed in browser memory. Nevertheless, follow your organization\'s evidence-handling policy before opening sensitive material in any software.' },
+  { question: 'Why might GPS data be missing?', answer: 'The camera may not support GPS, location recording may have been disabled, a platform may have stripped metadata, or the file may have been re-encoded.' },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    privacy: 'Local-only binary examination',
+    dropTitle: 'Place an image on the evidence table',
+    dropHint: 'Drop a JPEG or PNG here, or choose a file. Nothing is uploaded.',
+    chooseFile: 'Choose image',
+    replaceFile: 'Replace image',
+    waiting: 'Awaiting evidence',
+    metadata: 'Capture metadata',
+    integrity: 'Integrity signals',
+    location: 'Recorded location',
+    hex: 'Hexadecimal evidence window',
+    hexHint: 'First 512 bytes · cyan header · amber metadata · neutral image data',
+    noData: 'No readable value',
+    noGps: 'No readable GPS coordinates were found.',
+    mapLink: 'Open coordinates in OpenStreetMap',
+    score: 'Heuristic confidence',
+    disclaimer: 'A high score does not establish authenticity. Preserve the original, calculate cryptographic hashes, and use validated laboratory workflows for case conclusions.',
+    fileName: 'File',
+    fileSize: 'Size',
+    fileType: 'Container',
+    camera: 'Camera',
+    captured: 'Captured',
+    software: 'Software',
+    coordinates: 'Coordinates',
+    statusNoObvious: 'No obvious editing indicators',
+    statusReview: 'Review recommended',
+    statusEditing: 'Editing signature detected',
+    processing: 'Reading binary evidence...',
+    loadError: 'The file could not be analyzed. Select a valid JPEG or PNG image.',
+  },
+  seo: [
+    { type: 'title', text: 'How to Analyze Image Metadata and Authenticity Indicators', level: 2 },
+    { type: 'paragraph', html: 'A forensic image metadata analyzer helps investigators, journalists, legal teams, compliance reviewers, and researchers answer a high-intent question: <strong>what can image metadata actually reveal about a photograph?</strong> Metadata can expose useful clues about capture, location, software processing, and file structure, but it does not function as a standalone truth machine. Its greatest value is triage. It helps you identify which files deserve deeper examination, which details support the claimed history of the image, and which contradictions need follow-up before anyone makes a strong authenticity claim.' },
+    { type: 'paragraph', html: 'This browser-based utility is designed for users who want more than a raw EXIF dump. It reads the selected JPEG or PNG locally and surfaces camera fields, capture timestamps, software tags, coordinate fields, container clues, and the opening bytes of the file in one place. That supports common search intent behind phrases such as <em>photo authenticity checker</em>, <em>EXIF metadata analyzer</em>, <em>how to tell if an image was edited</em>, and <em>how to verify image GPS metadata</em>. People searching those terms usually want both evidence and interpretation, not just a list of tags.' },
+    { type: 'paragraph', html: 'The most important principle is that the result should be read as context, not as a verdict. A file may contain useful metadata and still be misleading. A file may contain little or no metadata and still be genuine. A software signature may indicate ordinary export behavior rather than deceptive manipulation. Good forensic practice therefore treats metadata as one layer of evidence that must be compared against provenance, hashes, witness accounts, device history, and validated examination methods.' },
+    { type: 'title', text: 'What EXIF Metadata Can and Cannot Tell You', level: 3 },
+    { type: 'paragraph', html: 'EXIF is a TIFF-based metadata structure commonly embedded in JPEG images. It may record the capture device, original date and time, orientation, exposure settings, and GPS position. When those fields are internally consistent and align with the known circumstances of a case, they can support a proposed timeline or source. When they conflict with the reported history of the image, they can identify precise questions for further review.' },
+    { type: 'paragraph', html: 'However, one of the biggest misconceptions behind image metadata searches is that EXIF is trustworthy by default. It is not. Metadata can be edited, copied between files, stripped by social networks, altered during export, normalized by cloud platforms, or partially damaged by transcoding. The better question is not simply whether metadata exists, but whether it is technically coherent, contextually plausible, and corroborated by independent evidence.' },
+    { type: 'table', headers: ['Observation', 'Possible meaning', 'Required caution'], rows: [
+      ['Camera make and model present', 'The file contains device-identification tags.', 'Tags can be copied or rewritten and do not identify the physical camera by themselves.'],
+      ['GPS coordinates present', 'A location was recorded in metadata.', 'Confirm coordinate sign, datum, timestamp, and consistency with independent evidence.'],
+      ['Software tag names an editor', 'The named application likely wrote metadata or exported the file.', 'This does not prove deceptive compositing or content alteration.'],
+      ['Capture date missing', 'The relevant tag is absent or unreadable.', 'Absence may result from privacy settings, transcoding, or metadata removal.'],
+    ] },
+    { type: 'title', text: 'What Users Usually Mean by "Is This Photo Authentic?"', level: 3 },
+    { type: 'paragraph', html: 'In practice, people searching for image authenticity checks often mean different things. They may want to know whether the file came directly from a camera, whether editing software touched it, whether the stated date or location seems credible, whether the file structure looks normal, or whether there are immediate reasons to distrust it. A useful analyzer should help separate those questions instead of collapsing everything into a simplistic yes-or-no judgment.' },
+    { type: 'paragraph', html: 'This tool therefore distinguishes between <strong>observations</strong> and <strong>heuristics</strong>. Observations are things the file appears to contain, such as a readable software field or coordinate pair. Heuristics are risk-oriented interpretations, such as whether an editor signature deserves review. That separation is valuable for both usability and SEO because it answers a real user need: people want to understand what the file says, what the tool infers, and where human judgment still matters.' },
+    { type: 'title', text: 'Interpreting Editing Software Signatures', level: 3 },
+    { type: 'paragraph', html: 'Names such as Adobe Photoshop, Lightroom, GIMP, Snapseed, or ImageMagick can appear as plain text in metadata or application segments. Their presence is an attribution clue about file processing, not proof that pixels were maliciously altered. This is one of the most common search intents around forensic image metadata, because many users assume that seeing an editor name automatically means the image was manipulated. In reality, ordinary resizing, format conversion, color correction, newsroom processing, redaction, or evidence preparation can produce the same signature.' },
+    { type: 'paragraph', html: 'A better interpretation is to ask what role the named software plausibly played. Did it resize the image for the web? Strip metadata during export? Save a screenshot? Re-encode a social media copy? Add a color profile? The same software string can support very different narratives depending on the workflow. Examiners should compare the signature with the expected handling history and, when the stakes justify it, move to deeper methods such as quantization-table review, compression-history analysis, thumbnail comparison, sensor-pattern examination, and pixel-level testing.' },
+    { type: 'title', text: 'How to Read GPS Metadata Responsibly', level: 3 },
+    { type: 'paragraph', html: 'GPS metadata can be highly valuable because it may connect an image to a place, but it is easy to overstate its certainty. Coordinates should be checked for hemisphere sign, decimal precision, timestamp alignment, and consistency with the rest of the file. A coordinate pair that looks precise is not automatically reliable. It may reflect stale device state, manual editing, export behavior, or shared-media history. Missing GPS data also does not imply concealment, because many cameras never record location and many platforms remove it automatically.' },
+    { type: 'paragraph', html: 'For users arriving from searches about photo geolocation or metadata-based location verification, the most reliable approach is comparison. Treat the coordinates as one lead among several. Compare them with testimony, travel history, scene landmarks, weather, network records, cloud backups, and device logs where lawfully available. The real value of the metadata lies in how well it fits the broader evidence picture.' },
+    { type: 'title', text: 'Why the Hexadecimal View Matters', level: 3 },
+    { type: 'paragraph', html: 'A hexadecimal viewer exposes the actual byte values and offsets that form the file. That matters because many authenticity questions are really structure questions. JPEG files normally begin with the SOI marker FF D8, followed by marker segments such as APP0 or APP1; EXIF commonly resides in APP1. PNG files begin with an eight-byte signature and continue as named chunks. Looking at the first bytes helps users confirm that a file at least resembles the container it claims to be and gives experienced examiners a fast way to document offsets for later reporting.' },
+    { type: 'paragraph', html: 'Structural anomalies do not automatically mean tampering, because legitimate encoders differ. Still, byte-level visibility is valuable when a file appears damaged, mislabeled, partially rewritten, or inconsistent with its extension. Many users searching for an image forensic tool want transparency rather than a black box. Showing the header and metadata zones directly makes the tool easier to trust because the user can see where the interpretation begins.' },
+    { type: 'title', text: 'A Practical Workflow for Metadata-Based Image Review', level: 3 },
+    { type: 'paragraph', html: 'A strong workflow starts before the EXIF review. Preserve the source file, compute a cryptographic hash, and avoid treating a browser-loaded working copy as the evidential master. Then review the container, file properties, capture fields, software fields, and GPS coordinates together. Look for internal coherence first. After that, compare what the file says with what the case says. In many investigations, the most useful insight comes from the mismatch between those two stories.' },
+    { type: 'paragraph', html: 'This matters for search intent because many users do not just want a tag list. They want to know what to do after they see a date, a software label, or a coordinate pair. In most cases the answer is to document the observation, record the limitation, and decide whether the file needs deeper examination with laboratory-approved methods. Metadata analysis is a gateway step, not the whole examination.' },
+    { type: 'title', text: 'Forensic Workflow Checklist', level: 3 },
+    { type: 'list', items: [
+      '<strong>Preserve:</strong> Never treat a browser-loaded working copy as the evidential master.',
+      '<strong>Hash:</strong> Record a cryptographic hash at acquisition and after every authorized transfer.',
+      '<strong>Corroborate:</strong> Compare metadata with device records, cloud records, testimony, and scene facts.',
+      '<strong>Document:</strong> Record software versions, settings, offsets, observations, and screenshots needed for reproducibility.',
+      '<strong>Validate:</strong> Use laboratory-approved tools and peer review before expressing a formal authenticity conclusion.',
+    ] },
+    { type: 'title', text: 'When Metadata Review Is Not Enough', level: 3 },
+    { type: 'paragraph', html: 'Sometimes the metadata looks clean and the image is still misleading. Sometimes the metadata looks suspicious and the image is still authentic. That is why advanced forensic conclusions require more than file tags. Depending on the stakes, follow-up work may include compression artifact analysis, quantization-table comparison, thumbnail inconsistency checks, pixel-level examination, provenance reconstruction, and chain-of-custody review. The right SEO content says this clearly because it answers the real question behind most Google searches: what can this tool do for me, and where do its limits begin?' },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: title, description, applicationCategory: 'ForensicApplication', operatingSystem: 'Any' },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) },
+    { '@context': 'https://schema.org', '@type': 'HowTo', name: title, step: howTo.map((step) => ({ '@type': 'HowToStep', name: step.name, text: step.text })) },
+  ],
+};

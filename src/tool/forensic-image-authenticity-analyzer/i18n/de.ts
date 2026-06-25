@@ -1,0 +1,105 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'forensischer-bildmetadata-authentizitaets-analysator';
+const title = 'Forensischer Bildmetadata und Authentizitätsanalysator';
+const description = 'Untersuche Bildheader, EXIF-Aufnahmedaten, GPS-Koordinaten, Signaturen von Bearbeitungssoftware und Rohbytes lokal in deinem Browser.';
+
+const howTo = [
+  { name: 'Originalbeweis sichern', text: 'Arbeite mit einer forensischen Kopie und bewahre die Quelldatei sowie ihren kryptografischen Hash außerhalb dieses Browser-Tools auf.' },
+  { name: 'Bild lokal laden', text: 'Ziehe ein JPEG oder PNG hinein oder wähle eine Datei aus. Die Datei wird nur im Browserspeicher gelesen und nicht hochgeladen.' },
+  { name: 'Metadaten und Ort prüfen', text: 'Vergleiche Aufnahmezeit, Kameradaten, Software und GPS-Felder mit der Falldarstellung und den Erfassungsunterlagen.' },
+  { name: 'Integritaetssignale einordnen', text: 'Behandle Editiersignaturen und fehlende Felder als Ermittlungsansaetze, nicht als Beweis fuer Manipulation.' },
+  { name: 'Hex-Vorschau auswerten', text: 'Nutze die markierten Header- und Metadatenbereiche, um die Containerstruktur zu erkennen und Offsets fuer eine tiefere Analyse zu dokumentieren.' },
+];
+
+const faq = [
+  { question: 'Koennen Metadaten beweisen, dass ein Foto echt ist?', answer: 'Nein. Metadaten können entfernt, kopiert oder verändert werden. Eine Authentifizierung erfordert die Kombination aus Dateistruktur, Herkunft, Hashes, visueller Prüfung, Kompressionsanalyse und validierten forensischen Methoden.' },
+  { question: 'Beweist eine Adobe- oder GIMP-Signatur eine boeswillige Bearbeitung?', answer: 'Nein. Sie zeigt nur an, dass eine Software die Datei oder ihre Metadaten geschrieben oder exportiert haben koennte. Auch legitime Farbkorrektur, redaktionelle Verarbeitung oder Beweisaufbereitung können dieselbe Signatur erzeugen.' },
+  { question: 'Wird das Bild hochgeladen?', answer: 'Nein. Die Analyse erfolgt im Arbeitsspeicher des Browsers. Beachte trotzdem die Beweisrichtlinien deiner Organisation, bevor du sensibles Material in irgendeiner Software öffnest.' },
+  { question: 'Warum koennten GPS-Daten fehlen?', answer: 'Die Kamera unterstuetzt möglicherweise kein GPS, die Standortaufzeichnung war deaktiviert, eine Plattform hat Metadaten entfernt oder die Datei wurde neu kodiert.' },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    privacy: 'Nur lokale Binaeranalyse',
+    dropTitle: 'Lege ein Bild auf den Beweistisch',
+    dropHint: 'Ziehe hier ein JPEG oder PNG hinein oder wähle eine Datei. Es wird nichts hochgeladen.',
+    chooseFile: 'Bild auswählen',
+    replaceFile: 'Bild ersetzen',
+    waiting: 'Warte auf Beweisstueck',
+    metadata: 'Aufnahmemetadaten',
+    integrity: 'Integritaetssignale',
+    location: 'Erfasster Ort',
+    hex: 'Hexadezimales Beweisfenster',
+    hexHint: 'Erste 512 Bytes - cyanfarbener Header - bernsteinfarbene Metadaten - neutrale Bilddaten',
+    noData: 'Kein lesbarer Wert',
+    noGps: 'Es wurden keine lesbaren GPS-Koordinaten gefunden.',
+    mapLink: 'Koordinaten in OpenStreetMap oeffnen',
+    score: 'Heuristische Vertrauensstufe',
+    disclaimer: 'Ein hoher Wert belegt keine Authentizitaet. Bewahre das Original auf, berechne kryptografische Hashes und nutze validierte Labor-Workflows fuer Fallbewertungen.',
+    fileName: 'Datei',
+    fileSize: 'Größe',
+    fileType: 'Container',
+    camera: 'Kamera',
+    captured: 'Aufgenommen',
+    software: 'Software',
+    coordinates: 'Koordinaten',
+    statusNoObvious: 'Keine offensichtlichen Bearbeitungshinweise',
+    statusReview: 'Prüfung empfohlen',
+    statusEditing: 'Bearbeitungssignatur erkannt',
+    processing: 'Binaere Beweisdaten werden gelesen...',
+    loadError: 'Die Datei konnte nicht analysiert werden. Waehle ein gueltiges JPEG- oder PNG-Bild aus.',
+  },
+  seo: [
+    { type: 'title', text: 'Wie man Bildmetadaten und Authentizitaetssignale analysiert', level: 2 },
+    { type: 'paragraph', html: 'Ein forensischer Bildmetadata-Analysator hilft Ermittlern, Journalisten, juristischen Teams, Compliance-Pruefern und Sachverstaendigen bei einer haeufig gesuchten Frage: <strong>Was können Bildmetadaten tatsaechlich über ein Foto verraten?</strong> Metadaten können nuetzliche Hinweise zu Aufnahme, Ort, Softwareverarbeitung und Dateistruktur liefern, sind aber keine eigenstaendige Wahrheitsmaschine. Ihr größter Nutzen liegt im Triage-Prozess. Sie helfen dabei zu erkennen, welche Dateien eine tiefere Analyse verdienen, welche Details die behauptete Geschichte des Bildes stuetzen und welche Widersprueche vor einer belastbaren Authentizitaetsaussage weiter geprueft werden muessen.' },
+    { type: 'paragraph', html: 'Dieses Browser-Tool richtet sich an Nutzer, die mehr wollen als einen rohen EXIF-Dump. Es liest das ausgewaehlte JPEG oder PNG lokal ein und zeigt Kamerafelder, Aufnahmezeitpunkte, Software-Tags, Koordinaten, Containerhinweise und die ersten Bytes der Datei an einem Ort. Damit bedient es Suchintentionen hinter Begriffen wie <em>Foto Authentizitaetsprüfung</em>, <em>EXIF-Metadaten analysieren</em>, <em>woran erkennt man bearbeitete Bilder</em> oder <em>GPS-Metadaten eines Bildes prüfen</em>. Wer danach sucht, moechte in der Regel sowohl Belege als auch Einordnung und nicht nur eine Tag-Liste.' },
+    { type: 'paragraph', html: 'Der wichtigste Grundsatz ist: Das Ergebnis muss als Kontext gelesen werden, nicht als Urteil. Eine Datei kann nuetzliche Metadaten enthalten und trotzdem irreführend sein. Sie kann nur wenige oder gar keine Metadaten enthalten und dennoch echt sein. Eine Softwaresignatur kann auf normales Exportverhalten hindeuten statt auf taeuschende Manipulation. Gute forensische Praxis behandelt Metadaten deshalb als eine Beweisebene, die mit Herkunft, Hashes, Zeugenaussagen, Gerätehistorie und validierten Untersuchungsmethoden abgeglichen werden muss.' },
+    { type: 'title', text: 'Was EXIF sagen kann und was nicht', level: 3 },
+    { type: 'paragraph', html: 'EXIF ist eine TIFF-basierte Metadatenstruktur, die haeufig in JPEG-Dateien eingebettet ist. Sie kann das Aufnahmegeraet, das urspruengliche Datum und die Uhrzeit, die Ausrichtung, Belichtungsparameter und die GPS-Position enthalten. Wenn diese Felder intern stimmig sind und zu den bekannten Umstaenden des Falls passen, können sie eine vorgeschlagene Zeitleiste oder Herkunft stuetzen. Wenn sie der behaupteten Entstehungsgeschichte widersprechen, liefern sie gezielte Fragen fuer die weitere Prüfung.' },
+    { type: 'paragraph', html: 'Einer der größten Irrtuemer hinter Suchanfragen zu Bildmetadaten ist die Annahme, EXIF sei standardmaessig vertrauenswuerdig. Das ist nicht so. Metadaten können bearbeitet, zwischen Dateien kopiert, von sozialen Netzwerken entfernt, beim Export verändert, durch Cloud-Plattformen normalisiert oder bei der Neukodierung teilweise beschaedigt werden. Die bessere Frage lautet daher nicht nur, ob Metadaten vorhanden sind, sondern ob sie technisch kohaerent, kontextuell plausibel und durch unabhaengige Beweise gestuetzt sind.' },
+    { type: 'table', headers: ['Beobachtung', 'Moegliche Bedeutung', 'Erforderliche Vorsicht'], rows: [
+      ['Kameramarke und -modell vorhanden', 'Die Datei enthaelt Gerätekennungs-Tags.', 'Tags können kopiert oder umgeschrieben werden und identifizieren die physische Kamera nicht allein.'],
+      ['GPS-Koordinaten vorhanden', 'In den Metadaten wurde ein Ort gespeichert.', 'Pruefe Vorzeichen, Datum, Zeitstempel und Uebereinstimmung mit unabhaengigen Beweisen.'],
+      ['Software-Tag nennt einen Editor', 'Die genannte Anwendung hat die Datei wahrscheinlich geschrieben oder exportiert.', 'Das beweist keine taeuschende Montage oder inhaltliche Veraenderung.'],
+      ['Aufnahmedatum fehlt', 'Das relevante Tag fehlt oder ist nicht lesbar.', 'Fehlende Daten können auf Privatsphaere-Einstellungen, Transkodierung oder Metadatenentfernung zurückgehen.'],
+    ] },
+    { type: 'title', text: 'Was Nutzer meist mit "Ist dieses Foto authentisch?" meinen', level: 3 },
+    { type: 'paragraph', html: 'In der Praxis meinen Menschen, die nach Bildauthentizitaetsprüfungen suchen, oft unterschiedliche Dinge. Sie wollen wissen, ob die Datei direkt aus einer Kamera stammt, ob Bearbeitungssoftware sie beruehrt hat, ob das behauptete Datum oder der Ort plausibel wirken, ob die Dateistruktur normal aussieht oder ob unmittelbare Gruende zum Misstrauen bestehen. Ein nuetzlicher Analysator sollte diese Fragen auseinanderhalten, statt alles in ein vereinfachtes Ja-oder-Nein zu pressen.' },
+    { type: 'paragraph', html: 'Dieses Tool trennt deshalb zwischen <strong>Beobachtungen</strong> und <strong>Heuristiken</strong>. Beobachtungen sind Dinge, die die Datei tatsaechlich zu enthalten scheint, zum Beispiel ein lesbares Softwarefeld oder ein Koordinatenpaar. Heuristiken sind risikoorientierte Einordnungen, etwa ob eine Editor-Signatur überprueft werden sollte. Diese Trennung ist sowohl fuer die Nutzbarkeit als auch fuer SEO wertvoll, weil sie eine reale Nutzerfrage beantwortet: Was sagt die Datei, was schließt das Tool daraus und wo bleibt menschliches Urteil unverzichtbar?' },
+    { type: 'title', text: 'Bearbeitungssoftware-Signaturen richtig deuten', level: 3 },
+    { type: 'paragraph', html: 'Namen wie Adobe Photoshop, Lightroom, GIMP, Snapseed oder ImageMagick können als Klartext in Metadaten oder Anwendungssegmenten erscheinen. Ihre Praesenz ist ein Herkunftshinweis zur Dateiverarbeitung, aber kein Beweis dafuer, dass Pixel boeswillig verändert wurden. Gerade hier liegt eine sehr haeufige Suchintention, weil viele Nutzer annehmen, der Name eines Editors bedeute automatisch Manipulation. Tatsaechlich können auch normales Skalieren, Formatumwandlung, Farbkorrektur, redaktionelle Verarbeitung, Schwaerzung oder Beweisaufbereitung dieselbe Signatur hinterlassen.' },
+    { type: 'paragraph', html: 'Eine bessere Einordnung fragt danach, welche Rolle die genannte Software plausibel gespielt hat. Hat sie das Bild fuer das Web verkleinert? Beim Export Metadaten entfernt? Einen Screenshot gespeichert? Eine Social-Media-Kopie neu kodiert? Ein Farbprofil hinzugefuegt? Dieselbe Zeichenfolge kann je nach Workflow sehr unterschiedliche Geschichten stuetzen. Sachverstaendige sollten die Signatur mit dem erwarteten Verarbeitungsverlauf vergleichen und bei entsprechendem Risiko zu tieferen Methoden wie Quantisierungstabellen-Prüfung, Kompressionshistorien-Analyse, Thumbnail-Vergleich, Sensorpattern-Untersuchung und Pixeltests übergehen.' },
+    { type: 'title', text: 'GPS-Metadaten verantwortungsvoll lesen', level: 3 },
+    { type: 'paragraph', html: 'GPS-Metadaten können sehr wertvoll sein, weil sie ein Bild mit einem Ort verknuepfen können. Gleichzeitig werden sie oft überinterpretiert. Koordinaten sollten auf Hemisphaeren-Vorzeichen, Dezimalpraezision, zeitliche Zuordnung und Stimmigkeit mit dem Rest der Datei geprueft werden. Ein Koordinatenpaar, das praezise aussieht, ist nicht automatisch verlaesslich. Es kann auf alten Gerätestatus, manuelle Bearbeitung, Exportverhalten oder eine gemeinsam geteilte Medienhistorie zurückgehen. Fehlende GPS-Daten bedeuten ebenfalls nicht automatisch Verschleierung, weil viele Kameras nie Standortdaten speichern und viele Plattformen sie standardmaessig entfernen.' },
+    { type: 'paragraph', html: 'Fuer Nutzer, die über Suchanfragen zu Foto-Geolokalisierung oder metadatenbasierter Ortsprüfung kommen, ist Vergleich der verlaesslichste Ansatz. Behandle Koordinaten als einen Hinweis unter mehreren. Vergleiche sie mit Zeugenaussagen, Reiseverlauf, markanten Szenenmerkmalen, Wetter, Netzwerkdaten, Cloud-Backups und Geräteeintraegen, sofern dies rechtlich zulaessig ist. Der eigentliche Wert der Metadaten liegt darin, wie gut sie in das groessere Beweisbild passen.' },
+    { type: 'title', text: 'Warum die hexadezimale Ansicht wichtig ist', level: 3 },
+    { type: 'paragraph', html: 'Ein Hex-Viewer zeigt die tatsaechlichen Bytewerte und Offsets, aus denen die Datei besteht. Das ist wichtig, weil viele Fragen zur Authentizitaet in Wahrheit Strukturfragen sind. JPEG-Dateien beginnen üblicherweise mit dem SOI-Marker FF D8, gefolgt von Segmenten wie APP0 oder APP1. EXIF liegt haeufig in APP1. PNG-Dateien starten mit einer Acht-Byte-Signatur und setzen sich als benannte Chunks fort. Ein Blick auf die ersten Bytes hilft zu prüfen, ob eine Datei zumindest wie der Container aussieht, der sie vorgibt zu sein, und bietet erfahrenen Pruefern eine schnelle Möglichkeit, Offsets fuer spaetere Berichte festzuhalten.' },
+    { type: 'paragraph', html: 'Strukturelle Auffälligkeiten bedeuten nicht automatisch Manipulation, da sich legitime Encoder unterscheiden. Trotzdem ist Byte-Sichtbarkeit wertvoll, wenn eine Datei beschaedigt, falsch bezeichnet, teilweise überschrieben oder mit ihrer Endung unvereinbar erscheint. Viele Nutzer, die nach einem Bildforensik-Tool suchen, moechten Transparenz statt Blackbox. Wenn Header und Metadatenzonen direkt sichtbar sind, wird leichter nachvollziehbar, wo die Interpretation beginnt.' },
+    { type: 'title', text: 'Ein praktischer Workflow fuer die Metadatenprüfung', level: 3 },
+    { type: 'paragraph', html: 'Ein belastbarer Workflow beginnt vor der EXIF-Prüfung. Bewahre die Quelldatei auf, berechne einen kryptografischen Hash und behandle eine im Browser geladene Arbeitskopie niemals als beweisrelevantes Master. Pruefe danach gemeinsam den Container, die Dateieigenschaften, die Aufnahmefelder, die Softwarefelder und die GPS-Koordinaten. Suche zunaechst nach interner Stimmigkeit. Anschliessend vergleichst du, was die Datei erzählt, mit dem, was der Fall erzählt. In vielen Ermittlungen entsteht die nuetzlichste Erkenntnis aus der Abweichung zwischen diesen beiden Geschichten.' },
+    { type: 'paragraph', html: 'Das ist auch fuer die Suchintention wichtig, weil viele Nutzer eben nicht nur eine Tag-Liste wollen. Sie moechten wissen, was sie nach dem Anblick eines Datums, einer Softwarebezeichnung oder eines Koordinatenpaars tun sollen. In den meisten Faellen bedeutet das: Beobachtung dokumentieren, Einschraenkung festhalten und entscheiden, ob die Datei eine tiefere Untersuchung mit laborzugelassenen Methoden benoetigt. Metadatenanalyse ist ein Einstiegsschritt, nicht die ganze Untersuchung.' },
+    { type: 'title', text: 'Checkliste fuer den forensischen Workflow', level: 3 },
+    { type: 'list', items: [
+      '<strong>Sichern:</strong> Behandle eine im Browser geladene Arbeitskopie niemals als beweisrelevantes Master.',
+      '<strong>Hashen:</strong> Erfasse einen kryptografischen Hash bei der Sicherung und nach jeder autorisierten Uebertragung.',
+      '<strong>Abgleichen:</strong> Vergleiche Metadaten mit Gerätedaten, Cloud-Eintraegen, Zeugenaussagen und Tatsachen am Tatort.',
+      '<strong>Dokumentieren:</strong> Halte Softwareversionen, Einstellungen, Offsets, Beobachtungen und Screenshots fuer die Reproduzierbarkeit fest.',
+      '<strong>Validieren:</strong> Nutze laborzugelassene Werkzeuge und Peer Review, bevor du eine formale Authentizitaetsaussage triffst.',
+    ] },
+    { type: 'title', text: 'Wann Metadatenprüfung nicht ausreicht', level: 3 },
+    { type: 'paragraph', html: 'Manchmal wirken die Metadaten sauber und das Bild ist trotzdem irreführend. Manchmal erscheinen die Metadaten verdaechtig und das Bild ist dennoch authentisch. Deshalb brauchen fortgeschrittene forensische Schlussfolgerungen mehr als Dateitags. Je nach Fallgewicht können Folgeschritte Kompressionsartefakt-Analyse, Quantisierungstabellen-Vergleich, Prüfung inkonsistenter Thumbnails, Pixeluntersuchung, Rekonstruktion der Herkunft und Review der Chain of Custody umfassen. Guter SEO-Inhalt sagt das klar, weil er damit die eigentliche Frage hinter vielen Suchanfragen beantwortet: Was kann dieses Tool leisten und wo beginnen seine Grenzen?' },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: title, description, applicationCategory: 'ForensicApplication', operatingSystem: 'Any' },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) },
+    { '@context': 'https://schema.org', '@type': 'HowTo', name: title, step: howTo.map((step) => ({ '@type': 'HowToStep', name: step.name, text: step.text })) },
+  ],
+};

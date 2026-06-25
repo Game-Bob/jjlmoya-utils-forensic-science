@@ -1,0 +1,105 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'analyseur-medico-legal-metadonnees-authenticite-image';
+const title = 'Analyseur Médicolégal des Métadonnées et de l\'Authenticité des Images';
+const description = 'Inspectez les en-têtes d\'image, les détails EXIF de prise de vue, les coordonnées GPS, les signatures de logiciels d\'édition et les octets bruts localement dans votre navigateur.';
+
+const howTo = [
+  { name: 'Préserver la preuve originale', text: 'Travaillez à partir d\'une copie médico-légale et conservez le fichier source ainsi que son hash cryptographique en dehors de cet outil navigateur.' },
+  { name: 'Charger une image localement', text: 'Glissez-déposez ou sélectionnez un JPEG ou un PNG. Le fichier est lu dans la mémoire du navigateur et n\'est pas téléversé.' },
+  { name: 'Examiner les métadonnées et la localisation', text: 'Comparez l\'heure de capture, l\'identité de l\'appareil, le logiciel et les champs GPS avec le récit du dossier et les registres d\'acquisition.' },
+  { name: 'Interpréter les signaux d\'intégrité', text: 'Considérez les signatures d\'édition et les champs manquants comme des pistes d\'enquête, pas comme une preuve de manipulation.' },
+  { name: 'Examiner l\'aperçu hexadécimal', text: 'Utilisez les zones mises en évidence de l\'en-tête et des métadonnées pour identifier la structure du conteneur et documenter les offsets pour une analyse plus approfondie.' },
+];
+
+const faq = [
+  { question: 'Les métadonnées peuvent-elles prouver qu\'une photo est authentique ?', answer: 'Non. Les métadonnées peuvent être supprimées, copiées ou modifiées. L\'authentification exige de combiner la structure du fichier, la provenance, les hashes, l\'examen visuel, l\'analyse de compression et des méthodes médico-légales validées.' },
+  { question: 'Une signature Adobe ou GIMP prouve-t-elle une retouche malveillante ?', answer: 'Non. Elle indique qu\'un logiciel a pu écrire les métadonnées ou exporter le fichier. Une correction colorimétrique légitime, un flux éditorial ou la préparation d\'éléments de preuve peuvent produire la même signature.' },
+  { question: 'L\'image est-elle téléversée ?', answer: 'Non. L\'analyse s\'effectue dans la mémoire du navigateur. Respectez néanmoins la politique de traitement des preuves de votre organisation avant d\'ouvrir un document sensible dans un logiciel quelconque.' },
+  { question: 'Pourquoi les données GPS peuvent-elles être absentes ?', answer: 'L\'appareil peut ne pas prendre en charge le GPS, l\'enregistrement de la position a pu être désactivé, une plateforme a pu supprimer les métadonnées, ou le fichier a pu être réencodé.' },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    privacy: 'Examen binaire local uniquement',
+    dropTitle: 'Déposez une image sur la table de preuve',
+    dropHint: 'Déposez ici un JPEG ou un PNG, ou choisissez un fichier. Rien n\'est téléversé.',
+    chooseFile: 'Choisir une image',
+    replaceFile: 'Remplacer l\'image',
+    waiting: 'En attente d\'une pièce',
+    metadata: 'Métadonnées de capture',
+    integrity: 'Signaux d\'intégrité',
+    location: 'Localisation enregistrée',
+    hex: 'Fenêtre de preuve hexadécimale',
+    hexHint: '512 premiers octets · en-tête cyan · métadonnées ambre · données image neutres',
+    noData: 'Aucune valeur lisible',
+    noGps: 'Aucune coordonnée GPS lisible n\'a été trouvée.',
+    mapLink: 'Ouvrir les coordonnées dans OpenStreetMap',
+    score: 'Confiance heuristique',
+    disclaimer: 'Un score élevé n\'établit pas l\'authenticité. Conservez l\'original, calculez des hashes cryptographiques et utilisez des workflows de laboratoire validés pour les conclusions du dossier.',
+    fileName: 'Fichier',
+    fileSize: 'Taille',
+    fileType: 'Conteneur',
+    camera: 'Appareil',
+    captured: 'Capturé',
+    software: 'Logiciel',
+    coordinates: 'Coordonnées',
+    statusNoObvious: 'Aucun indice évident de retouche',
+    statusReview: 'Révision recommandée',
+    statusEditing: 'Signature d\'édition détectée',
+    processing: 'Lecture des preuves binaires...',
+    loadError: 'Le fichier n\'a pas pu être analysé. Sélectionnez une image JPEG ou PNG valide.',
+  },
+  seo: [
+    { type: 'title', text: 'Comment analyser les métadonnées d\'image et les indices d\'authenticité', level: 2 },
+    { type: 'paragraph', html: 'Un analyseur médico-légal de métadonnées d\'image aide les enquêteurs, journalistes, juristes, équipes conformité et experts à répondre à une question à forte intention: <strong>que peuvent réellement révéler les métadonnées d\'une photographie ?</strong> Les métadonnées peuvent fournir des indices utiles sur la capture, la localisation, le traitement logiciel et la structure du fichier, mais elles ne constituent pas une machine autonome à dire le vrai. Leur principale valeur réside dans le triage. Elles permettent d\'identifier les fichiers qui méritent un examen plus approfondi, les détails qui soutiennent l\'histoire revendiquée de l\'image et les contradictions qui nécessitent un suivi avant toute conclusion forte sur l\'authenticité.' },
+    { type: 'paragraph', html: 'Cet outil navigateur s\'adresse aux utilisateurs qui veulent plus qu\'un simple dump EXIF brut. Il lit localement le JPEG ou le PNG sélectionné et réunit en un seul endroit les champs de l\'appareil, les horodatages de capture, les étiquettes logicielles, les coordonnées, les indices de conteneur et les premiers octets du fichier. Il répond ainsi à des intentions de recherche fréquentes derrière des requêtes comme <em>vérifier l\'authenticité d\'une photo</em>, <em>analyser les métadonnées EXIF</em>, <em>comment savoir si une image a été retouchée</em> ou <em>comment vérifier les métadonnées GPS d\'une image</em>. Les utilisateurs qui formulent ces recherches veulent généralement à la fois des éléments factuels et de l\'interprétation.' },
+    { type: 'paragraph', html: 'Le principe essentiel est que le résultat doit être lu comme du contexte, pas comme un verdict. Un fichier peut contenir des métadonnées utiles et rester trompeur. Il peut contenir peu ou pas de métadonnées et demeurer authentique. Une signature logicielle peut indiquer un comportement normal d\'export plutôt qu\'une manipulation trompeuse. Une bonne pratique médico-légale traite donc les métadonnées comme une couche de preuve à comparer avec la provenance, les hashes, les témoignages, l\'historique de l\'appareil et des méthodes d\'examen validées.' },
+    { type: 'title', text: 'Ce que l\'EXIF peut dire et ne peut pas dire', level: 3 },
+    { type: 'paragraph', html: 'EXIF est une structure de métadonnées fondée sur TIFF couramment intégrée aux images JPEG. Elle peut enregistrer l\'appareil de prise de vue, la date et l\'heure originales, l\'orientation, les paramètres d\'exposition et la position GPS. Lorsque ces champs sont cohérents entre eux et compatibles avec les circonstances connues de l\'affaire, ils peuvent soutenir une chronologie ou une origine proposées. Lorsqu\'ils contredisent l\'histoire annoncée de l\'image, ils orientent l\'examinateur vers des questions précises.' },
+    { type: 'paragraph', html: 'L\'une des plus grandes idées reçues derrière les recherches sur les métadonnées d\'image consiste à croire que l\'EXIF est fiable par défaut. Ce n\'est pas le cas. Les métadonnées peuvent être modifiées, copiées entre fichiers, supprimées par les réseaux sociaux, altérées lors de l\'export, normalisées par des plateformes cloud ou partiellement endommagées par réencodage. La bonne question n\'est donc pas seulement de savoir si des métadonnées existent, mais si elles sont techniquement cohérentes, contextuellement plausibles et corroborées par des éléments indépendants.' },
+    { type: 'table', headers: ['Observation', 'Sens possible', 'Prudence requise'], rows: [
+      ['Marque et modèle d\'appareil présents', 'Le fichier contient des balises d\'identification du dispositif.', 'Les balises peuvent être copiées ou réécrites et n\'identifient pas à elles seules l\'appareil physique.'],
+      ['Coordonnées GPS présentes', 'Une localisation a été enregistrée dans les métadonnées.', 'Vérifiez le signe, le datum, l\'horodatage et la cohérence avec des preuves indépendantes.'],
+      ['Le champ logiciel nomme un éditeur', 'L\'application indiquée a probablement écrit les métadonnées ou exporté le fichier.', 'Cela ne prouve pas un photomontage trompeur ni une altération du contenu.'],
+      ['Date de capture absente', 'La balise concernée est absente ou illisible.', 'L\'absence peut provenir d\'un réglage de confidentialité, d\'une transcodification ou d\'une suppression de métadonnées.'],
+    ] },
+    { type: 'title', text: 'Ce que les utilisateurs veulent souvent dire par " cette photo est-elle authentique ? "', level: 3 },
+    { type: 'paragraph', html: 'En pratique, les personnes qui recherchent une vérification d\'authenticité d\'image visent souvent des questions différentes. Elles veulent savoir si le fichier provient directement d\'un appareil photo, si un logiciel d\'édition l\'a touché, si la date ou le lieu revendiqués semblent crédibles, si la structure du fichier paraît normale ou s\'il existe des raisons immédiates de s\'en méfier. Un bon analyseur doit aider à séparer ces questions au lieu de tout réduire à un simple oui ou non.' },
+    { type: 'paragraph', html: 'Cet outil distingue donc les <strong>observations</strong> des <strong>heuristiques</strong>. Les observations correspondent à ce que le fichier semble effectivement contenir, comme un champ logiciel lisible ou une paire de coordonnées. Les heuristiques sont des interprétations orientées risque, par exemple le fait qu\'une signature d\'édition mérite une revue. Cette distinction améliore à la fois l\'utilisabilité et la pertinence SEO, car elle répond à une vraie attente: comprendre ce que dit le fichier, ce que l\'outil infère et où le jugement humain reste indispensable.' },
+    { type: 'title', text: 'Comment interpréter les signatures de logiciels d\'édition', level: 3 },
+    { type: 'paragraph', html: 'Des noms comme Adobe Photoshop, Lightroom, GIMP, Snapseed ou ImageMagick peuvent apparaître en clair dans les métadonnées ou les segments applicatifs. Leur présence constitue un indice d\'attribution sur le traitement du fichier, pas une preuve que les pixels ont été modifiés de manière malveillante. C\'est l\'une des intentions de recherche les plus fréquentes autour des métadonnées médico-légales d\'image, car beaucoup d\'utilisateurs supposent que la présence d\'un éditeur signifie automatiquement manipulation. En réalité, un redimensionnement ordinaire, une conversion de format, une correction colorimétrique, un traitement éditorial, une rédaction ou une préparation probatoire peuvent laisser la même signature.' },
+    { type: 'paragraph', html: 'Une meilleure lecture consiste à se demander quel rôle le logiciel indiqué a vraisemblablement joué. A-t-il redimensionné l\'image pour le web ? Supprimé des métadonnées à l\'export ? Enregistré une capture d\'écran ? Réencodé une copie issue des réseaux sociaux ? Ajouté un profil colorimétrique ? La même chaîne logicielle peut soutenir des récits très différents selon le workflow. Les examinateurs devraient comparer cette signature avec l\'historique de traitement attendu et, si l\'enjeu le justifie, recourir à des méthodes plus profondes comme l\'examen des tables de quantification, l\'analyse de l\'historique de compression, la comparaison des miniatures, l\'étude de motifs de capteur et les tests pixel par pixel.' },
+    { type: 'title', text: 'Lire les métadonnées GPS avec prudence', level: 3 },
+    { type: 'paragraph', html: 'Les métadonnées GPS peuvent être très utiles parce qu\'elles relient potentiellement une image à un lieu, mais il est facile de surévaluer leur certitude. Les coordonnées doivent être vérifiées au regard du signe d\'hémisphère, de la précision décimale, de la cohérence temporelle et de l\'ensemble du fichier. Une paire de coordonnées qui paraît précise n\'est pas automatiquement fiable. Elle peut refléter un ancien état du dispositif, une édition manuelle, un comportement d\'export ou un historique de média partagé. L\'absence de GPS ne signifie pas non plus forcément dissimulation, car beaucoup d\'appareils n\'enregistrent jamais la position et de nombreuses plateformes la suppriment automatiquement.' },
+    { type: 'paragraph', html: 'Pour les utilisateurs arrivant via des recherches sur la géolocalisation photo ou la vérification d\'emplacement à partir des métadonnées, la méthode la plus fiable est la comparaison. Considérez les coordonnées comme une piste parmi d\'autres. Comparez-les avec les témoignages, l\'historique de déplacement, les repères de la scène, la météo, les journaux réseau, les sauvegardes cloud et les logs de l\'appareil lorsque cela est légalement possible. La vraie valeur des métadonnées réside dans leur capacité à s\'insérer de manière cohérente dans un tableau probatoire plus large.' },
+    { type: 'title', text: 'Pourquoi la vue hexadécimale est importante', level: 3 },
+    { type: 'paragraph', html: 'Un visualiseur hexadécimal expose les valeurs d\'octets et les offsets réels qui composent le fichier. C\'est important parce que beaucoup de questions d\'authenticité sont en réalité des questions de structure. Les fichiers JPEG commencent normalement par le marqueur SOI FF D8, suivi de segments comme APP0 ou APP1 ; l\'EXIF se trouve fréquemment dans APP1. Les fichiers PNG commencent par une signature de huit octets et se poursuivent sous forme de chunks nommés. Regarder les premiers octets aide à confirmer qu\'un fichier ressemble au conteneur qu\'il prétend être et donne aux examinateurs expérimentés un moyen rapide de documenter des offsets pour les rapports.' },
+    { type: 'paragraph', html: 'Les anomalies structurelles ne signifient pas automatiquement manipulation, car les encodeurs légitimes diffèrent. Toutefois, la visibilité au niveau des octets est précieuse lorsqu\'un fichier semble endommagé, mal étiqueté, partiellement réécrit ou incohérent avec son extension. De nombreux utilisateurs qui recherchent un outil de criminalistique de l\'image veulent de la transparence plutôt qu\'une boîte noire. Montrer directement l\'en-tête et les zones de métadonnées aide à comprendre où commence l\'interprétation.' },
+    { type: 'title', text: 'Un workflow pratique pour l\'examen des métadonnées', level: 3 },
+    { type: 'paragraph', html: 'Un workflow solide commence avant même l\'examen EXIF. Conservez le fichier source, calculez un hash cryptographique et ne considérez jamais une copie de travail chargée dans le navigateur comme le maître probatoire. Examinez ensuite ensemble le conteneur, les propriétés du fichier, les champs de capture, les champs logiciels et les coordonnées GPS. Recherchez d\'abord la cohérence interne. Ensuite, comparez ce que dit le fichier avec ce que dit le dossier. Dans de nombreuses enquêtes, l\'idée la plus utile naît de l\'écart entre ces deux récits.' },
+    { type: 'paragraph', html: 'Cela compte aussi pour l\'intention de recherche, car beaucoup d\'utilisateurs ne veulent pas seulement une liste de balises. Ils veulent savoir quoi faire après avoir vu une date, un nom de logiciel ou une paire de coordonnées. Dans la plupart des cas, cela signifie documenter l\'observation, consigner la limite et décider si le fichier nécessite une analyse plus poussée avec des méthodes approuvées en laboratoire. L\'analyse des métadonnées est une étape d\'entrée, pas l\'examen complet.' },
+    { type: 'title', text: 'Checklist du workflow médico-légal', level: 3 },
+    { type: 'list', items: [
+      '<strong>Préserver :</strong> ne traitez jamais une copie de travail chargée dans le navigateur comme un maître probatoire.',
+      '<strong>Hasher :</strong> enregistrez un hash cryptographique lors de l\'acquisition et après chaque transfert autorisé.',
+      '<strong>Corroborer :</strong> comparez les métadonnées avec les traces de l\'appareil, les données cloud, les témoignages et les faits de la scène.',
+      '<strong>Documenter :</strong> consignez versions logicielles, réglages, offsets, observations et captures nécessaires à la reproductibilité.',
+      '<strong>Valider :</strong> utilisez des outils approuvés en laboratoire et une revue par les pairs avant de formuler une conclusion formelle sur l\'authenticité.',
+    ] },
+    { type: 'title', text: 'Quand l\'examen des métadonnées ne suffit pas', level: 3 },
+    { type: 'paragraph', html: 'Parfois, les métadonnées paraissent propres alors que l\'image reste trompeuse. Parfois, elles semblent suspectes alors que l\'image est authentique. C\'est pourquoi les conclusions médico-légales avancées exigent plus que de simples balises de fichier. Selon les enjeux du dossier, les étapes suivantes peuvent inclure l\'analyse d\'artefacts de compression, la comparaison de tables de quantification, la vérification d\'incohérences de miniatures, l\'examen au niveau du pixel, la reconstruction de provenance et la revue de la chaîne de conservation. Un bon contenu SEO doit l\'énoncer clairement, car cela répond à la vraie question derrière la plupart des recherches Google: que peut faire cet outil pour moi et où commencent ses limites ?' },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: title, description, applicationCategory: 'ForensicApplication', operatingSystem: 'Any' },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) },
+    { '@context': 'https://schema.org', '@type': 'HowTo', name: title, step: howTo.map((step) => ({ '@type': 'HowToStep', name: step.name, text: step.text })) },
+  ],
+};
