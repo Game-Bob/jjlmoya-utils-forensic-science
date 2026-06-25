@@ -1,0 +1,65 @@
+---
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="estimation-panel">
+  <h3 class="panel-title">{ui.resultsTitle}</h3>
+  
+  <div id="fallback-alert" class="alert-box hidden">
+    {ui.fallbackAlert}
+  </div>
+  
+  <div class="stature-hero">
+    <div class="stature-value-box">
+      <span class="stature-value-title">{ui.estimateLabel}</span>
+      <div class="stature-display">
+        <span id="stature-cm-value" class="stature-number">--</span>
+        <span class="stature-unit">{ui.unitsCm}</span>
+      </div>
+      <div class="stature-display-secondary">
+        <span id="stature-inch-value">--</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <span class="metric-title">{ui.errorLabel}</span>
+      <span id="see-value" class="metric-value">--</span>
+    </div>
+    
+    <div class="metric-card span-2">
+      <span class="metric-title">{ui.rangeLabel}</span>
+      <span id="range-value" class="metric-value">--</span>
+    </div>
+  </div>
+  
+  <div class="formula-card">
+    <span class="formula-title">{ui.formulaLabel}</span>
+    <div class="formula-visual-container">
+      <div class="formula-part highlight-bone">
+        <span class="formula-part-label">{ui.formulaBoneFactor}</span>
+        <span class="formula-part-math" id="part-bone">--</span>
+      </div>
+      <div class="formula-operator">+</div>
+      <div class="formula-part highlight-const">
+        <span class="formula-part-label">{ui.formulaConstant}</span>
+        <span class="formula-part-math" id="part-const">--</span>
+      </div>
+      <div class="formula-operator" id="operator-age-sign" style="display: none;">-</div>
+      <div class="formula-part highlight-age" id="container-part-age" style="display: none;">
+        <span class="formula-part-label">{ui.formulaAgeCorrection}</span>
+        <span class="formula-part-math" id="part-age">--</span>
+      </div>
+      <div class="formula-operator">±</div>
+      <div class="formula-part highlight-error">
+        <span class="formula-part-label">{ui.formulaStdError}</span>
+        <span class="formula-part-math" id="part-error">--</span>
+      </div>
+    </div>
+  </div>
+</div>

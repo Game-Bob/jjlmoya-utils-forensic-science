@@ -1,0 +1,109 @@
+---
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+
+const bones = [
+  { value: 'femur', label: ui.femurName, min: 30, max: 60, default: 45 },
+  { value: 'tibia', label: ui.tibiaName, min: 25, max: 50, default: 38 },
+  { value: 'humerus', label: ui.humerusName, min: 20, max: 45, default: 32 },
+  { value: 'fibula', label: ui.fibulaName, min: 25, max: 50, default: 37 },
+  { value: 'radius', label: ui.radiusName, min: 15, max: 35, default: 24 },
+  { value: 'ulna', label: ui.ulnaName, min: 18, max: 38, default: 26 }
+];
+
+const sexes = [
+  { value: 'male', label: ui.maleOption },
+  { value: 'female', label: ui.femaleOption }
+];
+
+const ancestries = [
+  { value: 'white', label: ui.whiteOption },
+  { value: 'black', label: ui.blackOption },
+  { value: 'asian', label: ui.asianOption }
+];
+---
+
+<div class="osteometric-selector">
+  <h3 class="selector-title">{ui.configTitle}</h3>
+  
+
+  <div class="form-group">
+    <label>{ui.boneLabel}</label>
+    <div class="custom-select" id="dropdown-bone">
+      <input type="hidden" id="input-bone" value="femur" />
+      <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+        <span class="custom-select-trigger-text">{ui.femurName}</span>
+        <svg class="custom-select-arrow" viewBox="0 0 24 24" width="18" height="18">
+          <path d="M7 10l5 5 5-5H7z" fill="currentColor" />
+        </svg>
+      </button>
+      <div class="custom-select-options hidden" role="listbox">
+        {bones.map((bone) => (
+          <div 
+            class="custom-select-option" 
+            role="option" 
+            data-value={bone.value}
+            data-min={bone.min}
+            data-max={bone.max}
+            data-default={bone.default}
+          >
+            {bone.label}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="input-length-val" id="length-label-text">{ui.lengthLabel} ({ui.unitsCm})</label>
+    <div class="length-input-container">
+      <input type="number" id="input-length-val" class="selector-number" step="0.1" />
+      <input type="range" id="input-length" class="selector-range" step="0.1" />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{ui.sexLabel}</label>
+    <div class="radio-group">
+      {sexes.map((sex) => (
+        <label class="radio-label">
+          <input type="radio" name="sex" value={sex.value} checked={sex.value === 'male'} />
+          <span class="custom-radio"></span>
+          <span>{sex.label}</span>
+        </label>
+      ))}
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{ui.ancestryLabel}</label>
+    <div class="custom-select" id="dropdown-ancestry">
+      <input type="hidden" id="input-ancestry" value="white" />
+      <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+        <span class="custom-select-trigger-text">{ui.whiteOption}</span>
+        <svg class="custom-select-arrow" viewBox="0 0 24 24" width="18" height="18">
+          <path d="M7 10l5 5 5-5H7z" fill="currentColor" />
+        </svg>
+      </button>
+      <div class="custom-select-options hidden" role="listbox">
+        {ancestries.map((ancestry) => (
+          <div 
+            class="custom-select-option" 
+            role="option" 
+            data-value={ancestry.value}
+          >
+            {ancestry.label}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="input-age">{ui.ageLabel}</label>
+    <input type="number" id="input-age" class="selector-number" min="18" max="100" value="25" />
+  </div>
+</div>

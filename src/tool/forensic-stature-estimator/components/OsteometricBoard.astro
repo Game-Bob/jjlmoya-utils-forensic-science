@@ -1,0 +1,39 @@
+---
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="osteometric-board-container">
+  <div class="osteometric-board-header">
+    <span class="osteometric-board-title">{ui.rulerLabelMetric}</span>
+    <span class="osteometric-board-instructions">{ui.boardInstructions}</span>
+  </div>
+  <div class="osteometric-board">
+    <div class="osteometric-ruler">
+      <div class="ruler-ticks"></div>
+    </div>
+    
+    <div class="osteometric-base">
+      <div class="fixed-block"></div>
+      
+      <div class="bone-stage">
+        <svg viewBox="0 0 100 20" class="bone-svg" preserveAspectRatio="none">
+          <path id="bone-shape-femur" class="bone-shape hidden" d="M 5 10 C 5 6, 8 6, 10 9 C 20 8, 40 8, 90 9 C 92 6, 95 6, 95 10 C 95 14, 92 14, 90 11 C 40 12, 20 12, 10 11 C 8 14, 5 14, 5 10 Z" fill="rgba(240, 235, 215, 0.95)" stroke="rgb(180, 170, 140)" stroke-width="0.5" />
+          <path id="bone-shape-tibia" class="bone-shape hidden" d="M 5 10 C 5 5, 10 5, 12 8 C 25 8, 55 8, 90 9 C 91 7, 93 7, 95 10 C 95 13, 91 13, 90 11 C 55 12, 25 12, 12 12 C 10 15, 5 15, 5 10 Z" fill="rgba(240, 235, 215, 0.95)" stroke="rgb(180, 170, 140)" stroke-width="0.5" />
+          <path id="bone-shape-humerus" class="bone-shape hidden" d="M 6 10 C 6 7, 9 7, 11 9 C 20 9, 60 9, 89 9 C 91 7, 94 7, 94 10 C 94 13, 91 13, 89 11 C 60 11, 20 11, 11 11 C 9 13, 6 13, 6 10 Z" fill="rgba(240, 235, 215, 0.95)" stroke="rgb(180, 170, 140)" stroke-width="0.5" />
+          <path id="bone-shape-fibula" class="bone-shape hidden" d="M 5 10 C 5 8, 7 8, 8 9.5 L 92 9.5 C 93 8, 95 8, 95 10 C 95 12, 93 12, 92 10.5 L 8 10.5 C 7 12, 5 12, 5 10 Z" fill="rgba(240, 235, 215, 0.95)" stroke="rgb(180, 170, 140)" stroke-width="0.5" />
+          <path id="bone-shape-radius" class="bone-shape hidden" d="M 5 10 C 5 7, 8 7, 10 9 Q 50 8, 90 9 C 92 7, 95 7, 95 10 C 95 13, 92 13, 90 11 Q 50 12, 10 11 C 8 13, 5 13, 5 10 Z" fill="rgba(240, 235, 215, 0.95)" stroke="rgb(180, 170, 140)" stroke-width="0.5" />
+          <path id="bone-shape-ulna" class="bone-shape hidden" d="M 5 10 C 5 6, 9 6, 11 8.5 L 90 9.5 C 91 8.5, 94 8.5, 94 10 C 94 11.5, 91 11.5, 90 10.5 L 11 11.5 C 9 14, 5 14, 5 10 Z" fill="rgba(240, 235, 215, 0.95)" stroke="rgb(180, 170, 140)" stroke-width="0.5" />
+        </svg>
+      </div>
+      
+      <div class="sliding-caliper" id="caliper-slider">
+        <div class="caliper-arm"></div>
+        <div class="caliper-handle"></div>
+      </div>
+    </div>
+  </div>
+</div>

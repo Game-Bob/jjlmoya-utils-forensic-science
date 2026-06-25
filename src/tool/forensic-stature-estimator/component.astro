@@ -1,0 +1,49 @@
+---
+import './forensic-stature-estimator.css';
+import { forensicStatureEstimator } from './index';
+import type { KnownLocale } from '../../types';
+import OsteometricBoard from './components/OsteometricBoard.astro';
+import OsteometricSelector from './components/OsteometricSelector.astro';
+import EstimationPanel from './components/EstimationPanel.astro';
+
+interface Props {
+  locale?: KnownLocale;
+}
+
+const { locale = 'en' } = Astro.props;
+const content = await forensicStatureEstimator.i18n[locale]?.();
+if (!content) return null;
+const { ui } = content;
+---
+
+<div class="forensic-stature-card">
+  <div class="forensic-stature-header">
+    <div class="unit-toggle-group-global">
+      <label class="unit-toggle-label">
+        <input type="radio" name="system-unit" value="metric" checked />
+        <span class="unit-toggle-button">{ui.metricOption}</span>
+      </label>
+      <label class="unit-toggle-label">
+        <input type="radio" name="system-unit" value="imperial" />
+        <span class="unit-toggle-button">{ui.imperialOption}</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="forensic-stature-grid">
+    <div class="forensic-stature-left">
+      <OsteometricBoard ui={ui} />
+      <OsteometricSelector ui={ui} />
+    </div>
+    
+    <div class="forensic-stature-right">
+      <EstimationPanel ui={ui} />
+    </div>
+  </div>
+</div>
+
+<script id="stature-ui-data" type="application/json" set:html={JSON.stringify(ui)}></script>
+
+<script>
+  import './script';
+</script>
