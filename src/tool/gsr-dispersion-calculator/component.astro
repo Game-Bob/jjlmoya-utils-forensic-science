@@ -1,0 +1,294 @@
+---
+import './gsr-dispersion-calculator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<section class="gsr-shell" data-gsr-calculator>
+  <div class="gsr-card">
+    <div class="gsr-visual">
+      <div class="gsr-target-head">
+        <span>{ui.target}</span>
+        <strong id="gsr-radius">-</strong>
+      </div>
+      <canvas id="gsr-canvas" width="720" height="720" aria-label={ui.canvasAria}></canvas>
+    </div>
+
+    <aside class="gsr-controls">
+      <div class="gsr-unit-toggle" role="group" aria-label={ui.units}>
+        <button type="button" data-gsr-unit="metric" data-active="true">{ui.metric}</button>
+        <button type="button" data-gsr-unit="imperial" data-active="false">{ui.imperial}</button>
+      </div>
+
+      <label class="gsr-slider">
+        <span>{ui.distance}</span>
+        <strong id="gsr-distance-label">-</strong>
+        <input id="gsr-distance" type="range" min="0" max="300" value="75" />
+      </label>
+
+      <label class="gsr-select">
+        <span>{ui.ammo}</span>
+        <select id="gsr-ammo">
+          <option value="pistol9mm">{ui.ammoPistol9mm}</option>
+          <option value="revolver38">{ui.ammoRevolver38}</option>
+          <option value="shotgun12">{ui.ammoShotgun12}</option>
+        </select>
+      </label>
+
+      <div class="gsr-cone" aria-label={ui.cone}>
+        <span class="gsr-muzzle"></span>
+        <span class="gsr-cone-beam" id="gsr-cone-beam"></span>
+        <span class="gsr-plane"></span>
+      </div>
+
+      <article class="gsr-reading">
+        <small>{ui.category}</small>
+        <h3 id="gsr-category">-</h3>
+        <p id="gsr-expected">-</p>
+      </article>
+
+      <div class="gsr-metrics">
+        <div>
+          <span>{ui.density}</span>
+          <strong id="gsr-density">-</strong>
+        </div>
+        <div>
+          <span>{ui.thermal}</span>
+          <strong id="gsr-thermal">-</strong>
+        </div>
+      </div>
+    </aside>
+
+    <nav class="gsr-range-strip" aria-label={ui.rangeStripAria}>
+      <span data-gsr-range="contact">{ui.contact}</span>
+      <span data-gsr-range="near-contact">{ui.near}</span>
+      <span data-gsr-range="close-range">{ui.close}</span>
+      <span data-gsr-range="distant">{ui.distant}</span>
+    </nav>
+
+    <p class="gsr-disclaimer">{ui.disclaimer}</p>
+  </div>
+</section>
+
+<script id="gsr-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script>
+  import { GsrDispersionModel } from './logic';
+  import type { AmmoType, GsrParticle } from './logic';
+
+  const model = new GsrDispersionModel();
+  const ui = JSON.parse(document.getElementById('gsr-ui')?.textContent || '{}');
+  const STORAGE_KEY = 'gsr-dispersion-calculator-state';
+  const canvas = document.getElementById('gsr-canvas') as HTMLCanvasElement | null;
+  const distanceInput = document.getElementById('gsr-distance') as HTMLInputElement | null;
+  const ammoSelect = document.getElementById('gsr-ammo') as HTMLSelectElement | null;
+  const context = canvas?.getContext('2d');
+  let unitSystem: 'metric' | 'imperial' = 'metric';
+
+  function getParticleColors(isDark: boolean): Record<GsrParticle['element'], string> {
+    if (isDark) {
+      return {
+        lead: '156, 188, 220',
+        barium: '104, 224, 180',
+        antimony: '255, 184, 92',
+        soot: '246, 236, 214',
+      };
+    }
+
+    return {
+      lead: '108, 126, 146',
+      barium: '88, 160, 124',
+      antimony: '205, 132, 58',
+      soot: '62, 58, 52',
+    };
+  }
+
+  function setText(id: string, value: string): void {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  }
+
+  function updateUnitButtons(): void {
+    document.querySelectorAll<HTMLButtonElement>('[data-gsr-unit]').forEach((item) => {
+      item.dataset.active = item.dataset.gsrUnit === unitSystem ? 'true' : 'false';
+    });
+  }
+
+  function saveState(): void {
+    const distanceCm = Number(distanceInput?.value ?? 75);
+    const ammo = ammoSelect?.value ?? 'pistol9mm';
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      distanceCm,
+      ammo,
+      unitSystem,
+    }));
+  }
+
+  function parseSavedState(): { distanceCm?: number; ammo?: string; unitSystem?: 'metric' | 'imperial' } | null {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}') as {
+        distanceCm?: number;
+        ammo?: string;
+        unitSystem?: 'metric' | 'imperial';
+      };
+    } catch {
+      localStorage.removeItem(STORAGE_KEY);
+      return null;
+    }
+  }
+
+  function applySavedDistance(distanceCm?: number): void {
+    if (typeof distanceCm === 'number' && distanceInput) {
+      distanceInput.value = String(Math.max(0, Math.min(300, distanceCm)));
+    }
+  }
+
+  function applySavedAmmo(ammo?: string): void {
+    if ((ammo === 'pistol9mm' || ammo === 'revolver38' || ammo === 'shotgun12') && ammoSelect) {
+      ammoSelect.value = ammo;
+    }
+  }
+
+  function applySavedUnitSystem(savedUnitSystem?: 'metric' | 'imperial'): void {
+    if (savedUnitSystem === 'metric' || savedUnitSystem === 'imperial') {
+      unitSystem = savedUnitSystem;
+    }
+  }
+
+  function restoreState(): void {
+    const saved = parseSavedState();
+    applySavedDistance(saved?.distanceCm);
+    applySavedAmmo(saved?.ammo);
+    applySavedUnitSystem(saved?.unitSystem);
+    updateUnitButtons();
+  }
+
+  function formatLength(cm: number): string {
+    if (unitSystem === 'metric') {
+      return cm >= 100 ? `${(cm / 100).toFixed(2)} ${ui.unitMeter}` : `${Math.round(cm)} ${ui.unitCentimeter}`;
+    }
+    const inches = cm / 2.54;
+    return inches >= 12 ? `${(inches / 12).toFixed(2)} ${ui.unitFoot}` : `${inches.toFixed(1)} ${ui.unitInch}`;
+  }
+
+  function getCategoryLabel(category: 'contact' | 'near-contact' | 'close-range' | 'distant'): string {
+    if (category === 'contact') return ui.categoryContactLabel;
+    if (category === 'near-contact') return ui.categoryNearContactLabel;
+    if (category === 'close-range') return ui.categoryCloseRangeLabel;
+    if (category === 'distant') return ui.categoryDistantLabel;
+    return '';
+  }
+
+  function getExpectedFinding(category: 'contact' | 'near-contact' | 'close-range' | 'distant'): string {
+    if (category === 'contact') return ui.expectedContact;
+    if (category === 'near-contact') return ui.expectedNearContact;
+    if (category === 'close-range') return ui.expectedCloseRange;
+    return ui.expectedDistant;
+  }
+
+  function drawCloth(): void {
+    if (!canvas || !context) return;
+    const { width, height } = canvas;
+    const isDark = document.documentElement.classList.contains('theme-dark');
+    const gradient = context.createRadialGradient(width * 0.5, height * 0.42, 20, width * 0.5, height * 0.5, width * 0.65);
+    gradient.addColorStop(0, isDark ? '#5a5241' : '#f7f0df');
+    gradient.addColorStop(1, isDark ? '#312c25' : '#d6ccb8');
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, width, height);
+    context.strokeStyle = isDark ? 'rgba(244, 234, 214, 0.12)' : 'rgba(78, 72, 59, 0.11)';
+    context.lineWidth = 1;
+    for (let index = -width; index < width * 2; index += 24) {
+      context.beginPath();
+      context.moveTo(index, 0);
+      context.lineTo(index + width, height);
+      context.stroke();
+      context.beginPath();
+      context.moveTo(index + width, 0);
+      context.lineTo(index, height);
+      context.stroke();
+    }
+  }
+
+  function drawThermalHalo(center: number, thermalScore: number, isDark: boolean): void {
+    if (!context || thermalScore <= 0) return;
+    const burn = context.createRadialGradient(center, center, 4, center, center, 95 + thermalScore * 0.7);
+    burn.addColorStop(0, isDark ? `rgba(255, 206, 128, ${0.18 + thermalScore / 320})` : `rgba(96, 58, 24, ${0.18 + thermalScore / 340})`);
+    burn.addColorStop(0.45, isDark ? `rgba(255, 156, 76, ${thermalScore / 420})` : `rgba(188, 120, 52, ${thermalScore / 520})`);
+    burn.addColorStop(1, isDark ? 'rgba(255, 156, 76, 0)' : 'rgba(188, 120, 52, 0)');
+    context.fillStyle = burn;
+    context.beginPath();
+    context.arc(center, center, 120 + thermalScore * 0.65, 0, Math.PI * 2);
+    context.fill();
+  }
+
+  function drawParticleCloud(particles: GsrParticle[], scale: number, center: number, isDark: boolean): void {
+    if (!context) return;
+    const colors = getParticleColors(isDark);
+    const opacityBoost = isDark ? 0.16 : 0.1;
+    const radiusBoost = isDark ? 0.35 : 0.18;
+
+    for (const particle of particles) {
+      context.fillStyle = `rgba(${colors[particle.element]}, ${Math.min(1, particle.opacity + opacityBoost)})`;
+      context.beginPath();
+      context.arc(center + particle.x * scale, center + particle.y * scale, particle.radius + radiusBoost, 0, Math.PI * 2);
+      context.fill();
+    }
+  }
+
+  function drawPatternRadius(center: number, patternRadiusCm: number, scale: number, isDark: boolean): void {
+    if (!context) return;
+    context.strokeStyle = isDark ? 'rgba(242, 240, 232, 0.62)' : 'rgba(90, 96, 101, 0.55)';
+    context.lineWidth = isDark ? 3.4 : 3.2;
+    context.setLineDash(isDark ? [12, 9] : [11, 9]);
+    context.beginPath();
+    context.arc(center, center, Math.min(300, patternRadiusCm * scale), 0, Math.PI * 2);
+    context.stroke();
+    context.setLineDash([]);
+  }
+
+  function drawParticles(particles: GsrParticle[], patternRadiusCm: number, thermalScore: number): void {
+    if (!canvas || !context) return;
+    const isDark = document.documentElement.classList.contains('theme-dark');
+    const center = canvas.width / 2;
+    const scale = Math.min(5.8, 250 / Math.max(patternRadiusCm, 16));
+    drawThermalHalo(center, thermalScore, isDark);
+    drawParticleCloud(particles, scale, center, isDark);
+    drawPatternRadius(center, patternRadiusCm, scale, isDark);
+  }
+
+  function render(): void {
+    const distanceCm = Number(distanceInput?.value ?? 75);
+    const ammo = (ammoSelect?.value ?? 'pistol9mm') as AmmoType;
+    const result = model.simulate(distanceCm, ammo);
+    drawCloth();
+    drawParticles(result.particles, result.patternRadiusCm, result.thermalScore);
+    setText('gsr-distance-label', formatLength(distanceCm));
+    setText('gsr-category', getCategoryLabel(result.category));
+    setText('gsr-expected', getExpectedFinding(result.category));
+    setText('gsr-density', `${result.densityScore}%`);
+    setText('gsr-thermal', `${result.thermalScore}%`);
+    setText('gsr-radius', `${formatLength(result.patternRadiusCm)} ${ui.radiusSuffix}`);
+    document.querySelectorAll<HTMLElement>('[data-gsr-range]').forEach((item) => {
+      item.dataset.active = item.dataset.gsrRange === result.category ? 'true' : 'false';
+    });
+    const beam = document.getElementById('gsr-cone-beam') as HTMLElement | null;
+    if (beam) beam.style.transform = `scaleY(${0.35 + distanceCm / 260})`;
+    saveState();
+  }
+
+  distanceInput?.addEventListener('input', render);
+  ammoSelect?.addEventListener('change', render);
+  new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  document.querySelectorAll<HTMLButtonElement>('[data-gsr-unit]').forEach((button) => {
+    button.addEventListener('click', () => {
+      unitSystem = button.dataset.gsrUnit === 'imperial' ? 'imperial' : 'metric';
+      updateUnitButtons();
+      render();
+    });
+  });
+  restoreState();
+  render();
+</script>

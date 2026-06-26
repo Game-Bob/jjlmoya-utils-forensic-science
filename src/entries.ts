@@ -10,6 +10,8 @@ export { forensicBloodTestSimulator } from './tool/forensic-blood-test-simulator
 export type { BloodTestUI, BloodTestLocaleContent } from './tool/forensic-blood-test-simulator/entry';
 export { forensicImageAuthenticityAnalyzer } from './tool/forensic-image-authenticity-analyzer/entry';
 export type { ImageAuthenticityUI, ImageAuthenticityLocaleContent } from './tool/forensic-image-authenticity-analyzer/entry';
+export { gsrDispersionCalculator } from './tool/gsr-dispersion-calculator/entry';
+export type { GsrDispersionUI, GsrDispersionLocaleContent } from './tool/gsr-dispersion-calculator/entry';
 
 import { forensicAgeEstimator } from './tool/forensic-age-estimator/entry';
 import { widmarkAlcoholSimulator } from './tool/widmark-alcohol-simulator/entry';
@@ -17,6 +19,7 @@ import { forensicSexDeterminator } from './tool/forensic-sex-determinator/entry'
 import { forensicStatureEstimator } from './tool/forensic-stature-estimator/entry';
 import { forensicBloodTestSimulator } from './tool/forensic-blood-test-simulator/entry';
 import { forensicImageAuthenticityAnalyzer } from './tool/forensic-image-authenticity-analyzer/entry';
+import { gsrDispersionCalculator } from './tool/gsr-dispersion-calculator/entry';
 
 export const ALL_ENTRIES = [
   forensicAgeEstimator,
@@ -24,5 +27,6 @@ export const ALL_ENTRIES = [
   forensicSexDeterminator,
   forensicStatureEstimator,
   forensicBloodTestSimulator,
-  forensicImageAuthenticityAnalyzer
+  forensicImageAuthenticityAnalyzer,
+  gsrDispersionCalculator
 ];

@@ -6,6 +6,7 @@ export { FORENSIC_SEX_DETERMINATOR_TOOL } from './tool/forensic-sex-determinator
 export { FORENSIC_STATURE_ESTIMATOR_TOOL } from './tool/forensic-stature-estimator/index';
 export { FORENSIC_BLOOD_TEST_SIMULATOR_TOOL } from './tool/forensic-blood-test-simulator/index';
 export { FORENSIC_IMAGE_AUTHENTICITY_ANALYZER_TOOL } from './tool/forensic-image-authenticity-analyzer/index';
+export { GSR_DISPERSION_CALCULATOR_TOOL } from './tool/gsr-dispersion-calculator/index';
 
 export type {
   KnownLocale,

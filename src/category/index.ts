@@ -5,6 +5,7 @@ import { forensicSexDeterminator } from '../tool/forensic-sex-determinator/index
 import { forensicStatureEstimator } from '../tool/forensic-stature-estimator/index';
 import { forensicBloodTestSimulator } from '../tool/forensic-blood-test-simulator/index';
 import { forensicImageAuthenticityAnalyzer } from '../tool/forensic-image-authenticity-analyzer/index';
+import { gsrDispersionCalculator } from '../tool/gsr-dispersion-calculator/index';
 
 export const forensicCategory: ScienceCategoryEntry = {
   icon: 'mdi:fingerprint',
@@ -14,7 +15,8 @@ export const forensicCategory: ScienceCategoryEntry = {
     forensicSexDeterminator,
     forensicStatureEstimator,
     forensicBloodTestSimulator,
-    forensicImageAuthenticityAnalyzer
+    forensicImageAuthenticityAnalyzer,
+    gsrDispersionCalculator
   ],
   i18n: {
     de: () => import('./i18n/de').then((m) => m.content),
