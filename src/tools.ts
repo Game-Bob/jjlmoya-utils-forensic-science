@@ -8,6 +8,7 @@ import { FORENSIC_BLOOD_TEST_SIMULATOR_TOOL } from './tool/forensic-blood-test-s
 import { FORENSIC_IMAGE_AUTHENTICITY_ANALYZER_TOOL } from './tool/forensic-image-authenticity-analyzer/index';
 import { GSR_DISPERSION_CALCULATOR_TOOL } from './tool/gsr-dispersion-calculator/index';
 import { FORENSIC_TLC_INK_SIMULATOR_TOOL } from './tool/forensic-tlc-ink-simulator/index';
+import { FORENSIC_MICROCRYSTAL_DRUG_SIMULATOR_TOOL } from './tool/forensic-microcrystal-drug-simulator/index';
 
 export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_AGE_ESTIMATOR_TOOL,
@@ -17,5 +18,6 @@ export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_BLOOD_TEST_SIMULATOR_TOOL,
   FORENSIC_IMAGE_AUTHENTICITY_ANALYZER_TOOL,
   GSR_DISPERSION_CALCULATOR_TOOL,
-  FORENSIC_TLC_INK_SIMULATOR_TOOL
+  FORENSIC_TLC_INK_SIMULATOR_TOOL,
+  FORENSIC_MICROCRYSTAL_DRUG_SIMULATOR_TOOL
 ];

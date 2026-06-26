@@ -7,6 +7,7 @@ import { forensicBloodTestSimulator } from '../tool/forensic-blood-test-simulato
 import { forensicImageAuthenticityAnalyzer } from '../tool/forensic-image-authenticity-analyzer/index';
 import { gsrDispersionCalculator } from '../tool/gsr-dispersion-calculator/index';
 import { forensicTlcInkSimulator } from '../tool/forensic-tlc-ink-simulator/index';
+import { forensicMicrocrystalDrugSimulator } from '../tool/forensic-microcrystal-drug-simulator/index';
 
 export const forensicCategory: ScienceCategoryEntry = {
   icon: 'mdi:fingerprint',
@@ -18,7 +19,8 @@ export const forensicCategory: ScienceCategoryEntry = {
     forensicBloodTestSimulator,
     forensicImageAuthenticityAnalyzer,
     gsrDispersionCalculator,
-    forensicTlcInkSimulator
+    forensicTlcInkSimulator,
+    forensicMicrocrystalDrugSimulator
   ],
   i18n: {
     de: () => import('./i18n/de').then((m) => m.content),

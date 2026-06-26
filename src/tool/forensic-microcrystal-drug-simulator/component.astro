@@ -1,0 +1,239 @@
+---
+import './forensic-microcrystal-drug-simulator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<section class="microcrystal-shell" data-microcrystal-tool>
+  <div class="microcrystal-card">
+    <div class="microcrystal-stage">
+      <div class="microcrystal-toolbar">
+        <span>{ui.microscope}</span>
+        <strong id="microcrystal-match">-</strong>
+      </div>
+      <div class="microcrystal-lens" aria-label={ui.canvasAria}>
+        <canvas id="microcrystal-canvas" width="760" height="560"></canvas>
+        <div class="microcrystal-reticle" aria-hidden="true"></div>
+      </div>
+      <div class="microcrystal-readout">
+        <span id="microcrystal-habit">-</span>
+        <span id="microcrystal-cue">-</span>
+      </div>
+    </div>
+
+    <aside class="microcrystal-controls">
+      <label class="microcrystal-sample-field">
+        <span>{ui.sample}</span>
+        <span class="microcrystal-select">
+          <select id="microcrystal-sample">
+            <option value="cocaine">{ui.sampleCocaine}</option>
+            <option value="heroin">{ui.sampleHeroin}</option>
+            <option value="amphetamine">{ui.sampleAmphetamine}</option>
+            <option value="methamphetamine">{ui.sampleMethamphetamine}</option>
+          </select>
+        </span>
+      </label>
+
+      <div class="microcrystal-reagents" role="group" aria-label={ui.reagent}>
+        <button type="button" data-reagent="platinumChloride" data-active="true">
+          <span></span>
+          {ui.reagentPlatinum}
+        </button>
+        <button type="button" data-reagent="goldChloride" data-active="false">
+          <span></span>
+          {ui.reagentGold}
+        </button>
+        <button type="button" data-reagent="dragendorff" data-active="false">
+          <span></span>
+          {ui.reagentDragendorff}
+        </button>
+      </div>
+
+      <label>
+        <span>{ui.polarization}</span>
+        <input id="microcrystal-polarization" type="range" min="0" max="100" value="72" />
+      </label>
+
+      <div class="microcrystal-metrics">
+        <div>
+          <span>{ui.confidence}</span>
+          <strong id="microcrystal-confidence">-</strong>
+          <i id="microcrystal-confidence-bar"></i>
+        </div>
+        <div>
+          <span>{ui.growth}</span>
+          <strong id="microcrystal-growth">-</strong>
+          <i id="microcrystal-growth-bar"></i>
+        </div>
+        <div>
+          <span>{ui.birefringence}</span>
+          <strong id="microcrystal-birefringence">-</strong>
+          <i id="microcrystal-birefringence-bar"></i>
+        </div>
+      </div>
+
+      <button class="microcrystal-grow" type="button" id="microcrystal-grow">{ui.regrow}</button>
+      <aside class="microcrystal-warning" aria-label={ui.warningLabel}>
+        <strong>{ui.warningTitle}</strong>
+        <p>{ui.disclaimer}</p>
+      </aside>
+    </aside>
+  </div>
+</section>
+
+<script id="microcrystal-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script>
+  import { CrystallographyEngine } from './logic';
+  import type { CrystalHabit, CrystalReagent, CrystalSeed, DrugSample } from './logic';
+
+  const engine = new CrystallographyEngine();
+  const ui = JSON.parse(document.getElementById('microcrystal-ui')?.textContent || '{}');
+  const canvas = document.getElementById('microcrystal-canvas') as HTMLCanvasElement | null;
+  const context = canvas?.getContext('2d');
+  const sampleSelect = document.getElementById('microcrystal-sample') as HTMLSelectElement | null;
+  const polarizationInput = document.getElementById('microcrystal-polarization') as HTMLInputElement | null;
+  let reagent: CrystalReagent = 'platinumChloride';
+  let growthStart = performance.now();
+
+  function setText(id: string, value: string): void {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  }
+
+  function setMeter(id: string, value: number): void {
+    const element = document.getElementById(id);
+    if (element) element.style.setProperty('--value', `${Math.max(0, Math.min(100, value))}%`);
+  }
+
+  function habitLabel(habit: CrystalHabit): string {
+    return ui[`habit${habit.charAt(0).toUpperCase()}${habit.slice(1)}`] ?? habit;
+  }
+
+  function matchLabel(match: string): string {
+    if (match === 'reference-like') return ui.matchReference;
+    if (match === 'partial') return ui.matchPartial;
+    return ui.matchNonSpecific;
+  }
+
+  function drawBackground(isDark: boolean, polarization: number): void {
+    if (!canvas || !context) return;
+    context.fillStyle = isDark ? '#10262c' : '#edf4f1';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.globalAlpha = isDark ? 0.05 + polarization / 900 : 0.025 + polarization / 1400;
+    context.strokeStyle = isDark ? '#f5fbff' : '#4f7a74';
+    context.lineWidth = isDark ? 1 : 0.8;
+    for (let x = -140; x < canvas.width; x += 38) {
+      context.beginPath();
+      context.moveTo(x, 0);
+      context.lineTo(x + 210, canvas.height);
+      context.stroke();
+    }
+    context.globalAlpha = 1;
+  }
+
+  function drawNeedle(seed: CrystalSeed, progress: number, hue: number, polarization: number): void {
+    if (!context) return;
+    const x = seed.x * 7.6;
+    const y = seed.y * 5.6;
+    const length = seed.length * progress;
+    const glow = 0.35 + polarization / 180;
+    context.save();
+    context.translate(x, y);
+    context.rotate(seed.angle);
+    context.strokeStyle = `hsla(${hue}, 88%, ${56 + polarization * 0.18}%, ${glow})`;
+    context.lineWidth = seed.width;
+    context.beginPath();
+    context.moveTo(0, 0);
+    context.lineTo(length, 0);
+    context.moveTo(length * 0.35, 0);
+    context.lineTo(length * 0.72, length * 0.22 * seed.branch);
+    context.moveTo(length * 0.42, 0);
+    context.lineTo(length * 0.82, -length * 0.2 * seed.branch);
+    context.stroke();
+    context.restore();
+  }
+
+  function drawRosette(seed: CrystalSeed, progress: number, hue: number, polarization: number): void {
+    for (let spoke = 0; spoke < 9; spoke++) {
+      drawNeedle({ ...seed, angle: seed.angle + spoke * 0.7, length: seed.length * 0.62 }, progress, hue + spoke * 7, polarization);
+    }
+  }
+
+  function drawPlate(seed: CrystalSeed, progress: number, hue: number, polarization: number): void {
+    if (!context) return;
+    const radius = seed.length * progress * 0.42;
+    context.save();
+    context.translate(seed.x * 7.6, seed.y * 5.6);
+    context.rotate(seed.angle);
+    context.fillStyle = `hsla(${hue}, 74%, ${60 + polarization * 0.15}%, 0.38)`;
+    context.strokeStyle = `hsla(${hue + 18}, 92%, 74%, 0.72)`;
+    context.lineWidth = 1.4;
+    context.beginPath();
+    for (let side = 0; side < 6; side++) {
+      const angle = side * Math.PI / 3;
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius * 0.62;
+      if (side === 0) context.moveTo(x, y);
+      else context.lineTo(x, y);
+    }
+    context.closePath();
+    context.fill();
+    context.stroke();
+    context.restore();
+  }
+
+  function drawPattern(habit: CrystalHabit, seeds: CrystalSeed[], progress: number, hue: number, polarization: number): void {
+    seeds.forEach((seed, index) => {
+      const localProgress = Math.max(0, Math.min(1, progress - index / (seeds.length * 2.5)));
+      if (habit === 'rosettes') drawRosette(seed, localProgress, hue, polarization);
+      else if (habit === 'plates') drawPlate(seed, localProgress, hue, polarization);
+      else if (habit === 'weakScatter') drawPlate({ ...seed, length: seed.length * 0.42 }, localProgress, hue, polarization);
+      else drawNeedle(seed, localProgress, hue, polarization);
+    });
+  }
+
+  function render(): void {
+    if (!canvas || !context) return;
+    const sample = (sampleSelect?.value ?? 'cocaine') as DrugSample;
+    const polarization = Number(polarizationInput?.value ?? 72);
+    const result = engine.simulate(sample, reagent);
+    const progress = Math.min(1, (performance.now() - growthStart) / (1800 - result.growthRate * 9));
+    const isDark = document.documentElement.classList.contains('theme-dark');
+    drawBackground(isDark, polarization);
+    drawPattern(result.habit, result.seeds, progress, result.hue, polarization);
+    setText('microcrystal-match', matchLabel(result.matchLabel));
+    setText('microcrystal-habit', habitLabel(result.habit));
+    setText('microcrystal-cue', ui[result.cueKey] ?? '');
+    setText('microcrystal-confidence', `${result.confidence}%`);
+    setText('microcrystal-growth', `${result.growthRate}%`);
+    setText('microcrystal-birefringence', `${result.birefringence}%`);
+    setMeter('microcrystal-confidence-bar', result.confidence);
+    setMeter('microcrystal-growth-bar', result.growthRate);
+    setMeter('microcrystal-birefringence-bar', result.birefringence);
+    if (progress < 1) requestAnimationFrame(render);
+  }
+
+  function restart(): void {
+    growthStart = performance.now();
+    render();
+  }
+
+  sampleSelect?.addEventListener('change', restart);
+  polarizationInput?.addEventListener('input', render);
+  document.getElementById('microcrystal-grow')?.addEventListener('click', restart);
+  document.querySelectorAll<HTMLButtonElement>('[data-reagent]').forEach((button) => {
+    button.addEventListener('click', () => {
+      reagent = (button.dataset.reagent ?? 'platinumChloride') as CrystalReagent;
+      document.querySelectorAll<HTMLButtonElement>('[data-reagent]').forEach((item) => {
+        item.dataset.active = item === button ? 'true' : 'false';
+      });
+      restart();
+    });
+  });
+  new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  restart();
+</script>
