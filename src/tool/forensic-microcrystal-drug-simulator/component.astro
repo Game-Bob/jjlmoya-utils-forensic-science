@@ -186,7 +186,8 @@ const { ui } = Astro.props;
     context.restore();
   }
 
-  function drawPattern(habit: CrystalHabit, seeds: CrystalSeed[], progress: number, hue: number, polarization: number): void {
+  function drawPattern(result: { habit: CrystalHabit; seeds: CrystalSeed[]; hue: number }, progress: number, polarization: number): void {
+    const { habit, seeds, hue } = result;
     seeds.forEach((seed, index) => {
       const localProgress = Math.max(0, Math.min(1, progress - index / (seeds.length * 2.5)));
       if (habit === 'rosettes') drawRosette(seed, localProgress, hue, polarization);
@@ -197,17 +198,17 @@ const { ui } = Astro.props;
   }
 
   function render(): void {
-    if (!canvas || !context) return;
-    const sample = (sampleSelect?.value ?? 'cocaine') as DrugSample;
-    const polarization = Number(polarizationInput?.value ?? 72);
+    if (!canvas || !context || !sampleSelect || !polarizationInput) return;
+    const sample = sampleSelect.value as DrugSample;
+    const polarization = Number(polarizationInput.value);
     const result = engine.simulate(sample, reagent);
     const progress = Math.min(1, (performance.now() - growthStart) / (1800 - result.growthRate * 9));
     const isDark = document.documentElement.classList.contains('theme-dark');
     drawBackground(isDark, polarization);
-    drawPattern(result.habit, result.seeds, progress, result.hue, polarization);
+    drawPattern(result, progress, polarization);
     setText('microcrystal-match', matchLabel(result.matchLabel));
     setText('microcrystal-habit', habitLabel(result.habit));
-    setText('microcrystal-cue', ui[result.cueKey] ?? '');
+    setText('microcrystal-cue', ui[result.cueKey] || '');
     setText('microcrystal-confidence', `${result.confidence}%`);
     setText('microcrystal-growth', `${result.growthRate}%`);
     setText('microcrystal-birefringence', `${result.birefringence}%`);
