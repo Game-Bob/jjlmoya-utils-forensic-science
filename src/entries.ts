@@ -12,6 +12,8 @@ export { forensicImageAuthenticityAnalyzer } from './tool/forensic-image-authent
 export type { ImageAuthenticityUI, ImageAuthenticityLocaleContent } from './tool/forensic-image-authenticity-analyzer/entry';
 export { gsrDispersionCalculator } from './tool/gsr-dispersion-calculator/entry';
 export type { GsrDispersionUI, GsrDispersionLocaleContent } from './tool/gsr-dispersion-calculator/entry';
+export { forensicTlcInkSimulator } from './tool/forensic-tlc-ink-simulator/entry';
+export type { TlcInkSimulatorUI, TlcInkSimulatorLocaleContent } from './tool/forensic-tlc-ink-simulator/entry';
 
 import { forensicAgeEstimator } from './tool/forensic-age-estimator/entry';
 import { widmarkAlcoholSimulator } from './tool/widmark-alcohol-simulator/entry';
@@ -20,6 +22,7 @@ import { forensicStatureEstimator } from './tool/forensic-stature-estimator/entr
 import { forensicBloodTestSimulator } from './tool/forensic-blood-test-simulator/entry';
 import { forensicImageAuthenticityAnalyzer } from './tool/forensic-image-authenticity-analyzer/entry';
 import { gsrDispersionCalculator } from './tool/gsr-dispersion-calculator/entry';
+import { forensicTlcInkSimulator } from './tool/forensic-tlc-ink-simulator/entry';
 
 export const ALL_ENTRIES = [
   forensicAgeEstimator,
@@ -28,5 +31,6 @@ export const ALL_ENTRIES = [
   forensicStatureEstimator,
   forensicBloodTestSimulator,
   forensicImageAuthenticityAnalyzer,
-  gsrDispersionCalculator
+  gsrDispersionCalculator,
+  forensicTlcInkSimulator
 ];

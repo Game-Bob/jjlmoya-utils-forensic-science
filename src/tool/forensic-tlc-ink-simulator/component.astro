@@ -1,0 +1,245 @@
+---
+import './forensic-tlc-ink-simulator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+const rulerMarks = (ui.rulerMarks ?? '').split(',');
+---
+
+<section class="tlc-shell" data-tlc-simulator>
+  <div class="tlc-lab">
+    <div class="tlc-stage">
+      <div class="tlc-chamber" aria-label={ui.chamberAria}>
+        <div class="tlc-glass-shine"></div>
+        <div class="tlc-solvent" id="tlc-solvent"></div>
+        <div class="tlc-plate">
+          <div class="tlc-plate-clip"></div>
+          <div class="tlc-solvent-front" id="tlc-front"><span>{ui.solventFront}</span></div>
+          <div class="tlc-origin"><span>{ui.originLine}</span></div>
+          <div class="tlc-spot"></div>
+          <div class="tlc-lane" id="tlc-lane"></div>
+        </div>
+        <div class="tlc-ruler" aria-label={ui.rulerAria}>
+          {rulerMarks.map((mark) => <span>{mark}</span>)}
+        </div>
+      </div>
+
+      <div class="tlc-table-wrap">
+        <table class="tlc-table">
+          <thead>
+            <tr>
+              <th>{ui.pigment}</th>
+              <th>{ui.distance}</th>
+              <th>{ui.rfValue}</th>
+            </tr>
+          </thead>
+          <tbody id="tlc-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <aside class="tlc-panel">
+      <div class="tlc-unit-toggle" role="group" aria-label={ui.units}>
+        <button type="button" data-tlc-unit="metric" data-active="true">{ui.metric}</button>
+        <button type="button" data-tlc-unit="imperial" data-active="false">{ui.imperial}</button>
+      </div>
+
+      <label class="tlc-field">
+        <span>{ui.inkSample}</span>
+        <select id="tlc-ink">
+          <option value="ransomNote">{ui.ransomNote}</option>
+          <option value="bluePen">{ui.bluePen}</option>
+          <option value="blackPen">{ui.blackPen}</option>
+          <option value="gelPen">{ui.gelPen}</option>
+        </select>
+      </label>
+
+      <label class="tlc-field">
+        <span>{ui.solventSystem}</span>
+        <select id="tlc-solvent-select">
+          <option value="ethanolWater">{ui.ethanolWater}</option>
+          <option value="butanolAcetic">{ui.butanolAcetic}</option>
+          <option value="isopropanolAmmonia">{ui.isopropanolAmmonia}</option>
+        </select>
+      </label>
+
+      <label class="tlc-slider">
+        <span>{ui.developmentTime}</span>
+        <strong id="tlc-time-label">-</strong>
+        <input id="tlc-time" type="range" min="1" max="12" value="6" step="0.5" />
+      </label>
+
+      <div class="tlc-readout">
+        <div>
+          <span>{ui.frontDistance}</span>
+          <strong id="tlc-front-distance">-</strong>
+        </div>
+        <div>
+          <span>{ui.matchScore}</span>
+          <strong id="tlc-match">-</strong>
+        </div>
+      </div>
+
+      <div class="tlc-mini-map" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </aside>
+
+    <p class="tlc-disclaimer">{ui.disclaimer}</p>
+  </div>
+</section>
+
+<script id="tlc-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script>
+  import { ChromatographyPhysics } from './logic';
+  import type { InkSample, SolventSystem, TlcBand } from './logic';
+
+  const ui = JSON.parse(document.getElementById('tlc-ui')?.textContent || '{}');
+  const model = new ChromatographyPhysics();
+  const STORAGE_KEY = 'forensic-tlc-ink-simulator-state';
+  const inkSelect = document.getElementById('tlc-ink') as HTMLSelectElement | null;
+  const solventSelect = document.getElementById('tlc-solvent-select') as HTMLSelectElement | null;
+  const timeInput = document.getElementById('tlc-time') as HTMLInputElement | null;
+  const lane = document.getElementById('tlc-lane');
+  const front = document.getElementById('tlc-front') as HTMLElement | null;
+  const solvent = document.getElementById('tlc-solvent') as HTMLElement | null;
+  const tableBody = document.getElementById('tlc-table-body');
+  let unitSystem: 'metric' | 'imperial' = 'metric';
+
+  function setText(id: string, value: string): void {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  }
+
+  function formatDistance(mm: number): string {
+    if (unitSystem === 'metric') return `${mm.toFixed(1)} ${ui.unitMillimeter}`;
+    return `${(mm / 25.4).toFixed(2)} ${ui.unitInch}`;
+  }
+
+  function updateUnitButtons(): void {
+    document.querySelectorAll<HTMLButtonElement>('[data-tlc-unit]').forEach((button) => {
+      button.dataset.active = button.dataset.tlcUnit === unitSystem ? 'true' : 'false';
+    });
+  }
+
+  function renderBand(band: TlcBand, solventTravelMm: number): HTMLDivElement {
+    const mark = document.createElement('div');
+    const label = ui[band.labelKey] ?? band.id;
+    mark.className = 'tlc-band';
+    mark.style.setProperty('--band-color', band.color);
+    mark.style.setProperty('--band-bottom', `${10 + (band.distanceMm / solventTravelMm) * 78}%`);
+    mark.style.setProperty('--band-height', `${Math.max(5, band.widthMm * 1.8)}px`);
+    mark.title = `${label}: ${ui.rfValue} ${band.rf.toFixed(2)}`;
+    return mark;
+  }
+
+  function renderTable(bands: TlcBand[]): void {
+    if (!tableBody) return;
+    tableBody.innerHTML = '';
+    bands.forEach((band) => {
+      const row = document.createElement('tr');
+      const label = ui[band.labelKey] ?? band.id;
+      row.innerHTML = `<td><span class="tlc-chip" style="--chip:${band.color}"></span>${label}</td><td>${formatDistance(band.distanceMm)}</td><td>${band.rf.toFixed(2)}</td>`;
+      tableBody.append(row);
+    });
+  }
+
+  function saveState(): void {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      ink: inkSelect?.value ?? 'ransomNote',
+      solvent: solventSelect?.value ?? 'ethanolWater',
+      time: Number(timeInput?.value ?? 6),
+      unitSystem,
+    }));
+  }
+
+  function applySavedSelectValue(select: HTMLSelectElement | null, value: unknown): void {
+    if (typeof value === 'string' && select) {
+      select.value = value;
+    }
+  }
+
+  function applySavedTime(value: unknown): void {
+    if (typeof value === 'number' && timeInput) {
+      timeInput.value = String(value);
+    }
+  }
+
+  function applySavedUnitSystem(value: unknown): void {
+    if (value === 'imperial' || value === 'metric') {
+      unitSystem = value;
+    }
+  }
+
+  function parseSavedState(): Record<string, unknown> {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}') as Record<string, unknown>;
+  }
+
+  function restoreState(): void {
+    try {
+      const saved = parseSavedState();
+      applySavedSelectValue(inkSelect, saved.ink);
+      applySavedSelectValue(solventSelect, saved.solvent);
+      applySavedTime(saved.time);
+      applySavedUnitSystem(saved.unitSystem);
+    } catch {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  }
+
+  function getSimulationInput(): { timeMinutes: number; ink: InkSample; solventSystem: SolventSystem } {
+    return {
+      timeMinutes: Number(timeInput?.value ?? 6),
+      ink: (inkSelect?.value ?? 'ransomNote') as InkSample,
+      solventSystem: (solventSelect?.value ?? 'ethanolWater') as SolventSystem,
+    };
+  }
+
+  function renderLane(bands: TlcBand[], solventTravelMm: number): void {
+    if (!lane) return;
+    lane.innerHTML = '';
+    bands.forEach((band) => lane.append(renderBand(band, solventTravelMm)));
+  }
+
+  function renderSolvent(frontPosition: number, timeMinutes: number): void {
+    if (front) front.style.bottom = `${frontPosition}%`;
+    if (solvent) solvent.style.height = `${Math.min(42, 10 + timeMinutes * 2.2)}%`;
+  }
+
+  function renderReadouts(timeMinutes: number, solventTravelMm: number, matchScore: number): void {
+    setText('tlc-time-label', `${timeMinutes.toFixed(1)} ${ui.unitMinute}`);
+    setText('tlc-front-distance', formatDistance(solventTravelMm));
+    setText('tlc-match', `${matchScore}%`);
+  }
+
+  function render(): void {
+    const { timeMinutes, ink, solventSystem } = getSimulationInput();
+    const result = model.simulate(timeMinutes, ink, solventSystem);
+    const solventTravelMm = result.solventFrontMm - result.originMm;
+    const frontPosition = 10 + (solventTravelMm / (result.plateHeightMm - result.originMm)) * 82;
+
+    renderLane(result.bands, solventTravelMm);
+    renderSolvent(frontPosition, timeMinutes);
+    renderReadouts(timeMinutes, solventTravelMm, result.matchScore);
+    renderTable(result.bands);
+    saveState();
+  }
+
+  inkSelect?.addEventListener('change', render);
+  solventSelect?.addEventListener('change', render);
+  timeInput?.addEventListener('input', render);
+  document.querySelectorAll<HTMLButtonElement>('[data-tlc-unit]').forEach((button) => {
+    button.addEventListener('click', () => {
+      unitSystem = button.dataset.tlcUnit === 'imperial' ? 'imperial' : 'metric';
+      updateUnitButtons();
+      render();
+    });
+  });
+
+  restoreState();
+  updateUnitButtons();
+  render();
+</script>

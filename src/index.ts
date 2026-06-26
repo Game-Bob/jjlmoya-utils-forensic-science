@@ -7,6 +7,7 @@ export { FORENSIC_STATURE_ESTIMATOR_TOOL } from './tool/forensic-stature-estimat
 export { FORENSIC_BLOOD_TEST_SIMULATOR_TOOL } from './tool/forensic-blood-test-simulator/index';
 export { FORENSIC_IMAGE_AUTHENTICITY_ANALYZER_TOOL } from './tool/forensic-image-authenticity-analyzer/index';
 export { GSR_DISPERSION_CALCULATOR_TOOL } from './tool/gsr-dispersion-calculator/index';
+export { FORENSIC_TLC_INK_SIMULATOR_TOOL } from './tool/forensic-tlc-ink-simulator/index';
 
 export type {
   KnownLocale,

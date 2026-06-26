@@ -7,6 +7,7 @@ import { FORENSIC_STATURE_ESTIMATOR_TOOL } from './tool/forensic-stature-estimat
 import { FORENSIC_BLOOD_TEST_SIMULATOR_TOOL } from './tool/forensic-blood-test-simulator/index';
 import { FORENSIC_IMAGE_AUTHENTICITY_ANALYZER_TOOL } from './tool/forensic-image-authenticity-analyzer/index';
 import { GSR_DISPERSION_CALCULATOR_TOOL } from './tool/gsr-dispersion-calculator/index';
+import { FORENSIC_TLC_INK_SIMULATOR_TOOL } from './tool/forensic-tlc-ink-simulator/index';
 
 export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_AGE_ESTIMATOR_TOOL,
@@ -15,5 +16,6 @@ export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_STATURE_ESTIMATOR_TOOL,
   FORENSIC_BLOOD_TEST_SIMULATOR_TOOL,
   FORENSIC_IMAGE_AUTHENTICITY_ANALYZER_TOOL,
-  GSR_DISPERSION_CALCULATOR_TOOL
+  GSR_DISPERSION_CALCULATOR_TOOL,
+  FORENSIC_TLC_INK_SIMULATOR_TOOL
 ];
