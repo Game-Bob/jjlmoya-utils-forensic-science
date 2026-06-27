@@ -1,0 +1,81 @@
+---
+import './forensic-glass-becke-line-simulator.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<section class="becke-shell" data-becke-tool>
+  <div class="becke-scope">
+    <div class="becke-viewer" aria-label={ui.viewerAria}>
+      <canvas id="becke-canvas" width="720" height="540"></canvas>
+      <div class="becke-reticle" aria-hidden="true"></div>
+      <div class="becke-material-chip" id="becke-material-chip">{ui.sodaLime}</div>
+      <div class="becke-badge">
+        <span>{ui.matchMeter}</span>
+        <strong id="becke-match">-</strong>
+      </div>
+    </div>
+
+    <aside class="becke-controls">
+      <div class="becke-unit-toggle" role="group" aria-label={ui.units}>
+        <button type="button" data-becke-unit="metric" data-active="true">{ui.metric}</button>
+        <button type="button" data-becke-unit="imperial" data-active="false">{ui.imperial}</button>
+      </div>
+
+      <div class="becke-field becke-choice" data-becke-choice>
+        <span>{ui.glassSample}</span>
+        <button id="becke-glass-trigger" class="becke-choice-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span id="becke-glass-label">{ui.sodaLime}</span>
+          <span class="becke-choice-icon" aria-hidden="true"></span>
+        </button>
+        <div class="becke-choice-menu" id="becke-glass-menu" role="listbox" aria-label={ui.glassSample}>
+          <button type="button" role="option" data-becke-glass="sodaLime" aria-selected="true">{ui.sodaLime}</button>
+          <button type="button" role="option" data-becke-glass="borosilicate" aria-selected="false">{ui.borosilicate}</button>
+          <button type="button" role="option" data-becke-glass="leadCrystal" aria-selected="false">{ui.leadCrystal}</button>
+          <button type="button" role="option" data-becke-glass="tempered" aria-selected="false">{ui.tempered}</button>
+        </div>
+      </div>
+
+      <label class="becke-slider becke-heat">
+        <span>{ui.stageTemperature}</span>
+        <strong id="becke-temperature-label">-</strong>
+        <input id="becke-temperature" type="range" min="15" max="145" value="96" step="0.5" />
+      </label>
+
+      <div class="becke-focus" role="group" aria-label={ui.focusDirection}>
+        <button type="button" data-becke-focus="raised" data-active="true">{ui.focusRaised}</button>
+        <button type="button" data-becke-focus="lowered" data-active="false">{ui.focusLowered}</button>
+      </div>
+
+      <div class="becke-readouts">
+        <div>
+          <span>{ui.liquidRi}</span>
+          <strong id="becke-liquid-ri">-</strong>
+        </div>
+        <div>
+          <span>{ui.glassRi}</span>
+          <strong id="becke-glass-ri">-</strong>
+        </div>
+        <div>
+          <span>{ui.deltaRi}</span>
+          <strong id="becke-delta-ri">-</strong>
+        </div>
+      </div>
+
+      <p class="becke-interpretation" id="becke-interpretation">-</p>
+    </aside>
+
+    <p class="becke-disclaimer">{ui.disclaimer}</p>
+  </div>
+</section>
+
+<script id="becke-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script>
+  import { initBeckeLineSimulator } from './view';
+
+  initBeckeLineSimulator(JSON.parse(document.getElementById('becke-ui')?.textContent || '{}'));
+</script>

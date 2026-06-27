@@ -8,6 +8,7 @@ import { forensicImageAuthenticityAnalyzer } from '../tool/forensic-image-authen
 import { gsrDispersionCalculator } from '../tool/gsr-dispersion-calculator/index';
 import { forensicTlcInkSimulator } from '../tool/forensic-tlc-ink-simulator/index';
 import { forensicMicrocrystalDrugSimulator } from '../tool/forensic-microcrystal-drug-simulator/index';
+import { forensicGlassBeckeLineSimulator } from '../tool/forensic-glass-becke-line-simulator/index';
 
 export const forensicCategory: ScienceCategoryEntry = {
   icon: 'mdi:fingerprint',
@@ -20,7 +21,8 @@ export const forensicCategory: ScienceCategoryEntry = {
     forensicImageAuthenticityAnalyzer,
     gsrDispersionCalculator,
     forensicTlcInkSimulator,
-    forensicMicrocrystalDrugSimulator
+    forensicMicrocrystalDrugSimulator,
+    forensicGlassBeckeLineSimulator
   ],
   i18n: {
     de: () => import('./i18n/de').then((m) => m.content),
