@@ -1,0 +1,558 @@
+---
+import './bloodstain-pattern-origin-analyzer.css';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="bpa-shell">
+  <div class="bpa-card">
+    <div class="bpa-toolbar">
+      <div class="bpa-segment" role="group" aria-label={ui.unitsLabel}>
+        <button type="button" class="is-active" data-unit="metric">{ui.metric}</button>
+        <button type="button" data-unit="imperial">{ui.imperial}</button>
+      </div>
+      <div class="bpa-active-strip">
+        <span id="bpa-active-dot"></span>
+        <strong id="bpa-active-stain">{ui.stainLabel} A</strong>
+      </div>
+      <div class="bpa-actions">
+        <button type="button" id="bpa-add"><Icon name="mdi:plus" aria-hidden="true" />{ui.addStain}</button>
+        <button type="button" id="bpa-reset"><Icon name="mdi:restore" aria-hidden="true" />{ui.reset}</button>
+      </div>
+    </div>
+
+    <div class="bpa-stage">
+      <div class="bpa-surface-panel">
+        <div class="bpa-surface-wrap">
+          <canvas id="bpa-surface" width="820" height="520" aria-label={ui.surface}></canvas>
+        </div>
+      </div>
+
+      <div class="bpa-view-panel">
+        <div id="bpa-three" class="bpa-three" aria-label={ui.viewport3dLabel}></div>
+        <p>{ui.rotateHint}</p>
+      </div>
+    </div>
+
+    <div class="bpa-focus-panel">
+      <div class="bpa-focus-title">
+        <span id="bpa-focus-swatch"></span>
+        <strong id="bpa-focus-name">{ui.stainLabel} A</strong>
+      </div>
+      <label>
+        <span>{ui.width}</span>
+        <input id="bpa-focus-width" type="range" min="0.2" max="3" step="0.1" />
+        <output id="bpa-focus-width-value">0 {ui.cm}</output>
+      </label>
+      <label>
+        <span>{ui.length}</span>
+        <input id="bpa-focus-length" type="range" min="0.5" max="6" step="0.1" />
+        <output id="bpa-focus-length-value">0 {ui.cm}</output>
+      </label>
+      <label>
+        <span>{ui.rotation}</span>
+        <input id="bpa-focus-rotation" type="range" min="-90" max="90" step="1" />
+        <output id="bpa-focus-rotation-value">0 {ui.degree}</output>
+      </label>
+    </div>
+
+    <div class="bpa-dashboard">
+      <section class="bpa-readout">
+        <span>{ui.origin}</span>
+        <strong id="bpa-origin">0, 0, 0 {ui.cm}</strong>
+      </section>
+      <section class="bpa-readout">
+        <span>{ui.spread}</span>
+        <strong id="bpa-spread">0 {ui.cm}</strong>
+      </section>
+      <section class="bpa-readout">
+        <span>{ui.confidence}</span>
+        <strong id="bpa-confidence">{ui.low}</strong>
+      </section>
+      <section class="bpa-readout">
+        <span>{ui.impact}</span>
+        <strong id="bpa-impact">0 {ui.degree}</strong>
+      </section>
+    </div>
+
+    <div class="bpa-table-wrap">
+      <table class="bpa-table">
+        <caption>{ui.table}</caption>
+        <thead>
+          <tr>
+            <th>{ui.x}</th>
+            <th>{ui.y}</th>
+            <th>{ui.width}</th>
+            <th>{ui.length}</th>
+            <th>{ui.rotation}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="bpa-rows"></tbody>
+      </table>
+    </div>
+
+    <p class="bpa-disclaimer">{ui.disclaimer}</p>
+  </div>
+</div>
+
+<template id="bpa-delete-icon">
+  <Icon name="mdi:trash-can-outline" aria-hidden="true" />
+</template>
+<script id="bpa-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+
+<script>
+  import * as THREE from 'three';
+  import { analyzeBloodstains } from './logic';
+  import type { BloodstainInput, OriginEstimate } from './logic';
+
+  const ui = JSON.parse(document.getElementById('bpa-ui')?.textContent || '{}');
+  const surface = document.getElementById('bpa-surface') as HTMLCanvasElement | null;
+  const rows = document.getElementById('bpa-rows');
+  const threeHost = document.getElementById('bpa-three');
+  const originEl = document.getElementById('bpa-origin');
+  const spreadEl = document.getElementById('bpa-spread');
+  const confidenceEl = document.getElementById('bpa-confidence');
+  const impactEl = document.getElementById('bpa-impact');
+  const activeEl = document.getElementById('bpa-active-stain');
+  const activeDotEl = document.getElementById('bpa-active-dot');
+  const focusNameEl = document.getElementById('bpa-focus-name');
+  const focusSwatchEl = document.getElementById('bpa-focus-swatch');
+  const focusWidthEl = document.getElementById('bpa-focus-width') as HTMLInputElement | null;
+  const focusLengthEl = document.getElementById('bpa-focus-length') as HTMLInputElement | null;
+  const focusRotationEl = document.getElementById('bpa-focus-rotation') as HTMLInputElement | null;
+  const focusWidthValueEl = document.getElementById('bpa-focus-width-value');
+  const focusLengthValueEl = document.getElementById('bpa-focus-length-value');
+  const focusRotationValueEl = document.getElementById('bpa-focus-rotation-value');
+  const addBtn = document.getElementById('bpa-add');
+  const resetBtn = document.getElementById('bpa-reset');
+  const deleteIconTemplate = document.getElementById('bpa-delete-icon') as HTMLTemplateElement | null;
+  const unitButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.bpa-segment button'));
+  const STORAGE_KEY = 'bloodstain-pattern-origin-analyzer';
+  const INCH_PER_CM = 0.3937007874;
+  const palette = ['#b3203f', '#e05a47', '#8e1734', '#d93f76', '#aa2f23', '#f07a5f'];
+  let unit: 'metric' | 'imperial' = 'metric';
+  let selectedStainId = 'A';
+  let draggingStainId: string | null = null;
+  let stains: BloodstainInput[] = [
+    { id: 'A', xCm: -34, yCm: -18, widthCm: 1.1, lengthCm: 2.4, rotationDeg: 34 },
+    { id: 'B', xCm: 8, yCm: 9, widthCm: 1.3, lengthCm: 3.1, rotationDeg: 10 },
+    { id: 'C', xCm: 38, yCm: -7, widthCm: 1, lengthCm: 2.2, rotationDeg: -22 },
+  ];
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 1200);
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  const group = new THREE.Group();
+  const originMesh = new THREE.Mesh(
+    new THREE.SphereGeometry(4.5, 32, 16),
+    new THREE.MeshStandardMaterial({ color: 0xf7d046, emissive: 0x4d3200, roughness: 0.36 })
+  );
+  let dragging3d = false;
+  let lastX = 0;
+
+  function display(valueCm: number): string {
+    const value = unit === 'metric' ? valueCm : valueCm * INCH_PER_CM;
+    const suffix = unit === 'metric' ? ui.cm : ui.inch;
+    return `${value.toFixed(value < 10 ? 1 : 0)} ${suffix}`;
+  }
+
+  function inputToCm(value: number): number {
+    return unit === 'metric' ? value : value / INCH_PER_CM;
+  }
+
+  function cmToInput(value: number): number {
+    return unit === 'metric' ? value : value * INCH_PER_CM;
+  }
+
+  function confidenceLabel(confidence: OriginEstimate['confidence']): string {
+    return ui[confidence] || confidence;
+  }
+
+  function selectedIndex(): number {
+    return Math.max(0, stains.findIndex((stain) => stain.id === selectedStainId));
+  }
+
+  function selectedStain(): BloodstainInput | undefined {
+    return stains.find((stain) => stain.id === selectedStainId) ?? stains[0];
+  }
+
+  function configureFocusRanges() {
+    if (!focusWidthEl || !focusLengthEl) return;
+    focusWidthEl.min = cmToInput(0.2).toString();
+    focusWidthEl.max = cmToInput(3).toString();
+    focusWidthEl.step = unit === 'metric' ? '0.1' : '0.05';
+    focusLengthEl.min = cmToInput(0.5).toString();
+    focusLengthEl.max = cmToInput(6).toString();
+    focusLengthEl.step = unit === 'metric' ? '0.1' : '0.05';
+  }
+
+  function syncFocusPanel() {
+    const stain = selectedStain();
+    if (!stain) return;
+    const color = palette[selectedIndex() % palette.length];
+    if (focusNameEl) focusNameEl.textContent = `${ui.stainLabel} ${stain.id}`;
+    if (focusSwatchEl) focusSwatchEl.style.background = color;
+    configureFocusRanges();
+    if (focusWidthEl) focusWidthEl.value = cmToInput(stain.widthCm).toString();
+    if (focusLengthEl) focusLengthEl.value = cmToInput(stain.lengthCm).toString();
+    if (focusRotationEl) focusRotationEl.value = stain.rotationDeg.toString();
+    if (focusWidthValueEl) focusWidthValueEl.textContent = display(stain.widthCm);
+    if (focusLengthValueEl) focusLengthValueEl.textContent = display(stain.lengthCm);
+    if (focusRotationValueEl) focusRotationValueEl.textContent = `${stain.rotationDeg.toFixed(0)} ${ui.degree}`;
+  }
+
+  function canvasMetrics() {
+    if (!surface) return null;
+    const rect = surface.getBoundingClientRect();
+    return {
+      rect,
+      cx: surface.width / 2,
+      cy: surface.height / 2,
+      scale: 4.6,
+      pointerScaleX: surface.width / Math.max(rect.width, 1),
+      pointerScaleY: surface.height / Math.max(rect.height, 1),
+    };
+  }
+
+  function stainScreenPoint(stain: BloodstainInput) {
+    const metrics = canvasMetrics();
+    if (!metrics) return { x: 0, y: 0 };
+    return {
+      x: metrics.cx + stain.xCm * metrics.scale,
+      y: metrics.cy - stain.yCm * metrics.scale,
+    };
+  }
+
+  function eventToSurface(event: PointerEvent) {
+    const metrics = canvasMetrics();
+    if (!metrics) return null;
+    return {
+      x: (event.clientX - metrics.rect.left) * metrics.pointerScaleX,
+      y: (event.clientY - metrics.rect.top) * metrics.pointerScaleY,
+      metrics,
+    };
+  }
+
+  function findStainAt(event: PointerEvent): BloodstainInput | null {
+    const pointer = eventToSurface(event);
+    if (!pointer) return null;
+    let best: { stain: BloodstainInput; distance: number } | null = null;
+    stains.forEach((stain) => {
+      const point = stainScreenPoint(stain);
+      const distance = Math.hypot(pointer.x - point.x, pointer.y - point.y);
+      if (distance < 30 && (!best || distance < best.distance)) {
+        best = { stain, distance };
+      }
+    });
+    return best?.stain ?? null;
+  }
+
+  function setupThree() {
+    if (!threeHost) return;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    threeHost.appendChild(renderer.domElement);
+    scene.add(group);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x3d2830, 2.5));
+    const light = new THREE.DirectionalLight(0xffffff, 2);
+    light.position.set(70, -120, 140);
+    scene.add(light);
+    const plane = new THREE.Mesh(
+      new THREE.PlaneGeometry(130, 90, 13, 9),
+      new THREE.MeshStandardMaterial({ color: 0x33282d, wireframe: true, transparent: true, opacity: 0.48 })
+    );
+    group.add(plane);
+    group.add(originMesh);
+    camera.position.set(0, -165, 95);
+    camera.lookAt(0, 0, 35);
+    resizeThree();
+    renderer.setAnimationLoop(() => renderer.render(scene, camera));
+  }
+
+  function resizeThree() {
+    if (!threeHost) return;
+    const rect = threeHost.getBoundingClientRect();
+    renderer.setSize(rect.width, rect.height, false);
+    camera.aspect = rect.width / Math.max(rect.height, 1);
+    camera.updateProjectionMatrix();
+  }
+
+  function clearDynamic3d() {
+    for (let index = group.children.length - 1; index >= 0; index--) {
+      const child = group.children[index];
+      if (child.userData.dynamic) group.remove(child);
+    }
+  }
+
+  function render3d(estimate: OriginEstimate) {
+    clearDynamic3d();
+    originMesh.position.set(estimate.point.x, estimate.point.y, estimate.point.z);
+    for (const [index, line] of estimate.lines.entries()) {
+      const color = new THREE.Color(palette[index % palette.length]);
+      const start = new THREE.Vector3(line.originPoint.x, line.originPoint.y, line.originPoint.z);
+      const end = new THREE.Vector3(
+        line.originPoint.x + line.direction.x * 155,
+        line.originPoint.y + line.direction.y * 155,
+        line.originPoint.z + line.direction.z * 155
+      );
+      const geometry = new THREE.BufferGeometry().setFromPoints([start, end]);
+      const mesh = new THREE.Line(geometry, new THREE.LineBasicMaterial({ color, linewidth: 2 }));
+      mesh.userData.dynamic = true;
+      group.add(mesh);
+      const dot = new THREE.Mesh(
+        new THREE.SphereGeometry(2.4, 16, 8),
+        new THREE.MeshStandardMaterial({ color })
+      );
+      dot.position.copy(start);
+      dot.userData.dynamic = true;
+      group.add(dot);
+    }
+  }
+
+  function drawSurface(estimate: OriginEstimate) {
+    if (!surface) return;
+    const ctx = surface.getContext('2d');
+    if (!ctx) return;
+    const width = surface.width;
+    const height = surface.height;
+    ctx.clearRect(0, 0, width, height);
+    const dark = document.documentElement.classList.contains('theme-dark');
+    const gradient = ctx.createLinearGradient(0, 0, width, height);
+    gradient.addColorStop(0, dark ? '#1b2026' : '#fffaf7');
+    gradient.addColorStop(0.55, dark ? '#14181d' : '#fff3ef');
+    gradient.addColorStop(1, dark ? '#0f1216' : '#f9ebe6');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+    ctx.strokeStyle = dark ? 'rgba(255,255,255,.075)' : 'rgba(70,20,30,.105)';
+    for (let x = 40; x < width; x += 40) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, height);
+      ctx.stroke();
+    }
+    for (let y = 40; y < height; y += 40) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(width, y);
+      ctx.stroke();
+    }
+    const cx = width / 2;
+    const cy = height / 2;
+    const scale = 4.6;
+    ctx.strokeStyle = dark ? 'rgba(125,211,252,.22)' : 'rgba(179,32,63,.2)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx, 0);
+    ctx.lineTo(cx, height);
+    ctx.moveTo(0, cy);
+    ctx.lineTo(width, cy);
+    ctx.stroke();
+    estimate.lines.forEach((line, index) => {
+      const sx = cx + line.stain.xCm * scale;
+      const sy = cy - line.stain.yCm * scale;
+      const selected = line.stain.id === selectedStainId;
+      const color = palette[index % palette.length];
+      ctx.globalAlpha = selected ? 0.22 : 0.1;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = selected ? 3 : 2;
+      ctx.beginPath();
+      ctx.moveTo(sx - line.direction.x * 35, sy + line.direction.y * 35);
+      ctx.lineTo(sx + line.direction.x * 170, sy - line.direction.y * 170);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.save();
+      ctx.translate(sx, sy);
+      ctx.rotate(line.stain.rotationDeg * Math.PI / 180);
+      if (selected) {
+        ctx.strokeStyle = 'rgba(255,255,255,.95)';
+        ctx.lineWidth = 7;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, line.stain.lengthCm * scale + 8, line.stain.widthCm * scale + 8, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      ctx.fillStyle = color;
+      ctx.globalAlpha = selected ? 0.95 : 0.78;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, line.stain.lengthCm * scale, line.stain.widthCm * scale, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = dark ? 'rgba(226,232,240,.72)' : 'rgba(75,9,20,.28)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.restore();
+      ctx.fillStyle = dark ? '#f8fafc' : '#2f121a';
+      ctx.font = '700 13px system-ui, sans-serif';
+      ctx.fillText(line.stain.id, sx + 11, sy - 10);
+      ctx.globalAlpha = 1;
+    });
+  }
+
+  function renderRows() {
+    if (!rows) return;
+    rows.innerHTML = '';
+    stains.forEach((stain) => {
+      const row = document.createElement('tr');
+      if (stain.id === selectedStainId) row.className = 'is-selected';
+      row.innerHTML = `
+        <td><input data-field="xCm" data-id="${stain.id}" type="number" step="0.5" value="${cmToInput(stain.xCm).toFixed(1)}"></td>
+        <td><input data-field="yCm" data-id="${stain.id}" type="number" step="0.5" value="${cmToInput(stain.yCm).toFixed(1)}"></td>
+        <td><input data-field="widthCm" data-id="${stain.id}" type="number" min="0.1" step="0.1" value="${cmToInput(stain.widthCm).toFixed(1)}"></td>
+        <td><input data-field="lengthCm" data-id="${stain.id}" type="number" min="0.1" step="0.1" value="${cmToInput(stain.lengthCm).toFixed(1)}"></td>
+        <td><input data-field="rotationDeg" data-id="${stain.id}" type="number" step="1" value="${stain.rotationDeg.toFixed(0)}"></td>
+        <td><button type="button" class="bpa-icon-button" data-remove="${stain.id}" aria-label="${ui.remove} ${stain.id}">${deleteIconTemplate?.innerHTML || ui.remove}</button></td>
+      `;
+      rows.appendChild(row);
+    });
+  }
+
+  function update() {
+    const estimate = analyzeBloodstains(stains);
+    const averageImpact = estimate.lines.reduce((sum, line) => sum + line.impactAngleDeg, 0) / Math.max(estimate.lines.length, 1);
+    if (originEl) originEl.textContent = `${display(estimate.point.x)}, ${display(estimate.point.y)}, ${display(estimate.point.z)}`;
+    if (spreadEl) spreadEl.textContent = display(estimate.spreadCm);
+    if (confidenceEl) confidenceEl.textContent = confidenceLabel(estimate.confidence);
+    if (confidenceEl) confidenceEl.dataset.confidence = estimate.confidence;
+    if (impactEl) impactEl.textContent = `${averageImpact.toFixed(1)} ${ui.degree}`;
+    if (activeEl) activeEl.textContent = `${ui.stainLabel} ${selectedStainId}`;
+    if (activeDotEl) activeDotEl.style.background = palette[selectedIndex() % palette.length];
+    syncFocusPanel();
+    drawSurface(estimate);
+    render3d(estimate);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stains));
+  }
+
+  function handleFocusInput() {
+    const stain = selectedStain();
+    if (!stain) return;
+    if (focusWidthEl) stain.widthCm = inputToCm(Number(focusWidthEl.value));
+    if (focusLengthEl) stain.lengthCm = Math.max(stain.widthCm, inputToCm(Number(focusLengthEl.value)));
+    if (focusRotationEl) stain.rotationDeg = Number(focusRotationEl.value);
+    renderRows();
+    update();
+  }
+
+  focusWidthEl?.addEventListener('input', handleFocusInput);
+  focusLengthEl?.addEventListener('input', handleFocusInput);
+  focusRotationEl?.addEventListener('input', handleFocusInput);
+
+  surface?.addEventListener('pointerdown', (event) => {
+    const stain = findStainAt(event);
+    if (!stain) return;
+    draggingStainId = stain.id;
+    selectedStainId = stain.id;
+    surface.setPointerCapture(event.pointerId);
+    surface.classList.add('is-dragging');
+    update();
+  });
+
+  surface?.addEventListener('pointermove', (event) => {
+    const hovered = findStainAt(event);
+    if (surface) surface.classList.toggle('can-grab', Boolean(hovered || draggingStainId));
+    if (!draggingStainId) return;
+    const pointer = eventToSurface(event);
+    const stain = stains.find((item) => item.id === draggingStainId);
+    if (!pointer || !stain) return;
+    stain.xCm = (pointer.x - pointer.metrics.cx) / pointer.metrics.scale;
+    stain.yCm = (pointer.metrics.cy - pointer.y) / pointer.metrics.scale;
+    renderRows();
+    update();
+  });
+
+  surface?.addEventListener('pointerup', () => {
+    draggingStainId = null;
+    surface.classList.remove('is-dragging');
+  });
+
+  surface?.addEventListener('pointercancel', () => {
+    draggingStainId = null;
+    surface.classList.remove('is-dragging');
+  });
+
+  rows?.addEventListener('input', (event) => {
+    const input = event.target as HTMLInputElement;
+    const id = input.dataset.id;
+    const field = input.dataset.field;
+    const stain = stains.find((item) => item.id === id);
+    if (!stain || !field) return;
+    selectedStainId = stain.id;
+    const value = Number(input.value);
+    if (field === 'rotationDeg') {
+      stain.rotationDeg = value;
+    } else if (field === 'xCm' || field === 'yCm' || field === 'widthCm' || field === 'lengthCm') {
+      stain[field] = inputToCm(value);
+    }
+    update();
+  });
+
+  rows?.addEventListener('click', (event) => {
+    const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-remove]');
+    const rowInput = (event.target as HTMLElement).closest<HTMLInputElement>('input[data-id]');
+    if (rowInput?.dataset.id) selectedStainId = rowInput.dataset.id;
+    if (!button) {
+      renderRows();
+      update();
+      return;
+    }
+    stains = stains.filter((stain) => stain.id !== button.dataset.remove);
+    if (!stains.some((stain) => stain.id === selectedStainId)) selectedStainId = stains[0]?.id ?? 'A';
+    renderRows();
+    update();
+  });
+
+  addBtn?.addEventListener('click', () => {
+    const id = String.fromCharCode(65 + stains.length);
+    stains = [...stains, { id, xCm: -20 + stains.length * 14, yCm: 16 - stains.length * 6, widthCm: 1, lengthCm: 2.4, rotationDeg: 18 - stains.length * 9 }];
+    selectedStainId = id;
+    renderRows();
+    update();
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    localStorage.removeItem(STORAGE_KEY);
+    stains = [
+      { id: 'A', xCm: -34, yCm: -18, widthCm: 1.1, lengthCm: 2.4, rotationDeg: 34 },
+      { id: 'B', xCm: 8, yCm: 9, widthCm: 1.3, lengthCm: 3.1, rotationDeg: 10 },
+      { id: 'C', xCm: 38, yCm: -7, widthCm: 1, lengthCm: 2.2, rotationDeg: -22 },
+    ];
+    selectedStainId = 'A';
+    renderRows();
+    update();
+  });
+
+  unitButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      unit = button.dataset.unit === 'imperial' ? 'imperial' : 'metric';
+      unitButtons.forEach((item) => item.classList.toggle('is-active', item === button));
+      renderRows();
+      update();
+    });
+  });
+
+  renderer.domElement.addEventListener('pointerdown', (event) => {
+    dragging3d = true;
+    lastX = event.clientX;
+    renderer.domElement.setPointerCapture(event.pointerId);
+  });
+  renderer.domElement.addEventListener('pointermove', (event) => {
+    if (!dragging3d) return;
+    group.rotation.z += (event.clientX - lastX) * 0.008;
+    lastX = event.clientX;
+  });
+  renderer.domElement.addEventListener('pointerup', () => {
+    dragging3d = false;
+  });
+
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) stains = JSON.parse(saved);
+  } catch {}
+
+  setupThree();
+  renderRows();
+  update();
+  window.addEventListener('resize', resizeThree);
+</script>

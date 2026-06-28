@@ -197,5 +197,21 @@ export default [
             "complexity": "off",
         },
     },
+    {
+        files: ["src/tool/bloodstain-pattern-origin-analyzer/component.astro"],
+        rules: {
+            "max-lines": "off",
+            "max-lines-per-function": "off",
+            "complexity": "off",
+        },
+    },
+    {
+        files: ["src/tool/bloodstain-pattern-origin-analyzer/component.astro/*.ts"],
+        rules: {
+            "max-lines": "off",
+            "max-lines-per-function": "off",
+            "complexity": "off",
+        },
+    },
 ];
 

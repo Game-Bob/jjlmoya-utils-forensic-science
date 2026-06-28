@@ -26,10 +26,10 @@ export const content: CategoryLocaleContent = {
     {
       type: 'list',
       items: [
-        '<strong>Age assessment tools:</strong> dental, skeletal, and maturity indicators with explicit uncertainty.',
-        '<strong>Evidence interpretation tools:</strong> structured calculators that show assumptions, confidence, and limitations.',
-        '<strong>Case triage tools:</strong> fast workflows that help decide what data are missing before formal analysis.',
-        '<strong>Reporting support:</strong> outputs that encourage clear language, ranges, caveats, and traceable reasoning.',
+        '<strong>Herramientas de evaluación de edad:</strong> indicadores dentales, esqueléticos y de madurez con incertidumbre explícita.',
+        '<strong>Herramientas de interpretación de evidencia:</strong> calculadoras estructuradas que muestran supuestos, confianza y limitaciones.',
+        '<strong>Herramientas de triaje de casos:</strong> flujos de trabajo rápidos que ayudan a decidir qué datos faltan antes del análisis formal.',
+        '<strong>Soporte para informes:</strong> resultados que fomentan un lenguaje claro, rangos, advertencias y razonamiento rastreable.',
       ],
     },
     {
@@ -43,12 +43,12 @@ export const content: CategoryLocaleContent = {
     },
     {
       type: 'table',
-      headers: ['Good use', 'Poor use', 'Why it matters'],
+      headers: ['Buen uso', 'Mal uso', 'Por qué es importante'],
       rows: [
-        ["Screen a case file before specialist review.", "Replace specialist review with a calculator result.", "Forensic conclusions must be defensible and methodologically valid."],
-        ["Explain uncertainty to non-specialists.", "Report one exact answer without caveats.", "False precision can mislead legal or safeguarding decisions."],
-        ["Compare how assumptions affect a result.", "Hide assumptions from the report.", "Transparent assumptions make the result easier to audit."],
-        ["Identify missing evidence.", "Ignore poor data quality.", "Weak inputs can make even a correct formula unreliable."],
+        ["Examinar un expediente antes de la revisión especializada.", "Reemplazar la revisión de un especialista con el resultado de una calculadora.", "Las conclusiones forenses deben ser defendibles y metodológicamente válidas."],
+        ["Explicar la incertidumbre a no especialistas.", "Informar una sola respuesta exacta sin advertencias.", "La falsa precisión puede inducir a error en decisiones legales o de protección."],
+        ["Comparar cómo influyen los supuestos en un resultado.", "Ocultar supuestos del informe.", "Los supuestos transparentes hacen que el resultado sea más fácil de auditar."],
+        ["Identificar la evidencia faltante.", "Ignorar la mala calidad de los datos.", "Los datos de entrada débiles pueden hacer que incluso una fórmula correcta no sea confiable."],
       ],
     },
   ],

@@ -11,6 +11,7 @@ import { FORENSIC_TLC_INK_SIMULATOR_TOOL } from './tool/forensic-tlc-ink-simulat
 import { FORENSIC_MICROCRYSTAL_DRUG_SIMULATOR_TOOL } from './tool/forensic-microcrystal-drug-simulator/index';
 import { FORENSIC_GLASS_BECKE_LINE_SIMULATOR_TOOL } from './tool/forensic-glass-becke-line-simulator/index';
 import { FORENSIC_FIBER_COMPARISON_MICROSCOPE_TOOL } from './tool/forensic-fiber-comparison-microscope/index';
+import { BLOODSTAIN_PATTERN_ORIGIN_ANALYZER_TOOL } from './tool/bloodstain-pattern-origin-analyzer/index';
 
 export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_AGE_ESTIMATOR_TOOL,
@@ -23,5 +24,6 @@ export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_TLC_INK_SIMULATOR_TOOL,
   FORENSIC_MICROCRYSTAL_DRUG_SIMULATOR_TOOL,
   FORENSIC_GLASS_BECKE_LINE_SIMULATOR_TOOL,
-  FORENSIC_FIBER_COMPARISON_MICROSCOPE_TOOL
+  FORENSIC_FIBER_COMPARISON_MICROSCOPE_TOOL,
+  BLOODSTAIN_PATTERN_ORIGIN_ANALYZER_TOOL
 ];
