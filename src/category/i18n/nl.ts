@@ -2,53 +2,53 @@ import type { CategoryLocaleContent } from '../../types';
 
 export const content: CategoryLocaleContent = {
   slug: "forensische-wetenschap",
-  title: "Forensische hulpmiddelen",
-  description: "Forensische hulpmiddelen voor gestructureerde zaaktriage, transparante berekeningen en bewijsbewuste rapportage.",
+  title: "Forensische Wetenschaphulpmiddelen",
+  description: "Forensische hulpmiddelen voor gestructureerde casustriage, transparante berekeningen en bewijsbewuste rapportage.",
   seo: [
     {
       type: 'title',
-      text: "Forensische hulpmiddelen voor bewijsbewuste berekeningen en zaaktriage",
+      text: "Forensische Wetenschaphulpmiddelen voor Bewijsanalyse en Casustriage",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "Deze categorie verzamelt forensische calculators en gestructureerde hulpmiddelen om bewijs te interpreteren, aannames te documenteren en schijnnauwkeurigheid te vermijden. Ze vervangt geen experts of gevalideerde protocollen; ze maakt vroege zaakbeoordeling duidelijker.",
+      html: "Deze bibliotheek biedt gespecialiseerde tools en berekeningen voor forensische analisten, juridische professionals, onderzoekers en rechercheurs. Forensische wetenschapshulpmiddelen helpen bij het evalueren van fysiek bewijsmateriaal dat op plaats delicten is verzameld. Door gestructureerde modellen te gebruiken voor de baan van bloedspatten, leeftijdsschatting, de brekingsindex van glas en druganalyse, kunnen teams een eerste casustriage uitvoeren. Elke tool richt zich op transparantie, het tonen van aannames en het helpen van gebruikers om de grenzen van elke forensische formule duidelijk te begrijpen.",
     },
     {
       type: 'paragraph',
-      html: "Forensisch werk kan belangrijke beslissingen beinvloeden. Daarom tonen deze tools bereiken, beperkingen en ontbrekende gegevens voordat een conclusie wordt geschreven.",
+      html: "Een vroege casusevaluatie vereist het beoordelen van welk bewijsmateriaal beschikbaar is, wat de wetenschappelijke formules aannemen en waar onzekerheid blijft bestaan. Deze calculators zijn ontworpen om onderwijs en voorlopige screening te ondersteunen. Ze helpen bepalen welke analytische stappen nodig zijn voordat formele laboratoriumtests worden uitgevoerd. Het gebruik van deze tools helpt bij het vroegtijdig identificeren van hiaten in de bewijsdossiers tijdens het onderzoeksproces.",
     },
     {
       type: 'title',
-      text: "Wat hoort in deze categorie forensische hulpmiddelen",
+      text: "Belangrijke Gebieden van Forensische Berekeningen",
       level: 3,
     },
     {
       type: 'list',
       items: [
-        '<strong>Age assessment tools:</strong> dental, skeletal, and maturity indicators with explicit uncertainty.',
-        '<strong>Evidence interpretation tools:</strong> structured calculators that show assumptions, confidence, and limitations.',
-        '<strong>Case triage tools:</strong> fast workflows that help decide what data are missing before formal analysis.',
-        '<strong>Reporting support:</strong> outputs that encourage clear language, ranges, caveats, and traceable reasoning.',
+        '<strong>Leeftijdsschatting:</strong> skelet-, gebits- en rijpheidsberekeningen met expliciete onzekerheidsstatistieken.',
+        '<strong>Bewijsinterpretatie:</strong> gestructureerde schatters die formules, betrouwbaarheidsintervallen en grenzen weergeven.',
+        '<strong>Casustriage:</strong> snelle tools die ontbrekend bewijsmateriaal markeren en parameters identificeren die nodig zijn voor formeel onderzoek.',
+        '<strong>Ondersteuning bij het opstellen van rapporten:</strong> hulpmiddelen die duidelijke rapportage stimuleren met behulp van bereiken in plaats van schijnprecisie.',
       ],
     },
     {
       type: 'title',
-      text: "Forensische calculators verantwoord gebruiken",
+      text: "Richtlijnen voor Verantwoord Gebruik van Forensische Software",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "Gebruik deze tools als beslis- en uitlegondersteuning, niet als eindautoriteit voor juridische, medische, migratie- of identificatiebeslissingen.",
+      html: "Elke forensische berekening brengt foutmarges en betrouwbaarheidslimieten met zich mee. Een calculator mag nooit een gekwalificeerde getuige-deskundige of een gevalideerd laboratoriumprotocol vervangen. In plaats daarvan kunnen deze webtools het best worden gebruikt om scenario's te verkennen, concepten uit te leggen aan niet-specialisten en de gevoeligheid van metingen te controleren voordat definitieve rapporten worden geschreven. Dit helpt misverstanden in de rechtszaal over wetenschappelijke precisie te voorkomen.",
     },
     {
       type: 'table',
-      headers: ['Good use', 'Poor use', 'Why it matters'],
+      headers: ['Juist Gebruik', 'Onjuist Gebruik', 'Belang'],
       rows: [
-        ["Screen a case file before specialist review.", "Replace specialist review with a calculator result.", "Forensic conclusions must be defensible and methodologically valid."],
-        ["Explain uncertainty to non-specialists.", "Report one exact answer without caveats.", "False precision can mislead legal or safeguarding decisions."],
-        ["Compare how assumptions affect a result.", "Hide assumptions from the report.", "Transparent assumptions make the result easier to audit."],
-        ["Identify missing evidence.", "Ignore poor data quality.", "Weak inputs can make even a correct formula unreliable."],
+        ["Casusdossiers screenen voorafgaand aan formeel specialistisch onderzoek.", "De uitkomst van een calculator gebruiken als definitief deskundigenoordeel.", "Forensisch bewijs moet voldoen aan strenge normen van wetenschappelijke validatie."],
+        ["Meetonzekerheid en bereiken uitleggen aan rechercheurs.", "Een enkel exact cijfer rapporteren zonder de beperkingen uit te leggen.", "Schijnprecisie kan leiden tot onjuiste beslissingen in rechtssystemen."],
+        ["Controleren hoe invoeraannames de geschatte uitkomst beïnvloeden.", "Eerste parameters of berekeningen verbergen in het casusdossier.", "Transparantie maakt het mogelijk om resultaten te controleren en door anderen te reproduceren."],
+        ["Bepalen of de datakwaliteit voldoende is voor de berekening.", "Formules uitvoeren met slechte of onvolledige schaalmetingen.", "Zwakke invoerparameters maken elke wiskundige reconstructie onbetrouwbaar."],
       ],
     },
   ],

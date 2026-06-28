@@ -1,54 +1,54 @@
 import type { CategoryLocaleContent } from '../../types';
 
 export const content: CategoryLocaleContent = {
-  slug: "rattsmedicinsk-vetenskap",
-  title: "Verktyg for forensisk vetenskap",
-  description: "Forensiska verktyg for strukturerad arendetriage, transparenta berakningar och evidensmedveten rapportering.",
+  slug: "kriminalteknik",
+  title: "Kriminaltekniska verktyg",
+  description: "Kriminaltekniska verktyg för strukturerad falltriage, transparenta beräkningar och bevismedveten rapportering.",
   seo: [
     {
       type: 'title',
-      text: "Forensiska vetenskapsverktyg for evidensmedvetna berakningar och arendetriage",
+      text: "Kriminaltekniska verktyg för bevisanalys och falltriage",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "Denna kategori samlar forensiska raknare och strukturerade verktyg for att tolka bevis, dokumentera antaganden och undvika falsk precision. Den ersatter inte experter eller validerade protokoll; den gor tidig arendegranskning tydligare.",
+      html: "Detta bibliotek tillhandahåller specialiserade verktyg och beräkningar för kriminaltekniker, jurister, forskare och utredare. Kriminaltekniska verktyg hjälper till att utvärdera fysiska bevis som samlats in från brottsplatser. Genom att använda strukturerade modeller för blodstänksbana, åldersbedömning, glasbrytningsindex och droganalys kan utredningsteam utföra en första falltriage. Varje verktyg fokuserar på transparens, visar antaganden och hjälper användare att tydligt förstå gränserna för varje kriminalteknisk formel.",
     },
     {
       type: 'paragraph',
-      html: "Forensiskt arbete kan paverka viktiga beslut. Darfor ska verktygen visa intervall, begransningar och saknade data innan en slutsats skrivs.",
+      html: "En tidig fallgranskning kräver bedömning av vilka bevis som är tillgängliga, vad de vetenskapliga formlerna antar och var osäkerheten kvarstår. Dessa kalkylatorer är utformade för att stödja utbildning och preliminär screening. De hjälper till att avgöra vilka analytiska steg som är nödvändiga innan formella laboratorietester genomförs. Genom att använda dessa verktyg underlättas identifieringen av luckor i bevismaterialet tidigt i utredningsprocessen.",
     },
     {
       type: 'title',
-      text: "Vad som hor till denna kategori forensiska verktyg",
+      text: "Nyckelområden för kriminaltekniska beräkningar",
       level: 3,
     },
     {
       type: 'list',
       items: [
-        '<strong>Age assessment tools:</strong> dental, skeletal, and maturity indicators with explicit uncertainty.',
-        '<strong>Evidence interpretation tools:</strong> structured calculators that show assumptions, confidence, and limitations.',
-        '<strong>Case triage tools:</strong> fast workflows that help decide what data are missing before formal analysis.',
-        '<strong>Reporting support:</strong> outputs that encourage clear language, ranges, caveats, and traceable reasoning.',
+        '<strong>Åldersbedömning:</strong> beräkningar för skelett, tänder och mognad med explicita osäkerhetsmått.',
+        '<strong>Bevistolkning:</strong> strukturerade uppskattningsverktyg som visar formler, konfidensintervall och begränsningar.',
+        '<strong>Falltriage:</strong> snabba verktyg som belyser saknade bevis och identifierar parametrar som krävs för formell undersökning.',
+        '<strong>Stöd för rapportskrivning:</strong> verktyg som uppmuntrar till tydlig rapportering med hjälp av intervall istället för skenbar precision.',
       ],
     },
     {
       type: 'title',
-      text: "Anvand forensiska raknare ansvarsfullt",
+      text: "Riktlinjer för ansvarsfull användning av kriminalteknisk programvara",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "Anvand verktygen som stod for beslut och forklaring, inte som slutlig auktoritet for juridiska, medicinska, migrations- eller identifieringsbeslut.",
+      html: "Varje kriminalteknisk beräkning innebär felmarginaler och konfidensgränser. En kalkylator får aldrig ersätta ett kvalificerat expertsakkunnigt vittne eller ett validerat laboratorieprotokoll. Istället används dessa webbverktyg bäst för att utforska scenarier, förklara koncept för icke-specialister och kontrollera mätningarnas känslighet innan slutliga rapporter skrivs. Detta bidrar till att förhindra missförstånd i domstolen angående vetenskaplig precision.",
     },
     {
       type: 'table',
-      headers: ['Good use', 'Poor use', 'Why it matters'],
+      headers: ['Lämplig användning', 'Olämplig användning', 'Betydelse'],
       rows: [
-        ["Screen a case file before specialist review.", "Replace specialist review with a calculator result.", "Forensic conclusions must be defensible and methodologically valid."],
-        ["Explain uncertainty to non-specialists.", "Report one exact answer without caveats.", "False precision can mislead legal or safeguarding decisions."],
-        ["Compare how assumptions affect a result.", "Hide assumptions from the report.", "Transparent assumptions make the result easier to audit."],
-        ["Identify missing evidence.", "Ignore poor data quality.", "Weak inputs can make even a correct formula unreliable."],
+        ["Screening av fallakter före formell specialistundersökning.", "Att använda kalkylatorns resultat som ett slutgiltigt expertutlåtande.", "Kriminaltekniska bevis måste uppfylla stränga krav på vetenskaplig validering."],
+        ["Förklara mätosäkerhet och intervall för utredare.", "Rapportera en enskild exakt siffra utan att förklara begränsningarna.", "Skenbar precision kan leda till felaktiga beslut i rättssystemet."],
+        ["Kontrollera hur indataantaganden påverkar det uppskattade resultatet.", "Att dölja initiala parametrar eller beräkningar från falldokumentationen.", "Transparens gör det möjligt att granska resultat och låta andra reproducera dem."],
+        ["Avgöra om datakvaliteten är tillräcklig för beräkningen.", "Körning av formler med dåliga eller ofullständiga skalamätningar.", "Svaga indataparametrar gör alla matematiska rekonstruktioner otillförlitliga."],
       ],
     },
   ],

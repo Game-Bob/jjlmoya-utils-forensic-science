@@ -3,54 +3,53 @@ import type { CategoryLocaleContent } from '../../types';
 export const content: CategoryLocaleContent = {
   slug: "forensic-science",
   title: "법과학 도구",
-  description: "구조화된 사건 분류, 투명한 계산, 증거를 고려한 보고를 위한 법과학 유틸리티.",
+  description: "구조화된 케이스 트리아지, 투명한 계산 및 증거 인식 보고를 위한 법과학 유틸리티입니다.",
   seo: [
     {
       type: 'title',
-      text: "증거 기반 계산과 사건 분류를 위한 법과학 도구",
+      text: "증거 분석 및 케이스 트리아지를 위한 법과학 도구",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "이 범주는 증거를 해석하고 가정을 문서화하며 거짓 정밀성을 피하기 위한 법과학 계산기와 구조화된 도구를 모읍니다. 전문가나 검증된 프로토콜을 대체하지 않고 초기 사건 검토를 더 명확하게 합니다.",
+      html: "이 라이브러리는 법과학 분석가, 법률 전문가, 연구원 및 수사관을 위한 전문적인 도구와 계산을 제공합니다. 법과학 유틸리티는 범죄 현장에서 수집된 물리적 증거를 평가하는 데 도움이 됩니다. 혈흔 궤적, 연령 추정, 유리 굴절률 및 약물 분석을 위한 구조화된 모델을 사용함으로써 팀은 초기 케이스 트리아지를 수행할 수 있습니다. 모든 유틸리티는 투명성에 초점을 맞추고 있으며, 가정 조건을 제시하고 사용자가 각 법과학 공식의 한계를 명확하게 이해할 수 있도록 돕습니다.",
     },
     {
       type: 'paragraph',
-      html: "법과학 업무는 중요한 결정에 영향을 줄 수 있습니다. 따라서 도구는 결론 작성 전에 범위, 한계, 누락 데이터를 보여 주어야 합니다.",
+      html: "초기 케이스 검토에서는 어떤 증거가 제공되는지, 과학 공식이 무엇을 가정하고 있는지, 그리고 불확실성이 어디에 남아 있는지를 평가해야 합니다. 이러한 계산기는 교육 및 예비 스크리닝을 지원하도록 설계되었습니다. 정식 실험실 테스트를 수행하기 전에 어떤 분석 단계가 필요한지 결정하는 데 도움이 됩니다. 이러한 도구를 사용하면 수사 초기 단계에서 증거 파일의 누락된 부분을 식별하는 데 도움이 됩니다.",
     },
     {
       type: 'title',
-      text: "이 범주에 포함되는 것",
+      text: "법과학 계산의 핵심 분야",
       level: 3,
     },
     {
       type: 'list',
       items: [
-        '<strong>Age assessment tools:</strong> dental, skeletal, and maturity indicators with explicit uncertainty.',
-        '<strong>Evidence interpretation tools:</strong> structured calculators that show assumptions, confidence, and limitations.',
-        '<strong>Case triage tools:</strong> fast workflows that help decide what data are missing before formal analysis.',
-        '<strong>Reporting support:</strong> outputs that encourage clear language, ranges, caveats, and traceable reasoning.',
+        '<strong>연령 추정:</strong> 명시적인 불확실성 지표를 포함한 골격, 치아 및 성숙도 계산.',
+        '<strong>증거 해석:</strong> 공식, 신뢰 구간 및 한계를 표시하는 구조화된 추정 도구.',
+        '<strong>케이스 트리아지:</strong> 누락된 증거를 강조하고 공식 조사에 필요한 매개변수를 식별하는 신속한 도구.',
+        '<strong>보고서 작성 지원:</strong> 거짓 정밀성 대신 범위를 사용한 명확한 보고를 장려하는 유틸리티.',
       ],
     },
     {
       type: 'title',
-      text: "법과학 계산기를 책임 있게 사용하기",
+      text: "법과학 소프트웨어의 책임 있는 사용을 위한 지침",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "이 도구는 의사결정과 설명의 보조 수단으로 사용하고 법적, 의료, 이민, 신원확인 결정의 최종 권위로 사용하지 마십시오.",
+      html: "모든 법과학 계산에는 오류율과 신뢰 한계가 수반됩니다. 계산 도구가 자격을 갖춘 전문 증인이나 검증된 실험실 프로토콜을 대체할 수는 없습니다. 대신 이러한 웹 유틸리티는 시나리오를 탐색하고 비전문가에게 개념을 설명하며 최종 보고서를 작성하기 전에 측정 감도를 확인하는 데 가장 적합합니다. 이는 과학적 정밀성과 관련하여 법정에서 오해가 생기는 것을 방지하는 데 도움이 됩니다.",
     },
     {
       type: 'table',
-      headers: ['Good use', 'Poor use', 'Why it matters'],
+      headers: ['적절한 사용', '부적절한 사용', '중요성'],
       rows: [
-        ["Screen a case file before specialist review.", "Replace specialist review with a calculator result.", "Forensic conclusions must be defensible and methodologically valid."],
-        ["Explain uncertainty to non-specialists.", "Report one exact answer without caveats.", "False precision can mislead legal or safeguarding decisions."],
-        ["Compare how assumptions affect a result.", "Hide assumptions from the report.", "Transparent assumptions make the result easier to audit."],
-        ["Identify missing evidence.", "Ignore poor data quality.", "Weak inputs can make even a correct formula unreliable."],
+        ["정식 전문의 검사 전에 케이스 파일을 스크리닝함.", "계산기 결과를 최종 전문가 의견으로 사용함.", "법과학적 증거는 엄격한 과학적 검증 기준을 충족해야 합니다."],
+        ["수사관에게 측정 불확실성과 범위를 설명함.", "한계를 설명하지 않고 단일 정확한 수치만 보고함.", "거짓 정밀성은 사법 제도의 잘못된 결정으로 이어질 수 있습니다."],
+        ["입력 가정이 추정 결과에 어떻게 영향을 미치는지 확인함.", "사건 기록에서 초기 매개변수나 계산 과정을 숨김.", "투명성은 결과를 감사하고 다른 사람이 재현할 수 있도록 합니다."],
+        ["데이터 품질이 계산에 충분한지 결정함.", "축척 측정이 부실하거나 불완전한 상태에서 공식을 실행함.", "취약한 입력 매개변수는 모든 수학적 재구성의 신뢰성을 떨어뜨립니다."],
       ],
     },
   ],
 };
-

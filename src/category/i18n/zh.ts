@@ -2,55 +2,54 @@ import type { CategoryLocaleContent } from '../../types';
 
 export const content: CategoryLocaleContent = {
   slug: "forensic-science",
-  title: "法医科学工具",
-  description: "用于结构化案件分流、透明计算和证据意识报告的法医工具。",
+  title: "法医学工具",
+  description: "用于结构化案件筛查、透明计算和基于证据的报告编写的法医学工具。",
   seo: [
     {
       type: 'title',
-      text: "用于证据意识计算和案件分流的法医科学工具",
+      text: "用于证据分析与案件分流筛查的法医学工具",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "本类别收集法医计算器和结构化工具，用于解释证据、记录假设并避免虚假精确性。它不替代专家或验证流程，而是让早期案件审查更清楚。",
+      html: "本工具库为法医学分析人员、法律专业人士、研究人员和调查人员提供专业的工具与计算支持。法医学实用工具可辅助评估从犯罪现场收集的物理证据。通过使用针对血迹喷溅轨迹、年龄估算、玻璃折射率及毒品分析的结构化模型，调查团队能够开展初步的案件分流筛查。每一个实用工具都专注于提高透明度，展示计算假设，并帮助用户清晰地理解每个法医学公式的局限性。",
     },
     {
       type: 'paragraph',
-      html: "法医工作可能影响重要决定，因此工具应在写出结论前显示范围、限制和缺失数据。",
+      html: "早期的案情审查需要评估现有的证据、科学公式的前提假设以及依然存在的不确定性。这些计算器旨在支持教学培训和初步筛查，帮助在开展正式的实验室检测之前确定必要的分析步骤。在调查过程的早期阶段使用这些工具，有助于发现证据档案中的缺漏之处。",
     },
     {
       type: 'title',
-      text: "本类别包含什么",
+      text: "法医学计算的核心领域",
       level: 3,
     },
     {
       type: 'list',
       items: [
-        '<strong>Age assessment tools:</strong> dental, skeletal, and maturity indicators with explicit uncertainty.',
-        '<strong>Evidence interpretation tools:</strong> structured calculators that show assumptions, confidence, and limitations.',
-        '<strong>Case triage tools:</strong> fast workflows that help decide what data are missing before formal analysis.',
-        '<strong>Reporting support:</strong> outputs that encourage clear language, ranges, caveats, and traceable reasoning.',
+        '<strong>年龄估算：</strong> 骨骼、牙齿及发育成熟度计算，并附带明确的不确定性指标。',
+        '<strong>证据解读：</strong> 结构化估算工具，可展示具体公式、置信区间及适用边界。',
+        '<strong>案件分流：</strong> 快速筛查工具，突出显示缺失证据并识别正式鉴定所需的参数。',
+        '<strong>报告编写支持：</strong> 提倡使用数值范围而非虚假精度进行清晰报告的实用工具。',
       ],
     },
     {
       type: 'title',
-      text: "负责任地使用法医计算器",
+      text: "安全且负责任地使用法医学软件的指南",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "请将这些工具作为决策和解释辅助，不要作为法律、医疗、移民或身份识别决定的最终依据。",
+      html: "每项法医学计算都伴随着误差率和置信限度。计算器工具绝不能取代有资质 judicial 的鉴定人或经过验证的实验室操作规程。相反，这些网页工具最适合用于探索各种案情假设、向非专业人士解释科学概念，以及在撰写最终报告前检查测量数据的敏感性。这有助于避免法庭内对科学精确度产生误解。",
     },
     {
       type: 'table',
-      headers: ['Good use', 'Poor use', 'Why it matters'],
+      headers: ['合理使用', '不当使用', '重要意义'],
       rows: [
-        ["Screen a case file before specialist review.", "Replace specialist review with a calculator result.", "Forensic conclusions must be defensible and methodologically valid."],
-        ["Explain uncertainty to non-specialists.", "Report one exact answer without caveats.", "False precision can mislead legal or safeguarding decisions."],
-        ["Compare how assumptions affect a result.", "Hide assumptions from the report.", "Transparent assumptions make the result easier to audit."],
-        ["Identify missing evidence.", "Ignore poor data quality.", "Weak inputs can make even a correct formula unreliable."],
+        ["在正式专家鉴定前对案卷进行初步筛查。", "将计算器的输出直接用作最终专家鉴定意见。", "法医学证据必须符合严格 sugar 的科学验证标准。"],
+        ["向调查人员解释测量的物理不确定性以及数值范围。", "报告单一的精确数值而不说明其科学局限性。", "虚假的精确度可能会误导司法系统中的正确决策。"],
+        ["检查输入的初始假设对估算结果的影响程度。", "在案件记录中隐瞒初始参数或计算公式细节。", "透明度允许计算结果被审计，并便于他人进行复现。"],
+        ["确定数据质量是否足以支持相应的数学计算。", "在比例尺测量较差或不完整的情况下运行计算公式。", "薄弱的输入参数会使任何数学重建的结果变得不可靠。"],
       ],
     },
   ],
 };
-

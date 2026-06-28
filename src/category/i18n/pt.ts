@@ -2,53 +2,53 @@ import type { CategoryLocaleContent } from '../../types';
 
 export const content: CategoryLocaleContent = {
   slug: "ciencia-forense",
-  title: "Ferramentas de ciencia forense",
-  description: "Utilitarios forenses para triagem estruturada de casos, calculos transparentes e relatorios conscientes das evidencias.",
+  title: "Ferramentas de ciência forense",
+  description: "Utilitários forenses para triagem estruturada de casos, cálculos transparentes e relatórios conscientes das evidências.",
   seo: [
     {
       type: 'title',
-      text: "Ferramentas de ciencia forense para calculos conscientes das evidencias e triagem de casos",
+      text: "Ferramentas de ciência forense para análise de evidências e triagem de casos",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "Esta categoria reune calculadoras forenses e utilitarios estruturados para interpretar evidencias, documentar pressupostos e evitar falsa precisao. Ela nao substitui especialistas ou protocolos validados; torna a revisao inicial do caso mais clara.",
+      html: "Esta biblioteca fornece ferramentas especializadas e cálculos para analistas forenses, profissionais do direito, pesquisadores e investigadores. Os utilitários de ciência forense ajudam a avaliar as evidências físicas coletadas nas cenas de crime. Ao usar modelos estruturados para trajetória de manchas de sangue, estimativa de idade, índice de refração de vidro e análise de drogas, as equipes podem realizar uma triagem inicial do caso. Cada utilitário concentra-se na transparência, mostrando premissas e ajudando os usuários a compreender claramente os limites de cada fórmula forense.",
     },
     {
       type: 'paragraph',
-      html: "O trabalho forense pode influenciar decisoes importantes. Por isso, estas ferramentas devem mostrar intervalos, limites e dados ausentes antes de qualquer conclusao.",
+      html: "A revisão inicial de um caso exige avaliar quais evidências estão disponíveis, o que as fórmulas científicas assumem e onde permanece a incerteza. Essas calculadoras são projetadas para apoiar a educação e a triagem preliminar. Elas auxiliam na determinação de quais etapas analíticas são necessárias antes de se comprometer com testes laboratoriais formais. O uso dessas ferramentas ajuda a identificar lacunas nos arquivos de evidências logo no início do processo de investigação.",
     },
     {
       type: 'title',
-      text: "O que pertence a esta categoria de utilitarios forenses",
+      text: "Áreas-chave dos cálculos forenses",
       level: 3,
     },
     {
       type: 'list',
       items: [
-        '<strong>Age assessment tools:</strong> dental, skeletal, and maturity indicators with explicit uncertainty.',
-        '<strong>Evidence interpretation tools:</strong> structured calculators that show assumptions, confidence, and limitations.',
-        '<strong>Case triage tools:</strong> fast workflows that help decide what data are missing before formal analysis.',
-        '<strong>Reporting support:</strong> outputs that encourage clear language, ranges, caveats, and traceable reasoning.',
+        '<strong>Estimativa de idade:</strong> cálculos esqueléticos, odontológicos e de maturidade com métricas de incerteza explícitas.',
+        '<strong>Interpretação de evidências:</strong> estimadores estruturados que exibem fórmulas, intervalos de confiança e limites.',
+        '<strong>Triagem de casos:</strong> ferramentas rápidas que destacam evidências ausentes e identificam parâmetros necessários para o exame formal.',
+        '<strong>Suporte na elaboração de relatórios:</strong> utilitários que incentivam relatórios claros usando faixas de valores em vez de falsa precisão.',
       ],
     },
     {
       type: 'title',
-      text: "Usar calculadoras forenses com responsabilidade",
+      text: "Diretrizes para o uso responsável de software forense",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "Use estas ferramentas como apoio a decisao e explicacao, nao como autoridade final para decisoes legais, medicas, migratorias ou de identificacao.",
+      html: "Cada cálculo forense envolve taxas de erro e limites de confiança. Uma calculadora nunca deve substituir uma testemunha pericial qualificada ou um protocolo laboratorial validado. Em vez disso, esses utilitários web são mais bem usados para explorar cenários, explicar conceitos para não especialistas e verificar a sensibilidade das medições antes de redigir os relatórios finais. Isso ajuda a evitar mal-entendidos no tribunal em relação à precisão científica.",
     },
     {
       type: 'table',
-      headers: ['Good use', 'Poor use', 'Why it matters'],
+      headers: ['Uso adequado', 'Uso inadequado', 'Importância'],
       rows: [
-        ["Screen a case file before specialist review.", "Replace specialist review with a calculator result.", "Forensic conclusions must be defensible and methodologically valid."],
-        ["Explain uncertainty to non-specialists.", "Report one exact answer without caveats.", "False precision can mislead legal or safeguarding decisions."],
-        ["Compare how assumptions affect a result.", "Hide assumptions from the report.", "Transparent assumptions make the result easier to audit."],
-        ["Identify missing evidence.", "Ignore poor data quality.", "Weak inputs can make even a correct formula unreliable."],
+        ["Triagem de arquivos de caso antes de um exame formal por especialista.", "Usar o resultado de uma calculadora como parecer pericial final.", "As evidências forenses devem atender a padrões rigorosos de validação científica."],
+        ["Explicar a incerteza de medição e faixas de valores para os investigadores.", "Relatar um único número exato sem explicar as limitações.", "A falsa precisão pode levar a decisões incorretas nos sistemas judiciais."],
+        ["Verificar como as premissas de entrada afetam o resultado estimado.", "Ocultar parâmetros iniciais ou cálculos do registro do caso.", "A transparência permite que os resultados sejam auditados e reproduzidos por outros."],
+        ["Determinar se a qualidade dos dados é suficiente para o cálculo.", "Executar fórmulas com medições de escala deficientes ou incompletas.", "Parâmetros de entrada fracos tornam qualquer reconstrução matemática não confiável."],
       ],
     },
   ],

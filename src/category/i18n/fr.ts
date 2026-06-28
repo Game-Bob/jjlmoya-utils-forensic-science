@@ -7,48 +7,48 @@ export const content: CategoryLocaleContent = {
   seo: [
     {
       type: 'title',
-      text: "Outils de science forensique pour calculs fondes sur les preuves et triage des dossiers",
+      text: "Outils de science forensique pour analyse des preuves et triage des dossiers",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "Cette categorie repond a une intention de recherche pratique: interpreter les preuves, documenter les hypotheses et eviter la fausse precision. Elle ne remplace pas les experts, les laboratoires ou les protocoles valides; elle clarifie l examen initial du dossier.",
+      html: "Cette bibliothèque fournit des outils et des calculs spécialisés pour les analystes forensiques, les professionnels du droit, les chercheurs et les enquêteurs. Les utilitaires de science forensique aident à évaluer les preuves physiques collectées sur les scènes de crime. En utilisant des modèles structurés pour la trajectoire des taches de sang, l'estimation de l'âge, l'indice de réfraction du verre et l'analyse des drogues, les équipes peuvent effectuer un triage initial des dossiers. Chaque utilitaire se concentre sur la transparence, montrant les hypothèses et aidant les utilisateurs à comprendre clairement les limites de chaque formule forensique.",
     },
     {
       type: 'paragraph',
-      html: "Le travail forensique peut influencer des decisions importantes. Chaque outil doit donc afficher des intervalles, des limites et les donnees manquantes avant toute conclusion formelle.",
+      html: "L'examen initial d'un dossier nécessite d'évaluer quelles preuves sont disponibles, ce que supposent les formules scientifiques et où subsiste l'incertitude. Ces calculateurs sont conçus pour soutenir la formation et l'évaluation préliminaire. Ils aident à déterminer quelles étapes analytiques sont nécessaires avant de s'engager dans des analyses de laboratoire formelles. L'utilisation de ces outils permet d'identifier les lacunes dans les dossiers de preuves dès le début du processus d'enquête.",
     },
     {
       type: 'title',
-      text: "Ce qui appartient a cette categorie d utilitaires forensiques",
+      text: "Domaines cles des calculs forensiques",
       level: 3,
     },
     {
       type: 'list',
       items: [
-        '<strong>Age assessment tools:</strong> dental, skeletal, and maturity indicators with explicit uncertainty.',
-        '<strong>Evidence interpretation tools:</strong> structured calculators that show assumptions, confidence, and limitations.',
-        '<strong>Case triage tools:</strong> fast workflows that help decide what data are missing before formal analysis.',
-        '<strong>Reporting support:</strong> outputs that encourage clear language, ranges, caveats, and traceable reasoning.',
+        '<strong>Evaluation de l\'age:</strong> calculs squelettiques, dentaires et de maturité avec des mesures d\'incertitude explicites.',
+        '<strong>Interpretation des preuves:</strong> estimateurs structurés affichant des formules, des intervalles de confiance et des limites.',
+        '<strong>Triage des dossiers:</strong> outils rapides qui mettent en évidence les preuves manquantes et identifient les paramètres requis pour un examen formel.',
+        '<strong>Aide a la redaction de rapports:</strong> utilitaires qui encouragent des rapports clairs utilisant des plages de valeurs plutôt qu\'une fausse précision.',
       ],
     },
     {
       type: 'title',
-      text: "Utiliser les calculateurs forensiques de facon responsable",
+      text: "Directives pour une utilisation responsable des logiciels forensiques",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "Utilisez ces outils comme aides a la decision et a l explication, pas comme autorite finale pour des decisions juridiques, medicales, migratoires, de protection ou d identification.",
+      html: "Chaque calcul forensique implique des taux d'erreur et des limites de confiance. Un calculateur ne doit jamais remplacer un témoin expert qualifié ou un protocole de laboratoire validé. Au lieu de cela, ces utilitaires web sont mieux utilisés pour explorer des scénarios, expliquer des concepts à des non-spécialistes et vérifier la sensibilité des mesures avant de rédiger les rapports finaux. Cela permet d'éviter les malentendus dans la salle d'audience concernant la précision scientifique.",
     },
     {
       type: 'table',
-      headers: ['Good use', 'Poor use', 'Why it matters'],
+      headers: ['Usage approprie', 'Usage inapproprie', 'Importance'],
       rows: [
-        ["Screen a case file before specialist review.", "Replace specialist review with a calculator result.", "Forensic conclusions must be defensible and methodologically valid."],
-        ["Explain uncertainty to non-specialists.", "Report one exact answer without caveats.", "False precision can mislead legal or safeguarding decisions."],
-        ["Compare how assumptions affect a result.", "Hide assumptions from the report.", "Transparent assumptions make the result easier to audit."],
-        ["Identify missing evidence.", "Ignore poor data quality.", "Weak inputs can make even a correct formula unreliable."],
+        ["Examiner les dossiers de cas avant un examen formel par un spécialiste.", "Utiliser le résultat d'un calculateur comme opinion d'expert finale.", "Les preuves forensiques doivent répondre à des normes strictes de validation scientifique."],
+        ["Expliquer l'incertitude de mesure et les plages de valeurs aux enquêteurs.", "Rapporter un seul chiffre exact sans expliquer les limites.", "La fausse précision peut conduire à des décisions incorrectes dans les systèmes judiciaires."],
+        ["Vérifier comment les hypothèses d'entrée affectent le résultat estimé.", "Masquer les paramètres initiaux ou les calculs du dossier de cas.", "La transparence permet d'auditer et de reproduire les résultats par d'autres."],
+        ["Déterminer si la qualité des données est suffisante pour le calcul.", "Exécuter des formules avec des mesures d'échelle médiocres ou incomplètes.", "Des paramètres d'entrée faibles rendent toute reconstruction mathématique peu fiable."],
       ],
     },
   ],

@@ -7,50 +7,49 @@ export const content: CategoryLocaleContent = {
   seo: [
     {
       type: 'title',
-      text: "証拠を意識した計算とケーストリアージのための法科学ツール",
+      text: "証拠分析とケーストリアージのための法科学ツール",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "このカテゴリは、証拠を解釈し、前提を記録し、見せかけの精密さを避けるための法科学計算機と構造化ツールを集めています。専門家や検証済みプロトコルを置き換えるものではなく、初期のケースレビューを明確にします。",
+      html: "このライブラリは、法科学分析官、法曹関係者、研究者、および捜査官向けの専門的なツールと計算方法を提供します。法科学ユーティリティは、犯罪現場から収集された物理的証拠の評価を支援します。血痕の軌道、年齢推定、ガラスの屈折率、薬物分析などの構造化モデルを使用することで、初期のケーストリアージを実行できます。すべてのユーティリティは透明性に重点を置いており、前提条件を示し、ユーザーが各法科学公式の限界を明確に理解できるよう支援します。",
     },
     {
       type: 'paragraph',
-      html: "法科学の作業は重要な判断に影響します。そのため、結論を書く前に範囲、限界、不足データを示す必要があります。",
+      html: "初期のケースレビューでは、どのような証拠が利用可能か、科学的公式が何を前提としているか、そしてどこに不確実性が残っているかを評価する必要があります。これらの計算ツールは、教育と予備的なスクリーニングをサポートするように設計されています。これらは、正式な実験室テストに進む前に、どの分析ステップが必要であるかを判断するのに役立ちます。これらのツールを使用することで、捜査プロセスの初期段階で証拠ファイル内のギャップを特定することができます。",
     },
     {
       type: 'title',
-      text: "このカテゴリに含まれるもの",
+      text: "法科学計算の主な分野",
       level: 3,
     },
     {
       type: 'list',
       items: [
-        '<strong>Age assessment tools:</strong> dental, skeletal, and maturity indicators with explicit uncertainty.',
-        '<strong>Evidence interpretation tools:</strong> structured calculators that show assumptions, confidence, and limitations.',
-        '<strong>Case triage tools:</strong> fast workflows that help decide what data are missing before formal analysis.',
-        '<strong>Reporting support:</strong> outputs that encourage clear language, ranges, caveats, and traceable reasoning.',
+        '<strong>年齢推定:</strong> 明示的な不確実性指標を伴う骨格、歯、および成熟度の計算。',
+        '<strong>証拠の解釈:</strong> 公式、信頼区間、および境界を表示する構造化された推定ツール。',
+        '<strong>ケーストリアージ:</strong> 不足している証拠を浮き彫りにし、正式な検査に必要なパラメータを特定する迅速なツール。',
+        '<strong>報告書作成サポート:</strong> 見せかけの精密さではなく、範囲値を使用した明確な報告を推奨するユーティリティ。',
       ],
     },
     {
       type: 'title',
-      text: "法科学計算機を責任を持って使う",
+      text: "法科学ソフトウェアを責任を持って使用するためのガイドライン",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "これらのツールは意思決定と説明の補助として使い、法的、医療、移民、身元確認の最終判断として使わないでください。",
+      html: "すべての法科学計算には、誤差率と信頼限界が伴います。計算ツールが資格のある専門証人や検証済みの実験室プロトコルに取って代わることは決してありません。代わりに、これらのウェブユーティリティは、シナリオの探索、非専門家への概念の説明、および最終レポートを作成する前の測定感度のチェックに最適です。これにより、科学的な精密さに関して法廷内での誤解が生じるのを防ぎます。",
     },
     {
       type: 'table',
-      headers: ['Good use', 'Poor use', 'Why it matters'],
+      headers: ['適切な使用方法', '不適切な使用方法', '重要性'],
       rows: [
-        ["Screen a case file before specialist review.", "Replace specialist review with a calculator result.", "Forensic conclusions must be defensible and methodologically valid."],
-        ["Explain uncertainty to non-specialists.", "Report one exact answer without caveats.", "False precision can mislead legal or safeguarding decisions."],
-        ["Compare how assumptions affect a result.", "Hide assumptions from the report.", "Transparent assumptions make the result easier to audit."],
-        ["Identify missing evidence.", "Ignore poor data quality.", "Weak inputs can make even a correct formula unreliable."],
+        ["正式な専門家による検査の前にケースファイルをスクリーニングする。", "計算ツールの出力を最終的な専門家の意見として使用する。", "法科学的証拠は、科学的検証の厳格な基準を満たさなければなりません。"],
+        ["捜査官に対して測定の不確実性と範囲を説明する。", "限界を説明せずに単一の正確な数値を報告する。", "見せかけの精密さは、司法制度における誤った意思決定につながる可能性があります。"],
+        ["入力の前提条件が推定結果にどのように影響するかを確認する。", "ケース記録から初期パラメータや計算内容を隠す。", "透明性により、結果を監査し、他の人が再現することが可能になります。"],
+        ["データ品質が計算に十分であるかどうかを判断する。", "スケール測定が不十分または不完全な状態で公式を実行する。", "不十分な入力パラメータは、いかなる数学的再構築の信頼性も損ないます。"],
       ],
     },
   ],
 };
-

@@ -2,53 +2,53 @@ import type { CategoryLocaleContent } from '../../types';
 
 export const content: CategoryLocaleContent = {
   slug: "ilmu-forensik",
-  title: "Alat ilmu forensik",
-  description: "Utilitas forensik untuk triase kasus terstruktur, perhitungan transparan, dan pelaporan yang sadar bukti.",
+  title: "Alat Ilmu Forensik",
+  description: "Utilitas forensik untuk triase kasus terstruktur, perhitungan transparan, dan pelaporan sadar bukti.",
   seo: [
     {
       type: 'title',
-      text: "Alat ilmu forensik untuk perhitungan sadar bukti dan triase kasus",
+      text: "Alat Ilmu Forensik untuk Analisis Bukti dan Triase Kasus",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "Kategori ini dibuat untuk niat pencarian praktis: menafsirkan bukti, mendokumentasikan asumsi, dan menghindari presisi palsu. Kategori ini tidak menggantikan ahli atau protokol tervalidasi; tujuannya membuat tinjauan awal kasus lebih jelas.",
+      html: "Perpustakaan ini menyediakan alat dan perhitungan khusus untuk analis forensik, profesional hukum, peneliti, dan penyelidik. Utilitas ilmu forensik membantu mengevaluasi bukti fisik yang dikumpulkan dari tempat kejadian perkara. Dengan menggunakan model terstruktur untuk lintasan bercak darah, estimasi usia, indeks bias kaca, dan analisis narkoba, tim dapat melakukan triase kasus awal. Setiap utilitas berfokus pada transparansi, menunjukkan asumsi dan membantu pengguna memahami batasan dari setiap formula forensik secara jelas.",
     },
     {
       type: 'paragraph',
-      html: "Pekerjaan forensik dapat memengaruhi keputusan penting. Karena itu alat harus menampilkan rentang, batasan, dan data yang hilang sebelum kesimpulan ditulis.",
+      html: "Tinjauan kasus awal memerlukan penilaian bukti apa yang tersedia, apa yang diasumsikan oleh formula ilmiah, dan di mana ketidakpastian tetap ada. Kalkulator ini dirancang untuk mendukung pendidikan dan penyaringan awal. Mereka membantu dalam menentukan langkah analitis mana yang diperlukan sebelum melakukan pengujian laboratorium formal. Menggunakan alat-alat ini membantu mengidentifikasi kesenjangan dalam berkas bukti sejak awal dalam proses penyelidikan.",
     },
     {
       type: 'title',
-      text: "Apa yang termasuk kategori utilitas forensik ini",
+      text: "Bidang Utama Perhitungan Forensik",
       level: 3,
     },
     {
       type: 'list',
       items: [
-        '<strong>Age assessment tools:</strong> dental, skeletal, and maturity indicators with explicit uncertainty.',
-        '<strong>Evidence interpretation tools:</strong> structured calculators that show assumptions, confidence, and limitations.',
-        '<strong>Case triage tools:</strong> fast workflows that help decide what data are missing before formal analysis.',
-        '<strong>Reporting support:</strong> outputs that encourage clear language, ranges, caveats, and traceable reasoning.',
+        '<strong>Estimasi usia:</strong> perhitungan skeletal, dental, dan kematangan dengan metrik ketidakpastian yang eksplisit.',
+        '<strong>Interpretasi bukti:</strong> estimator terstruktur yang menampilkan formula, interval kepercayaan, dan batasan.',
+        '<strong>Triase kasus:</strong> alat cepat yang menyoroti bukti yang hilang dan mengidentifikasi parameter yang diperlukan untuk pemeriksaan formal.',
+        '<strong>Dukungan penyusunan laporan:</strong> utilitas yang mendorong pelaporan yang jelas menggunakan rentang nilai daripada presisi palsu.',
       ],
     },
     {
       type: 'title',
-      text: "Menggunakan kalkulator forensik secara bertanggung jawab",
+      text: "Panduan untuk Penggunaan Perangkat Lunak Forensik secara Bertanggung Jawab",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "Gunakan alat ini sebagai bantuan keputusan dan penjelasan, bukan sebagai otoritas akhir untuk keputusan hukum, medis, migrasi, perlindungan, atau identifikasi.",
+      html: "Setiap perhitungan forensik melibatkan tingkat kesalahan dan batas kepercayaan. Kalkulator tidak boleh menggantikan saksi ahli yang memenuhi syarat atau protokol laboratorium yang divalidasi. Sebaliknya, utilitas web ini paling baik digunakan untuk menjelajahi skenario, menjelaskan konsep kepada non-spesialis, dan memeriksa sensitivitas pengukuran sebelum menulis laporan akhir. Ini membantu mencegah kesalahpahaman di pengadilan mengenai presisi ilmiah.",
     },
     {
       type: 'table',
-      headers: ['Good use', 'Poor use', 'Why it matters'],
+      headers: ['Penggunaan yang Sesuai', 'Penggunaan yang Tidak Sesuai', 'Pentingnya'],
       rows: [
-        ["Screen a case file before specialist review.", "Replace specialist review with a calculator result.", "Forensic conclusions must be defensible and methodologically valid."],
-        ["Explain uncertainty to non-specialists.", "Report one exact answer without caveats.", "False precision can mislead legal or safeguarding decisions."],
-        ["Compare how assumptions affect a result.", "Hide assumptions from the report.", "Transparent assumptions make the result easier to audit."],
-        ["Identify missing evidence.", "Ignore poor data quality.", "Weak inputs can make even a correct formula unreliable."],
+        ["Menyaring berkas kasus sebelum pemeriksaan ahli formal.", "Menggunakan hasil kalkulator sebagai opini ahli akhir.", "Bukti forensik harus memenuhi standar validasi ilmiah yang ketat."],
+        ["Menjelaskan ketidakpastian pengukuran dan rentang nilai kepada penyelidik.", "Melaporkan angka pasti tunggal tanpa menjelaskan batasan.", "Presisi palsu dapat menyebabkan keputusan yang salah dalam sistem peradilan."],
+        ["Memeriksa bagaimana asumsi masukan memengaruhi hasil yang diperkirakan.", "Menyembunyikan parameter awal atau perhitungan dari catatan kasus.", "Transparansi memungkinkan hasil untuk diaudit dan direproduksi oleh orang lain."],
+        ["Menentukan apakah kualitas data cukup untuk perhitungan.", "Menjalankan formula dengan pengukuran skala yang buruk atau tidak lengkap.", "Parameter masukan yang lemah membuat rekonstruksi matematis apa pun tidak dapat diandalkan."],
       ],
     },
   ],

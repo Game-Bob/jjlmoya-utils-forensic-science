@@ -1,54 +1,54 @@
 import type { CategoryLocaleContent } from '../../types';
 
 export const content: CategoryLocaleContent = {
-  slug: "nauka-sadowa",
-  title: "Narzedzia nauki sadowej",
-  description: "Narzedzia forensyczne do uporzadkowanej triage spraw, przejrzystych obliczen i raportowania swiadomego dowodow.",
+  slug: "kryminalistyka",
+  title: "Narzędzia kryminalistyczne",
+  description: "Narzędzia kryminalistyczne do strukturyzowanego triażu spraw, transparentnych obliczeń i raportowania uwzględniającego stopień pewności dowodów.",
   seo: [
     {
       type: 'title',
-      text: "Narzedzia nauki sadowej do obliczen swiadomych dowodow i triage spraw",
+      text: "Narzędzia kryminalistyczne do analizy dowodów i triażu spraw",
       level: 2,
     },
     {
       type: 'paragraph',
-      html: "Ta kategoria gromadzi kalkulatory forensyczne i uporzadkowane narzedzia do interpretacji dowodow, dokumentowania zalozen i unikania falszywej precyzji. Nie zastepuje ekspertow ani zwalidowanych protokolow; wyjasnia wczesna ocene sprawy.",
+      html: "Ta biblioteka dostarcza specjalistyczne narzędzia i obliczenia dla analityków kryminalistycznych, prawników, badaczy i śledczych. Narzędzia kryminalistyczne pomagają w ocenie dowodów rzeczowych zabezpieczonych na miejscach zdarzeń. Korzystając ze strukturyzowanych modeli do wyznaczania trajektorii plam krwi, szacowania wieku, współczynnika załamania światła szkła oraz analizy narkotyków, zespoły mogą przeprowadzić wstępną selekcję spraw. Każde narzędzie kładzie nacisk na przejrzystość, prezentując przyjęte założenia i pomagając użytkownikom jasno zrozumieć granice każdej metody.",
     },
     {
       type: 'paragraph',
-      html: "Praca forensyczna moze wplywac na wazne decyzje. Dlatego te narzedzia powinny pokazywac zakresy, ograniczenia i brakujace dane przed napisaniem wniosku.",
+      html: "Wstępna analiza sprawy wymaga oceny dostępności dowodów, założeń leżących u podstaw wzorów naukowych oraz zakresu niepewności. Kalkulatory te zostały zaprojektowane w celu wsparcia edukacji i wstępnej selekcji. Pomagają one określić, które kroki analityczne są niezbędne przed podjęciem decyzji o wykonaniu pełnych badań laboratoryjnych. Korzystanie z tych narzędzi ułatwia wczesne wykrywanie braków w materiale dowodowym w toku śledztwa.",
     },
     {
       type: 'title',
-      text: "Co nalezy do tej kategorii narzedzi forensycznych",
+      text: "Kluczowe obszary obliczeń kryminalistycznych",
       level: 3,
     },
     {
       type: 'list',
       items: [
-        '<strong>Age assessment tools:</strong> dental, skeletal, and maturity indicators with explicit uncertainty.',
-        '<strong>Evidence interpretation tools:</strong> structured calculators that show assumptions, confidence, and limitations.',
-        '<strong>Case triage tools:</strong> fast workflows that help decide what data are missing before formal analysis.',
-        '<strong>Reporting support:</strong> outputs that encourage clear language, ranges, caveats, and traceable reasoning.',
+        '<strong>Szacowanie wieku:</strong> obliczenia na podstawie układu kostnego, uzębienia i wskaźników dojrzałości z określoną niepewnością.',
+        '<strong>Interpretacja dowodów:</strong> strukturyzowane kalkulatory prezentujące wzory, przedziały ufności i ograniczenia.',
+        '<strong>Triaż spraw:</strong> szybkie narzędzia wskazujące brakujące dowody i identyfikujące parametry wymagane do badań formalnych.',
+        '<strong>Wsparcie w raportowaniu:</strong> narzędzia zachęcające do jasnego raportowania opartego na przedziałach wartości zamiast pozornej dokładności.',
       ],
     },
     {
       type: 'title',
-      text: "Odpowiedzialne uzywanie kalkulatorow forensycznych",
+      text: "Zasady odpowiedzialnego korzystania z oprogramowania kryminalistycznego",
       level: 3,
     },
     {
       type: 'paragraph',
-      html: "Uzywaj tych narzedzi jako pomocy decyzyjnej i wyjasniajacej, nie jako ostatecznego autorytetu dla decyzji prawnych, medycznych, migracyjnych lub identyfikacyjnych.",
+      html: "Każde obliczenie kryminalistyczne wiąże się z marginesem błędu i granicami ufności. Kalkulator nigdy nie powinien zastępować wykwalifikowanego biegłego ani walidowanej procedury laboratoryjnej. Zamiast tego narzędzia te najlepiej wykorzystywać do analizowania scenariuszy, wyjaśniania pojęć osobom bez specjalistycznej wiedzy oraz sprawdzania wrażliwości pomiarów przed sporządzeniem końcowych raportów. Pomaga to zapobiegać nieporozumieniom na sali sądowej w kwestii precyzji naukowej.",
     },
     {
       type: 'table',
-      headers: ['Good use', 'Poor use', 'Why it matters'],
+      headers: ['Właściwe zastosowanie', 'Niewłaściwe zastosowanie', 'Znaczenie'],
       rows: [
-        ["Screen a case file before specialist review.", "Replace specialist review with a calculator result.", "Forensic conclusions must be defensible and methodologically valid."],
-        ["Explain uncertainty to non-specialists.", "Report one exact answer without caveats.", "False precision can mislead legal or safeguarding decisions."],
-        ["Compare how assumptions affect a result.", "Hide assumptions from the report.", "Transparent assumptions make the result easier to audit."],
-        ["Identify missing evidence.", "Ignore poor data quality.", "Weak inputs can make even a correct formula unreliable."],
+        ["Wstępna weryfikacja akt sprawy przed formalną ekspertyzą biegłego.", "Zastępowanie opinii biegłego wynikiem z kalkulatora.", "Dowody kryminalistyczne muszą spełniać rygorystyczne standardy naukowej walidacji."],
+        ["Wyjaśnianie śledczym niepewności pomiarowej i przedziałów wartości.", "Podawanie jednej dokładnej liczby bez wyjaśnienia ograniczeń.", "Pozorna dokładność może prowadzić do błędnych decyzji w wymiarze sprawiedliwości."],
+        ["Badanie wpływu przyjętych założeń na szacowany wynik końcowy.", "Ukrywanie założeń początkowych lub obliczeń w dokumentacji sprawy.", "Przejrzystość umożliwia audyt wyników i ich odtworzenie przez inne osoby."],
+        ["Określanie, czy jakość danych jest wystarczająca do wykonania obliczeń.", "Stosowanie wzorów przy słabych lub niekompletnych pomiarach skali.", "Słabe parametry wejściowe czynią każdą matematyczną rekonstrukcję niewiarygodną."],
       ],
     },
   ],
