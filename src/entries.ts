@@ -18,6 +18,8 @@ export { forensicMicrocrystalDrugSimulator } from './tool/forensic-microcrystal-
 export type { MicrocrystalDrugSimulatorUI, MicrocrystalDrugSimulatorLocaleContent } from './tool/forensic-microcrystal-drug-simulator/entry';
 export { forensicGlassBeckeLineSimulator } from './tool/forensic-glass-becke-line-simulator/entry';
 export type { GlassBeckeLineSimulatorUI, GlassBeckeLineSimulatorLocaleContent } from './tool/forensic-glass-becke-line-simulator/entry';
+export { forensicFiberComparisonMicroscope } from './tool/forensic-fiber-comparison-microscope/entry';
+export type { FiberComparisonMicroscopeUI, FiberComparisonMicroscopeLocaleContent } from './tool/forensic-fiber-comparison-microscope/entry';
 
 import { forensicAgeEstimator } from './tool/forensic-age-estimator/entry';
 import { widmarkAlcoholSimulator } from './tool/widmark-alcohol-simulator/entry';
@@ -29,6 +31,7 @@ import { gsrDispersionCalculator } from './tool/gsr-dispersion-calculator/entry'
 import { forensicTlcInkSimulator } from './tool/forensic-tlc-ink-simulator/entry';
 import { forensicMicrocrystalDrugSimulator } from './tool/forensic-microcrystal-drug-simulator/entry';
 import { forensicGlassBeckeLineSimulator } from './tool/forensic-glass-becke-line-simulator/entry';
+import { forensicFiberComparisonMicroscope } from './tool/forensic-fiber-comparison-microscope/entry';
 
 export const ALL_ENTRIES = [
   forensicAgeEstimator,
@@ -40,5 +43,6 @@ export const ALL_ENTRIES = [
   gsrDispersionCalculator,
   forensicTlcInkSimulator,
   forensicMicrocrystalDrugSimulator,
-  forensicGlassBeckeLineSimulator
+  forensicGlassBeckeLineSimulator,
+  forensicFiberComparisonMicroscope
 ];

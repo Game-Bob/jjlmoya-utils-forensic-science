@@ -10,6 +10,7 @@ export { GSR_DISPERSION_CALCULATOR_TOOL } from './tool/gsr-dispersion-calculator
 export { FORENSIC_TLC_INK_SIMULATOR_TOOL } from './tool/forensic-tlc-ink-simulator/index';
 export { FORENSIC_MICROCRYSTAL_DRUG_SIMULATOR_TOOL } from './tool/forensic-microcrystal-drug-simulator/index';
 export { FORENSIC_GLASS_BECKE_LINE_SIMULATOR_TOOL } from './tool/forensic-glass-becke-line-simulator/index';
+export { FORENSIC_FIBER_COMPARISON_MICROSCOPE_TOOL } from './tool/forensic-fiber-comparison-microscope/index';
 
 export type {
   KnownLocale,

@@ -1,0 +1,146 @@
+---
+import './forensic-fiber-comparison-microscope.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<section class="fiber-lab" data-fiber-tool>
+  <div class="fiber-stage">
+    <div class="fiber-ocular" aria-label={ui.viewerAria}>
+      <canvas id="fiber-canvas" width="860" height="560"></canvas>
+      <div class="fiber-split" aria-hidden="true"></div>
+      <div class="fiber-label fiber-label-left" id="fiber-left-label">-</div>
+      <div class="fiber-label fiber-label-right" id="fiber-right-label">-</div>
+      <div class="fiber-score">
+        <span>{ui.combinedMatch}</span>
+        <strong id="fiber-combined-score">-</strong>
+      </div>
+    </div>
+
+    <aside class="fiber-controls">
+      <div class="fiber-field">
+        <span>{ui.questionedSample}</span>
+        <select id="fiber-left" class="fiber-native-select" aria-hidden="true" tabindex="-1">
+          <option value="questionedCotton">{ui.questionedCotton}</option>
+        </select>
+        <div class="fiber-builder-head">
+          <span id="fiber-left-choice">{ui.questionedCotton}</span>
+          <small id="fiber-left-summary">{ui.builderSummaryDefault}</small>
+        </div>
+        <div class="fiber-builder-grid">
+          <div class="fiber-builder-group">
+            <small>{ui.material}</small>
+            <div class="fiber-pill-row" role="group" aria-label={ui.material}>
+              <button type="button" data-fiber-builder="material" data-builder-value="cotton" data-active="true">{ui.cotton}</button>
+              <button type="button" data-fiber-builder="material" data-builder-value="wool" data-active="false">{ui.woolMaterial}</button>
+              <button type="button" data-fiber-builder="material" data-builder-value="polyester" data-active="false">{ui.polyesterMaterial}</button>
+              <button type="button" data-fiber-builder="material" data-builder-value="nylon" data-active="false">{ui.nylonMaterial}</button>
+            </div>
+          </div>
+          <div class="fiber-builder-group">
+            <small>{ui.twist}</small>
+            <div class="fiber-pill-row" role="group" aria-label={ui.twist}>
+              <button type="button" data-fiber-builder="twist" data-builder-value="irregular" data-active="true">{ui.irregularTwist}</button>
+              <button type="button" data-fiber-builder="twist" data-builder-value="S" data-active="false">{ui.sTwist}</button>
+              <button type="button" data-fiber-builder="twist" data-builder-value="Z" data-active="false">{ui.zTwist}</button>
+            </div>
+          </div>
+          <label class="fiber-mini-slider">
+            <span>{ui.diameter}</span>
+            <strong id="fiber-diameter-label">18 µm</strong>
+            <input id="fiber-diameter" type="range" min="8" max="36" value="18" />
+          </label>
+          <label class="fiber-mini-slider">
+            <span>{ui.polarResponse}</span>
+            <strong id="fiber-birefringence-label">0.032</strong>
+            <input id="fiber-questioned-birefringence" type="range" min="10" max="65" value="32" />
+          </label>
+          <div class="fiber-builder-group fiber-builder-wide">
+            <small>{ui.dyeProfile}</small>
+            <div class="fiber-pill-row" role="group" aria-label={ui.dyeProfile}>
+              <button type="button" data-fiber-builder="dyePreset" data-builder-value="indigo" data-active="true">{ui.indigoDye}</button>
+              <button type="button" data-fiber-builder="dyePreset" data-builder-value="crimson" data-active="false">{ui.crimsonDye}</button>
+              <button type="button" data-fiber-builder="dyePreset" data-builder-value="navy" data-active="false">{ui.navyDye}</button>
+              <button type="button" data-fiber-builder="dyePreset" data-builder-value="violet" data-active="false">{ui.violetDye}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fiber-field">
+        <span>{ui.knownSample}</span>
+        <select id="fiber-right" class="fiber-native-select" aria-hidden="true" tabindex="-1">
+          <option value="suspectCotton">{ui.suspectCotton}</option>
+          <option value="wool">{ui.wool}</option>
+          <option value="polyester">{ui.polyester}</option>
+          <option value="nylon">{ui.nylon}</option>
+        </select>
+        <button class="fiber-choice-trigger" type="button" data-fiber-choice-trigger="right" aria-haspopup="listbox" aria-expanded="false">
+          <span id="fiber-right-choice">{ui.suspectCotton}</span>
+          <span class="fiber-choice-mark" aria-hidden="true"></span>
+        </button>
+        <div class="fiber-choice-menu" data-fiber-choice-menu="right" role="listbox" aria-label={ui.knownSample}>
+          <button type="button" role="option" data-fiber-choice="right" data-fiber-value="suspectCotton" aria-selected="true">{ui.suspectCotton}</button>
+          <button type="button" role="option" data-fiber-choice="right" data-fiber-value="wool" aria-selected="false">{ui.wool}</button>
+          <button type="button" role="option" data-fiber-choice="right" data-fiber-value="polyester" aria-selected="false">{ui.polyester}</button>
+          <button type="button" role="option" data-fiber-choice="right" data-fiber-value="nylon" aria-selected="false">{ui.nylon}</button>
+        </div>
+      </div>
+
+      <label class="fiber-slider fiber-focus">
+        <span>{ui.focus}</span>
+        <strong id="fiber-focus-label">-</strong>
+        <input id="fiber-focus" type="range" min="0" max="100" value="62" />
+      </label>
+
+      <label class="fiber-slider fiber-polar">
+        <span>{ui.polarizer}</span>
+        <strong id="fiber-polar-label">-</strong>
+        <input id="fiber-polarizer" type="range" min="0" max="180" value="45" />
+      </label>
+
+      <div class="fiber-readouts">
+        <div>
+          <span>{ui.morphology}</span>
+          <strong id="fiber-morphology-score">-</strong>
+        </div>
+        <div>
+          <span>{ui.spectrum}</span>
+          <strong id="fiber-spectrum-score">-</strong>
+        </div>
+        <div>
+          <span>{ui.birefringence}</span>
+          <strong id="fiber-birefringence">-</strong>
+        </div>
+      </div>
+
+      <article class="fiber-verdict" id="fiber-verdict-panel" data-verdict="partial" aria-live="polite">
+        <div class="fiber-verdict-head">
+          <span id="fiber-verdict-status">-</span>
+          <strong id="fiber-verdict-score">-</strong>
+        </div>
+        <div class="fiber-verdict-meter" aria-hidden="true">
+          <span id="fiber-verdict-meter"></span>
+        </div>
+        <p id="fiber-verdict">-</p>
+      </article>
+    </aside>
+
+    <div class="fiber-chart" aria-label={ui.chartAria}>
+      <svg id="fiber-spectrum-chart" viewBox="0 0 720 270" role="img"></svg>
+    </div>
+
+    <p class="fiber-disclaimer">{ui.disclaimer}</p>
+  </div>
+</section>
+
+<script id="fiber-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script>
+  import { initFiberComparisonMicroscope } from './view';
+
+  initFiberComparisonMicroscope(JSON.parse(document.getElementById('fiber-ui')?.textContent || '{}'));
+</script>
