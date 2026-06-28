@@ -13,6 +13,7 @@ import { FORENSIC_GLASS_BECKE_LINE_SIMULATOR_TOOL } from './tool/forensic-glass-
 import { FORENSIC_FIBER_COMPARISON_MICROSCOPE_TOOL } from './tool/forensic-fiber-comparison-microscope/index';
 import { BLOODSTAIN_PATTERN_ORIGIN_ANALYZER_TOOL } from './tool/bloodstain-pattern-origin-analyzer/index';
 import { FORENSIC_FINGERPRINT_MINUTIAE_IDENTIFIER_TOOL } from './tool/forensic-fingerprint-minutiae-identifier/index';
+import { FIRE_PATTERN_ORIGIN_ANALYZER_TOOL } from './tool/fire-pattern-origin-analyzer/index';
 
 export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_AGE_ESTIMATOR_TOOL,
@@ -27,5 +28,6 @@ export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_GLASS_BECKE_LINE_SIMULATOR_TOOL,
   FORENSIC_FIBER_COMPARISON_MICROSCOPE_TOOL,
   BLOODSTAIN_PATTERN_ORIGIN_ANALYZER_TOOL,
-  FORENSIC_FINGERPRINT_MINUTIAE_IDENTIFIER_TOOL
+  FORENSIC_FINGERPRINT_MINUTIAE_IDENTIFIER_TOOL,
+  FIRE_PATTERN_ORIGIN_ANALYZER_TOOL
 ];

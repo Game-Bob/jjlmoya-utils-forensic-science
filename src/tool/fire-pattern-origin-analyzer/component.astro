@@ -1,0 +1,196 @@
+---
+import './fire-pattern-origin-analyzer.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<section class="fire-origin" data-fire-origin-tool data-has-plan="false">
+  <div class="fire-workspace">
+    <div class="fire-topbar">
+      <label class="fire-command fire-command-load">
+        <input id="fire-plan-upload" type="file" accept="image/*" />
+        <span>{ui.loadPlan}</span>
+      </label>
+      <button type="button" class="fire-command" id="fire-reset" disabled>{ui.resetVectors}</button>
+      <button type="button" class="fire-command fire-command-export" id="fire-export" disabled>{ui.generateReport}</button>
+    </div>
+
+    <div class="fire-plan-shell">
+      <div class="fire-layer-dots" role="group" aria-label={ui.visibleLayers}>
+        <button type="button" class="fire-layer-dot" data-fire-layer-toggle="vPattern" data-active="true" aria-label={ui.vPattern} disabled></button>
+        <button type="button" class="fire-layer-dot" data-fire-layer-toggle="deepChar" data-active="true" aria-label={ui.deepChar} disabled></button>
+        <button type="button" class="fire-layer-dot" data-fire-layer-toggle="sootShadow" data-active="true" aria-label={ui.sootShadow} disabled></button>
+        <button type="button" class="fire-layer-dot" data-fire-layer-toggle="cleanBurn" data-active="true" aria-label={ui.cleanBurn} disabled></button>
+      </div>
+
+      <div class="fire-pointer-overlay" id="fire-pointer-overlay">
+        <span>{ui.pointerLabel}</span>
+        <strong id="fire-pointer-coordinate">--, --</strong>
+      </div>
+
+      <div class="fire-origin-overlay" id="fire-origin-overlay">
+        <span>{ui.estimatedOrigin}</span>
+        <strong id="fire-origin-coordinate">--, --</strong>
+      </div>
+
+      <button type="button" class="fire-dropzone" id="fire-dropzone">{ui.dropPlan}</button>
+
+      <div class="fire-radial-menu" id="fire-radial-menu" hidden>
+        <button type="button" data-fire-pattern="vPattern">{ui.vPattern}</button>
+        <button type="button" data-fire-pattern="deepChar">{ui.deepChar}</button>
+        <button type="button" data-fire-pattern="cleanBurn">{ui.cleanBurn}</button>
+        <button type="button" data-fire-pattern="sootShadow">{ui.sootShadow}</button>
+      </div>
+
+      <svg id="fire-plan-svg" viewBox="0 0 1000 680" role="img" aria-label={ui.planAria}>
+        <defs>
+          <pattern id="fire-grid" width="50" height="50" patternUnits="userSpaceOnUse">
+            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" stroke-width="1" opacity="0.14"></path>
+          </pattern>
+        </defs>
+        <image id="fire-plan-image" x="0" y="0" width="1000" height="680" preserveAspectRatio="xMidYMid slice"></image>
+        <rect class="fire-grid-fill" x="0" y="0" width="1000" height="680" fill="url(#fire-grid)"></rect>
+      </svg>
+      <canvas id="fire-overlay-canvas" width="1000" height="680"></canvas>
+    </div>
+
+    <footer class="fire-statusbar">
+      <span>{ui.vectorsLabel}: <strong id="fire-vector-count">0</strong></span>
+      <span>{ui.confidenceLabel}: <strong id="fire-confidence-score">0.0%</strong></span>
+      <span>{ui.varianceLabel}: <strong id="fire-origin-variance">+-0.0 m</strong></span>
+      <span>{ui.modeLabel}: <strong id="fire-mode-label">{ui.awaitingVector}</strong></span>
+    </footer>
+
+    <details class="fire-guide" open>
+      <summary>{ui.guideSummary}</summary>
+      <div class="fire-guide-body" aria-label={ui.guideTitle}>
+        <div class="fire-guide-panels">
+          <details open>
+            <summary>{ui.flowPanelTitle}</summary>
+            <div class="fire-guide-flow">
+              <article>
+                <strong>{ui.flow1Kicker}</strong>
+                <span>{ui.flow1Icon}</span>
+                <h3>{ui.flow1Title}</h3>
+                <p>{ui.flow1Text}</p>
+              </article>
+              <article>
+                <strong>{ui.flow2Kicker}</strong>
+                <span>{ui.flow2Icon}</span>
+                <h3>{ui.flow2Title}</h3>
+                <p>{ui.flow2Text}</p>
+              </article>
+              <article>
+                <strong>{ui.flow3Kicker}</strong>
+                <span>{ui.flow3Icon}</span>
+                <h3>{ui.flow3Title}</h3>
+                <p>{ui.flow3Text}</p>
+              </article>
+              <article>
+                <strong>{ui.flow4Kicker}</strong>
+                <span>{ui.flow4Icon}</span>
+                <h3>{ui.flow4Title}</h3>
+                <p>{ui.flow4Text}</p>
+              </article>
+            </div>
+          </details>
+
+          <details open>
+            <summary>{ui.legendPanelTitle}</summary>
+            <div class="fire-guide-legend" aria-label={ui.indicatorsTitle}>
+              <article class="fire-guide-chip fire-guide-chip-v">
+                <span></span>
+                <strong>{ui.vPattern}</strong>
+                <small>{ui.vPatternShort}</small>
+              </article>
+              <article class="fire-guide-chip fire-guide-chip-char">
+                <span></span>
+                <strong>{ui.deepChar}</strong>
+                <small>{ui.deepCharShort}</small>
+              </article>
+              <article class="fire-guide-chip fire-guide-chip-soot">
+                <span></span>
+                <strong>{ui.sootShadow}</strong>
+                <small>{ui.sootShadowShort}</small>
+              </article>
+              <article class="fire-guide-chip fire-guide-chip-clean">
+                <span></span>
+                <strong>{ui.cleanBurn}</strong>
+                <small>{ui.cleanBurnShort}</small>
+              </article>
+            </div>
+          </details>
+
+          <details open>
+            <summary>{ui.readoutPanelTitle}</summary>
+            <div class="fire-guide-readouts">
+              <article>
+                <strong>{ui.vectorsLabel}</strong>
+                <p>{ui.resultsPoint1}</p>
+              </article>
+              <article>
+                <strong>{ui.confidenceLabel}</strong>
+                <p>{ui.resultsPoint2}</p>
+              </article>
+              <article>
+                <strong>{ui.varianceLabel}</strong>
+                <p>{ui.resultsPoint3}</p>
+              </article>
+              <article>
+                <strong>{ui.modeLabel}</strong>
+                <p>{ui.resultsPoint4}</p>
+              </article>
+            </div>
+          </details>
+
+          <details open>
+            <summary>{ui.basicsTitle}</summary>
+            <div class="fire-guide-panel-copy">
+              <p>{ui.basicsIntro}</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>{ui.indicatorsTitle}</summary>
+            <div class="fire-guide-definitions">
+              <article>
+                <h3>{ui.vPattern}</h3>
+                <p>{ui.vPatternExplain}</p>
+              </article>
+              <article>
+                <h3>{ui.deepChar}</h3>
+                <p>{ui.deepCharExplain}</p>
+              </article>
+              <article>
+                <h3>{ui.sootShadow}</h3>
+                <p>{ui.sootShadowExplain}</p>
+              </article>
+              <article>
+                <h3>{ui.cleanBurn}</h3>
+                <p>{ui.cleanBurnExplain}</p>
+              </article>
+            </div>
+          </details>
+
+          <details>
+            <summary>{ui.resultsTitle}</summary>
+            <div class="fire-guide-panel-copy">
+              <p>{ui.resultsIntro}</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<script id="fire-origin-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script>
+  import { initFirePatternOriginAnalyzer } from './view';
+
+  initFirePatternOriginAnalyzer(JSON.parse(document.getElementById('fire-origin-ui')?.textContent || '{}'));
+</script>

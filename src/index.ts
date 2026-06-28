@@ -13,6 +13,7 @@ export { FORENSIC_GLASS_BECKE_LINE_SIMULATOR_TOOL } from './tool/forensic-glass-
 export { FORENSIC_FIBER_COMPARISON_MICROSCOPE_TOOL } from './tool/forensic-fiber-comparison-microscope/index';
 export { BLOODSTAIN_PATTERN_ORIGIN_ANALYZER_TOOL } from './tool/bloodstain-pattern-origin-analyzer/index';
 export { FORENSIC_FINGERPRINT_MINUTIAE_IDENTIFIER_TOOL } from './tool/forensic-fingerprint-minutiae-identifier/index';
+export { FIRE_PATTERN_ORIGIN_ANALYZER_TOOL } from './tool/fire-pattern-origin-analyzer/index';
 
 export type {
   KnownLocale,

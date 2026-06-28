@@ -12,6 +12,7 @@ import { forensicGlassBeckeLineSimulator } from '../tool/forensic-glass-becke-li
 import { forensicFiberComparisonMicroscope } from '../tool/forensic-fiber-comparison-microscope/index';
 import { bloodstainPatternOriginAnalyzer } from '../tool/bloodstain-pattern-origin-analyzer/index';
 import { forensicFingerprintMinutiaeIdentifier } from '../tool/forensic-fingerprint-minutiae-identifier/index';
+import { firePatternOriginAnalyzer } from '../tool/fire-pattern-origin-analyzer/index';
 
 export const forensicCategory: ScienceCategoryEntry = {
   icon: 'mdi:fingerprint',
@@ -28,7 +29,8 @@ export const forensicCategory: ScienceCategoryEntry = {
     forensicGlassBeckeLineSimulator,
     forensicFiberComparisonMicroscope,
     bloodstainPatternOriginAnalyzer,
-    forensicFingerprintMinutiaeIdentifier
+    forensicFingerprintMinutiaeIdentifier,
+    firePatternOriginAnalyzer
   ],
   i18n: {
     de: () => import('./i18n/de').then((m) => m.content),
