@@ -13,6 +13,7 @@ import { forensicFiberComparisonMicroscope } from '../tool/forensic-fiber-compar
 import { bloodstainPatternOriginAnalyzer } from '../tool/bloodstain-pattern-origin-analyzer/index';
 import { forensicFingerprintMinutiaeIdentifier } from '../tool/forensic-fingerprint-minutiae-identifier/index';
 import { firePatternOriginAnalyzer } from '../tool/fire-pattern-origin-analyzer/index';
+import { forensicToolmarkStriationMatcher } from '../tool/forensic-toolmark-striation-matcher/index';
 
 export const forensicCategory: ScienceCategoryEntry = {
   icon: 'mdi:fingerprint',
@@ -30,7 +31,8 @@ export const forensicCategory: ScienceCategoryEntry = {
     forensicFiberComparisonMicroscope,
     bloodstainPatternOriginAnalyzer,
     forensicFingerprintMinutiaeIdentifier,
-    firePatternOriginAnalyzer
+    firePatternOriginAnalyzer,
+    forensicToolmarkStriationMatcher
   ],
   i18n: {
     de: () => import('./i18n/de').then((m) => m.content),

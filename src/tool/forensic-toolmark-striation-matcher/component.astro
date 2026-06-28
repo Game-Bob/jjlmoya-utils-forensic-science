@@ -1,0 +1,121 @@
+---
+import './forensic-toolmark-striation-matcher.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<section class="toolmark-shell" data-toolmark-tool>
+  <div class="toolmark-stage">
+    <div class="toolmark-view-wrap">
+      <div class="toolmark-view" aria-label={ui.viewerAria}>
+        <canvas id="toolmark-canvas" width="980" height="640"></canvas>
+        <input id="toolmark-split" class="toolmark-split" type="range" min="22" max="78" value="50" aria-label={ui.splitLabel} />
+        <div class="toolmark-handle" aria-hidden="true">
+          <span></span>
+        </div>
+        <div class="toolmark-score" id="toolmark-score-card">
+          <span>{ui.correlation}</span>
+          <strong id="toolmark-correlation">{ui.emptyValue}</strong>
+          <small id="toolmark-verdict">{ui.emptyValue}</small>
+        </div>
+      </div>
+      <div class="toolmark-strip" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <aside class="toolmark-controls">
+      <div class="toolmark-panel">
+        <span class="toolmark-panel-label">{ui.loadImages}</span>
+        <label class="toolmark-upload">
+          <span>{ui.uploadKnown}</span>
+          <strong id="toolmark-known-name">{ui.noFile}</strong>
+          <input id="toolmark-known-file" type="file" accept="image/*" />
+        </label>
+        <label class="toolmark-upload">
+          <span>{ui.uploadQuestioned}</span>
+          <strong id="toolmark-questioned-name">{ui.noFile}</strong>
+          <input id="toolmark-questioned-file" type="file" accept="image/*" />
+        </label>
+      </div>
+
+      <div class="toolmark-panel">
+        <div class="toolmark-panel-head">
+          <span class="toolmark-panel-label">{ui.alignImage}</span>
+          <div class="toolmark-unit-toggle" role="group" aria-label={ui.units}>
+            <button type="button" data-toolmark-unit="metric" data-active="true">{ui.metric}</button>
+            <button type="button" data-toolmark-unit="imperial" data-active="false">{ui.imperial}</button>
+          </div>
+        </div>
+        <label class="toolmark-slider">
+          <span><b>{ui.offset}</b><strong id="toolmark-offset-label">-</strong></span>
+          <input id="toolmark-offset" type="range" min="-180" max="180" value="34" step="1" />
+        </label>
+
+        <label class="toolmark-slider">
+          <span><b>{ui.rotation}</b><strong id="toolmark-rotation-label">-</strong></span>
+          <input id="toolmark-rotation" type="range" min="-12" max="12" value="2.5" step="0.1" />
+        </label>
+
+        <label class="toolmark-slider">
+          <span><b>{ui.zoom}</b><strong id="toolmark-zoom-label">-</strong></span>
+          <input id="toolmark-zoom" type="range" min="50" max="260" value="100" step="2" />
+        </label>
+      </div>
+
+      <div class="toolmark-panel">
+        <span class="toolmark-panel-label">{ui.adjustImage}</span>
+        <div class="toolmark-tune">
+          <label>
+            <span>{ui.contrast}</span>
+            <input id="toolmark-contrast" type="range" min="50" max="180" value="108" step="1" />
+          </label>
+          <label>
+            <span>{ui.brightness}</span>
+            <input id="toolmark-brightness" type="range" min="55" max="150" value="100" step="1" />
+          </label>
+        </div>
+      </div>
+
+      <div class="toolmark-actions" aria-label={ui.outputControls}>
+        <button type="button" id="toolmark-reset">{ui.center}</button>
+        <button type="button" id="toolmark-grid" data-active="true">{ui.grid}</button>
+        <button type="button" id="toolmark-export">{ui.exportImage}</button>
+      </div>
+
+      <details class="toolmark-demo">
+        <summary>{ui.demoOptions}</summary>
+        <div class="toolmark-profile" role="group" aria-label={ui.toolProfile}>
+          <button type="button" data-toolmark-profile="screwdriver" data-active="true"><span>{ui.screwdriver}</span></button>
+          <button type="button" data-toolmark-profile="prybar" data-active="false"><span>{ui.prybar}</span></button>
+          <button type="button" data-toolmark-profile="boltCutter" data-active="false"><span>{ui.boltCutter}</span></button>
+        </div>
+        <div class="toolmark-bars">
+          <div>
+            <span>{ui.phaseFit}<strong id="toolmark-phase-label">{ui.zeroPercent}</strong></span>
+            <meter id="toolmark-phase" min="0" max="100" value="0"></meter>
+          </div>
+          <div>
+            <span>{ui.rotationFit}<strong id="toolmark-rotation-fit-label">{ui.zeroPercent}</strong></span>
+            <meter id="toolmark-rotation-fit" min="0" max="100" value="0"></meter>
+          </div>
+        </div>
+      </details>
+
+      <p class="toolmark-interpretation" id="toolmark-interpretation" aria-live="polite">{ui.emptyValue}</p>
+    </aside>
+  </div>
+</section>
+
+<script id="toolmark-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script>
+  import { initToolmarkStriationMatcher } from './view';
+
+  initToolmarkStriationMatcher(JSON.parse(document.getElementById('toolmark-ui')?.textContent || '{}'));
+</script>
