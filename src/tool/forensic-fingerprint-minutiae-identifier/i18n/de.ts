@@ -1,0 +1,298 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'fingerabdruck-minuzien-identifikator';
+const title = 'Forensischer Fingerabdruckmuster und Minuzien Identifikator';
+const description = 'Laden Sie ein Fingerabdruckbild hoch, prüfen Sie es mit einer echten Lupe, klassifizieren Sie das Linienmuster, markieren Sie Minuzien und exportieren Sie eine Beweismitteltabelle.';
+
+const howTo = [
+  {
+    name: 'Wählen Sie das Galton-Henry-Muster',
+    text: 'Wählen Sie Bogen, Schleife oder Wirbel, um die beobachtete Flussrichtung der Papillarlinien zu dokumentieren.',
+  },
+  {
+    name: 'Zentrum und Delta einstellen',
+    text: 'Passen Sie die Regler für den Zentrumsversatz und die Deltaanzahl an. Der Klassifikator berechnet das Henry-Label und die Konfidenz.',
+  },
+  {
+    name: 'Wählen Sie einen Minuzientyp',
+    text: 'Wählen Sie Endung, Gabelung, Insel oder Punkt, bevor Sie Markierungen auf der Arbeitsfläche platzieren.',
+  },
+  {
+    name: 'Markierungen setzen und prüfen',
+    text: 'Klicken Sie auf den Fingerabdruck, um Markierungen zu setzen. Die Tabelle erfasst die Koordinaten und prüft das Übungsziel (5 Endungen und 3 Gabelungen).',
+  },
+];
+
+const faq = [
+  {
+    key: 'faq-1',
+    question: 'Was sind Minuzien?',
+    answer: 'Minuzien sind anatomische Merkmale der Papillarlinien (z. B. Endungen, Gabelungen). Sie werden für den forensischen Vergleich und die Identifizierung genutzt.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Was ist der Unterschied zwischen Bogen, Schleife und Wirbel?',
+    answer: 'Bögen laufen ohne Rückbiegung von einer Seite zur anderen. Schleifen haben eine Rückbiegung und ein Delta. Wirbel weisen kreis- oder spiralförmige Muster und meist zwei Deltas auf.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Kann dieses Tool echte Personen identifizieren?',
+    answer: 'Nein. Dies ist ein pädagogischer Simulator. Echte Identifizierungen erfordern kalibrierte Systeme, Originalbeweismittel und die Beurteilung durch einen zertifizierten Sachverständigen.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Warum fordert das Tool 5 Endungen und 3 Gabelungen?',
+    answer: 'Dieses Ziel entspricht einer typischen Schulungsübung, bei der Schüler das systematische Erkennen und Benennen häufiger Minuzientypen üben.',
+  },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    canvasAria: 'Interaktive Arbeitsfläche für das Platzieren von Minuzien-Markierungen auf dem Fingerabdruck',
+    workflow: 'Workflow der Fingerabdruck-Analyse',
+    stepUpload: 'Hochladen',
+    stepClassify: 'Klassifizieren',
+    stepMark: 'Markieren',
+    stepReview: 'Prüfen',
+    stepLabel: 'Schritt',
+    stage1Title: 'Laden Sie den Abdruck',
+    stage1Copy: 'Beginnen Sie mit einem Fingerabdruckbild. Die Arbeitsfläche bleibt gesperrt, bis ein Bild geladen ist.',
+    stage2Title: 'Linienfluss klassifizieren',
+    stage2Copy: 'Verwenden Sie die Schaltflächen unter dem Bild, um Bogen, Schleife oder Wirbel auszuwählen.',
+    stage3Title: 'Minuzien markieren',
+    stage3Copy: 'Wählen Sie einen Typ, klicken Sie auf das Bild zum Hinzufügen oder auf eine vorhandene Markierung zum Löschen.',
+    stage4Title: 'Beweismitteltabelle prüfen',
+    stage4Copy: 'Überprüfen Sie die Anzahl, löschen Sie Fehler mit dem Mülleimer-Symbol und kopieren Sie die strukturierten Notizen.',
+    canvasHint1: 'Laden Sie ein Fingerabdruckbild hoch, um zu beginnen.',
+    canvasHint2: 'Noch nicht markieren. Klassifizieren Sie das Muster mit den Schaltflächen unter dem Bild.',
+    canvasHint3: 'Klicken Sie auf das Bild, um die ausgewählte Minuzie zu platzieren. Klicken Sie auf eine Markierung, um sie auszuwählen.',
+    canvasHint4: 'Prüfen Sie die Beweismitteltabelle unter dem Bild.',
+    uploadTitle: 'Fingerabdruckbild hochladen',
+    uploadHint: 'PNG, JPG oder Scan eines latenten Fingerabdrucks',
+    replaceImage: 'Ersetzen',
+    continueMarking: 'Weiter zum Markieren',
+    reviewEvidence: 'Beweismittel prüfen',
+    back: 'Zurück',
+    next: 'Weiter',
+    patternType: 'Mustertyp des Fingerabdrucks',
+    arch: 'Bogen',
+    loop: 'Schleife',
+    whorl: 'Wirbel',
+    activeMinutia: 'Aktive Minuzie',
+    markingNow: 'Markierung läuft',
+    clickToPlace: 'Klicken Sie auf die Stelle im Bild',
+    ridgeEnding: 'Endung',
+    ridgeEndingShort: 'Linienendung',
+    ridgeEndingHelp: 'Eine Endung liegt vor, wenn eine Papillarlinie abrupt abbricht, ohne sich mit einer anderen zu verbinden.',
+    bifurcation: 'Gabelung',
+    bifurcationShort: 'Linienteilung',
+    bifurcationHelp: 'Eine Gabelung (Bifurkation) ist die Aufspaltung einer einzelnen Papillarlinie in zwei Äste.',
+    island: 'Insel',
+    islandShort: 'kurze isolierte Linie',
+    islandHelp: 'Eine Insel ist ein kurzes Liniensegment mit zwei sichtbaren Enden, das von längeren Linien getrennt ist.',
+    dot: 'Punkt',
+    dotShort: 'winziger isolierter Punkt',
+    dotHelp: 'Ein Punkt ist ein sehr kurzes Liniensegment, das wie ein isolierter Punkt erscheint.',
+    coreOffset: 'Zentrumsversatz',
+    deltaCount: 'Deltaanzahl',
+    henryClass: 'Henry-Klasse',
+    validation: 'Übungsergebnis',
+    legendAria: 'Minuzien-Legende',
+    clearMarks: 'Alle löschen',
+    undoLast: 'Letzten rückgängig',
+    deleteSelected: 'Ausgewählte löschen',
+    selectMarkToDelete: 'Klicken Sie zuerst auf eine Markierung im Bild',
+    copyEvidence: 'Beweismittel kopieren',
+    ridgeFlow: 'Linienfluss-Notiz',
+    type: 'Typ',
+    position: 'Position',
+    action: 'Aktion',
+    remove: 'Entfernen',
+    endingsGoal: 'Linienendungen',
+    bifurcationsGoal: 'Gabelungen',
+    totalMarks: 'Markierungen gesamt',
+    plainArch: 'Einfacher Bogen',
+    archFlow: 'Die Linien treten an einer Seite ein, steigen in der Mitte leicht an und treten an der anderen Seite aus.',
+    ulnarLoop: 'Ulnarschleife',
+    radialLoop: 'Radialschleife',
+    loopFlow: 'Ein Delta und eine deutliche Schleife, die sich zur Eintrittsseite der Linien hin öffnet.',
+    plainWhorl: 'Einfacher Wirbel',
+    centralPocketWhorl: 'Zentraltaschenwirbel',
+    whorlFlow: 'Kreis- oder spiralförmige Linien, die sich um ein Zentrum drehen, meist mit zwei Deltas.',
+    ridgeEndingLabel: 'E',
+    bifurcationLabel: 'G',
+    islandLabel: 'I',
+    dotLabel: 'P',
+  },
+  seo: [
+    {
+      type: 'title',
+      text: 'Klassifizierung von Fingerabdrücken und Minuzienmarkierung',
+      level: 2,
+    },
+    {
+      type: 'diagnostic',
+      variant: 'info',
+      icon: 'mdi:fingerprint',
+      badge: 'Lern-Arbeitsfläche',
+      title: 'Ziele des Fingerabdruck Simulators',
+      html: 'Dieses Tool hilft Studierenden der Kriminalistik, die Grundlagen der <strong>Klassifizierung von Papillarlinien</strong> und die <strong>Minuzienannotation</strong> zu erlernen. Es kombiniert echte Bilder mit einer Lupe und einer exportierbaren Tabelle.',
+    },
+    {
+      type: 'stats',
+      columns: 4,
+      items: [
+        { value: '3', label: 'Hauptmusterfamilien', icon: 'mdi:shape-outline' },
+        { value: '4', label: 'unterstützte Minuzientypen', icon: 'mdi:map-marker-radius' },
+        { value: '5 + 3', label: 'schulisches Validierungsziel', icon: 'mdi:check-decagram' },
+        { value: 'Upload', label: 'bildzentrierter Workflow', icon: 'mdi:cloud-upload-outline' },
+      ],
+    },
+    {
+      type: 'summary',
+      title: 'Empfohlener Lernablauf',
+      items: [
+        'Klassifizieren Sie zuerst das globale Muster: Bogen, Schleife oder Wirbel.',
+        'Suchen Sie nach Deltas und dem Zentrum, bevor Sie Minuzien setzen.',
+        'Markieren Sie nur klare Linienmerkmale; vermeiden Sie Rauschen.',
+        'Erfassen Sie jeden Punkt mit Typ und ungefähren Koordinaten.',
+        'Trennen Sie die systematische Beobachtung von der abschließenden Bewertung.',
+      ],
+    },
+    {
+      type: 'comparative',
+      columns: 3,
+      items: [
+        {
+          title: 'Bogen',
+          icon: 'mdi:gesture-swipe-horizontal',
+          description: 'Die Linien laufen glatt durch. Einfache Bögen weisen keine Schleifen oder Deltas auf.',
+          points: ['Kein Delta', 'Wellenartiger Linienverlauf', 'Einfacher Einstieg für Anfänger'],
+        },
+        {
+          title: 'Schleife',
+          icon: 'mdi:rotate-left',
+          highlight: true,
+          description: 'Ein Linienverlauf, der sich um ein Zentrum biegt und an der gleichen Seite austritt, mit einem Delta.',
+          points: ['Ein Delta', 'Ulnare oder radiale Ausrichtung', 'Zentrumsposition ist entscheidend'],
+        },
+        {
+          title: 'Wirbel',
+          icon: 'mdi:autorenew',
+          description: 'Kreisförmige oder spiralförmige Linienmuster um ein zentrales Zentrum.',
+          points: ['Meist zwei Deltas', 'Kreisförmige Tendenz', 'Einfache und Zentraltaschen-Varianten'],
+        },
+      ],
+    },
+    {
+      type: 'table',
+      headers: ['Minuzie', 'Visuelles Merkmal', 'Häufiger Fehler beim Erfassen'],
+      rows: [
+        ['Endung', 'Eine Linie bricht abrupt im Fluss ab.', 'Prüfen Sie, ob es sich nicht um eine Kontrastschwäche oder ein Bildartefakt handelt.'],
+        ['Gabelung', 'Eine Linie spaltet sich in zwei Äste auf.', 'Achten Sie darauf, dass es keine Druckverzerrung durch zu starken Stempelabdruck ist.'],
+        ['Insel', 'Ein kurzes Linienstück liegt isoliert.', 'Nur erfassen, wenn beide Enden klar erkennbar und frei von Rauschen sind.'],
+        ['Punkt', 'Ein winziges Linienfragment.', 'Vorsicht vor Verwechslung mit Schmutz oder Bildfehlern.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Bedeutung des Übungsergebnisses',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Dieses Ergebnis stellt keine rechtlich verbindliche Identifizierung dar. Es dient als didaktische Checkliste, um Studierende zu einer sorgfältigen Annotation anzuhalten und voreilige Schlüsse ohne ausreichende Dokumentation zu vermeiden.',
+    },
+    {
+      type: 'paragraph',
+      html: 'In der echten Kriminaltechnik (ACE-V-Methode) bewerten Sachverständige die allgemeine Qualität, Verzerrungen, relative Positionen und die Seltenheit von Merkmalen, um eine Identität zweifelsfrei festzustellen.',
+    },
+    {
+      type: 'title',
+      text: 'Methodik der daktyloskopischen Analyse und des Vergleichs',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Die Daktyloskopie basiert auf der Annahme, dass keine zwei Personen die gleichen Papillarlinien besitzen und diese ein Leben lang unveränderlich bleiben. Schulungssimulatoren unterstützen Studierende dabei, eine systematische Beobachtungsgabe zu entwickeln, indem sie lernen, einzelne Linienverläufe zu verfolgen und kleinste Unterbrechungen wie Endungen oder Verzweigungen in einer kontrollierten Umgebung zu erkennen.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Die korrekte Annotation von Minuzien setzt voraus, dass Studierende zunächst den allgemeinen Linienfluss verstehen und dann lokale Anomalien benennen können. Endungen entstehen, wenn eine Papillarlinie plötzlich aufhört, ohne sich mit einer anderen Linie zu verbinden. Gabelungen hingegen entstehen, wenn sich eine Linie in zwei Teile aufteilt. Inseln und Punkte sind kurze isolierte Liniensegmente, die besonders vorsichtig markiert werden sollten, da sie leicht mit Bildrauschen oder Druckverzerrungen verwechselt werden können.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Im forensischen Unterricht ist es wichtig, den Unterschied zwischen der Klassenmerkmalsanalyse und der Individualmerkmalsanalyse zu verstehen. Klassenmerkmale wie Bogen, Schleife und Wirbel erlauben die Einordnung eines Abdrucks in eine Kategorie, können aber nicht zur Individualidentifikation genutzt werden. Erst die Gesamtheit und die räumliche Anordnung der Minuzien in Bezug auf Kern und Delta ermöglicht eine personenbezogene Zuordnung.',
+    },
+    {
+      type: 'glossary',
+      items: [
+        { term: 'Zentrum', definition: 'Der ungefähre Mittelpunkt einer Schleife oder eines Wirbels, der als Referenzpunkt dient.' },
+        { term: 'Delta', definition: 'Der dreieckige Verzweigungspunkt, an dem drei Liniensysteme aufeinandertreffen.' },
+        { term: 'Minuzie', definition: 'Einzelmerkmal einer Papillarlinie, das für den Vergleich genutzt wird.' },
+        { term: 'ACE-V', definition: 'Standardisiertes Prüfverfahren: Analyse, Vergleich, Bewertung, Verifikation.' },
+      ],
+    },
+    {
+      type: 'tip',
+      title: 'Praktischer Unterrichtstipp',
+      html: 'Lassen Sie Schüler denselben Abdruck zweimal markieren: einmal schnell und einmal nach einer detaillierten Flussanalyse. Der Vergleich zeigt meist viele falsch gesetzte Markierungen beim ersten Versuch.',
+    },
+    {
+      type: 'proscons',
+      title: 'Stärken und Grenzen dieses Simulators',
+      items: [
+        { pro: 'Verwendet eigene Bilder statt starrer Vorgaben.', con: 'Die Qualität des Ausgangsbildes schränkt die Erkennbarkeit von Linienmerkmalen ein.' },
+        { pro: 'Erstellt eine klare, exportierbare Tabelle der markierten Punkte.', con: 'Berechnet keine Richtungsvektoren oder die peritielle Beweiskraft.' },
+        { pro: 'Trennt die grobe Klassifizierung von der Detailannotation.', con: 'Nicht für echte forensische Gutachten im Strafverfahren geeignet.' },
+      ],
+    },
+    {
+      type: 'diagnostic',
+      variant: 'warning',
+      icon: 'mdi:scale-balance',
+      badge: 'Forensischer Warnhinweis',
+      title: 'Ausschließliche Nutzung zur Lehre und Ausbildung',
+      html: 'Dieses Tool dient rein didaktischen Zwecken und darf nicht zur Fallarbeit oder für Beweisgutachten verwendet werden.',
+    },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: title,
+      description,
+      applicationCategory: 'ForensicApplication',
+      operatingSystem: 'Any',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: title,
+      step: howTo.map((step) => ({
+        '@type': 'HowToStep',
+        name: step.name,
+        text: step.text,
+      })),
+    },
+  ],
+};

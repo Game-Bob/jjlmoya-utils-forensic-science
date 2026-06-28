@@ -1,0 +1,429 @@
+---
+import { Icon } from 'astro-icon/components';
+import './forensic-fingerprint-minutiae-identifier.css';
+
+interface Props {
+  ui: Record<string, string>;
+}
+
+const { ui } = Astro.props;
+---
+
+<section class="fp-shell" data-fingerprint-tool>
+  <div class="fp-board">
+    <div class="fp-workflow" aria-label={ui.workflow}>
+      <span data-fp-step="1" data-active="true"><b>1</b>{ui.stepUpload}</span>
+      <span data-fp-step="2"><b>2</b>{ui.stepClassify}</span>
+      <span data-fp-step="3"><b>3</b>{ui.stepMark}</span>
+      <span data-fp-step="4"><b>4</b>{ui.stepReview}</span>
+    </div>
+
+    <div class="fp-canvas-panel">
+      <div class="fp-upload" id="fp-upload">
+        <Icon name="mdi:cloud-upload-outline" aria-hidden="true" />
+        <strong>{ui.uploadTitle}</strong>
+        <span>{ui.uploadHint}</span>
+        <input id="fp-file" type="file" accept="image/*" aria-label={ui.uploadTitle} />
+      </div>
+      <canvas id="fp-canvas" width="920" height="620" aria-label={ui.canvasAria}></canvas>
+      <div class="fp-glass" id="fp-glass" aria-hidden="true"></div>
+      <div class="fp-canvas-hint" id="fp-canvas-hint">
+        <strong id="fp-canvas-hint-title">-</strong>
+      </div>
+      <div class="fp-canvas-actions">
+        <button type="button" id="fp-replace"><Icon name="mdi:image-sync-outline" aria-hidden="true" />{ui.replaceImage}</button>
+        <button type="button" id="fp-clear"><Icon name="mdi:eraser" aria-hidden="true" />{ui.clearMarks}</button>
+        <button type="button" id="fp-export"><Icon name="mdi:clipboard-text-outline" aria-hidden="true" />{ui.copyEvidence}</button>
+      </div>
+    </div>
+
+    <div class="fp-controls">
+      <div class="fp-step-panel" data-fp-panel="1">
+        <div class="fp-step-heading">
+          <span id="fp-stage-label">-</span>
+          <strong id="fp-stage-title">-</strong>
+          <p id="fp-stage-copy">-</p>
+        </div>
+        <button type="button" class="fp-primary-action" id="fp-upload-action"><Icon name="mdi:cloud-upload-outline" aria-hidden="true" />{ui.uploadTitle}</button>
+      </div>
+
+      <div class="fp-step-panel" data-fp-panel="2">
+        <div class="fp-step-heading">
+          <span>{ui.stepLabel} 2/4</span>
+          <strong>{ui.stage2Title}</strong>
+          <p>{ui.stage2Copy}</p>
+        </div>
+
+        <div class="fp-selector" role="group" aria-label={ui.patternType}>
+          <button type="button" data-fp-pattern="arch">{ui.arch}</button>
+          <button type="button" data-fp-pattern="loop">{ui.loop}</button>
+          <button type="button" data-fp-pattern="whorl">{ui.whorl}</button>
+        </div>
+
+        <div class="fp-compact-sliders">
+          <label class="fp-slider">
+            <span>{ui.coreOffset}</span>
+            <strong id="fp-core-label">0</strong>
+            <input id="fp-core" type="range" min="-36" max="36" value="12" />
+          </label>
+
+          <label class="fp-slider">
+            <span>{ui.deltaCount}</span>
+            <strong id="fp-delta-label">1</strong>
+            <input id="fp-delta" type="range" min="0" max="2" value="1" step="1" />
+          </label>
+        </div>
+
+        <div class="fp-readouts">
+          <div>
+            <span>{ui.henryClass}</span>
+            <strong id="fp-class">-</strong>
+          </div>
+          <div>
+            <span>{ui.ridgeFlow}</span>
+            <strong id="fp-flow-compact">-</strong>
+          </div>
+        </div>
+
+        <button type="button" class="fp-primary-action" data-fp-next="3"><Icon name="mdi:arrow-right" aria-hidden="true" />{ui.continueMarking}</button>
+      </div>
+
+      <div class="fp-step-panel" data-fp-panel="3">
+        <div class="fp-step-heading">
+          <span>{ui.stepLabel} 3/4</span>
+          <strong>{ui.stage3Title}</strong>
+          <p>{ui.stage3Copy}</p>
+        </div>
+
+        <div class="fp-legend" aria-label={ui.legendAria}>
+          <button type="button" data-fp-minutia="ridgeEnding"><i></i><span>{ui.ridgeEnding}</span><small>{ui.ridgeEndingShort}</small><b id="fp-count-ridgeEnding">0/5</b></button>
+          <button type="button" data-fp-minutia="bifurcation"><i></i><span>{ui.bifurcation}</span><small>{ui.bifurcationShort}</small><b id="fp-count-bifurcation">0/3</b></button>
+          <button type="button" data-fp-minutia="island"><i></i><span>{ui.island}</span><small>{ui.islandShort}</small><b id="fp-count-island">0/2</b></button>
+          <button type="button" data-fp-minutia="dot"><i></i><span>{ui.dot}</span><small>{ui.dotShort}</small><b id="fp-count-dot">0/2</b></button>
+        </div>
+
+        <div class="fp-active-minutia" id="fp-active-minutia">
+          <span id="fp-active-minutia-label">-</span>
+          <strong id="fp-active-minutia-title">-</strong>
+          <p id="fp-active-minutia-copy">-</p>
+        </div>
+
+        <div class="fp-mark-actions">
+          <button type="button" id="fp-undo"><Icon name="mdi:undo" aria-hidden="true" />{ui.undoLast}</button>
+          <button type="button" id="fp-delete-selected"><Icon name="mdi:trash-can-outline" aria-hidden="true" />{ui.deleteSelected}</button>
+          <button type="button" id="fp-clear-step"><Icon name="mdi:eraser" aria-hidden="true" />{ui.clearMarks}</button>
+        </div>
+
+        <div class="fp-readouts">
+          <div>
+            <span>{ui.validation}</span>
+            <strong id="fp-score">-</strong>
+          </div>
+          <div>
+            <span>{ui.totalMarks}</span>
+            <strong id="fp-total">0</strong>
+          </div>
+        </div>
+
+        <button type="button" class="fp-primary-action" data-fp-next="4" id="fp-review-action"><Icon name="mdi:clipboard-check-outline" aria-hidden="true" />{ui.reviewEvidence}</button>
+      </div>
+
+      <div class="fp-step-panel" data-fp-panel="4">
+        <div class="fp-step-heading">
+          <span>{ui.stepLabel} 4/4</span>
+          <strong>{ui.stage4Title}</strong>
+          <p>{ui.stage4Copy}</p>
+        </div>
+
+        <div class="fp-readouts">
+          <div>
+            <span>{ui.henryClass}</span>
+            <strong id="fp-class-review">-</strong>
+          </div>
+          <div>
+            <span>{ui.validation}</span>
+            <strong id="fp-score-review">-</strong>
+          </div>
+        </div>
+        <button type="button" class="fp-primary-action" id="fp-export-panel"><Icon name="mdi:clipboard-text-outline" aria-hidden="true" />{ui.copyEvidence}</button>
+      </div>
+
+      <div class="fp-step-nav">
+        <button type="button" data-fp-prev><Icon name="mdi:arrow-left" aria-hidden="true" />{ui.back}</button>
+      </div>
+    </div>
+
+    <div class="fp-evidence">
+      <div class="fp-flow">
+        <span>{ui.ridgeFlow}</span>
+        <strong id="fp-flow">-</strong>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>{ui.type}</th>
+            <th>{ui.position}</th>
+            <th>{ui.action}</th>
+          </tr>
+        </thead>
+        <tbody id="fp-table"></tbody>
+      </table>
+      <p id="fp-checklist" class="fp-checklist">-</p>
+    </div>
+  </div>
+</section>
+
+<template id="fp-trash-icon">
+  <Icon name="mdi:trash-can-outline" aria-hidden="true" />
+</template>
+<script id="fp-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script>
+  import { FingerprintClassifier, MinutiaeState, colors, limits } from './logic';
+  import type { FingerprintPattern, MinutiaType } from './logic';
+  import { drawPlaceholder, drawUploadedImage, drawMark } from './drawer';
+  import {
+    updateWorkflow,
+    updateUIStates,
+    updateActionButtons,
+    updateClassifierLabels,
+    updateMinutiaeLabels,
+    renderTable,
+  } from './renderer';
+
+  const ui = JSON.parse(document.getElementById('fp-ui')?.textContent || '{}');
+  const board = document.querySelector<HTMLElement>('[data-fingerprint-tool] .fp-board');
+  const canvas = document.getElementById('fp-canvas') as HTMLCanvasElement | null;
+  const context = canvas?.getContext('2d') ?? null;
+  const glass = document.getElementById('fp-glass');
+  const uploadPanel = document.getElementById('fp-upload');
+  const fileInput = document.getElementById('fp-file') as HTMLInputElement | null;
+  const coreInput = document.getElementById('fp-core') as HTMLInputElement | null, deltaInput = document.getElementById('fp-delta') as HTMLInputElement | null;
+  const tableBody = document.getElementById('fp-table'), trashIconTemplate = document.getElementById('fp-trash-icon') as HTMLTemplateElement | null;
+  const state = new MinutiaeState(), classifier = new FingerprintClassifier();
+  const STORAGE_KEY = 'forensic-fingerprint-minutiae-identifier';
+  let activePattern: FingerprintPattern = 'loop';
+  let selectedMinutia: MinutiaType = 'ridgeEnding';
+  let uploadedImage: HTMLImageElement | null = null;
+  let uploadedImageData = '', activeStep = 1, selectedMarkId = '';
+  let imageRect = { x: 0, y: 0, width: 0, height: 0 };
+
+  function activeMinutia(): MinutiaType {
+    return selectedMinutia;
+  }
+  function drawPattern(): void {
+    if (!canvas || !context) return;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    if (uploadedImage) {
+      imageRect = drawUploadedImage(canvas, context, uploadedImage);
+    } else {
+      const core = Number(coreInput?.value ?? 12);
+      drawPlaceholder(canvas, context, activePattern, core);
+    }
+    state.list().forEach((mark) => {
+      const label = ui[`${mark.type}Label`] ?? { ridgeEnding: 'E', bifurcation: 'B', island: 'I', dot: 'D' }[mark.type];
+      drawMark({ canvas, context, mark, selectedMarkId, color: colors[mark.type], label });
+    });
+  }
+  function saveState(): void {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      pattern: activePattern,
+      core: Number(coreInput?.value ?? 12),
+      delta: Number(deltaInput?.value ?? 1),
+      marks: state.list(),
+      uploadedImageData,
+      activeStep,
+    }));
+  }
+  function clampStep(step: number): number {
+    if (!uploadedImage) return 1;
+    return Math.max(2, Math.min(4, step));
+  }
+  function updateMagnifier(): void {
+    if (canvas && glass) {
+      glass.style.backgroundImage = `url(${canvas.toDataURL('image/png')})`;
+      glass.style.backgroundSize = `${canvas.clientWidth * 2.4}px ${canvas.clientHeight * 2.4}px`;
+    }
+  }
+  function render(): void {
+    const coreVal = Number(coreInput?.value ?? 12);
+    const deltaVal = Number(deltaInput?.value ?? 1);
+    const classification = classifier.classify(activePattern, coreVal, deltaVal);
+    const summary = state.summarize();
+    const selectedMark = state.list().find((mark) => mark.id === selectedMarkId);
+    updateUIStates(activeMinutia(), activePattern, limits, (type) => state.canAdd(type));
+    updateActionButtons(selectedMark, ui, state.lastMark() !== null);
+    updateClassifierLabels(classification, String(coreVal), String(deltaVal), ui);
+    updateMinutiaeLabels(summary, activeMinutia(), ui, limits);
+    updateWorkflow(activeStep, ui, board);
+    if (uploadPanel) uploadPanel.dataset.hasImage = uploadedImage ? 'true' : 'false';
+    drawPattern();
+    updateMagnifier();
+    renderTable({ marks: state.list(), colors, ui, tableBody, trashIconTemplate });
+    saveState();
+  }
+  function loadImage(src: string, clearMarks = true, targetStep = 2): void {
+    const image = new Image();
+    uploadedImageData = src;
+    image.onload = () => {
+      uploadedImage = image;
+      if (clearMarks) state.clear();
+      activeStep = targetStep;
+      render();
+    };
+    image.src = src;
+  }
+  function restoreInputValues(core?: number, delta?: number): void {
+    if (typeof core === 'number' && coreInput) coreInput.value = String(core);
+    if (typeof delta === 'number' && deltaInput) deltaInput.value = String(delta);
+  }
+  function restore(): void {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      if (saved.pattern) activePattern = saved.pattern;
+      restoreInputValues(saved.core, saved.delta);
+      if (saved.marks) state.replace(saved.marks);
+      if (typeof saved.uploadedImageData === 'string' && saved.uploadedImageData.startsWith('data:image/')) {
+        loadImage(saved.uploadedImageData, false, saved.activeStep);
+      }
+    } catch {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  }
+  function handleCanvasClick(canvasX: number, canvasY: number): void {
+    if (!canvas) return;
+    const existingMark = state.findMarkAt(canvasX, canvasY, canvas.width, canvas.height);
+    if (existingMark) {
+      selectedMarkId = existingMark.id;
+      selectedMinutia = existingMark.type;
+      render();
+      return;
+    }
+    if (!state.canAdd(activeMinutia())) return;
+    const inBounds = canvasX >= imageRect.x
+      && canvasX <= imageRect.x + imageRect.width
+      && canvasY >= imageRect.y
+      && canvasY <= imageRect.y + imageRect.height;
+    if (!inBounds) return;
+    const mark = state.addMark(activeMinutia(), (canvasX / canvas.width) * 100, (canvasY / canvas.height) * 100);
+    selectedMarkId = mark.id;
+    render();
+  }
+  canvas?.addEventListener('click', (event) => {
+    if (!uploadedImage) return fileInput?.click();
+    if (activeStep !== 3 || !canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const canvasX = ((event.clientX - rect.left) / rect.width) * canvas.width;
+    const canvasY = ((event.clientY - rect.top) / rect.height) * canvas.height;
+    handleCanvasClick(canvasX, canvasY);
+  });
+  canvas?.addEventListener('mousemove', (event) => {
+    if (!glass || !uploadedImage || !canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const localX = event.clientX - rect.left;
+    const localY = event.clientY - rect.top;
+    glass.style.opacity = '1';
+    glass.style.left = `${localX}px`;
+    glass.style.top = `${localY}px`;
+    glass.style.backgroundPosition = `${-(localX * 2.4 - 62)}px ${-(localY * 2.4 - 62)}px`;
+  });
+  canvas?.addEventListener('mouseleave', () => {
+    if (glass) glass.style.opacity = '0';
+  });
+  function handleClear(): void {
+    state.clear();
+    selectedMarkId = '';
+    render();
+  }
+  async function handleExport(): Promise<void> {
+    const text = state.list().map((mark) => `${ui[mark.type] ?? mark.type} @ ${mark.x.toFixed(1)}, ${mark.y.toFixed(1)}`).join('\n');
+    await navigator.clipboard?.writeText(text);
+  }
+  const clickActions: Record<string, () => void | Promise<void>> = {
+    'fp-clear': handleClear,
+    'fp-clear-step': handleClear,
+    'fp-replace': () => fileInput?.click(),
+    'fp-upload-action': () => fileInput?.click(),
+    'fp-export': handleExport,
+    'fp-export-panel': handleExport,
+    'fp-undo': () => {
+      const mark = state.lastMark();
+      if (mark) {
+        state.removeMark(mark.id);
+        if (selectedMarkId === mark.id) selectedMarkId = '';
+        render();
+      }
+    },
+    'fp-delete-selected': () => {
+      if (selectedMarkId) {
+        state.removeMark(selectedMarkId);
+        selectedMarkId = '';
+        render();
+      }
+    },
+  };
+  function handlePatternClick(target: HTMLElement): boolean {
+    const pBtn = target.closest<HTMLButtonElement>('[data-fp-pattern]');
+    if (!pBtn) return false;
+    activePattern = (pBtn.dataset.fpPattern || 'loop') as FingerprintPattern;
+    render();
+    return true;
+  }
+  function handleMinutiaClick(target: HTMLElement): boolean {
+    const mBtn = target.closest<HTMLButtonElement>('[data-fp-minutia]');
+    if (!mBtn) return false;
+    const type = (mBtn.dataset.fpMinutia || 'ridgeEnding') as MinutiaType;
+    if (state.canAdd(type) || type === activeMinutia()) selectedMinutia = type;
+    render();
+    return true;
+  }
+  function handleRemoveClick(target: HTMLElement): boolean {
+    const removeBtn = target.closest<HTMLButtonElement>('[data-remove]');
+    if (!removeBtn) return false;
+    const id = removeBtn.getAttribute('data-remove');
+    if (id) {
+      state.removeMark(id);
+      render();
+    }
+    return true;
+  }
+  function handleWorkflowClick(target: HTMLElement): boolean {
+    const nextBtn = target.closest<HTMLButtonElement>('[data-fp-next]');
+    if (nextBtn) {
+      activeStep = clampStep(Number(nextBtn.dataset.fpNext ?? activeStep + 1));
+      render();
+      return true;
+    }
+    const prevBtn = target.closest<HTMLButtonElement>('[data-fp-prev]');
+    if (prevBtn) {
+      activeStep = clampStep(activeStep - 1);
+      render();
+      return true;
+    }
+    return false;
+  }
+  function checkHandlers(t: HTMLElement): boolean {
+    return handlePatternClick(t) || handleMinutiaClick(t);
+  }
+  board?.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    if (checkHandlers(target) || handleRemoveClick(target) || handleWorkflowClick(target)) return;
+    const id = target.closest('[id]')?.id;
+    if (id && clickActions[id]) {
+      const result = clickActions[id]();
+      if (result instanceof Promise) result.catch(() => {});
+    }
+  });
+  fileInput?.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      if (typeof reader.result === 'string') loadImage(reader.result);
+    });
+    reader.readAsDataURL(file);
+  });
+  coreInput?.addEventListener('input', render);
+  deltaInput?.addEventListener('input', render);
+  restore();
+  render();
+</script>

@@ -1,0 +1,298 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'identificateur-minuties-dactyloscopiques';
+const title = 'Identificateur de motifs et de minuties dactyloscopiques';
+const description = 'Téléchargez une image d\'empreinte digitale, inspectez-la avec une loupe virtuelle, classez le motif général, marquez un ensemble de minuties et exportez une table de preuves. Outil pédagogique pour la formation en dactyloscopie forensique et l\'apprentissage de la classification de Henry.';
+
+const howTo = [
+  {
+    name: 'Choisissez le motif Galton-Henry',
+    text: 'Apres avoir charge l\'empreinte, sélectionnez arc, boucle ou verticille pour enregistrer la famille de flux de crêtes observee sur l\'image téléversée.',
+  },
+  {
+    name: 'Ajustez le noyau et les deltas',
+    text: 'Ajustez les curseurs de position du noyau et du nombre de deltas. Le classificateur met à jour la classification de Henry et le niveau de confiance associe.',
+  },
+  {
+    name: 'Selectionnez un type de minutie',
+    text: 'Choisissez un arret de crête, une bifurcation, un lac ou un point avant de placer des marqueurs sur l\'image dactyloscopique.',
+  },
+  {
+    name: 'Marquez et validez vos repères',
+    text: 'Cliquez sur l\'empreinte pour ajouter vos annotations. La table enregistre les coordonnees et valide l\'exercice (5 arrets et 3 bifurcations minimum).',
+  },
+];
+
+const faq = [
+  {
+    key: 'faq-1',
+    question: 'Qu\'est-ce qu\'une minutie en dactyloscopie?',
+    answer: 'Les minuties sont des accidents locaux sur le trace des crêtes papillaires (arrets, bifurcations, iles, points). Les experts les comparent pour etablir l\'identité d\'un individu.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Quelle différence entre arc, boucle et verticille?',
+    answer: 'L\'arc traverse de part en part sans retour en arriere. La boucle fait un demi-tour autour d\'un noyau avec un delta visible. Le verticille forme des cercles ou spirales avec généralement deux deltas.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Cet outil permet-il d\'identifier un suspect réel?',
+    answer: 'Non. C\'est un simulateur pédagogique d\'apprentissage. Les expertises réelles nécessitént du materiel calibre, des protocoles valides et l\'examen certifie d\'un dactyloscopiste agree.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Pourquoi demander 5 arrets de crête et 3 bifurcations?',
+    answer: 'Cette cible d\'exercice d\'entraînement permet de s\'assurer que l\'étudiant sait repèrer et nommer correctement les minuties les plus fréquentes de maniere systematique.',
+  },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    canvasAria: 'Zone interactive de l\'empreinte chargee pour placer des minuties dactyloscopiques',
+    workflow: 'Flux de travail de l\'analyse dactyloscopique',
+    stepUpload: 'Telecharger',
+    stepClassify: 'Classer',
+    stepMark: 'Marquer',
+    stepReview: 'Verifier',
+    stepLabel: 'Etape',
+    stage1Title: 'Chargez l\'empreinte',
+    stage1Copy: 'Commencez par charger l\'image d\'une empreinte digitale. Le canevas est verrouille avant cette étape.',
+    stage2Title: 'Classer le flux de crêtes',
+    stage2Copy: 'Utilisez les contrôles sous l\'image pour choisir l\'arc, la boucle ou le verticille comme classe dominante.',
+    stage3Title: 'Marquer les minuties requises',
+    stage3Copy: 'Choisissez une caractéristique, cliquez sur l\'image pour là placer, ou cliquez sur un marqueur existant pour le supprimer.',
+    stage4Title: 'Examiner le tableau des preuves',
+    stage4Copy: 'Verifiez les comptes, supprimez les erreurs avec le bouton de poubelle, puis copiez les notes structurees.',
+    canvasHint1: 'Téléchargez une image d\'empreinte pour commencer l\'analyse.',
+    canvasHint2: 'Ne marquez pas encore. Determinez la classe générale avec les boutons sous l\'image.',
+    canvasHint3: 'Cliquez sur l\'image pour placer la minutie sélectionnée. Cliquez sur un marqueur pour le sélectionner.',
+    canvasHint4: 'Examinez la table de minuties sous l\'image dactyloscopique.',
+    uploadTitle: 'Charger une empreinte digitale',
+    uploadHint: 'Image PNG, JPG ou scan de trace latente',
+    replaceImage: 'Remplacer',
+    continueMarking: 'Continuer vers le marquage',
+    reviewEvidence: 'Examiner les preuves',
+    back: 'Retour',
+    next: 'Suivant',
+    patternType: 'Type de motif général',
+    arch: 'Arc',
+    loop: 'Boucle',
+    whorl: 'Verticille',
+    activeMinutia: 'Minutie active',
+    markingNow: 'Marquage en cours',
+    clickToPlace: 'Cliquez sur l\'image a l\'endroit correspondant',
+    ridgeEnding: 'Arret de crête',
+    ridgeEndingShort: 'la crête s\'arrete',
+    ridgeEndingHelp: 'Un arret de crête est une ligne papillaire qui s\'interrompt brusquement sans se connecter à une autre ligne.',
+    bifurcation: 'Bifurcation',
+    bifurcationShort: 'la crête se divise',
+    bifurcationHelp: 'Une bifurcation est l\'endroit ou une crête unique se separe pour donner naissance a deux crêtes distinctes.',
+    island: 'Lac ou Ile',
+    islandShort: 'courte crête isolee',
+    islandHelp: 'Un lac est une crête courte fermee ou un segment isole possedant deux extremites distinctes et bien definies.',
+    dot: 'Point',
+    dotShort: 'point isole minuscule',
+    dotHelp: 'Un point est un fragment de crête si court qu\'il ressemble à un point isole sans direction apparente.',
+    coreOffset: 'Position du noyau',
+    deltaCount: 'Nombre de deltas',
+    henryClass: 'Classe de Henry',
+    validation: 'Score de l\'exercice',
+    legendAria: 'Legende des minuties dactyloscopiques',
+    clearMarks: 'Effacer tout',
+    undoLast: 'Annuler le dernier',
+    deleteSelected: 'Supprimer la selection',
+    selectMarkToDelete: 'Cliquez d\'abord sur un marqueur de l\'image',
+    copyEvidence: 'Copier les preuves',
+    ridgeFlow: 'Description du flux des crêtes',
+    type: 'Type',
+    position: 'Position',
+    action: 'Action',
+    remove: 'Supprimer',
+    endingsGoal: 'Arrets de crête',
+    bifurcationsGoal: 'Bifurcations',
+    totalMarks: 'Total des repères',
+    plainArch: 'Arc simple',
+    archFlow: 'Les crêtes entrent d\'un côté, s\'élèvent au centre et ressortent de l\'autre côté sans rebroussement ni delta.',
+    ulnarLoop: 'Boucle cubitale ulnaire',
+    radialLoop: 'Boucle radiale',
+    loopFlow: 'Un deltà unique et un rebroussement clair oriente vers le côté d\'entree des crêtes papillaires.',
+    plainWhorl: 'Verticille simple',
+    centralPocketWhorl: 'Verticille a poche centrale',
+    whorlFlow: 'Des cercles ou des spirales tournant autour d\'un centre avec généralement deux deltas distincts.',
+    ridgeEndingLabel: 'A',
+    bifurcationLabel: 'B',
+    islandLabel: 'L',
+    dotLabel: 'P',
+  },
+  seo: [
+    {
+      type: 'title',
+      text: 'Classification des empreintes et marquage des minuties en dactyloscopie',
+      level: 2,
+    },
+    {
+      type: 'diagnostic',
+      variant: 'info',
+      icon: 'mdi:fingerprint',
+      badge: 'Pedagogique',
+      title: 'Objectifs de ce simulateur de minuties dactyloscopiques',
+      html: 'Cet outil s\'adresse aux étudiants en criminalistique pour s\'exercer à la <strong>classification de Henry</strong> et au <strong>reperage des minuties</strong>. Il permet d\'apprendre la rigueur méthodologique en documentant les caractéristiques physiques locales sur une image réelle et exportable.',
+    },
+    {
+      type: 'stats',
+      columns: 4,
+      items: [
+        { value: '3', label: 'grandes familles de motifs', icon: 'mdi:shape-outline' },
+        { value: '4', label: 'types de minuties geres', icon: 'mdi:map-marker-radius' },
+        { value: '5 + 3', label: 'cible d\'evaluation pédagogique', icon: 'mdi:check-decagram' },
+        { value: 'Upload', label: 'flux axe sur l\'image', icon: 'mdi:cloud-upload-outline' },
+      ],
+    },
+    {
+      type: 'summary',
+      title: 'Workflow d\'analyse recommande',
+      items: [
+        'Determinez d\'abord le motif global: arc, boucle ou verticille.',
+        'Localisez le noyau et les deltas avant de placer la moindre minutie.',
+        'Marquez uniquement les details clairs, evitez les zones floues ou écrasées.',
+        'Enregistrez chaque point avec sa catégorie et ses coordonnees précises.',
+        'Separez l\'observation systematique de la conclusion finale d\'identification.',
+      ],
+    },
+    {
+      type: 'comparative',
+      columns: 3,
+      items: [
+        {
+          title: 'Arc',
+          icon: 'mdi:gesture-swipe-horizontal',
+          description: 'Les crêtes traversent horizontalement. Pas de rebroussement ni de delta sur un arc simple.',
+          points: ['Pas de delta', 'Allure de vague lisse', 'Ideal pour debuter l\'observation'],
+        },
+        {
+          title: 'Boucle',
+          icon: 'mdi:rotate-left',
+          highlight: true,
+          description: 'Presence d\'un noyau entoure de crêtes formant une anse, avec un delta associe visible.',
+          points: ['Un deltà unique', 'Orientation radiale ou cubitale', 'Position du noyau cruciale'],
+        },
+        {
+          title: 'Verticille',
+          icon: 'mdi:autorenew',
+          description: 'Dessins circulaires ou en double boucle autour d\'un centre papillaire central.',
+          points: ['Generalement deux deltas', 'Forme de spirale ou de cible', 'Variantes simples ou composites'],
+        },
+      ],
+    },
+    {
+      type: 'table',
+      headers: ['Minutie', 'Aspect visuel', 'Point de vigilance'],
+      rows: [
+        ['Arret de crête', 'La crête s\'arrete de facon nette sur le dessin papillaire.', 'Verifiez qu\'il ne s\'agit pas d\'un manque d\'encre ou d\'une coupure de l\'image.'],
+        ['Bifurcation', 'Une crête se divise pour en former deux distinctes.', 'Prenez garde aux faux contacts dus à la pression lors du rélève dactyloscopique.'],
+        ['Lac', 'Une crête s\'ouvre puis se referme rapidement.', 'N\'enregistrez que si les deux jonctions sont nettes sur le trace papillaire.'],
+        ['Point', 'Un minuscule ilot reduit a sa plus simple expression.', 'Attention à ne pas le confondre avec des poussieres ou du bruit numerique de l\'image.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Comprendre le score de validation de l\'exercice dactyloscopique',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Ce score n\'est pas un outil de calcul de valeur probante juridique. C\'est un repère d\'exercice pour encourager l\'étudiant a repèrer un minimum de caractéristiques variees pour valider sa rigueur d\'analyse et développer son sens de l\'observation systematique appliquee aux traces dactyloscopiques forensiques.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Dans la pratique réelle selon la méthode ACE-V, l\'expert dactyloscopiste evalue la qualité générale de l\'image, les deformations eventuelles, la concordance des positions relatives des minuties, et la rareté des caractéristiques observees pour formuler une conclusion d\'identification solide et juridiquement recevable.',
+    },
+    {
+      type: 'title',
+      text: 'Methodologie d\'analyse et de comparaison dactyloscopique',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'La dactyloscopie repose sur le postulat qu\'il n\'existe pas deux individus partageant les memes details de crêtes papillaires, et que ces dessins restent immuables tout au long de la vie. Les simulateurs pédagogiques aident les étudiants a acquerir de la méthode en leur apprenant a suivre le cheminement individuel des crêtes et a repèrer les moindres anomalies locales, comme les arrets ou les divisions, dans un environnement d\'apprentissage structure et guide par un expert.',
+    },
+    {
+      type: 'paragraph',
+      html: 'La bonne annotation des minuties exige que les étudiants comprennent d\'abord le flux général des crêtes et qu\'ils sachent ensuite nommer les anomalies locales. Les arrets surviennent lorsqu\'une crête papillaire s\'interrompt brusquement sans rejoindre une autre crête. Les bifurcations apparaissent lorsqu\'une crête se divise en deux branches distinctes et nettes. Les iles et les points sont de courts segments isoles qu\'il faut marquer avec une prudence particuliere et documentee.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Dans l\'enseignement des sciences forensiques, il est essentiel de distinguer l\'analyse des caractéristiques de classe de celle des caractéristiques individuelles. Les caractéristiques de classe, comme l\'arc, la boucle et le verticille, permettent de placer une empreinte dans une catégorie, mais elles ne suffisent pas seules a l\'identification individuelle. Seule la combinaison et la disposition spatiale des minuties par rapport au noyau et au delta permet une attribution à une personne specifique et juridiquement incontestable.',
+    },
+    {
+      type: 'glossary',
+      items: [
+        { term: 'Noyau', definition: 'Centre geometrique ou point de rebroussement central d\'une boucle ou d\'un verticille dactyloscopique.' },
+        { term: 'Delta', definition: 'Point de jonction en forme de Y ou de triangle forme par la divergence des systemes de crêtes papillaires.' },
+        { term: 'Minutie', definition: 'Point singulier sur une crête papillaire servant à la comparaison des empreintes forensiques.' },
+        { term: 'ACE-V', definition: 'Protocole international d\'examen dactyloscopique: Analyse, Comparaison, Evaluation, Verification.' },
+      ],
+    },
+    {
+      type: 'tip',
+      title: 'Conseil pratique d\'atelier pédagogique',
+      html: 'Faites marquer la meme empreinte deux fois par les étudiants: une fois rapidement, et une autre après analyse complète du flux papillaire. La comparaison montre souvent que les premiers repères contenaient de nombreuses fausses minuties et des omissions importantes.',
+    },
+    {
+      type: 'proscons',
+      title: 'Avantages et limites du simulateur dactyloscopique',
+      items: [
+        { pro: 'Permet d\'utiliser ses propres images d\'empreintes digitales réelles.', con: 'La qualité du fichier d\'origine conditionne directement la finesse de l\'analyse minutiae.' },
+        { pro: 'Genere une table de repères claire et exportable facilement.', con: 'Ne calcule pas l\'orientation spatiale ni la suffisance d\'identification forensique.' },
+        { pro: 'Separe bien l\'étape de classification globale du pointage des minuties.', con: 'Ne convient pas pour des expertises judiciaires réelles ou officielles.' },
+      ],
+    },
+    {
+      type: 'diagnostic',
+      variant: 'warning',
+      icon: 'mdi:scale-balance',
+      badge: 'Mise en garde legale',
+      title: 'Utilisation pédagogique exclusive',
+      html: 'Cet outil est conçu pour l\'enseignement et ne doit en aucun cas etre utilise pour formuler des conclusions d\'identification dans le cadre d\'enquetes judiciaires réelles.',
+    },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: title,
+      description,
+      applicationCategory: 'ForensicApplication',
+      operatingSystem: 'Any',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: title,
+      step: howTo.map((step) => ({
+        '@type': 'HowToStep',
+        name: step.name,
+        text: step.text,
+      })),
+    },
+  ],
+};

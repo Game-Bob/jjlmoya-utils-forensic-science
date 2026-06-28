@@ -1,0 +1,298 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'identificatore-minuzie-impronte-digitali';
+const title = 'Identificatore forense di patterns e minuzie dellè impronte digitali';
+const description = 'Carica un\'immagine di un\'impronta digitale, ispezionala con una lente d\'ingrandimento reale, classifica il pattern delle creste, marca un set di minuzie ed esporta la tabella delle prove.';
+
+const howTo = [
+  {
+    name: 'Scegli il pattern Galton-Henry',
+    text: 'Dopo aver caricato l\'impronta, seleziona arco, cappio o vortice per registrarè la famiglia di flusso delle creste osservata.',
+  },
+  {
+    name: 'Regola nucleo e delta',
+    text: 'Regola gli slider per l\'offset del nucleo è il conteggio dei delta. Il classificatore aggiorna la classe Henry e l\'affidabilità.',
+  },
+  {
+    name: 'Seleziona un tipo di minuzia',
+    text: 'Scegli terminazione di cresta, biforcazione, isola o punto prima di posizionarè i marcatori sull\'immagine.',
+  },
+  {
+    name: 'Posiziona e verifica i marcatori',
+    text: 'Clicca sull\'impronta per aggiungerè i marcatori. La tabella memorizza le coordinate e verifica l\'obiettivo dell\'esercizio (5 terminazioni e 3 biforcazioni).',
+  },
+];
+
+const faq = [
+  {
+    key: 'faq-1',
+    question: 'Cosa sono le minuzie?',
+    answer: 'Le minuzie sono caratteristiche locali delle creste papillari (terminazioni, biforcazioni, isole, punti) utilizzate per il confronto e l\'identificazione forense.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Qual è la differenza tra arco, cappio e vortice?',
+    answer: 'L\'arco attraversa da un lato all\'altro senza rientrare. Il cappio presenta una curva di ritorno è un delta. Il vortice ha flussi circolari o a spirale e solitamente due delta.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Questo strumento puo identificarè una persona reale?',
+    answer: 'No. E un simulatore didattico. Lè identificazioni legali richiedono procedure certificate, immagini calibrate è la valutazione di un esperto dattiloscopista.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Perche l\'esercizio richiede 5 terminazioni e 3 biforcazioni?',
+    answer: 'Questo obiettivo didattico serve per abituarè gli studenti a identificare e classificare correttamentè i tipi di minuzie più frequenti.',
+  },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    canvasAria: 'Area interattiva per l\'impronta caricata per posizionarè i marcatori delle minuzie',
+    workflow: 'Workflow dell\'analisi dattiloscopica',
+    stepUpload: 'Carica',
+    stepClassify: 'Classifica',
+    stepMark: 'Marca',
+    stepReview: 'Verifica',
+    stepLabel: 'Passo',
+    stage1Title: 'Carica l\'impronta',
+    stage1Copy: 'Inizia caricando l\'immagine di un\'impronta. Il canvas rimarra bloccato fino al caricamento.',
+    stage2Title: 'Classifica il flusso delle creste',
+    stage2Copy: 'Usa i controlli sotto l\'immagine per selezionare arco, cappio o vortice.',
+    stage3Title: 'Marca le minuzie richieste',
+    stage3Copy: 'Scegli un tipo di minuzia, clicca sull\'immagine per posizionarla, o clicca su un marcatore esistente per rimuoverlo.',
+    stage4Title: 'Esamina la tabella delle prove',
+    stage4Copy: 'Verifica il conteggio delle minuzie, elimina eventuali errori con il cestino ed esporta il resoconto.',
+    canvasHint1: 'Carica un\'immagine di un\'impronta per iniziare.',
+    canvasHint2: 'Non marcare ancora. Determina il tipo di pattern usando i pulsanti inferiori.',
+    canvasHint3: 'Clicca sull\'immagine per posizionarè la minuzia selezionata. Clicca su una minuzia per selezionarla.',
+    canvasHint4: 'Esamina la tabella delle prove sotto l\'immagine.',
+    uploadTitle: 'Carica immagine dell\'impronta',
+    uploadHint: 'Immagine PNG, JPG o scansione di traccia latente',
+    replaceImage: 'Sostituisci',
+    continueMarking: 'Continua a marcare',
+    reviewEvidence: 'Esamina le prove',
+    back: 'Indietro',
+    next: 'Avanti',
+    patternType: 'Tipo di pattern generale',
+    arch: 'Arco',
+    loop: 'Cappio',
+    whorl: 'Vortice',
+    activeMinutia: 'Minuzia attiva',
+    markingNow: 'Marcatura in corso',
+    clickToPlace: 'Clicca sull\'immagine nel punto corretto',
+    ridgeEnding: 'Terminazione di cresta',
+    ridgeEndingShort: 'la cresta finisce',
+    ridgeEndingHelp: 'Una terminazione di cresta è il punto in cui una cresta si interrompè improvvisamente.',
+    bifurcation: 'Biforcazione',
+    bifurcationShort: 'la cresta si divide',
+    bifurcationHelp: 'Una biforcazione è il punto in cui una cresta si biforca in due rami.',
+    island: 'Isola',
+    islandShort: 'breve cresta isolata',
+    islandHelp: 'Un\'isola è un breve segmento di cresta isolato con due estremita definite, separato da creste più lunghe.',
+    dot: 'Punto',
+    dotShort: 'minuscolo punto isolato',
+    dotHelp: 'Un punto è una piccolissima porzione di cresta isolata che appare comè un singolo punto.',
+    coreOffset: 'Offset del nucleo',
+    deltaCount: 'Conteggio dei delta',
+    henryClass: 'Classe Henry',
+    validation: 'Punteggio esercizio',
+    legendAria: 'Legenda delle minuzie',
+    clearMarks: 'Cancella tutto',
+    undoLast: 'Annulla ultimo',
+    deleteSelected: 'Elimina selezionato',
+    selectMarkToDelete: 'Clicca prima su una minuzia nell\'immagine',
+    copyEvidence: 'Copia prove',
+    ridgeFlow: 'Nota sul flusso',
+    type: 'Tipo',
+    position: 'Posizione',
+    action: 'Azione',
+    remove: 'Rimuovi',
+    endingsGoal: 'Terminazioni',
+    bifurcationsGoal: 'Biforcazioni',
+    totalMarks: 'Marcatori totali',
+    plainArch: 'Arco semplice',
+    archFlow: 'Le creste entrano da un lato, si alzano leggermente al centro e escono dal lato opposto senza rientrare.',
+    ulnarLoop: 'Cappio ulnare',
+    radialLoop: 'Cappio radiale',
+    loopFlow: 'Un delta è una chiara curva di ritorno orientata verso il lato di ingresso delle creste.',
+    plainWhorl: 'Vortice semplice',
+    centralPocketWhorl: 'Vortice a tasca centrale',
+    whorlFlow: 'Flussi circolari o a spirale attorno ad un nucleo, con la presenza di due delta.',
+    ridgeEndingLabel: 'T',
+    bifurcationLabel: 'B',
+    islandLabel: 'I',
+    dotLabel: 'P',
+  },
+  seo: [
+    {
+      type: 'title',
+      text: 'Classificazione dellè impronte e marcatura delle minuzie',
+      level: 2,
+    },
+    {
+      type: 'diagnostic',
+      variant: 'info',
+      icon: 'mdi:fingerprint',
+      badge: 'Didattica',
+      title: 'Scopo di questo simulatore di minuzie dellè impronte digitali',
+      html: 'Questo strumento e pensato per gli studenti di scienze forensi per facilitare l\'apprendimento della <strong>classificazione dattiloscopica</strong> e del <strong>posizionamento delle minuzie</strong> usando immagini reali, una lentè interattiva e resoconti strutturati.',
+    },
+    {
+      type: 'stats',
+      columns: 4,
+      items: [
+        { value: '3', label: 'famiglie di pattern', icon: 'mdi:shape-outline' },
+        { value: '4', label: 'tipi di minuzie', icon: 'mdi:map-marker-radius' },
+        { value: '5 + 3', label: 'obiettivo didattico richiesto', icon: 'mdi:check-decagram' },
+        { value: 'Upload', label: 'workflow incentrato sull\'immagine', icon: 'mdi:cloud-upload-outline' },
+      ],
+    },
+    {
+      type: 'summary',
+      title: 'Flusso di analisi consigliato',
+      items: [
+        'Classifica prima il pattern generale: arco, cappio o vortice.',
+        'Individua i delta e l\'area del nucleo prima di posizionarè le minuzie.',
+        'Marca solo dettagli nitidi, evita le zone confuse o con rumore di fondo.',
+        'Registra ogni punto indicandonè la categoria è le coordinate.',
+        'Distingui la fase di osservazione metodica da quella di interpretazione.',
+      ],
+    },
+    {
+      type: 'comparative',
+      columns: 3,
+      items: [
+        {
+          title: 'Arco',
+          icon: 'mdi:gesture-swipe-horizontal',
+          description: 'Le creste fluiscono da parte a parte. Gli archi semplici non hanno delta o curve di ritorno.',
+          points: ['Nessun delta', 'Flusso ondulatorio', 'Ideale per i principianti'],
+        },
+        {
+          title: 'Cappio',
+          icon: 'mdi:rotate-left',
+          highlight: true,
+          description: 'Presenza di una curva ad ansa intorno al nucleo e di un delta associato.',
+          points: ['Un solo delta', 'Orientamento radiale o ulnare', 'La posizione del nucleo e fondamentale'],
+        },
+        {
+          title: 'Vortice',
+          icon: 'mdi:autorenew',
+          description: 'Disegni circolari o spiraliformi attorno al nucleo centrale.',
+          points: ['Di solito due delta', 'Struttura a spirale o cerchi', 'Varianti semplici o composte'],
+        },
+      ],
+    },
+    {
+      type: 'table',
+      headers: ['Minuzia', 'Caratteristica visiva', 'Errore comune di marcatura'],
+      rows: [
+        ['Terminazione', 'La cresta si interrompe bruscamente.', 'Verifica che non sia una mancanza d\'inchiostro o un disturbo dell\'immagine.'],
+        ['Biforcazione', 'Una cresta si sdoppia in due rami.', 'Fai attenzione alle false biforcazioni dovute alla pressione di stampa.'],
+        ['Isola', 'Breve tratto isolato compreso tra due creste.', 'Posizionalo solo se entrambè le estremita sono chiaramente definite.'],
+        ['Punto', 'Frammento di cresta piccolissimo simile ad un punto.', 'Usa prudenza per non scambiarlo con sporco o rumore dei pixel.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Comè leggerè il punteggio dell\'esercizio',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Questo punteggio non ha validita legale per l\'identificazione forense. Si tratta di una checklist didattica chè incentiva gli studenti a raccogliere e documentare almeno 5 terminazioni e 3 biforcazioni, stimolando la precisione d\'indagine.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Nel lavoro peritale reale (metodologia ACE-V), l\'esperto analizza la qualità generale, le deformazioni, la corrispondenza tridimensionale è la rarita delle caratteristiche per giungere a una identificazione.',
+    },
+    {
+      type: 'title',
+      text: 'Metodologia di analisi e confronto dattiloscopico',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'La dattiloscopia si basa sul presupposto che non esistano duè individui con gli stessi dettagli delle creste papillari e che queste ultime rimangano immutate per tutta la vita. I simulatori didattici aiutano gli studenti a svilupparè un metodo rigoroso insegnando loro a seguirè il percorso delle singole creste e a identificarè le minime anomalie locali, comè interruzioni o biforcazioni, in un ambiente di apprendimento controllato.',
+    },
+    {
+      type: 'paragraph',
+      html: 'La corretta annotazione delle minutiae richiede chè gli studenti comprendano prima il flusso generale delle creste e poi sappiano nominarè le anomalie locali. Le terminazioni si verificano quando una cresta si interrompe bruscamente senza congiungersi a un\'altra. Le biforcazioni si producono quando una cresta si dividè in due rami. Lè isole è i punti sono brevi segmenti isolati che vanno marcati con particolare cautela, poiche possono essere facilmente confusi con il rumore dell\'immagine o con distorsioni da pressione.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Nell\'insegnamento della criminalistica e fondamentale distinguere tra l\'analisi delle caratteristiche di classe e quella delle caratteristichè individuali. Le caratteristiche di classe, come arco, cappio e vortice, consentono di collocarè un\'impronta in una categoria, ma non possono essere usate da sole per l\'identificazionè individuale. Solo la combinazione è la disposizione spaziale delle minutiae rispetto al nucleo e alla delta permettè un\'attribuzione a un singolo individuo.',
+    },
+    {
+      type: 'glossary',
+      items: [
+        { term: 'Nucleo', definition: 'Punto centrale geometrico di un cappio o vortice, usato come riferimento.' },
+        { term: 'Delta', definition: 'Punto triangolare formato dalla convergenza di tre sistemi di creste.' },
+        { term: 'Minutiae', definition: 'Caratteristiche microscopiche delle creste papillari utilizzate nei confronti.' },
+        { term: 'ACE-V', definition: 'Protocollo internazionale: Analisi, Confronto, Valutazione, Verifica.' },
+      ],
+    },
+    {
+      type: 'tip',
+      title: 'Suggerimento per l\'insegnante',
+      html: 'Fai marcarè la stessa impronta due volte: una velocemente è una dopo l\'analisi attenta dei flussi. Il confronto rivelera quante false minuzie vengono marcate nel primo tentativo.',
+    },
+    {
+      type: 'proscons',
+      title: 'Vantaggi e limiti del simulatore',
+      items: [
+        { pro: 'Permette di utilizzarè immagini reali caricate dall\'utente.', con: 'La risoluzione e qualità del file d\'origine condizionano la marcatura.' },
+        { pro: 'Genera un tabulato delle prove chiaro ed esportabile.', con: 'Non calcola vettori direzionali nè la sufficienza peritale.' },
+        { pro: 'Distingue nettamentè la fase di classificazione da quella di puntamento.', con: 'Non adatto a perizie giudiziarie reali.' },
+      ],
+    },
+    {
+      type: 'diagnostic',
+      variant: 'warning',
+      icon: 'mdi:scale-balance',
+      badge: 'Nota legale',
+      title: 'Esclusivo uso accademico',
+      html: 'Questo simulatore e progettato esclusivamente per scopi formativi e non deve essere usato per indagini legali reali.',
+    },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: title,
+      description,
+      applicationCategory: 'ForensicApplication',
+      operatingSystem: 'Any',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: title,
+      step: howTo.map((step) => ({
+        '@type': 'HowToStep',
+        name: step.name,
+        text: step.text,
+      })),
+    },
+  ],
+};

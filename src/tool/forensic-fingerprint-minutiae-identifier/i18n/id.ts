@@ -1,0 +1,298 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'identifikator-minutiae-sidik-jari';
+const title = 'Identifikator Forensik Pola dan Minutiae Sidik Jari';
+const description = 'Unggah gambar sidik jari, periksa dengan kaca pembesar interaktif, klasifikasikan pola alur sidik jari, tandai serangkaian titik minutiae, dan ekspor tabel bukti.';
+
+const howTo = [
+  {
+    name: 'Pilih Pola Galton-Henry',
+    text: 'Setelah mengunggah sidik jari, pilih lengkung, gelung, atau pusaran untuk mencatat kelompok aliran bukit yang diamati.',
+  },
+  {
+    name: 'Sesuaikan Core dan Delta',
+    text: 'Sesuaikan penggeser offset inti (core) dan jumlah delta. Klasifikator memperbarui kelas Henry dan tingkat keyakinan.',
+  },
+  {
+    name: 'Pilih Jenis Minutiae',
+    text: 'Pilih ujung bukit, percabangan, pulau, atau titik sebelum menempatkan penanda pada gambar.',
+  },
+  {
+    name: 'Tempatkan dan Periksa Penanda',
+    text: 'Klik pada sidik jari untuk menambahkan penanda. Tabel akan mencatat koordinat dan memvalidasi target latihan (5 ujung dan 3 percabangan).',
+  },
+];
+
+const faq = [
+  {
+    key: 'faq-1',
+    question: 'Apa itu minutiae?',
+    answer: 'Minutiae adalah karakteristik lokal dari bukit sidik jari (seperti ujung bukit, percabangan, pulau, titik) yang digunakan untuk identifikasi forensik.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Apa perbedaan antara lengkung, gelung, dan pusaran?',
+    answer: 'Lengkung mengalir dari satu sisi ke sisi lain tanpa berbalik arah. Gelung memiliki alur berbalik dan satu delta. Pusaran memiliki pola melingkar atau spiral dan biasanya dua delta.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Dapatkah alat ini mengidentifikasi tersangka secara nyata?',
+    answer: 'Tidak. Ini adalah simulator edukasi untuk pelatihan. Identifikasi nyata membutuhkan gambar yang dikalibrasi, standar perbandingan, dan penilaian ahli sidik jari bersertifikat.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Mengapa latihan meminta 5 ujung bukit dan 3 percabangan?',
+    answer: 'Tujuan didaktis ini membantu siswa belajar mengenali dan menamai jenis minutiae yang paling umum secara sistematis.',
+  },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    canvasAria: 'Kanvas interaktif untuk menempatkan penanda minutiae pada sidik jari yang diunggah',
+    workflow: 'Alur Kerja Analisis Sidik Jari',
+    stepUpload: 'Unggah',
+    stepClassify: 'Klasifikasi',
+    stepMark: 'Tandai',
+    stepReview: 'Tinjau',
+    stepLabel: 'Langkah',
+    stage1Title: 'Unggah Sidik Jari',
+    stage1Copy: 'Mulai dengan mengunggah gambar sidik jari. Kanvas akan tetap terkunci sebelum gambar dimuat.',
+    stage2Title: 'Klasifikasi Aliran Bukit',
+    stage2Copy: 'Gunakan kontrol di bawah gambar untuk memilih lengkung, gelung, atau pusaran.',
+    stage3Title: 'Tandai Minutiae yang Diperlukan',
+    stage3Copy: 'Pilih jenis minutiae, klik gambar untuk menempatkannya, atau klik penanda yang ada untuk menghapus.',
+    stage4Title: 'Tinjau Tabel Bukti',
+    stage4Copy: 'Periksa jumlahnya, hapus kesalahan dengan tombol tempat sampah, lalu salin laporan.',
+    canvasHint1: 'Unggah gambar sidik jari untuk memulai.',
+    canvasHint2: 'Jangan tandai dulu. Tentukan pola umum menggunakan kontrol di bawah gambar.',
+    canvasHint3: 'Klik pada gambar untuk menempatkan minutiae yang dipilih. Klik penanda untuk memilihnya.',
+    canvasHint4: 'Tinjau tabel bukti di bawah gambar.',
+    uploadTitle: 'Unggah Gambar Sidik Jari',
+    uploadHint: 'Gambar PNG, JPG, atau pemindaian sidik jari laten',
+    replaceImage: 'Ganti',
+    continueMarking: 'Lanjutkan Menandai',
+    reviewEvidence: 'Tinjau Bukti',
+    back: 'Kembali',
+    next: 'Berikutnya',
+    patternType: 'Jenis Pola Umum',
+    arch: 'Lengkung',
+    loop: 'Gelung',
+    whorl: 'Pusaran',
+    activeMinutia: 'Minutiae Aktif',
+    markingNow: 'Penandaan Aktif',
+    clickToPlace: 'Klik pada gambar di tempat yang sesuai',
+    ridgeEnding: 'Ujung Bukit',
+    ridgeEndingShort: 'bukit berakhir',
+    ridgeEndingHelp: 'Ujung bukit adalah titik di mana garis bukit berhenti secara tiba-tiba tanpa terhubung ke garis lainnya.',
+    bifurcation: 'Percabangan (Bifurkasi)',
+    bifurcationShort: 'bukit terbagi',
+    bifurcationHelp: 'Percabangan adalah titik di mana satu garis bukit terbagi menjadi dua cabang.',
+    island: 'Pulau',
+    islandShort: 'garis pendek terisolasi',
+    islandHelp: 'Pulau adalah segmen garis bukit pendek dengan dua ujung jelas yang terpisah dari garis bukit yang lebih panjang.',
+    dot: 'Titik',
+    dotShort: 'titik kecil terisolasi',
+    dotHelp: 'Titik adalah fragmen garis bukit yang sangat kecil yang terlihat seperti satu titik terpisah.',
+    coreOffset: 'Offset Core',
+    deltaCount: 'Jumlah Delta',
+    henryClass: 'Kelas Henry',
+    validation: 'Skor Latihan',
+    legendAria: 'Legenda Minutiae',
+    clearMarks: 'Hapus Semua',
+    undoLast: 'Batalkan Terakhir',
+    deleteSelected: 'Hapus yang Dipilih',
+    selectMarkToDelete: 'Klik penanda pada gambar terlebih dahulu',
+    copyEvidence: 'Salin Bukti',
+    ridgeFlow: 'Catatan Aliran Bukit',
+    type: 'Jenis',
+    position: 'Posisi',
+    action: 'Tindakan',
+    remove: 'Hapus',
+    endingsGoal: 'Ujung Bukit',
+    bifurcationsGoal: 'Percabangan',
+    totalMarks: 'Total Penanda',
+    plainArch: 'Lengkung Sederhana',
+    archFlow: 'Bukit masuk dari satu sisi, naik sedikit di tengah, dan keluar di sisi berlawanan tanpa berbalik arah.',
+    ulnarLoop: 'Gelung Ulnar',
+    radialLoop: 'Gelung Radial',
+    loopFlow: 'Satu delta dan alur berbalik jelas yang mengarah ke sisi masuknya garis bukit.',
+    plainWhorl: 'Pusaran Sederhana',
+    centralPocketWhorl: 'Pusaran Kantong Tengah',
+    whorlFlow: 'Garis bukit melingkar atau spiral di sekitar inti, biasanya dengan dua delta.',
+    ridgeEndingLabel: 'U',
+    bifurcationLabel: 'C',
+    islandLabel: 'I',
+    dotLabel: 'T',
+  },
+  seo: [
+    {
+      type: 'title',
+      text: 'Klasifikasi Sidik Jari dan Analisis Minutiae',
+      level: 2,
+    },
+    {
+      type: 'diagnostic',
+      variant: 'info',
+      icon: 'mdi:fingerprint',
+      badge: 'Edukasi',
+      title: 'Tujuan dari simulator sidik jari ini',
+      html: 'Alat ini dirancang untuk siswa ilmu forensik guna mempelajari <strong>klasifikasi sidik jari</strong> dan <strong>analisis minutiae</strong> menggunakan gambar nyata, kaca pembesar interaktif, dan tabel data yang dapat diekspor.',
+    },
+    {
+      type: 'stats',
+      columns: 4,
+      items: [
+        { value: '3', label: 'kelompok pola utama', icon: 'mdi:shape-outline' },
+        { value: '4', label: 'jenis minutiae didukung', icon: 'mdi:map-marker-radius' },
+        { value: '5 + 3', label: 'target didaktis latihan', icon: 'mdi:check-decagram' },
+        { value: 'Unggah', label: 'alur kerja berbasis gambar', icon: 'mdi:cloud-upload-outline' },
+      ],
+    },
+    {
+      type: 'summary',
+      title: 'Alur Analisis yang Direkomendasikan',
+      items: [
+        'Klasifikasikan pola umum terlebih dahulu: lengkung, gelung, atau pusaran.',
+        'Temukan posisi delta dan core sebelum menandai minutiae.',
+        'Tandai hanya detail yang jelas; hindari area kabur atau kotor.',
+        'Catat setiap penanda dengan jenis dan koordinat yang tepat.',
+        'Pisahkan observasi objektif secara ketat dari kesimpulan akhir.',
+      ],
+    },
+    {
+      type: 'comparative',
+      columns: 3,
+      items: [
+        {
+          title: 'Lengkung',
+          icon: 'mdi:gesture-swipe-horizontal',
+          description: 'Garis bukit mengalir rata. Lengkung sederhana tidak memiliki delta atau alur berbalik.',
+          points: ['Tanpa delta', 'Aliran seperti gelombang', 'Ideal untuk pemula'],
+        },
+        {
+          title: 'Gelung',
+          icon: 'mdi:rotate-left',
+          highlight: true,
+          description: 'Garis melengkung di sekitar inti dan kembali ke sisi asal, dengan satu delta.',
+          points: ['Satu delta', 'Arah radial atau ulnar', 'Posisi inti sangat penting'],
+        },
+        {
+          title: 'Pusaran',
+          icon: 'mdi:autorenew',
+          description: 'Pola melingkar atau spiral di sekitar inti tengah.',
+          points: ['Biasanya dua delta', 'Kecenderungan melingkar', 'Varian sederhana dan kantong tengah'],
+        },
+      ],
+    },
+    {
+      type: 'table',
+      headers: ['Minutiae', 'Karakteristik Visual', 'Kesalahan Umum Menandai'],
+      rows: [
+        ['Ujung Bukit', 'Garis bukit berhenti secara tiba-tiba.', 'Pastikan itu bukan karena kekurangan tinta atau cacat kontras gambar.'],
+        ['Percabangan', 'Satu garis terbagi menjadi dua cabang.', 'Waspadai percabangan palsu akibat tekanan tinta yang berlebih.'],
+        ['Pulau', 'Fragmen garis pendek terisolasi di antara dua garis.', 'Tandai hanya jika kedua ujungnya terlihat jelas bebas dari noise.'],
+        ['Titik', 'Fragmen kecil berbentuk titik.', 'Hati-hati agar tidak tertukar dengan kotoran atau piksel gambar.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Arti dari Skor Latihan',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Skor ini tidak memiliki kekuatan hukum pembuktian identifikasi forensik. Ini adalah daftar periksa didaktis untuk mendorong siswa melakukan anotasi secara cermat dan mencegah kesimpulan terburu-buru tanpa dokumentasi yang memadai.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Dalam praktik forensik nyata (metode ACE-V), para ahli menilai kualitas gambar, distorsi, keselarasan posisi, dan kelangkaan karakteristik untuk mencapai identifikasi yang meyakinkan.',
+    },
+    {
+      type: 'title',
+      text: 'Metodologi Analisis dan Perbandingan Daktiloskopi',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Daktiloskopi didasarkan pada prinsip bahwa tidak ada dua individu yang memiliki detail aliran bukit sidik jari yang sama, dan bahwa pola ini tetap tidak berubah sepanjang hidup. Simulator pendidikan membantu siswa mengembangkan metode observasi yang sistematis dengan mengajari mereka cara mengikuti jalur masing-masing garis bukit dan mengidentifikasi anomali kecil setempat, seperti ujung garis atau percabangan, dalam lingkungan pembelajaran yang terkontrol.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Anotasi minutiae yang benar memerlukan pemahaman aliran bukit secara keseluruhan sebelum menamakan anomali lokal. Ujung bukit terjadi saat sebuah garis bukit berhenti tiba-tiba tanpa terhubung ke garis lain. Percabangan muncul saat satu garis terbagi menjadi dua cabang. Pulau dan titik adalah segmen pendek terisolasi yang harus ditandai dengan sangat hati-hati, karena mudah tertukar dengan gangguan gambar atau distorsi tekanan.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Dalam pengajaran ilmu forensik, penting untuk membedakan antara analisis ciri kelas dan ciri individu. Ciri kelas seperti lengkung, gelung, dan pusaran memungkinkan pengelompokan sidik jari ke dalam kategori tertentu, namun tidak cukup sendiri untuk identifikasi individual. Hanya kombinasi dan susunan spasial minutiae terhadap inti dan delta yang memungkinkan pengatribusian sidik jari kepada satu individu tertentu.',
+    },
+    {
+      type: 'glossary',
+      items: [
+        { term: 'Inti (Core)', definition: 'Pusat geometris dari pola gelung atau pusaran yang berfungsi sebagai titik referensi.' },
+        { term: 'Delta', definition: 'Titik percabangan tiga arah di mana tiga sistem garis bukit bertemu.' },
+        { term: 'Minutiae', definition: 'Karakteristik mikro dari garis bukit yang digunakan saat perbandingan.' },
+        { term: 'ACE-V', definition: 'Metodologi: Analisis, Perbandingan, Evaluasi, Verifikasi.' },
+      ],
+    },
+    {
+      type: 'tip',
+      title: 'Tips untuk Guru',
+      html: 'Minta siswa menandai sidik jari yang sama dua kali: sekali dengan cepat, dan sekali setelah analisis aliran bukit yang cermat. Perbandingannya biasanya menunjukkan banyak penanda salah pada percobaan pertama.',
+    },
+    {
+      type: 'proscons',
+      title: 'Kelebihan dan Batasan Simulator',
+      items: [
+        { pro: 'Bekerja dengan gambar yang diunggah pengguna sendiri, bukan contoh statis.', con: 'Kualitas gambar asli memengaruhi kejelasan detail garis bukit.' },
+        { pro: 'Menghasilkan tabel bukti titik yang ditandai dengan jelas dan dapat diekspor.', con: 'Tidak menghitung vektor arah atau kecukupan bukti formal.' },
+        { pro: 'Memisahkan klasifikasi pola dengan jelas dari analisis minutiae detail.', con: 'Tidak cocok untuk laporan forensik resmi.' },
+      ],
+    },
+    {
+      type: 'diagnostic',
+      variant: 'warning',
+      icon: 'mdi:scale-balance',
+      badge: 'Peringatan Forensik',
+      title: 'Hanya untuk Penggunaan Edukasi',
+      html: 'Simulator ini dikembangkan murni untuk pengajaran dan tidak boleh digunakan untuk identifikasi forensik resmi dalam kasus hukum.',
+    },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: title,
+      description,
+      applicationCategory: 'ForensicApplication',
+      operatingSystem: 'Any',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: title,
+      step: howTo.map((step) => ({
+        '@type': 'HowToStep',
+        name: step.name,
+        text: step.text,
+      })),
+    },
+  ],
+};

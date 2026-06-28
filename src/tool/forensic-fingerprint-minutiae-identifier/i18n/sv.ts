@@ -1,0 +1,298 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'fingeravtryck-minuter-identifierare';
+const title = 'Forensisk fingeravtrycksmönster och minutidentifierare';
+const description = 'Ladda upp en bild av ett fingeravtryck, granska den med ett interaktivt förstoringsglas, klassificera mönstret, markera minuter och exportera en bevistabell.';
+
+const howTo = [
+  {
+    name: 'Välj Galton-Henry-mönster',
+    text: 'Välj båge, ögla eller virvel efter uppladdning för att registrera det observerade flödesmönstret för åsarna.',
+  },
+  {
+    name: 'Justera kärna och delta',
+    text: 'Justera reglagen för kärnförskjutning och antal deltan. Klassificeraren uppdaterar Henry-klassen och tillförlitligheten.',
+  },
+  {
+    name: 'Välj en minuttyp',
+    text: 'Välj åsavlutning, bifurkation, ö eller punkt innan du placerar markörer på bilden.',
+  },
+  {
+    name: 'Placera och granska markeringar',
+    text: 'Klicka på fingeravtrycket för att lägga till markeringar. Tabellen registrerar koordinaterna och kontrollerar målet (5 avslutningar och 3 bifurkationer).',
+  },
+];
+
+const faq = [
+  {
+    key: 'faq-1',
+    question: 'Vad är minuter (minutiae)?',
+    answer: 'Minuter är lokala anatomiska detaljer i fingeravtryckets åsar (som åsavslutningar, bifurkationer, öar och punkter) som används för forensisk identifiering.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Vad är skillnaden mellan båge, ögla och virvel?',
+    answer: 'Bågar löper från den ena sidan till den andra utan återgång. Öglor har en återgående ås och ett delta. Virvlar uppvisar cirkulära eller spiralformade mönster med oftast två deltan.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Kan detta verktyg identifiera en person på riktigt?',
+    answer: 'Nej. Detta är en pedagogisk simulator för utbildning. Riktig identifiering kräver kalibrerade bilder, jämförelsematerial och bedömning av en certifierad forensisk expert.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Varför kräver övningen 5 avslutningar och 3 bifurkationer?',
+    answer: 'Detta didaktiska mål hjälper studenter att systematiskt lära sig känna igen och namnge de vanligaste minuttyperna.',
+  },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    canvasAria: 'Interaktiv yta för att placera minutmarkeringar på det uppladdade fingeravtrycket',
+    workflow: 'Arbetsflöde för fingeravtrycksanalys',
+    stepUpload: 'Ladda upp',
+    stepClassify: 'Klassificera',
+    stepMark: 'Markera',
+    stepReview: 'Granska',
+    stepLabel: 'Steg',
+    stage1Title: 'Ladda upp avtrycket',
+    stage1Copy: 'Börja med en bild av ett fingeravtryck. Ytan förblir låst tills en fil har laddats upp.',
+    stage2Title: 'Klassificera åsflöde',
+    stage2Copy: 'Använd knapparna under bilden för att välja båge, ögla eller virvel.',
+    stage3Title: 'Markera obligatoriska minuter',
+    stage3Copy: 'Välj en minuttyp, klicka på bilden för att placera den, eller klicka på en befintlig markering för att ta bort.',
+    stage4Title: 'Granska bevistabellen',
+    stage4Copy: 'Kontrollera antalen, ta bort eventuella fel med papperskorgsknappen och kopiera rapporten.',
+    canvasHint1: 'Ladda upp en bild av ett fingeravtryck för att börja.',
+    canvasHint2: 'Markera inte än. Bestäm det allmänna mönstret med knapparna under bilden.',
+    canvasHint3: 'Klicka på bilden för att placera den valda minuten. Klicka på en markering för att välja den.',
+    canvasHint4: 'Granska bevistabellen under bilden.',
+    uploadTitle: 'Ladda upp bild av fingeravtryck',
+    uploadHint: 'PNG, JPG eller skanning av ett latent spår',
+    replaceImage: 'Ersätt',
+    continueMarking: 'Fortsätt markera',
+    reviewEvidence: 'Granska bevis',
+    back: 'Bakåt',
+    next: 'Nästa',
+    patternType: 'Typ av mönster',
+    arch: 'Båge',
+    loop: 'Ögla',
+    whorl: 'Virvel',
+    activeMinutia: 'Aktiv minut',
+    markingNow: 'Markering aktiv',
+    clickToPlace: 'Klicka på rätt ställe på bilden',
+    ridgeEnding: 'Åsavslutning',
+    ridgeEndingShort: 'åsen slutar',
+    ridgeEndingHelp: 'En åsavslutning är den punkt där en ås slutar tvärt utan att ansluta till någon annan ås.',
+    bifurcation: 'Bifurkation',
+    bifurcationShort: 'åsen delar sig',
+    bifurcationHelp: 'En bifurkation är den punkt där en enskild ås delar sig i två grenar.',
+    island: 'Ö',
+    islandShort: 'kort isolerad ås',
+    islandHelp: 'En ö är ett kort åssegment med två tydliga ändar, skilt från längre åsar.',
+    dot: 'Punkt',
+    dotShort: 'liten isolerad punkt',
+    dotHelp: 'En punkt är ett mycket litet åsfragment som ser ut som en fristående punkt.',
+    coreOffset: 'Kärnförskjutning',
+    deltaCount: 'Antal deltan',
+    henryClass: 'Henry-klass',
+    validation: 'Övningsresultat',
+    legendAria: 'Teckenförklaring för minuter',
+    clearMarks: 'Rensa allt',
+    undoLast: 'Ångra senaste',
+    deleteSelected: 'Ta bort markerad',
+    selectMarkToDelete: 'Klicka först på en markering i bilden',
+    copyEvidence: 'Kopiera bevis',
+    ridgeFlow: 'Anteckning om åsflöde',
+    type: 'Typ',
+    position: 'Position',
+    action: 'Åtgärd',
+    remove: 'Ta bort',
+    endingsGoal: 'Åsavslutningar',
+    bifurcationsGoal: 'Bifurkationer',
+    totalMarks: 'Totalt antal markeringar',
+    plainArch: 'Enkel båge',
+    archFlow: 'Åsar går in på ena sidan, stiger något i mitten och går ut på andra sidan utan återgång.',
+    ulnarLoop: 'Ulnarögla',
+    radialLoop: 'Radialögla',
+    loopFlow: 'Ett delta och en tydlig ögla som går tillbaka mot den sida den kom ifrån.',
+    plainWhorl: 'Enkel virvel',
+    centralPocketWhorl: 'Centralfickevirvel',
+    whorlFlow: 'Cirkulära eller spiralformade åsar runt en kärna, oftast med två deltan.',
+    ridgeEndingLabel: 'A',
+    bifurcationLabel: 'B',
+    islandLabel: 'Ö',
+    dotLabel: 'P',
+  },
+  seo: [
+    {
+      type: 'title',
+      text: 'Klassificera fingeravtryck och markera minuter',
+      level: 2,
+    },
+    {
+      type: 'diagnostic',
+      variant: 'info',
+      icon: 'mdi:fingerprint',
+      badge: 'Utbildning',
+      title: 'Syftet med denna fingeravtryckssimulator',
+      html: 'Detta verktyg hjälper studenter i forensisk vetenskap att lära sig <strong>daktyloskopisk klassificering</strong> och <strong>analys av minuter</strong> med egna bilder, förstoringsglas och exporterbara tabeller.',
+    },
+    {
+      type: 'stats',
+      columns: 4,
+      items: [
+        { value: '3', label: 'huvudmönstergrupper', icon: 'mdi:shape-outline' },
+        { value: '4', label: 'minuttyper som stöds', icon: 'mdi:map-marker-radius' },
+        { value: '5 + 3', label: 'didaktiskt övningsmål', icon: 'mdi:check-decagram' },
+        { value: 'Ladda upp', label: 'bildstyrt arbetsflöde', icon: 'mdi:cloud-upload-outline' },
+      ],
+    },
+    {
+      type: 'summary',
+      title: 'Rekommenderad analysordning',
+      items: [
+        'Klassificera först det allmänna mönstret: båge, ögla eller virvel.',
+        'Lokalisera deltan och kärnan innan du börjar markera minuter.',
+        'Markera endast tydliga detaljer; undvik otydliga eller smutsiga områden.',
+        'Registrera varje detalj med rätt typ och koordinater.',
+        'Håll den objektiva observationen strikt skild från slutsatsen.',
+      ],
+    },
+    {
+      type: 'comparative',
+      columns: 3,
+      items: [
+        {
+          title: 'Båge',
+          icon: 'mdi:gesture-swipe-horizontal',
+          description: 'Åsar löper smidigt igenom. Enkla bågar har inga deltan eller öglor.',
+          points: ['Inget delta', 'Vågliknande flöde', 'Enkel start för nybörjare'],
+        },
+        {
+          title: 'Ögla',
+          icon: 'mdi:rotate-left',
+          highlight: true,
+          description: 'Åsar böjer av runt kärnan och löper tillbaka mot ursprungssidan, med ett delta.',
+          points: ['Ett delta', 'Radial eller ulnar riktning', 'Kärnans position är avgörande'],
+        },
+        {
+          title: 'Virvel',
+          icon: 'mdi:autorenew',
+          description: 'Cirkel- eller spiralformigt mönster runt en central kärna.',
+          points: ['Oftast två deltan', 'Cirkulär tendens', 'Enkla virvlar och centralfickevirvlar'],
+        },
+      ],
+    },
+    {
+      type: 'table',
+      headers: ['Minut', 'Visuell egenskap', 'Vanligt fel vid markering'],
+      rows: [
+        ['Åsavslutning', 'En ås slutar tvärt.', 'Kontrollera att det inte är färgbrist, skada eller kontrastfel i bilden.'],
+        ['Bifurkation', 'En ås delar sig i två grenar.', 'Se upp för felaktiga delningar på grund av tryckförvrängning vid avtrycket.'],
+        ['Ö', 'Kort fristående åssegment.', 'Markera endast om båda ändarna syns tydligt utan brus.'],
+        ['Punkt', 'Mycket litet punktformat fragment.', 'Var försiktig så att det inte förväxlas med smuts eller bildbrus.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Övningsresultatets innebörd',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Detta resultat är inte ett juridiskt bevis för identifiering. Det är en didaktisk checklista för att uppmuntra studenter till noggrann annotering och förhindra förhastade slutsatser utan ordentlig dokumentation.',
+    },
+    {
+      type: 'paragraph',
+      html: 'I forensisk praxis (ACE-V-metoden) bedömer experter kvaliteten, eventuella förvrängningar och detaljernas sällsynthet för att nå en säker identifiering.',
+    },
+    {
+      type: 'title',
+      text: 'Metodologi för daktyloskopisk analys och jämförelse',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Daktyloskopi bygger på att inga två individer har samma papillära åsmönster och att dessa mönster kvarstår oförändrade under hela livet. Utbildningssimulatorer hjälper studenter att utveckla en systematisk observationsförmåga genom att lära dem att följa enskilda åsbanor och känna igen små lokala avvikelser som avslutningar eller bifurkationer i en kontrollerad inlärningsmiljö.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Korrekt annotering av minuter kräver att studenter först förstår det allmänna åsflödet och sedan kan benämna lokala avvikelser. Avslutningar uppstår när en papillär ås plötsligt slutar utan att ansluta till en annan. Bifurkationer uppstår när en ås delar sig i två grenar. Öar och punkter är korta isolerade segment som bör markeras med extra försiktighet, eftersom de lätt kan förväxlas med bildbrus eller tryckförvrängning.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Inom rattsmedicinsk utbildning ar det avgorande att skilja mellan klassegenskapsanalys och individualegenskapsanalys. Klassegenskaper som bage, ogla och virvel gor det mojligt att placera ett avtryck i en kategori, men racker inte ensamma for individuell identifiering. Forst kombinationen och den rumsliga arrangemanget av minuter i forhallande till karnan och deltat mojliggor en personbunden tilldelning. Utbildningssimulatorer ar darfor viktiga verktyg for att hjalpa studenter att beharska bade allmant klassificeringsarbete och detaljerad minutanalys.',
+    },
+    {
+      type: 'glossary',
+      items: [
+        { term: 'Kärna', definition: 'Centrum i ett ögle- eller virvelmönster som fungerar som referenspunkt.' },
+        { term: 'Delta', definition: 'Den trevägskorsning där tre åssystem möts.' },
+        { term: 'Minut', definition: 'Enskild detalj i åsmönstret som används vid jämförelse.' },
+        { term: 'ACE-V', definition: 'Metodik: Analys, Jämförelse, Utvärdering, Verifiering.' },
+      ],
+    },
+    {
+      type: 'tip',
+      title: 'Tips för lektionen',
+      html: 'Låt studenterna markera samma avtryck två gånger: en gång snabbt, och en gång efter en noggrann flödesanalys. Jämförelsen visar ofta många felaktiga markeringar i det första försöket.',
+    },
+    {
+      type: 'proscons',
+      title: 'Simulatorns styrkor och begränsningar',
+      items: [
+        { pro: 'Fungerar med egna uppladdade bilder istället för statiska exempel.', con: 'Kvaliteten på källbilden avgör hur väl åsdetaljerna syns.' },
+        { pro: 'Skapar en tydlig, exporterbar tabell över markerade punkter.', con: 'Beräknar inte riktningsvektorer eller bevisvärde.' },
+        { pro: 'Skiljer tydligt mönsterklassificering från detaljerad minutanalys.', con: 'Inte lämplig för officiella forensiska utredningar.' },
+      ],
+    },
+    {
+      type: 'diagnostic',
+      variant: 'warning',
+      icon: 'mdi:scale-balance',
+      badge: 'Forensisk varning',
+      title: 'Endast för utbildningsbruk',
+      html: 'Denna simulator är uteslutande utvecklad för undervisning och får inte användas för officiella forensiska identifieringar.',
+    },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: title,
+      description,
+      applicationCategory: 'ForensicApplication',
+      operatingSystem: 'Any',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: title,
+      step: howTo.map((step) => ({
+        '@type': 'HowToStep',
+        name: step.name,
+        text: step.text,
+      })),
+    },
+  ],
+};

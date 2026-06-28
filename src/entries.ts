@@ -22,6 +22,8 @@ export { forensicFiberComparisonMicroscope } from './tool/forensic-fiber-compari
 export type { FiberComparisonMicroscopeUI, FiberComparisonMicroscopeLocaleContent } from './tool/forensic-fiber-comparison-microscope/entry';
 export { bloodstainPatternOriginAnalyzer } from './tool/bloodstain-pattern-origin-analyzer/entry';
 export type { BloodstainPatternUI, BloodstainPatternLocaleContent } from './tool/bloodstain-pattern-origin-analyzer/entry';
+export { forensicFingerprintMinutiaeIdentifier } from './tool/forensic-fingerprint-minutiae-identifier/entry';
+export type { FingerprintMinutiaeUI, FingerprintMinutiaeLocaleContent } from './tool/forensic-fingerprint-minutiae-identifier/entry';
 
 import { forensicAgeEstimator } from './tool/forensic-age-estimator/entry';
 import { widmarkAlcoholSimulator } from './tool/widmark-alcohol-simulator/entry';
@@ -35,6 +37,7 @@ import { forensicMicrocrystalDrugSimulator } from './tool/forensic-microcrystal-
 import { forensicGlassBeckeLineSimulator } from './tool/forensic-glass-becke-line-simulator/entry';
 import { forensicFiberComparisonMicroscope } from './tool/forensic-fiber-comparison-microscope/entry';
 import { bloodstainPatternOriginAnalyzer } from './tool/bloodstain-pattern-origin-analyzer/entry';
+import { forensicFingerprintMinutiaeIdentifier } from './tool/forensic-fingerprint-minutiae-identifier/entry';
 
 export const ALL_ENTRIES = [
   forensicAgeEstimator,
@@ -48,5 +51,6 @@ export const ALL_ENTRIES = [
   forensicMicrocrystalDrugSimulator,
   forensicGlassBeckeLineSimulator,
   forensicFiberComparisonMicroscope,
-  bloodstainPatternOriginAnalyzer
+  bloodstainPatternOriginAnalyzer,
+  forensicFingerprintMinutiaeIdentifier
 ];

@@ -1,0 +1,298 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'identificador-minucias-impressao-digital';
+const title = 'Identificador forense de padrões e minúcias de impressões digitais';
+const description = 'Carregue uma imagem de impressão digital, inspecione-a com uma lupa real, classifique o padrão de cristas, marque um conjunto de minúcias e exporte a tabela de evidências.';
+
+const howTo = [
+  {
+    name: 'Escolha o padrão Galton-Henry',
+    text: 'Após carregar a impressão digital, selecione arco, laço ou verticilo para registar o fluxo de cristas observado.',
+  },
+  {
+    name: 'Ajuste o núcleo e as deltas',
+    text: 'Ajuste os seletores de desvio do núcleo e a contagem de deltas. O classificador atualiza a classe Henry e o nível de confiança.',
+  },
+  {
+    name: 'Selecione o tipo de minúcia',
+    text: 'Escolha terminação de crista, bifurcação, ilha ou ponto antes de posicionar as marcações no ecrã.',
+  },
+  {
+    name: 'Posicione e valide os marcadores',
+    text: 'Clique na imagem para adicionar as marcações. A tabela guarda as coordenadas e valida o objetivo (5 terminações e 3 bifurcações).',
+  },
+];
+
+const faq = [
+  {
+    key: 'faq-1',
+    question: 'O que são minúcias?',
+    answer: 'Minúcias são características locais das cristas papilares (terminações, bifurcações, ilhas, pontos) utilizadas para identificação e confronto forense.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Qual a diferença entre arco, laço e verticilo?',
+    answer: 'O arco passa de um lado ao outro sem retornar. O laço apresenta uma curva de retorno e um delta. O verticilo apresenta fluxos circulares ou em espiral e geralmente dois deltas.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Este simulador pode identificar uma pessoa real?',
+    answer: 'Não. É um simulador didático para aprendizagem de classificação. As identificações reais exigem equipamentos calibrados e a análise de um perito papiloscopista.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Por que o exercício pede 5 terminações e 3 bifurcações?',
+    answer: 'Este objetivo didático ajuda o estudante a exercitar a identificação sistemática dos tipos de minúcias mais frequentes.',
+  },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    canvasAria: 'Área interativa da impressão digital carregada para posicionar marcadores de minúcias',
+    workflow: 'Fluxo de trabalho da análise datiloscópica',
+    stepUpload: 'Carregar',
+    stepClassify: 'Classificar',
+    stepMark: 'Marcar',
+    stepReview: 'Rever',
+    stepLabel: 'Passo',
+    stage1Title: 'Carregar impressão digital',
+    stage1Copy: 'Inicie carregando a imagem de uma impressão digital. O canvas ficará bloqueado até ao carregamento.',
+    stage2Title: 'Classificar fluxo de cristas',
+    stage2Copy: 'Utilize os botões sob a imagem para escolher arco, laço ou verticilo.',
+    stage3Title: 'Marcar as minúcias obrigatórias',
+    stage3Copy: 'Escolha um tipo de minúcia, clique na imagem para posicionar ou clique num marcador existente para remover.',
+    stage4Title: 'Rever a tabela de evidências',
+    stage4Copy: 'Verifique a contagem de minúcias, elimine erros com o botão da lixeira e exporte o relatório.',
+    canvasHint1: 'Carregue uma imagem de impressão digital para começar.',
+    canvasHint2: 'Não marque ainda. Determine o tipo de padrão geral com as opções sob a imagem.',
+    canvasHint3: 'Clique na imagem para posicionar a minúcia selecionada. Clique num marcador para selecioná-lo.',
+    canvasHint4: 'Reveja a tabela de evidências sob a imagem.',
+    uploadTitle: 'Carregar imagem de impressão digital',
+    uploadHint: 'Imagem PNG, JPG ou digitalização de marca latente',
+    replaceImage: 'Substituir',
+    continueMarking: 'Continuar a marcar',
+    reviewEvidence: 'Rever evidências',
+    back: 'Voltar',
+    next: 'Seguinte',
+    patternType: 'Tipo de padrão geral',
+    arch: 'Arco',
+    loop: 'Laço',
+    whorl: 'Verticilo',
+    activeMinutia: 'Minúcia ativa',
+    markingNow: 'Marcação em curso',
+    clickToPlace: 'Clique na imagem no ponto correspondente',
+    ridgeEnding: 'Terminação de crista',
+    ridgeEndingShort: 'a crista termina',
+    ridgeEndingHelp: 'Uma terminação de crista é o ponto onde uma linha papilar se interrompe bruscamente.',
+    bifurcation: 'Bifurcação',
+    bifurcationShort: 'a crista divide-se',
+    bifurcationHelp: 'Uma bifurcação é o ponto em que uma linha única se divide em dois ramos.',
+    island: 'Ilha',
+    islandShort: 'curta crista isolada',
+    islandHelp: 'Uma ilha é um pequeno segmento de crista isolado com duas extremidades definidas, separado das cristas mais longas.',
+    dot: 'Ponto',
+    dotShort: 'minúsculo ponto isolado',
+    dotHelp: 'Um ponto é um fragmento de crista extremamente curto que se assemelha a um único ponto.',
+    coreOffset: 'Desvio do núcleo',
+    deltaCount: 'Contagem de deltas',
+    henryClass: 'Classe Henry',
+    validation: 'Pontuação do exercício',
+    legendAria: 'Legenda de minúcias',
+    clearMarks: 'Limpar tudo',
+    undoLast: 'Desfazer último',
+    deleteSelected: 'Eliminar selecionado',
+    selectMarkToDelete: 'Clique primeiro num marcador na imagem',
+    copyEvidence: 'Copiar evidências',
+    ridgeFlow: 'Nota sobre o fluxo',
+    type: 'Tipo',
+    position: 'Posição',
+    action: 'Ação',
+    remove: 'Remover',
+    endingsGoal: 'Terminações',
+    bifurcationsGoal: 'Bifurcações',
+    totalMarks: 'Total de marcas',
+    plainArch: 'Arco simples',
+    archFlow: 'As cristas entram por um lado, sobem no centro e saem pelo lado oposto sem retorno.',
+    ulnarLoop: 'Laço ulnar',
+    radialLoop: 'Laço radial',
+    loopFlow: 'Um delta e uma curva de retorno nítida voltada para o lado de entrada das cristas.',
+    plainWhorl: 'Verticilo simples',
+    centralPocketWhorl: 'Verticilo de bolsa central',
+    whorlFlow: 'Cristas circulares ou em espiral em torno do núcleo, com geralmente dois deltas.',
+    ridgeEndingLabel: 'T',
+    bifurcationLabel: 'B',
+    islandLabel: 'I',
+    dotLabel: 'P',
+  },
+  seo: [
+    {
+      type: 'title',
+      text: 'Classificação de impressões digitais e marcação de minúcias',
+      level: 2,
+    },
+    {
+      type: 'diagnostic',
+      variant: 'info',
+      icon: 'mdi:fingerprint',
+      badge: 'Aprendizagem',
+      title: 'Objetivo do simulador de minúcias de impressões digitais',
+      html: 'Esta ferramenta foi concebida para estudantes de ciências forenses aprenderem a <strong>classificação datiloscópica</strong> e a <strong>marcação de minúcias</strong> através de imagens reais, lupa interativa e relatórios.',
+    },
+    {
+      type: 'stats',
+      columns: 4,
+      items: [
+        { value: '3', label: 'famílias de padrões', icon: 'mdi:shape-outline' },
+        { value: '4', label: 'tipos de minúcias', icon: 'mdi:map-marker-radius' },
+        { value: '5 + 3', label: 'objetivo didático do exercício', icon: 'mdi:check-decagram' },
+        { value: 'Upload', label: 'fluxo centrado na imagem', icon: 'mdi:cloud-upload-outline' },
+      ],
+    },
+    {
+      type: 'summary',
+      title: 'Fluxo de análise recomendado',
+      items: [
+        'Classifique primeiro o padrão geral: arco, laço ou verticilo.',
+        'Localize as deltas e a área do núcleo antes de adicionar minúcias.',
+        'Marque apenas detalhes nítidos; evite zonas ruidosas.',
+        'Registe cada ponto identificando o seu tipo e coordenada.',
+        'Separe a observação estruturada da conclusão de identificação.',
+      ],
+    },
+    {
+      type: 'comparative',
+      columns: 3,
+      items: [
+        {
+          title: 'Arco',
+          icon: 'mdi:gesture-swipe-horizontal',
+          description: 'As cristas correm de lado a lado. Arcos simples não possuem deltas ou retorno.',
+          points: ['Sem delta', 'Fluxo ondulado suave', 'Ideal para iniciantes'],
+        },
+        {
+          title: 'Laço',
+          icon: 'mdi:rotate-left',
+          highlight: true,
+          description: 'Apresenta uma curva de retorno ao redor do núcleo e um delta associado.',
+          points: ['Um único delta', 'Direção radial ou ulnar', 'Posição do núcleo é crucial'],
+        },
+        {
+          title: 'Verticilo',
+          icon: 'mdi:autorenew',
+          description: 'Desenhos circulares ou em espiral ao redor do núcleo central.',
+          points: ['Geralmente dois deltas', 'Forma circular ou espiralada', 'Variantes simples ou compostas'],
+        },
+      ],
+    },
+    {
+      type: 'table',
+      headers: ['Minúcia', 'Aspeto visual', 'Erro de marcação comum'],
+      rows: [
+        ['Terminação', 'A crista interrompe-se de forma limpa.', 'Verifique se não é falta de tinta ou falha de contraste da imagem.'],
+        ['Bifurcação', 'Uma crista sdoppia-se em dois ramos.', 'Atenção às falsas bifurcações devido à pressão ao colher a impressão.'],
+        ['Ilha', 'Segmento isolado curto posicionado entre duas cristas.', 'Marque apenas se ambas as extremidades forem visíveis.'],
+        ['Ponto', 'Fragmento diminuto de crista semelhante a um ponto.', 'Use de prudência para não o confundir com poeira ou ruído de píxeis.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Como interpretar a pontuação do exercício',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Esta pontuação não tem validade de identificação forense legal. É uma lista de verificação didática que incentiva o estudante a documentar pelo menos 5 terminações e 3 bifurcações, promovendo a disciplina científica de observação.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Na prática real (metodologia ACE-V), o perito avalia a qualidade do suporte, as distorções, a concordância tridimensional e a raridade das minúcias para concluir uma identificação.',
+    },
+    {
+      type: 'title',
+      text: 'Metodologia de análise e comparação datiloscópica',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'A datiloscopia baseia-se na premissa de que não existem dois indivíduos com os mesmos detalhes de cristas papilares, e que estas permanecem inalteradas ao longo de toda a vida. Os simuladores didáticos ajudam os estudantes a desenvolver um método rigoroso, ensinando-os a seguir o percurso de cada crista e a identificar pequenas anomalias locais, como interrupções ou bifurcações, num ambiente de aprendizagem controlado.',
+    },
+    {
+      type: 'paragraph',
+      html: 'A correta anota\u00e7\u00e3o das min\u00facias exige que os estudantes compreendam primeiro o fluxo geral das cristas e depois saibam nomear as anomalias locais. As termina\u00e7\u00f5es ocorrem quando uma crista parar abruptamente sem se ligar a outra. As bifurca\u00e7\u00f5es surgem quando uma crista se divide em dois ramos. Ilhas e pontos s\u00e3o pequenos segmentos isolados que devem ser marcados com precau\u00e7\u00e3o, pois podem confundir-se facilmente com ru\u00eddo de imagem ou distor\u00e7\u00f5es de press\u00e3o.',
+    },
+    {
+      type: 'paragraph',
+      html: 'No ensino da criminalista \u00e9 fundamental distinguir entre a an\u00e1lise das caracter\u00edsticas de classe e a das caracter\u00edsticas individuais. As caracter\u00edsticas de classe, como arco, la\u00e7o e verticilo, permitem enquadrar uma impress\u00e3o numa categoria, mas n\u00e3o s\u00e3o suficientes por si s\u00f3 para a identifica\u00e7\u00e3o individual. S\u00f3 a combina\u00e7\u00e3o e a disposi\u00e7\u00e3o espacial das min\u00facias em rela\u00e7\u00e3o ao n\u00facleo e ao delta permite atribuir uma impress\u00e3o a um \u00fanico indiv\u00edduo.',
+    },
+    {
+      type: 'glossary',
+      items: [
+        { term: 'Núcleo', definition: 'Ponto central geométrico de um laço ou verticilo, usado como referência.' },
+        { term: 'Delta', definition: 'Ponto de junção triangular formado pela divergência de três sistemas de cristas.' },
+        { term: 'Minúcia', definition: 'Ponto singular sobre uma crista papilar utilizado para comparação.' },
+        { term: 'ACE-V', definition: 'Protocolo de exame: Análise, Comparação, Avaliação, Verificação.' },
+      ],
+    },
+    {
+      type: 'tip',
+      title: 'Sugestão para aula prática',
+      html: 'Peça aos alunos para marcar a mesma impressão duas vezes: uma rapidamente e outra após estudar o fluxo de cristas. A comparação mostra a quantidade de falsos marcadores colocados na primeira tentativa.',
+    },
+    {
+      type: 'proscons',
+      title: 'Forças e limites do simulador',
+      items: [
+        { pro: 'Permite trabalhar com imagens reais carregadas pelo utilizador.', con: 'A nitidez do ficheiro original condiciona a precisão das marcações.' },
+        { pro: 'Gera uma tabela de evidências clara e exportável.', con: 'Não calcula vetores de orientação nem a suficiência da prova.' },
+        { pro: 'Separa o padrão geral das características das minúcias individuais.', con: 'Não aplicável para perícias judiciais reais.' },
+      ],
+    },
+    {
+      type: 'diagnostic',
+      variant: 'warning',
+      icon: 'mdi:scale-balance',
+      badge: 'Aviso legal',
+      title: 'Apenas para fins didáticos',
+      html: 'Este simulador foi desenvolvido unicamente para ensino e formação, não devendo ser usado para avaliações periciais em casos reais.',
+    },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: title,
+      description,
+      applicationCategory: 'ForensicApplication',
+      operatingSystem: 'Any',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: title,
+      step: howTo.map((step) => ({
+        '@type': 'HowToStep',
+        name: step.name,
+        text: step.text,
+      })),
+    },
+  ],
+};

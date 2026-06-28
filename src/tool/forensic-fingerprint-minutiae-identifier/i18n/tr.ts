@@ -1,0 +1,298 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'parmak-izi-minutiae-tanimlayici';
+const title = 'Adli Parmak İzi Desen ve Karakteristik (Minutiae) Tanımlayıcı';
+const description = 'Bir parmak izi görseli yükleyin, gerçekçi bir büyüteçle inceleyin, sırt akış desenini sınıflandırın, karakteristik noktaları işaretleyin ve kanıt tablosunu dışa aktarın.';
+
+const howTo = [
+  {
+    name: 'Galton-Henry Desenini Seçin',
+    text: 'Görseli yükledikten sonra, gözlemlenen sırt akış ailesini kaydetmek için ark, ilmek veya spiral seçeneklerinden birini belirleyin.',
+  },
+  {
+    name: 'Çekirdek ve Delta Özelliklerini Ayarlayın',
+    text: 'Çekirdek kayması ve delta sayısını ayarlayın. Sınıflandırıcı Henry sınıfını ve güven oranını otomatik günceller.',
+  },
+  {
+    name: 'Bir Karakteristik Tipi Seçin',
+    text: 'İşaretleri yerleştirmeden önce sırt sonlanması, çatal, ada veya nokta seçeneklerinden birini belirleyin.',
+  },
+  {
+    name: 'İşaretleri Yerleştirin ve Denetleyin',
+    text: 'Parmak izi üzerine tıklayarak işaretleyicileri ekleyin. Tablo koordinatları kaydeder ve 5 sonlanma ile 3 çatal hedefini denetler.',
+  },
+];
+
+const faq = [
+  {
+    key: 'faq-1',
+    question: 'Karakteristik noktalar (Minutiae) nedir?',
+    answer: 'Karakteristik noktalar, sırt sonlanmaları, çatallar, adalar ve noktalar gibi sırt çizgilerinin küçük detaylarıdır. Karşılaştırma ve kimlik tespitinde kullanılırlar.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Ark, ilmek ve spiral arasındaki fark nedir?',
+    answer: 'Ark, geri dönüş yapmadan bir uçtan diğer uca akar. İlmek, bir geri dönüş çizgisine ve bir deltaya sahiptir. Spiral ise dairesel akışlar ve genellikle iki delta içerir.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Bu araç gerçek kimlik tespiti yapabilir mi?',
+    answer: 'Hayır. Bu araç eğitim amaçlı bir simülatördür. Gerçek kimlik tespiti, kalibre edilmiş görüntüler ve sertifikalı adli uzman değerlendirmesi gerektirir.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Egzersiz neden 5 sonlanma ve 3 çatal istemektedir?',
+    answer: 'Bu hedef, öğrencilerin en sık karşılaşılan karakteristik tiplerini ayırt etmesini ve sistematik not alma disiplini kazanmasını sağlamak için belirlenmiştir.',
+  },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    canvasAria: 'İşaretleri yerleştirmek için yüklenen parmak izi görselinin etkileşimli alanı',
+    workflow: 'Parmak İzi Analiz İş Akışı',
+    stepUpload: 'Yükle',
+    stepClassify: 'Sınıflandır',
+    stepMark: 'İşaretle',
+    stepReview: 'İncele',
+    stepLabel: 'Adım',
+    stage1Title: 'Parmak izini yükleyin',
+    stage1Copy: 'Bir parmak izi görseliyle başlayın. Görsel yüklenene kadar alan kilitli kalacaktır.',
+    stage2Title: 'Sırt akışını sınıflandırın',
+    stage2Copy: 'Görselin altındaki kontrolleri kullanarak ark, ilmek veya spiral seçimini yapın.',
+    stage3Title: 'Gerekli karakteristikleri işaretleyin',
+    stage3Copy: 'Bir karakteristik tipi seçin, eklemek için görsel üzerine tıklayın veya silmek için mevcut bir işarete tıklayın.',
+    stage4Title: 'Kanıt tablosunu inceleyin',
+    stage4Copy: 'Sayıları kontrol edin, hataları çöp kutusu düğmesiyle silin ve yapılandırılmış notları kopyalayın.',
+    canvasHint1: 'Başlamak için bir parmak izi görseli yükleyin.',
+    canvasHint2: 'Henüz işaretleme yapmayın. Alt kısımdaki butonlarla genel deseni belirleyin.',
+    canvasHint3: 'Seçili karakteristiği yerleştirmek için görsele tıklayın. Seçmek için mevcut bir işarete tıklayın.',
+    canvasHint4: 'Görselin altındaki kanıt tablosunu inceleyin.',
+    uploadTitle: 'Parmak izi görseli yükle',
+    uploadHint: 'PNG, JPG veya latent iz taraması',
+    replaceImage: 'Değiştir',
+    continueMarking: 'İşaretlemeye devam et',
+    reviewEvidence: 'Kanıtları incele',
+    back: 'Geri',
+    next: 'İleri',
+    patternType: 'Genel desen tipi',
+    arch: 'Ark',
+    loop: 'İlmek',
+    whorl: 'Spiral',
+    activeMinutia: 'Aktif karakteristik',
+    markingNow: 'İşaretleme devrede',
+    clickToPlace: 'Görselde tespit ettiğiniz yere tıklayın',
+    ridgeEnding: 'Sırt sonlanması',
+    ridgeEndingShort: 'sırt çizgisi biter',
+    ridgeEndingHelp: 'Bir sırt sonlanması, bir sırt çizgisinin başka bir çizgiyle birleşmeden aniden durduğu noktadır.',
+    bifurcation: 'Çatal (Bifurkasyon)',
+    bifurcationShort: 'sırt çizgisi bölünür',
+    bifurcationHelp: 'Çatal, tek bir sırt çizgisinin iki kola ayrıldığı noktadır.',
+    island: 'Ada',
+    islandShort: 'kısa izole çizgi',
+    islandHelp: 'Ada, her iki ucu da belirgin olan ve diğer uzun sırt çizgilerinden ayrılmış kısa bir sırt çizgisidir.',
+    dot: 'Nokta',
+    dotShort: 'küçük izole nokta',
+    dotHelp: 'Nokta, tek bir nokta gibi görünen çok kısa bir sırt çizgisi fragmentidir.',
+    coreOffset: 'Çekirdek kayması',
+    deltaCount: 'Delta sayısı',
+    henryClass: 'Henry sınıfı',
+    validation: 'Egzersiz skoru',
+    legendAria: 'Karakteristik göstergesi',
+    clearMarks: 'Hepsini temizle',
+    undoLast: 'Sonuncuyu geri al',
+    deleteSelected: 'Seçileni sil',
+    selectMarkToDelete: 'Önce görsel üzerindeki bir işarete tıklayın',
+    copyEvidence: 'Kanıtı kopyala',
+    ridgeFlow: 'Sırt akış notu',
+    type: 'Tip',
+    position: 'Konum',
+    action: 'İşlem',
+    remove: 'Sil',
+    endingsGoal: 'Sırt sonlanmaları',
+    bifurcationsGoal: 'Çatallar',
+    totalMarks: 'Toplam işaret',
+    plainArch: 'Basit ark',
+    archFlow: 'Sırtlar bir taraftan girer, ortada hafifçe yükselir ve geri dönüş yapmadan karşı taraftan çıkar.',
+    ulnarLoop: 'Ulnar ilmek',
+    radialLoop: 'Radial ilmek',
+    loopFlow: 'Bir delta ve sırtların giriş yönüne doğru geri dönen belirgin bir kavis.',
+    plainWhorl: 'Basit spiral',
+    centralPocketWhorl: 'Merkezi cep spirali',
+    whorlFlow: 'Çekirdek etrafında dairesel veya spiral akışlar ve genellikle iki delta.',
+    ridgeEndingLabel: 'S',
+    bifurcationLabel: 'Ç',
+    islandLabel: 'A',
+    dotLabel: 'N',
+  },
+  seo: [
+    {
+      type: 'title',
+      text: 'Parmak İzi Sınıflandırma ve Karakteristik Nokta Analizi',
+      level: 2,
+    },
+    {
+      type: 'diagnostic',
+      variant: 'info',
+      icon: 'mdi:fingerprint',
+      badge: 'Eğitim',
+      title: 'Bu parmak izi simülatörünün amacı',
+      html: 'Bu araç, adli bilimler öğrencilerinin <strong>dactyloscopic sınıflandırma</strong> ve <strong>karakteristik nokta analizi</strong> konularını gerçek görseller, interaktif büyüteç ve raporlama araçlarıyla öğrenmesini sağlamak için tasarlanmıştır.',
+    },
+    {
+      type: 'stats',
+      columns: 4,
+      items: [
+        { value: '3', label: 'ana desen ailesi', icon: 'mdi:shape-outline' },
+        { value: '4', label: 'karakteristik tipi', icon: 'mdi:map-marker-radius' },
+        { value: '5 + 3', label: 'eğitim egzersiz hedefi', icon: 'mdi:check-decagram' },
+        { value: 'Yükle', label: 'görsel odaklı akış', icon: 'mdi:cloud-upload-outline' },
+      ],
+    },
+    {
+      type: 'summary',
+      title: 'Önerilen analiz akışı',
+      items: [
+        'Önce genel deseni sınıflandırın: ark, ilmek veya spiral.',
+        'Karakteristikleri yerleştirmeden önce delta ve çekirdek alanlarını bulun.',
+        'Sadece net detayları işaretleyin; belirsiz veya lekeli alanlardan kaçının.',
+        'Her noktayı tipi ve koordinatlarıyla kaydedin.',
+        'Objektif gözlemi nihai yorumdan ayrı tutun.',
+      ],
+    },
+    {
+      type: 'comparative',
+      columns: 3,
+      items: [
+        {
+          title: 'Ark',
+          icon: 'mdi:gesture-swipe-horizontal',
+          description: 'Sırtlar bir uçtan diğerine akar. Basit arklarda delta veya geri dönüş çizgisi bulunmaz.',
+          points: ['Delta bulunmaz', 'Dalga benzeri akış', 'Yeni başlayanlar için idealdir'],
+        },
+        {
+          title: 'İlmek',
+          icon: 'mdi:rotate-left',
+          highlight: true,
+          description: 'Çekirdek etrafında geri dönen kavisli çizgiler ve ilişkili bir delta içerir.',
+          points: ['Tek bir delta', 'Radial veya ulnar yön', 'Çekirdek konumu belirleyicidir'],
+        },
+        {
+          title: 'Spiral',
+          icon: 'mdi:autorenew',
+          description: 'Merkezi çekirdek etrafında dairesel veya spiral desenler barındırır.',
+          points: ['Genellikle iki delta', 'Dairesel çizgi eğilimi', 'Basit ve merkezi cep varyasyonları'],
+        },
+      ],
+    },
+    {
+      type: 'table',
+      headers: ['Karakteristik', 'Görsel özellik', 'Sık yapılan işaretleme hatası'],
+      rows: [
+        ['Sırt sonlanması', 'Sırt çizgisi aniden biter.', 'Mürekkep dağılması veya görüntü kontrast hatası olmadığından emin olun.'],
+        ['Çatal', 'Bir sırt çizgisi iki kola ayrılır.', 'Baskı basıncı nedeniyle oluşan sahte çatallara dikkat edin.'],
+        ['Ada', 'İki sırt çizgisi arasında kısa izole çizgi.', 'Yalnızca her iki ucu da net şekilde boşluktaysa işaretleyin.'],
+        ['Nokta', 'Nokta şeklinde çok küçük fragment.', 'Görüntü pikselleri veya kirlerle karıştırmamaya dikkat edin.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Egzersiz skorunun yorumlanması',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Bu skor, resmi bir adli kanıt değeri taşımaz. Öğrencilerin en az 5 sonlanma ve 3 çatal işaretleyerek sistematik gözlem disiplini kazanmasını teşvik eden pedagojik bir listedir.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Gerçek adli vakalarda (ACE-V metodolojisi), uzmanlar görüntünün kalitesini, deformasyonları ve karakteristiklerin nadirliğini analiz ederek sonuça ulaşırlar.',
+    },
+    {
+      type: 'title',
+      text: 'Daktiloskopik analiz ve karşılaştırma metodolojisi',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Daktiloskopi, hiçbir iki bireyin aynı papiller çıkıntı ayrıntılarına sahip olmadığı ve bu özelliklerin yaşam boyunca değişmediği prensibine dayanmaktadır. Eğitim simülatörleri, öğrencilerin bireysel çökrük çizgilerini takip etmeyi ve uçlar ile çatallar gibi küçük lokal anomalileri kontrollü bir öğrenme ortamında tanımlamayı öğrenmeleri yoluyla sistematik bir gözlem becerisi geliştirmelerine yardımcı olur.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Minutiae\u2019n\u0131n do\u011fru \u015fekilde i\u015faretlenebilmesi i\u00e7in \u00f6\u011frencilerin \u00f6nce genel s\u0131rt \u00e7izgisi ak\u0131\u015f\u0131n\u0131 anlamalar\u0131, ard\u0131ndan yerel anomalileri adland\u0131rabilmeleri gerekmektedir. Sonlanmalar, bir papiller \u00e7izginin ba\u015fka bir \u00e7izgiyle birle\u015fmeden aniden durmas\u0131yla olu\u015fur. \u00c7atalla\u015fmalar ise bir \u00e7izginin iki kola ayr\u0131lmas\u0131yla meydana gelir. Adalar ve noktalar, g\u00f6r\u00fcnt\u00fc g\u00fcr\u00fclt\u00fcs\u00fc veya bask\u0131 bozulmas\u0131yla kar\u0131\u015ft\u0131r\u0131labilecekerinden \u00f6zellikle dikkatli i\u015faretlenmesi gereken k\u0131sa izole segmentlerdir.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Adli bilimler egitiminde sinif ozellikleri analizi ile bireysel ozellikler analizi arasindaki farki kavramak buyuk onem tasir. Kemer, ilmek ve sirmal gibi sinif ozellikleri, bir parmak izini bir kategoriye yerlestirmeye olanak tanir; ancak tek baslarına bireysel kimlik tespiti icin yeterli degildir. Minutiae karakteristiklerinin cekirdek ve deltaya gore kombine edilmesi ve uzaysal duzenlenmesi, kisisel atama yapabilmeyi mumkun kilar. Bu nedenle egitim simulatorleri, ogrencilerin hem genel siniflandirmayi hem de yerel minutiae analizini bir arada yapmayi ogrenmeleri acisindan vazgecilmez bir aractir.',
+    },
+    {
+      type: 'glossary',
+      items: [
+        { term: 'Çekirdek', definition: 'İlmek veya spiral desenlerin referans alınan geometrik orta noktası.' },
+        { term: 'Delta', definition: 'Üç sırt sisteminin birleştiği üçgen biçimli alan.' },
+        { term: 'Minutiae', definition: 'Sırt çizgileri üzerindeki karşılaştırmada kullanılan mikro karakteristik detaylar.' },
+        { term: 'ACE-V', definition: 'Uluslararası analiz protokolü: Analiz, Karşılaştırma, Değerlendirme, Doğrulama.' },
+      ],
+    },
+    {
+      type: 'tip',
+      title: 'Sınıf içi uygulama önerisi',
+      html: 'Öğrencilerden aynı izi iki kez işaretlemelerini isteyin: biri hızlıca, diğeri sırt akışını inceledikten sonra. Karşılaştırma, ilk denemedeki hatalı işaretleri ortaya çıkaracaktır.',
+    },
+    {
+      type: 'proscons',
+      title: 'Simülatörün güçlü ve sınırlı yönleri',
+      items: [
+        { pro: 'Önceden belirlenmiş şablonlar yerine kendi görsellerinizi yüklemenize izin verir.', con: 'Görüntü kalitesi, sırt detaylarının görünürlüğünü doğrudan etkiler.' },
+        { pro: 'Dışa aktarılabilir net bir kanıt tablosu oluşturur.', con: 'Yön vektörlerini veya peritiel delil yeterliliğini hesaplamaz.' },
+        { pro: 'Genel sınıflandırma adımı ile karakteristik işaretlemeyi birbirinden ayırır.', con: 'Gerçek adli davalarda veya resmi bilirkişi raporlarında kullanılamaz.' },
+      ],
+    },
+    {
+      type: 'diagnostic',
+      variant: 'warning',
+      icon: 'mdi:scale-balance',
+      badge: 'Yasal Uyarı',
+      title: 'Yalnızca akademik amaçlı kullanım',
+      html: 'Bu simülatör sadece eğitim ve öğretim faaliyetleri için tasarlanmış olup yasal adli süreçlerde kullanılmamalıdır.',
+    },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: title,
+      description,
+      applicationCategory: 'ForensicApplication',
+      operatingSystem: 'Any',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: title,
+      step: howTo.map((step) => ({
+        '@type': 'HowToStep',
+        name: step.name,
+        text: step.text,
+      })),
+    },
+  ],
+};

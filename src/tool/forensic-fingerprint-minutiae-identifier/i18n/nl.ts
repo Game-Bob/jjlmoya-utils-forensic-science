@@ -1,0 +1,298 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'vingerafdruk-minutiae-identificatie';
+const title = 'Forensische vingerafdrukpatroon en minutiae identificatie';
+const description = 'Upload een afbeelding van een vingerafdruk, inspecteer deze met een interactief vergrootglas, classificeer het patroon, markeer minutiae en exporteer een bewijstabel.';
+
+const howTo = [
+  {
+    name: 'Kies het Galton-Henry patroon',
+    text: 'Selecteer boog, lus of kring na het uploaden om het waargenomen stroompatroon van de papillairlijnen vast te leggen.',
+  },
+  {
+    name: 'Pas kern en delta aan',
+    text: 'Stel de schuifregelaars voor de kernverschuiving en delta-telling in. De classificator werkt de Henry-klasse en betrouwbaarheid bij.',
+  },
+  {
+    name: 'Selecteer een type minutia',
+    text: 'Kies lijneneinde, bifurcatie, eiland of punt voordat u markeringen op de afbeelding plaatst.',
+  },
+  {
+    name: 'Plaats en controleer markeringen',
+    text: 'Klik op de vingerafdruk om markeringen te plaatsen. De tabel registreert de coördinaten en controleert het doel (5 einden en 3 bifurcaties).',
+  },
+];
+
+const faq = [
+  {
+    key: 'faq-1',
+    question: 'Wat zijn minutiae?',
+    answer: 'Minutiae zijn lokale anatomische kenmerken van de papillairlijnen (zoals einden, bifurcaties, eilanden en punten) die gebruikt worden voor forensische identificatie.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Wat is het verschil tussen boog, lus en kring?',
+    answer: 'Bogen lopen van de ene naar de andere kant zonder terugloop. Lussen hebben een teruglopende lijn en een delta. Kringen vertonen cirkel- of spiraalpatronen met meestal twee deltas.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Kan deze tool echte vingerafdrukken matchen met een verdachte?',
+    answer: 'Nee. Dit is een educatieve simulator voor trainingsdoeleinden. Echte identificatie vereist gekalibreerde afbeeldingen, vergelijkingsmateriaal en de beoordeling door een gecertificeerd forensisch expert.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Waarom vraagt de oefening om 5 einden en 3 bifurcaties?',
+    answer: 'Dit didactische doel helpt studenten systematisch de meest voorkomende typen minutiae te leren herkennen en benoemen.',
+  },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    canvasAria: 'Interactief canvas voor het plaatsen van minutiae-markeringen op de vingerafdruk',
+    workflow: 'Werkstroom van vingerafdrukanalyse',
+    stepUpload: 'Uploaden',
+    stepClassify: 'Classificeren',
+    stepMark: 'Markeren',
+    stepReview: 'Controleren',
+    stepLabel: 'Stap',
+    stage1Title: 'Upload de afdruk',
+    stage1Copy: 'Begin met een afbeelding van een vingerafdruk. Het canvas blijft vergrendeld totdat er een bestand is geladen.',
+    stage2Title: 'Classificeer lijnstroom',
+    stage2Copy: 'Gebruik de knoppen onder de afbeelding om boog, lus of kring te kiezen.',
+    stage3Title: 'Markeer vereiste minutiae',
+    stage3Copy: 'Kies een minutia-type, klik op de afbeelding om deze te plaatsen of klik op een bestaande markering om te verwijderen.',
+    stage4Title: 'Controleer de bewijstabel',
+    stage4Copy: 'Controleer de aantallen, verwijder eventuele fouten met de prullenbak-knop en exporteer het verslag.',
+    canvasHint1: 'Upload een vingerafdrukafbeelding om te beginnen.',
+    canvasHint2: 'Nog niet markeren. Bepaal het algemene patroon met de knoppen onder de afbeelding.',
+    canvasHint3: 'Klik op de afbeelding om de geselecteerde minutia te plaatsen. Klik op een markering om deze te selecteren.',
+    canvasHint4: 'Controleer de bewijstabel onder de afbeelding.',
+    uploadTitle: 'Vingerafdrukafbeelding uploaden',
+    uploadHint: 'PNG, JPG of scan van een latent spoor',
+    replaceImage: 'Vervangen',
+    continueMarking: 'Doorgaan met markeren',
+    reviewEvidence: 'Bewijs controleren',
+    back: 'Terug',
+    next: 'Volgende',
+    patternType: 'Type patroon',
+    arch: 'Boog',
+    loop: 'Lus',
+    whorl: 'Kring',
+    activeMinutia: 'Actieve minutia',
+    markingNow: 'Markeren actief',
+    clickToPlace: 'Klik op de juiste plek op de afbeelding',
+    ridgeEnding: 'Lijneneinde',
+    ridgeEndingShort: 'de lijn eindigt',
+    ridgeEndingHelp: 'Een lijneneinde is het punt waar een papillairlijn abrupt stopt zonder verbinding te maken met een andere lijn.',
+    bifurcation: 'Bifurcatie',
+    bifurcationShort: 'de lijn splitst',
+    bifurcationHelp: 'Een bifurcatie is het punt waar een enkele papillairlijn zich splitst in twee lijnen.',
+    island: 'Eiland',
+    islandShort: 'korte geïsoleerde lijn',
+    islandHelp: 'Een eiland is een kort lijnfragment met twee duidelijke uiteinden, gescheiden van langere lijnen.',
+    dot: 'Punt',
+    dotShort: 'minuscuul geïsoleerd punt',
+    dotHelp: 'Een punt is een zeer klein lijnfragment dat eruitziet als een losliggende punt.',
+    coreOffset: 'Kernverschuiving',
+    deltaCount: 'Delta-telling',
+    henryClass: 'Henry-klasse',
+    validation: 'Oefenscore',
+    legendAria: 'Legenda van minutiae',
+    clearMarks: 'Alles wissen',
+    undoLast: 'Laatste ongedaan maken',
+    deleteSelected: 'Geselecteerde verwijderen',
+    selectMarkToDelete: 'Klik eerst op een markering in de afbeelding',
+    copyEvidence: 'Bewijs kopiëren',
+    ridgeFlow: 'Notitie over lijnstroom',
+    type: 'Type',
+    position: 'Positie',
+    action: 'Actie',
+    remove: 'Verwijderen',
+    endingsGoal: 'Lijneneinden',
+    bifurcationsGoal: 'Bifurcaties',
+    totalMarks: 'Totaal markeringen',
+    plainArch: 'Eenvoudige boog',
+    archFlow: 'Lijnen treden aan één kant binnen, stijgen in het midden licht en treden aan de andere kant uit.',
+    ulnarLoop: 'Ulnairlus',
+    radialLoop: 'Radiaallus',
+    loopFlow: 'Eén delta en een duidelijke lus die terugloopt naar de zijde van binnentreden.',
+    plainWhorl: 'Eenvoudige kring',
+    centralPocketWhorl: 'Zakkring',
+    whorlFlow: 'Cirkel- of spiraalvormige lijnen rond een kern, met meestal twee delta\'s.',
+    ridgeEndingLabel: 'E',
+    bifurcationLabel: 'B',
+    islandLabel: 'I',
+    dotLabel: 'P',
+  },
+  seo: [
+    {
+      type: 'title',
+      text: 'Vingerafdrukken classificeren en minutiae markeren',
+      level: 2,
+    },
+    {
+      type: 'diagnostic',
+      variant: 'info',
+      icon: 'mdi:fingerprint',
+      badge: 'Educatief',
+      title: 'Doel van deze vingerafdruk simulator',
+      html: 'Deze tool helpt studenten forensisch onderzoek bij het leren van <strong>dactyloscopische classificatie</strong> en het <strong>analyseren van minutiae</strong> met eigen afbeeldingen, een vergrootglas en exporteerbare tabellen.',
+    },
+    {
+      type: 'stats',
+      columns: 4,
+      items: [
+        { value: '3', label: 'hoofdpatroongroepen', icon: 'mdi:shape-outline' },
+        { value: '4', label: 'ondersteunde minutiae', icon: 'mdi:map-marker-radius' },
+        { value: '5 + 3', label: 'didactisch oefendoel', icon: 'mdi:check-decagram' },
+        { value: 'Upload', label: 'beeldgestuurde werkstroom', icon: 'mdi:cloud-upload-outline' },
+      ],
+    },
+    {
+      type: 'summary',
+      title: 'Aanbevolen stappenplan',
+      items: [
+        'Bepaal eerst het globale patroon: boog, lus of kring.',
+        'Lokaliseer de delta\'s en de kern voordat u begint met minutiae markeren.',
+        'Markeer alleen scherpe kenmerken; vermijd vage of besmeurde delen.',
+        'Leg elk kenmerk vast met het juiste type en coördinaten.',
+        'Houd de objectieve waarneming strikt gescheiden van de conclusie.',
+      ],
+    },
+    {
+      type: 'comparative',
+      columns: 3,
+      items: [
+        {
+          title: 'Boog',
+          icon: 'mdi:gesture-swipe-horizontal',
+          description: 'Lijnen lopen soepel door. Eenvoudige bogen hebben geen delta\'s of lussen.',
+          points: ['Geen delta', 'Golfachtig stroompatroon', 'Meest toegankelijk voor beginners'],
+        },
+        {
+          title: 'Lus',
+          icon: 'mdi:rotate-left',
+          highlight: true,
+          description: 'Lijnen buigen rond de kern en lopen terug naar de zijde van herkomst, met één delta.',
+          points: ['Eén delta', 'Radiale of ulnaire stroomrichting', 'Kernpositie is bepalend'],
+        },
+        {
+          title: 'Kring',
+          icon: 'mdi:autorenew',
+          description: 'Cirkel- of spiraalvormig patroon rond een centrale kern.',
+          points: ['Meestal twee delta\'s', 'Cirkelvormige tendens', 'Eenvoudige en zakkring varianten'],
+        },
+      ],
+    },
+    {
+      type: 'table',
+      headers: ['Minutia', 'Visueel kenmerk', 'Veelgemaakte fout bij markeren'],
+      rows: [
+        ['Lijneneinde', 'Een papillairlijn stopt abrupt.', 'Controleer of het geen inktbreuk, beschadiging of contrastfout is.'],
+        ['Bifurcatie', 'Een lijn splitst in twee takken.', 'Let op foutieve splitsingen door drukvervorming bij het afdrukken.'],
+        ['Eiland', 'Kort losliggend lijnfragment.', 'Alleen markeren als beide uiteinden duidelijk vrij liggen van andere lijnen.'],
+        ['Punt', 'Zeer klein stipvormig fragment.', 'Wees voorzichtig om dit niet te verwarren met vuil of beeldruis.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Betekenis van de oefenscore',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Deze score is geen juridisch bewijsmiddel. Het is een didactische checklist om studenten te stimuleren minutieus en zorgvuldig te annoteren en overhaaste conclusies zonder degelijke onderbouwing te voorkomen.',
+    },
+    {
+      type: 'paragraph',
+      html: 'In de forensische praktijk (ACE-V methode) beoordelen deskundigen de kwaliteit, eventuele vervormingen en de zeldzaamheid van kenmerken om tot een sluitende identificatie te komen.',
+    },
+    {
+      type: 'title',
+      text: 'Methodologie voor dactyloscopisch onderzoek en vergelijking',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Dactyloscopie is gebaseerd op het principe dat geen twee mensen dezelfde papillairäfdruk bezitten en dat dit patroon gedurende het hele leven onveranderd blijft. Didactische simulatoren helpen studenten een systematische observatiemethode te ontwikkelen door hen te leren de loop van individuele lijnen te volgen en minimale onderbrekingen zoals uiteinden of vertakkingen te herkennen in een gecontroleerde leeromgeving.',
+    },
+    {
+      type: 'paragraph',
+      html: 'De correcte annotatie van minutiae vereist dat studenten eerst de algehele lijnstroom begrijpen en vervolgens lokale afwijkingen kunnen benoemen. Uiteinden ontstaan wanneer een papillairlijn plotseling ophoudt zonder met een andere lijn te verbinden. Vertakkingen ontstaan wanneer een lijn zich splitst in twee takken. Eilanden en punten zijn korte ge\u00efsoleerde lijnsegmenten die bijzonder voorzichtig moeten worden gemarkeerd, omdat ze gemakkelijk verward kunnen worden met beeldruis of drukvervorming.',
+    },
+    {
+      type: 'paragraph',
+      html: 'In het forensisch onderwijs is het essentieel onderscheid te maken tussen de analyse van klasse- en individuele kenmerken. Klassekenmerken zoals boog, lus en kring maken het mogelijk een vingerafdruk in een categorie in te delen, maar zijn op zichzelf niet voldoende voor individuele identificatie. Alleen de combinatie en ruimtelijke rangschikking van minutiae in relatie tot de kern en het delta maakt een persoonsgebonden toewijzing mogelijk.',
+    },
+    {
+      type: 'glossary',
+      items: [
+        { term: 'Kern', definition: 'Het centrum van een lus- of kringpatroon dat dient als referentiepunt.' },
+        { term: 'Delta', definition: 'Het driezijdige splitsingspunt waar drie lijnstelsels samenkomen.' },
+        { term: 'Minutia', definition: 'Individueel kenmerk van een papillairlijn dat wordt gebruikt bij vergelijking.' },
+        { term: 'ACE-V', definition: 'Methodiek: Analyse, Vergelijking, Evaluatie, Verificatie.' },
+      ],
+    },
+    {
+      type: 'tip',
+      title: 'Tip voor praktijkles',
+      html: 'Laat studenten dezelfde afdruk tweemaal markeren: één keer snel, en één keer na een nauwkeurige stroomanalyse. De vergelijking toont vaak veel onterechte markeringen in de eerste poging.',
+    },
+    {
+      type: 'proscons',
+      title: 'Sterke punten en beperkingen van deze simulator',
+      items: [
+        { pro: 'Werkt met eigen geüploade afbeeldingen in plaats van statische voorbeelden.', con: 'De kwaliteit van de bronafbeelding bepaalt de herkenbaarheid van de lijnen.' },
+        { pro: 'Genereert een overzichtelijke, exporteerbare tabel van gemarkeerde punten.', con: 'Berekent geen richtingsvectoren of bewijskracht.' },
+        { pro: 'Scheidt patroonclassificatie duidelijk van de gedetailleerde minutiae-analyse.', con: 'Niet geschikt voor officiële forensische rapportages.' },
+      ],
+    },
+    {
+      type: 'diagnostic',
+      variant: 'warning',
+      icon: 'mdi:scale-balance',
+      badge: 'Forensische waarschuwing',
+      title: 'Uitsluitend voor educatief gebruik',
+      html: 'Deze simulator is uitsluitend ontwikkeld voor onderwijs en mag niet worden gebruikt voor officiële forensische identificaties.',
+    },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: title,
+      description,
+      applicationCategory: 'ForensicApplication',
+      operatingSystem: 'Any',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: title,
+      step: howTo.map((step) => ({
+        '@type': 'HowToStep',
+        name: step.name,
+        text: step.text,
+      })),
+    },
+  ],
+};

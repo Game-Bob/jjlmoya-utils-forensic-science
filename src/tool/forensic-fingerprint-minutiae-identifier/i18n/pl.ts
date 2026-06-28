@@ -1,0 +1,298 @@
+import { bibliography } from '../bibliography';
+import type { ToolLocaleContent } from '../../../types';
+
+const slug = 'identyfikator-minucji-linii-papilarnych';
+const title = 'Identyfikator minucji i wzorów linii papilarnych';
+const description = 'Prześlij obraz odcisku palca, zbadaj go za pomocą interaktywnego szkła powiększającego, sklasyfikuj wzór linii papilarnych, oznacz zestaw minucji i wyeksportuj tabelę dowodową.';
+
+const howTo = [
+  {
+    name: 'Wybierz wzor Galtona-Henry\'ego',
+    text: 'Po przesłaniu odcisku wybierz łuk, pętlę lub wir, aby zarejestrować zaobserwowany kierunek przepływu linii papilarnych.',
+  },
+  {
+    name: 'Dostosuj rdzeń i delty',
+    text: 'Ustaw suwaki przesuniecia rdzenia i liczby delt. Klasyfikator automatycznie zaktualizuje klase Henry\'ego i poziom pewnosci.',
+  },
+  {
+    name: 'Wybierz typ minucji',
+    text: 'Wybierz zakończenie linii, rozwidlenie, wyspę lub punkt przed umieszczeniem znaczników na obrazie.',
+  },
+  {
+    name: 'Umieść i zweryfikuj znaczniki',
+    text: 'Kliknij na odcisk palca, aby dodać znaczniki. Tabela zarejestruje współrzędne i sprawdzi cel ćwiczenia (5 zakończeń i 3 rozwidlenia).',
+  },
+];
+
+const faq = [
+  {
+    key: 'faq-1',
+    question: 'Co to są minucje?',
+    answer: 'Minucje to lokalne cechy charakterystyczne linii papilarnych (zakończenia, rozwidlenia, wyspy, punkty) wykorzystywane w identyfikacji daktyloskopijnej.',
+  },
+  {
+    key: 'faq-2',
+    question: 'Jaka jest różnica między łukiem, pętlą a wirem?',
+    answer: 'Łuk przebiega z jednej strony na drugą bez zakrzywienia powrotnego. Pętla ma jedną linię pętlicową i jedną deltę. Wir wykazuje wzór kolisty lub spiralny i zazwyczaj dwie delty.',
+  },
+  {
+    key: 'faq-3',
+    question: 'Czy ten program pozwala na zidentyfikowanie prawdziwej osoby?',
+    answer: 'Nie. To symulator edukacyjny do nauki klasyfikacji. Rzeczywiste badania wymagają skalibrowanych obrazów, materiałów porównawczych i oceny certyfikowanego biegłego.',
+  },
+  {
+    key: 'faq-4',
+    question: 'Dlaczego ćwiczenie wymaga 5 zakończeń i 3 rozwidleń?',
+    answer: 'Ten cel dydaktyczny pomaga studentom w systematycznym rozpoznawaniu i klasyfikowaniu najpopularniejszych rodzajów minucji.',
+  },
+];
+
+export const content: ToolLocaleContent = {
+  slug,
+  title,
+  description,
+  ui: {
+    canvasAria: 'Interaktywny obszar przesłanego odcisku palca do umieszczania znaczników minucji',
+    workflow: 'Przebieg analizy daktyloskopijnej',
+    stepUpload: 'Prześlij',
+    stepClassify: 'Klasyfikuj',
+    stepMark: 'Oznacz',
+    stepReview: 'Zweryfikuj',
+    stepLabel: 'Krok',
+    stage1Title: 'Prześlij odcisk palca',
+    stage1Copy: 'Zacznij od przesłania pliku z odciskiem. Obszar roboczy pozostanie zablokowany do momentu załadowania obrazu.',
+    stage2Title: 'Klasyfikuj przepływ linii',
+    stage2Copy: 'Użyj kontrolek pod obrazem, aby wybrać łuk, pętlę lub wir.',
+    stage3Title: 'Oznacz wymagane minucje',
+    stage3Copy: 'Wybierz typ minucji, kliknij na obrazie, aby ją umieścić, lub kliknij na istniejący znacznik, aby go usunąć.',
+    stage4Title: 'Przejrzyj tabelę dowodową',
+    stage4Copy: 'Sprawdź liczby minucji, usuń błędy za pomocą przycisku kosza i skopiuj sformatowany raport.',
+    canvasHint1: 'Prześlij obraz odcisku palca, aby rozpocząć.',
+    canvasHint2: 'Jeszcze nie oznaczaj. Określ ogólny wzór za pomocą przycisków pod obrazem.',
+    canvasHint3: 'Kliknij na obraz, aby umieścić wybraną minucję. Kliknij na znacznik, aby go zaznaczyć.',
+    canvasHint4: 'Przejrzyj tabelę dowodową pod obrazem.',
+    uploadTitle: 'Prześlij obraz odcisku palca',
+    uploadHint: 'Obraz PNG, JPG lub skan śladu daktyloskopijnego',
+    replaceImage: 'Zastąp',
+    continueMarking: 'Kontynuuj oznaczanie',
+    reviewEvidence: 'Zweryfikuj dowody',
+    back: 'Wstecz',
+    next: 'Dalej',
+    patternType: 'Ogólny typ wzoru',
+    arch: 'Łuk',
+    loop: 'Pętla',
+    whorl: 'Wir',
+    activeMinutia: 'Aktywna minucja',
+    markingNow: 'Oznaczanie aktywne',
+    clickToPlace: 'Kliknij we właściwym miejscu na obrazie',
+    ridgeEnding: 'Zakończenie linii',
+    ridgeEndingShort: 'linia się kończy',
+    ridgeEndingHelp: 'Zakończenie linii to punkt, w którym linia papilarna nagle się urywa bez łączenia z inną linią.',
+    bifurcation: 'Rozwidlenie (Bifurkacja)',
+    bifurcationShort: 'linia się rozdwaja',
+    bifurcationHelp: 'Rozwidlenie to punkt, w którym pojedyncza linia papilarna dzieli się na dwa odgałęzienia.',
+    island: 'Wyspa',
+    islandShort: 'krótka izolowana linia',
+    islandHelp: 'Wyspa to krótki odcinek linii papilarnej o dwóch wyraźnych końcach, oddzielony od dłuższych linii.',
+    dot: 'Punkt',
+    dotShort: 'malutki izolowany punkt',
+    dotHelp: 'Punkt to bardzo krótki fragment linii papilarnej, który wygląda jak pojedyncza kropka.',
+    coreOffset: 'Przesunięcie rdzenia',
+    deltaCount: 'Liczba delt',
+    henryClass: 'Klasa Henry\'ego',
+    validation: 'Wynik ćwiczenia',
+    legendAria: 'Legenda minucji',
+    clearMarks: 'Wyczyść wszystko',
+    undoLast: 'Cofnij ostatnie',
+    deleteSelected: 'Usuń zaznaczone',
+    selectMarkToDelete: 'Najpierw kliknij znacznik na obrazie',
+    copyEvidence: 'Skopiuj dowody',
+    ridgeFlow: 'Uwaga o przepływie',
+    type: 'Typ',
+    position: 'Pozycja',
+    action: 'Działanie',
+    remove: 'Usuń',
+    endingsGoal: 'Zakończenia linii',
+    bifurcationsGoal: 'Rozwidlenia',
+    totalMarks: 'Suma znaczników',
+    plainArch: 'Łuk zwykły',
+    archFlow: 'Linie wchodzą z jednej strony, lekko unoszą się w centrum i wychodzą po przeciwnej stronie bez powrotu.',
+    ulnarLoop: 'Pętla łokciowa',
+    radialLoop: 'Pętla promieniowa',
+    loopFlow: 'Jedna delta i wyraźna zakrzywiona linia powracająca w kierunku strony wejścia linii.',
+    plainWhorl: 'Wir zwykły',
+    centralPocketWhorl: 'Wir kieszeniowy',
+    whorlFlow: 'Koliste lub spiralne linie wokół rdzenia, z zazwyczaj dwiema deltami.',
+    ridgeEndingLabel: 'Z',
+    bifurcationLabel: 'R',
+    islandLabel: 'W',
+    dotLabel: 'P',
+  },
+  seo: [
+    {
+      type: 'title',
+      text: 'Klasyfikacja odcisków palców i analiza minucji',
+      level: 2,
+    },
+    {
+      type: 'diagnostic',
+      variant: 'info',
+      icon: 'mdi:fingerprint',
+      badge: 'Edukacja',
+      title: 'Cel tego symulatora minucji linii papilarnych',
+      html: 'To narzędzie zostało stworzone dla studentów kryminalistyki, aby ułatwić im naukę <strong>klasyfikacji daktyloskopijnej</strong> i <strong>oznaczania minucji</strong> z użyciem prawdziwych obrazów, interaktywnej lupy i raportów.',
+    },
+    {
+      type: 'stats',
+      columns: 4,
+      items: [
+        { value: '3', label: 'główne rodziny wzorów', icon: 'mdi:shape-outline' },
+        { value: '4', label: 'typy minucji', icon: 'mdi:map-marker-radius' },
+        { value: '5 + 3', label: 'cel edukacyjny ćwiczenia', icon: 'mdi:check-decagram' },
+        { value: 'Prześlij', label: 'przebieg oparty na obrazie', icon: 'mdi:cloud-upload-outline' },
+      ],
+    },
+    {
+      type: 'summary',
+      title: 'Sugerowany plan analizy',
+      items: [
+        'Najpierw sklasyfikuj ogólny wzór: łuk, pętlę lub wir.',
+        'Zlokalizuj delty i obszar rdzenia przed rozpoczęciem oznaczania minucji.',
+        'Oznaczaj tylko wyraźne cechy; unikaj obszarów zaszumionych lub rozmazanych.',
+        'Zapisz każdy punkt, podając jego typ oraz współrzędne.',
+        'Oddziel etap obiektywnej obserwacji od ostatecznej interpretacji.',
+      ],
+    },
+    {
+      type: 'comparative',
+      columns: 3,
+      items: [
+        {
+          title: 'Łuk',
+          icon: 'mdi:gesture-swipe-horizontal',
+          description: 'Linie papilarne przebiegają z jednej strony na drugą. Łuki zwykłe nie mają delt ani linii pętlicowych.',
+          points: ['Brak delty', 'Falisty wzór przepływu', 'Idealny dla początkujących'],
+        },
+        {
+          title: 'Pętla',
+          icon: 'mdi:rotate-left',
+          highlight: true,
+          description: 'Linie zakrzywiają się wokół rdzenia i powracają w tę samą stronę, z jedną deltą.',
+          points: ['Jedna delta', 'Kierunek łokciowy lub promieniowy', 'Pozycja rdzenia jest kluczowa'],
+        },
+        {
+          title: 'Wir',
+          icon: 'mdi:autorenew',
+          description: 'Wzory koliste lub spiralne wokół centralnego rdzenia.',
+          points: ['Zazwyczaj dwie delty', 'Struktura koncentryczna', 'Warianty zwykłe i kieszeniowe'],
+        },
+      ],
+    },
+    {
+      type: 'table',
+      headers: ['Minucja', 'Cechy wizualne', 'Częsty błąd przy oznaczaniu'],
+      rows: [
+        ['Zakończenie linii', 'Linia papilarna nagle się urywa.', 'Upewnij się, czy nie jest to brak tuszu lub wada kontrastu obrazu.'],
+        ['Rozwidlenie', 'Jedna linia dzieli się na dwie gałęzie.', 'Uważaj na fałszywe rozwidlenia wynikające z nacisku przy pobieraniu odcisku.'],
+        ['Wyspa', 'Krótki izolowany odcinek linii między dwiema dłuższymi.', 'Oznaczaj tylko wtedy, gdy oba końce są wyraźnie widoczne.'],
+        ['Punkt', 'Bardzo mały fragment linii przypominający kropkę.', 'Zachowaj ostrożność, by nie pomylić go z zabrudzeniem lub szumem matrycy.'],
+      ],
+    },
+    {
+      type: 'title',
+      text: 'Jak interpretować wynik ćwiczenia',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Ten wynik nie posiada mocy prawnej dowodu tożsamości. Jest to lista kontrolna, która motywuje studenta do dokładnej adnotacji i zapobiega wyciąganiu pochopnych wniosków bez właściwego udokumentowania cech.',
+    },
+    {
+      type: 'paragraph',
+      html: 'W rzeczywistej daktyloskopii (metodologia ACE-V) biegły analizuje jakość podłoża, zniekształcenia, zgodność przestrzenną i rzadkość występowania cech, aby sformułować jednoznaczną opinię.',
+    },
+    {
+      type: 'title',
+      text: 'Metodologia analizy i porównania daktyloskopijnego',
+      level: 3,
+    },
+    {
+      type: 'paragraph',
+      html: 'Daktyloskopia opiera się na założeniu, że nie istnieją dwie osoby o identycznych liniach papilarnych i że wzory te pozostają niezmienione przez całe życie. Symulatory edukacyjne pomagają studentom rozwinąć systematyczną metodę obserwacji, ucząc ich śledzenia przebiegu poszczególnych linii i identyfikowania drobnych lokalnych anomalii, takich jak zakończenia lub rozwidlenia, w kontrolowanym środowisku edukacyjnym.',
+    },
+    {
+      type: 'paragraph',
+      html: 'Poprawna adnotacja minucji wymaga, aby studenci najpierw zrozumieli ogólny przepływ linii papilarnych, a następnie potrafili nazwać lokalne anomalie. Zakończenia linii powstają, gdy linia papilarna nagle się urywa bez połączenia z inną linią. Rozwidlenia tworzą się, gdy jedna linia dzieli się na dwie gałęzie. Wyspy i punkty to krótkie izolowane segmenty, które należy oznaczać ze szczególną ostrożnością, gdyż łatwo je pomylić z szumem obrazu lub zniekształceniami ciśnienia.',
+    },
+    {
+      type: 'paragraph',
+      html: 'W nauczaniu kryminalistyki kluczowe jest rozróżnienie między analizą cech klasowych a analizą cech indywidualnych. Cechy klasowe, takie jak łuk, pętla i wir, pozwalają przyporządkować odcisk do kategorii, ale same w sobie nie wystarczają do identyfikacji indywidualnej. Dopiero kombinacja i przestrzenne rozmieszczenie minucji względem rdzenia i delty umożliwia przypisanie odcisku do konkretnej osoby.',
+    },
+    {
+      type: 'glossary',
+      items: [
+        { term: 'Rdzeń', definition: 'Geometryczny środek pętli lub wiru, używany jako punkt odniesienia.' },
+        { term: 'Delta', definition: 'Trójkątny punkt zbiegu trzech systemów linii papilarnych.' },
+        { term: 'Minucja', definition: 'Indywidualna cecha budowy linii papilarnej używana w badaniach porównawczych.' },
+        { term: 'ACE-V', definition: 'Procedura badawcza: analiza, porównanie, ocena, weryfikacja.' },
+      ],
+    },
+    {
+      type: 'tip',
+      title: 'Wskazówka dydaktyczna',
+      html: 'Poleć studentom oznaczyć ten sam odcisk dwukrotnie: raz szybko, a raz po dokładnej analizie przepływu linii. Porównanie wykaże liczbę błędnie postawionych znaczników w pierwszej próbie.',
+    },
+    {
+      type: 'proscons',
+      title: 'Mocne strony i ograniczenia symulatora',
+      items: [
+        { pro: 'Umożliwia pracę z własnymi plikami obrazów przesłanymi przez użytkownika.', con: 'Jakość pliku źródłowego bezpośrednio wpływa na precyzję oznaczeń.' },
+        { pro: 'Generuje przejrzysty, eksportowalny raport z zaznaczonymi punktami.', con: 'Nie oblicza wektorów kierunkowych ani formalnej wystarczalności dowodowej.' },
+        { pro: 'Oddziela klasyfikację ogólnego wzoru od szczegółowego oznaczania minucji.', con: 'Nie nadaje się do wykonywania oficjalnych ekspertyz sądowych.' },
+      ],
+    },
+    {
+      type: 'diagnostic',
+      variant: 'warning',
+      icon: 'mdi:scale-balance',
+      badge: 'Ostrzeżenie prawne',
+      title: 'Wyłącznie do użytku dydaktycznego',
+      html: 'Ten symulator został zaprojektowany wyłącznie w celach edukacyjnych i nie może być stosowany do wydawania opinii w rzeczywistych sprawach.',
+    },
+  ],
+  faq,
+  bibliography,
+  howTo,
+  schemas: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: title,
+      description,
+      applicationCategory: 'ForensicApplication',
+      operatingSystem: 'Any',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: title,
+      step: howTo.map((step) => ({
+        '@type': 'HowToStep',
+        name: step.name,
+        text: step.text,
+      })),
+    },
+  ],
+};
