@@ -173,12 +173,9 @@ function scoreByDistance(distance: number, fullScale: number): number {
 
 export class FiberComparisonMicroscope {
   compare(input: FiberComparisonInput): FiberComparisonResult {
-    const left = typeof input.left === 'string' ? FIBER_DATABASE[input.left] ?? FIBER_DATABASE.questionedCotton : input.left;
-    const right = FIBER_DATABASE[input.right] ?? FIBER_DATABASE.suspectCotton;
-    const diameterScore = scoreByDistance(Math.abs(left.diameterMicrons - right.diameterMicrons), 18);
-    const twistScore = left.twist === right.twist ? 100 : 52;
-    const materialScore = left.material === right.material ? 100 : left.natural === right.natural ? 68 : 34;
-    const morphologyScore = Math.round((diameterScore * 0.42) + (twistScore * 0.24) + (materialScore * 0.34));
+    const left = this.resolveLeftProfile(input.left);
+    const right = this.resolveRightProfile(input.right);
+    const morphologyScore = this.calculateMorphologyScore(left, right);
     const spectrumScore = this.calculateSpectrumScore(left.spectrum, right.spectrum);
     const combinedScore = Math.round((morphologyScore * 0.48) + (spectrumScore * 0.52));
     const birefringenceContrast = Number(Math.abs(left.birefringence - right.birefringence).toFixed(3));
@@ -193,7 +190,7 @@ export class FiberComparisonMicroscope {
       combinedScore,
       birefringenceContrast,
       visualSharpness,
-      verdictKey: combinedScore >= 82 ? 'verdictStrong' : combinedScore >= 55 ? 'verdictPartial' : 'verdictDifferent',
+      verdictKey: this.verdictForScore(combinedScore),
     };
   }
 
@@ -215,5 +212,33 @@ export class FiberComparisonMicroscope {
   private calculateSpectrumScore(left: SpectrumPoint[], right: SpectrumPoint[]): number {
     const totalDifference = left.reduce((sum, point, index) => sum + Math.abs(point.absorbance - (right[index]?.absorbance ?? 0)), 0);
     return scoreByDistance(totalDifference, 2.1);
+  }
+
+  private resolveLeftProfile(left: FiberReference | FiberProfile): FiberProfile {
+    if (typeof left === 'string') return FIBER_DATABASE[left] ?? FIBER_DATABASE.questionedCotton;
+    return left;
+  }
+
+  private resolveRightProfile(right: FiberReference): FiberProfile {
+    return FIBER_DATABASE[right] ?? FIBER_DATABASE.suspectCotton;
+  }
+
+  private calculateMorphologyScore(left: FiberProfile, right: FiberProfile): number {
+    const diameterScore = scoreByDistance(Math.abs(left.diameterMicrons - right.diameterMicrons), 18);
+    const twistScore = left.twist === right.twist ? 100 : 52;
+    const materialScore = this.materialScore(left, right);
+    return Math.round((diameterScore * 0.42) + (twistScore * 0.24) + (materialScore * 0.34));
+  }
+
+  private materialScore(left: FiberProfile, right: FiberProfile): number {
+    if (left.material === right.material) return 100;
+    if (left.natural === right.natural) return 68;
+    return 34;
+  }
+
+  private verdictForScore(score: number): FiberComparisonResult['verdictKey'] {
+    if (score >= 82) return 'verdictStrong';
+    if (score >= 55) return 'verdictPartial';
+    return 'verdictDifferent';
   }
 }
