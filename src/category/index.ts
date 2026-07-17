@@ -1,19 +1,19 @@
 import type { ScienceCategoryEntry } from '../types';
-import { forensicAgeEstimator } from '../tool/forensic-age-estimator/index';
-import { widmarkAlcoholSimulator } from '../tool/widmark-alcohol-simulator/index';
-import { forensicSexDeterminator } from '../tool/forensic-sex-determinator/index';
-import { forensicStatureEstimator } from '../tool/forensic-stature-estimator/index';
-import { forensicBloodTestSimulator } from '../tool/forensic-blood-test-simulator/index';
-import { forensicImageAuthenticityAnalyzer } from '../tool/forensic-image-authenticity-analyzer/index';
-import { gsrDispersionCalculator } from '../tool/gsr-dispersion-calculator/index';
-import { forensicTlcInkSimulator } from '../tool/forensic-tlc-ink-simulator/index';
-import { forensicMicrocrystalDrugSimulator } from '../tool/forensic-microcrystal-drug-simulator/index';
-import { forensicGlassBeckeLineSimulator } from '../tool/forensic-glass-becke-line-simulator/index';
-import { forensicFiberComparisonMicroscope } from '../tool/forensic-fiber-comparison-microscope/index';
-import { bloodstainPatternOriginAnalyzer } from '../tool/bloodstain-pattern-origin-analyzer/index';
-import { forensicFingerprintMinutiaeIdentifier } from '../tool/forensic-fingerprint-minutiae-identifier/index';
-import { firePatternOriginAnalyzer } from '../tool/fire-pattern-origin-analyzer/index';
-import { forensicToolmarkStriationMatcher } from '../tool/forensic-toolmark-striation-matcher/index';
+import { forensicAgeEstimator } from '../tool/forensic-age-estimator/entry';
+import { widmarkAlcoholSimulator } from '../tool/widmark-alcohol-simulator/entry';
+import { forensicSexDeterminator } from '../tool/forensic-sex-determinator/entry';
+import { forensicStatureEstimator } from '../tool/forensic-stature-estimator/entry';
+import { forensicBloodTestSimulator } from '../tool/forensic-blood-test-simulator/entry';
+import { forensicImageAuthenticityAnalyzer } from '../tool/forensic-image-authenticity-analyzer/entry';
+import { gsrDispersionCalculator } from '../tool/gsr-dispersion-calculator/entry';
+import { forensicTlcInkSimulator } from '../tool/forensic-tlc-ink-simulator/entry';
+import { forensicMicrocrystalDrugSimulator } from '../tool/forensic-microcrystal-drug-simulator/entry';
+import { forensicGlassBeckeLineSimulator } from '../tool/forensic-glass-becke-line-simulator/entry';
+import { forensicFiberComparisonMicroscope } from '../tool/forensic-fiber-comparison-microscope/entry';
+import { bloodstainPatternOriginAnalyzer } from '../tool/bloodstain-pattern-origin-analyzer/entry';
+import { forensicFingerprintMinutiaeIdentifier } from '../tool/forensic-fingerprint-minutiae-identifier/entry';
+import { firePatternOriginAnalyzer } from '../tool/fire-pattern-origin-analyzer/entry';
+import { forensicToolmarkStriationMatcher } from '../tool/forensic-toolmark-striation-matcher/entry';
 
 export const forensicCategory: ScienceCategoryEntry = {
   icon: 'mdi:fingerprint',
