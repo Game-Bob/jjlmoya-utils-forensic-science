@@ -12,9 +12,9 @@ export function animateDrop(dropEl: HTMLElement | null, dishEl: HTMLElement | nu
   }
 
   dropEl.classList.remove('animating');
-  void dropEl.offsetWidth;
-
-  dropEl.classList.add('animating');
+  requestAnimationFrame(() => {
+    dropEl.classList.add('animating');
+  });
 
   setTimeout(() => {
     dropEl.classList.remove('animating');

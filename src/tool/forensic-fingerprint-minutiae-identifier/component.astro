@@ -190,7 +190,7 @@ const { ui } = Astro.props;
     renderTable,
   } from './renderer';
 
-  const ui = JSON.parse(document.getElementById('fp-ui')?.textContent || '{}');
+  const ui = JSON.parse((document.getElementById('fp-ui') as HTMLElement | null)?.innerText || '{}');
   const board = document.querySelector<HTMLElement>('[data-fingerprint-tool] .fp-board');
   const canvas = document.getElementById('fp-canvas') as HTMLCanvasElement | null;
   const context = canvas?.getContext('2d') ?? null;
@@ -238,10 +238,12 @@ const { ui } = Astro.props;
     if (!uploadedImage) return 1;
     return Math.max(2, Math.min(4, step));
   }
+  function getCanvasRect(): DOMRect | null { return canvas ? canvas.getBoundingClientRect() : null; }
   function updateMagnifier(): void {
     if (canvas && glass) {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
       glass.style.backgroundImage = `url(${canvas.toDataURL('image/png')})`;
-      glass.style.backgroundSize = `${canvas.clientWidth * 2.4}px ${canvas.clientHeight * 2.4}px`;
+      glass.style.backgroundSize = `${w * 2.4}px ${h * 2.4}px`;
     }
   }
   function render(): void {
@@ -311,14 +313,16 @@ const { ui } = Astro.props;
   canvas?.addEventListener('click', (event) => {
     if (!uploadedImage) return fileInput?.click();
     if (activeStep !== 3 || !canvas) return;
-    const rect = canvas.getBoundingClientRect();
+    const rect = getCanvasRect();
+    if (!rect) return;
     const canvasX = ((event.clientX - rect.left) / rect.width) * canvas.width;
     const canvasY = ((event.clientY - rect.top) / rect.height) * canvas.height;
     handleCanvasClick(canvasX, canvasY);
   });
   canvas?.addEventListener('mousemove', (event) => {
     if (!glass || !uploadedImage || !canvas) return;
-    const rect = canvas.getBoundingClientRect();
+    const rect = getCanvasRect();
+    if (!rect) return;
     const localX = event.clientX - rect.left;
     const localY = event.clientY - rect.top;
     glass.style.opacity = '1';

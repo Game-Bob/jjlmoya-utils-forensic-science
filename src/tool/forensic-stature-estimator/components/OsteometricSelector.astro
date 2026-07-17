@@ -61,7 +61,7 @@ const ancestries = [
     <label for="input-length-val" id="length-label-text">{ui.lengthLabel} ({ui.unitsCm})</label>
     <div class="length-input-container">
       <input type="number" id="input-length-val" class="selector-number" step="0.1" />
-      <input type="range" id="input-length" class="selector-range" step="0.1" />
+      <input type="range" id="input-length" class="selector-range" step="0.1" aria-label={`${ui.lengthLabel} ${ui.unitsCm}`} />
     </div>
   </div>
   

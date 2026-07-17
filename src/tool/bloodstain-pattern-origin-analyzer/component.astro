@@ -111,7 +111,7 @@ const { ui } = Astro.props;
   import { analyzeBloodstains } from './logic';
   import type { BloodstainInput, OriginEstimate } from './logic';
 
-  const ui = JSON.parse(document.getElementById('bpa-ui')?.textContent || '{}');
+  const ui = JSON.parse((document.getElementById('bpa-ui') as HTMLElement | null)?.innerText || '{}');
   const surface = document.getElementById('bpa-surface') as HTMLCanvasElement | null;
   const rows = document.getElementById('bpa-rows');
   const threeHost = document.getElementById('bpa-three');
@@ -182,31 +182,6 @@ const { ui } = Astro.props;
     return stains.find((stain) => stain.id === selectedStainId) ?? stains[0];
   }
 
-  function configureFocusRanges() {
-    if (!focusWidthEl || !focusLengthEl) return;
-    focusWidthEl.min = cmToInput(0.2).toString();
-    focusWidthEl.max = cmToInput(3).toString();
-    focusWidthEl.step = unit === 'metric' ? '0.1' : '0.05';
-    focusLengthEl.min = cmToInput(0.5).toString();
-    focusLengthEl.max = cmToInput(6).toString();
-    focusLengthEl.step = unit === 'metric' ? '0.1' : '0.05';
-  }
-
-  function syncFocusPanel() {
-    const stain = selectedStain();
-    if (!stain) return;
-    const color = palette[selectedIndex() % palette.length];
-    if (focusNameEl) focusNameEl.textContent = `${ui.stainLabel} ${stain.id}`;
-    if (focusSwatchEl) focusSwatchEl.style.background = color;
-    configureFocusRanges();
-    if (focusWidthEl) focusWidthEl.value = cmToInput(stain.widthCm).toString();
-    if (focusLengthEl) focusLengthEl.value = cmToInput(stain.lengthCm).toString();
-    if (focusRotationEl) focusRotationEl.value = stain.rotationDeg.toString();
-    if (focusWidthValueEl) focusWidthValueEl.textContent = display(stain.widthCm);
-    if (focusLengthValueEl) focusLengthValueEl.textContent = display(stain.lengthCm);
-    if (focusRotationValueEl) focusRotationValueEl.textContent = `${stain.rotationDeg.toFixed(0)} ${ui.degree}`;
-  }
-
   function canvasMetrics() {
     if (!surface) return null;
     const rect = surface.getBoundingClientRect();
@@ -237,6 +212,39 @@ const { ui } = Astro.props;
       y: (event.clientY - metrics.rect.top) * metrics.pointerScaleY,
       metrics,
     };
+  }
+
+  function resizeThree() {
+    if (!threeHost) return;
+    const rect = threeHost.getBoundingClientRect();
+    renderer.setSize(rect.width, rect.height, false);
+    camera.aspect = rect.width / Math.max(rect.height, 1);
+    camera.updateProjectionMatrix();
+  }
+
+  function configureFocusRanges() {
+    if (!focusWidthEl || !focusLengthEl) return;
+    focusWidthEl.min = cmToInput(0.2).toString();
+    focusWidthEl.max = cmToInput(3).toString();
+    focusWidthEl.step = unit === 'metric' ? '0.1' : '0.05';
+    focusLengthEl.min = cmToInput(0.5).toString();
+    focusLengthEl.max = cmToInput(6).toString();
+    focusLengthEl.step = unit === 'metric' ? '0.1' : '0.05';
+  }
+
+  function syncFocusPanel() {
+    const stain = selectedStain();
+    if (!stain) return;
+    const color = palette[selectedIndex() % palette.length];
+    if (focusNameEl) focusNameEl.textContent = `${ui.stainLabel} ${stain.id}`;
+    if (focusSwatchEl) focusSwatchEl.style.background = color;
+    configureFocusRanges();
+    if (focusWidthEl) focusWidthEl.value = cmToInput(stain.widthCm).toString();
+    if (focusLengthEl) focusLengthEl.value = cmToInput(stain.lengthCm).toString();
+    if (focusRotationEl) focusRotationEl.value = stain.rotationDeg.toString();
+    if (focusWidthValueEl) focusWidthValueEl.textContent = display(stain.widthCm);
+    if (focusLengthValueEl) focusLengthValueEl.textContent = display(stain.lengthCm);
+    if (focusRotationValueEl) focusRotationValueEl.textContent = `${stain.rotationDeg.toFixed(0)} ${ui.degree}`;
   }
 
   function findStainAt(event: PointerEvent): BloodstainInput | null {
@@ -272,14 +280,6 @@ const { ui } = Astro.props;
     camera.lookAt(0, 0, 35);
     resizeThree();
     renderer.setAnimationLoop(() => renderer.render(scene, camera));
-  }
-
-  function resizeThree() {
-    if (!threeHost) return;
-    const rect = threeHost.getBoundingClientRect();
-    renderer.setSize(rect.width, rect.height, false);
-    camera.aspect = rect.width / Math.max(rect.height, 1);
-    camera.updateProjectionMatrix();
   }
 
   function clearDynamic3d() {
@@ -398,11 +398,11 @@ const { ui } = Astro.props;
       const row = document.createElement('tr');
       if (stain.id === selectedStainId) row.className = 'is-selected';
       row.innerHTML = `
-        <td><input data-field="xCm" data-id="${stain.id}" type="number" step="0.5" value="${cmToInput(stain.xCm).toFixed(1)}"></td>
-        <td><input data-field="yCm" data-id="${stain.id}" type="number" step="0.5" value="${cmToInput(stain.yCm).toFixed(1)}"></td>
-        <td><input data-field="widthCm" data-id="${stain.id}" type="number" min="0.1" step="0.1" value="${cmToInput(stain.widthCm).toFixed(1)}"></td>
-        <td><input data-field="lengthCm" data-id="${stain.id}" type="number" min="0.1" step="0.1" value="${cmToInput(stain.lengthCm).toFixed(1)}"></td>
-        <td><input data-field="rotationDeg" data-id="${stain.id}" type="number" step="1" value="${stain.rotationDeg.toFixed(0)}"></td>
+        <td><input aria-label="${ui.x} ${stain.id}" data-field="xCm" data-id="${stain.id}" type="number" step="0.5" value="${cmToInput(stain.xCm).toFixed(1)}"></td>
+        <td><input aria-label="${ui.y} ${stain.id}" data-field="yCm" data-id="${stain.id}" type="number" step="0.5" value="${cmToInput(stain.yCm).toFixed(1)}"></td>
+        <td><input aria-label="${ui.width} ${stain.id}" data-field="widthCm" data-id="${stain.id}" type="number" min="0.1" step="0.1" value="${cmToInput(stain.widthCm).toFixed(1)}"></td>
+        <td><input aria-label="${ui.length} ${stain.id}" data-field="lengthCm" data-id="${stain.id}" type="number" min="0.1" step="0.1" value="${cmToInput(stain.lengthCm).toFixed(1)}"></td>
+        <td><input aria-label="${ui.rotation} ${stain.id}" data-field="rotationDeg" data-id="${stain.id}" type="number" step="1" value="${stain.rotationDeg.toFixed(0)}"></td>
         <td><button type="button" class="bpa-icon-button" data-remove="${stain.id}" aria-label="${ui.remove} ${stain.id}">${deleteIconTemplate?.innerHTML || ui.remove}</button></td>
       `;
       rows.appendChild(row);

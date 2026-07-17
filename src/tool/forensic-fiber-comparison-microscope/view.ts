@@ -249,8 +249,9 @@ class FiberComparisonView {
     if (!panel) return;
     panel.dataset.verdict = state;
     panel.classList.remove('is-updating');
-    void panel.offsetWidth;
-    panel.classList.add('is-updating');
+    requestAnimationFrame(() => {
+      panel.classList.add('is-updating');
+    });
   }
 
   private statusKey(verdictKey: Result['verdictKey']): string {

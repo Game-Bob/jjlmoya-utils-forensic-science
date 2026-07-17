@@ -24,7 +24,7 @@ const { ui } = Astro.props;
     <aside class="fiber-controls">
       <div class="fiber-field">
         <span>{ui.questionedSample}</span>
-        <select id="fiber-left" class="fiber-native-select" aria-hidden="true" tabindex="-1">
+        <select id="fiber-left" class="fiber-native-select" aria-hidden="true" aria-label={ui.questionedSample} tabindex="-1">
           <option value="questionedCotton">{ui.questionedCotton}</option>
         </select>
         <div class="fiber-builder-head">
@@ -73,7 +73,7 @@ const { ui } = Astro.props;
 
       <div class="fiber-field">
         <span>{ui.knownSample}</span>
-        <select id="fiber-right" class="fiber-native-select" aria-hidden="true" tabindex="-1">
+        <select id="fiber-right" class="fiber-native-select" aria-hidden="true" aria-label={ui.knownSample} tabindex="-1">
           <option value="suspectCotton">{ui.suspectCotton}</option>
           <option value="wool">{ui.wool}</option>
           <option value="polyester">{ui.polyester}</option>
