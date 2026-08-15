@@ -14,6 +14,7 @@ import { bloodstainPatternOriginAnalyzer } from '../tool/bloodstain-pattern-orig
 import { forensicFingerprintMinutiaeIdentifier } from '../tool/forensic-fingerprint-minutiae-identifier/entry';
 import { firePatternOriginAnalyzer } from '../tool/fire-pattern-origin-analyzer/entry';
 import { forensicToolmarkStriationMatcher } from '../tool/forensic-toolmark-striation-matcher/entry';
+import { timeOfDeathAlgorMortisCalculator } from '../tool/time-of-death-algor-mortis-calculator/entry';
 
 export const forensicCategory: ScienceCategoryEntry = {
   icon: 'mdi:fingerprint',
@@ -32,8 +33,12 @@ export const forensicCategory: ScienceCategoryEntry = {
     bloodstainPatternOriginAnalyzer,
     forensicFingerprintMinutiaeIdentifier,
     firePatternOriginAnalyzer,
-    forensicToolmarkStriationMatcher
+    forensicToolmarkStriationMatcher,
+    timeOfDeathAlgorMortisCalculator
   ],
+
+
+
   i18n: {
     de: () => import('./i18n/de').then((m) => m.content),
     en: () => import('./i18n/en').then((m) => m.content),

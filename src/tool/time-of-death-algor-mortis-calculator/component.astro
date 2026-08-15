@@ -1,0 +1,133 @@
+---
+import type { KnownLocale } from '../../types';
+import type { TimeOfDeathAlgorMortisUI } from './ui';
+import { timeOfDeathAlgorMortisCalculator } from './entry';
+import './time-of-death-algor-mortis-calculator.css';
+
+interface Props {
+  ui?: TimeOfDeathAlgorMortisUI;
+  locale?: KnownLocale;
+}
+
+const { ui: propUi, locale = 'en' } = Astro.props;
+let ui = propUi;
+if (!ui) {
+  const content = await timeOfDeathAlgorMortisCalculator.i18n[locale]?.();
+  ui = content?.ui;
+}
+if (!ui) return null;
+---
+
+<div class="sc-algor-cockpit" id="algor-cockpit-root" data-i18n={JSON.stringify(ui)}>
+  <div class="sc-cockpit-sidebar">
+    <div>
+      <div class="sc-header-row">
+        <div class="sc-panel-title">{ui.presetsHeader}</div>
+        <div class="sc-unit-toggle">
+          <button type="button" class="sc-unit-btn active" data-unit="metric">{ui.unitMetricLabel || 'Metric'}</button>
+          <button type="button" class="sc-unit-btn" data-unit="imperial">{ui.unitImperialLabel || 'Imperial'}</button>
+        </div>
+      </div>
+      <div class="sc-presets-wrap">
+        <button type="button" class="sc-preset-chip active" data-preset="dressedIndoor">{ui.presetDressedIndoor}</button>
+        <button type="button" class="sc-preset-chip" data-preset="nakedCalm">{ui.presetNakedCalm}</button>
+        <button type="button" class="sc-preset-chip" data-preset="winterOutdoor">{ui.presetWinterOutdoor}</button>
+        <button type="button" class="sc-preset-chip" data-preset="submergedWater">{ui.presetSubmergedWater}</button>
+        <button type="button" class="sc-preset-chip" data-preset="heavyDuvet">{ui.presetHeavyDuvet}</button>
+      </div>
+    </div>
+
+    <div class="sc-input-group">
+      <div class="sc-input-label-row">
+        <label class="sc-label" for="slider-rectalTemp">{ui.rectalTempLabel}</label>
+        <span class="sc-label" id="label-unit-temp-1">{ui.celsiusUnit}</span>
+      </div>
+      <div class="sc-tactile-row">
+        <input type="range" id="slider-rectalTemp" class="sc-slider" data-key="rectalTemp" min="10" max="40" step="0.1" value="30.5" />
+        <input type="number" id="num-rectalTemp" class="sc-num-input" data-key="rectalTemp" aria-label={ui.rectalTempLabel} min="10" max="40" step="0.1" value="30.5" />
+      </div>
+    </div>
+
+    <div class="sc-input-group">
+      <div class="sc-input-label-row">
+        <label class="sc-label" for="slider-ambientTemp">{ui.ambientTempLabel}</label>
+        <span class="sc-label" id="label-unit-temp-2">{ui.celsiusUnit}</span>
+      </div>
+      <div class="sc-tactile-row">
+        <input type="range" id="slider-ambientTemp" class="sc-slider" data-key="ambientTemp" min="-10" max="38" step="0.1" value="19.5" />
+        <input type="number" id="num-ambientTemp" class="sc-num-input" data-key="ambientTemp" aria-label={ui.ambientTempLabel} min="-10" max="38" step="0.1" value="19.5" />
+      </div>
+    </div>
+
+    <div class="sc-input-group">
+      <div class="sc-input-label-row">
+        <label class="sc-label" for="slider-bodyWeight">{ui.bodyWeightLabel}</label>
+        <span class="sc-label" id="label-unit-weight">{ui.kgUnit}</span>
+      </div>
+      <div class="sc-tactile-row">
+        <input type="range" id="slider-bodyWeight" class="sc-slider" data-key="bodyWeight" min="20" max="180" step="0.5" value="75" />
+        <input type="number" id="num-bodyWeight" class="sc-num-input" data-key="bodyWeight" aria-label={ui.bodyWeightLabel} min="20" max="180" step="0.5" value="75" />
+      </div>
+    </div>
+
+    <div class="sc-input-group">
+      <label class="sc-label" for="factor-select-trigger">{ui.factorLabel}</label>
+      <div class="sc-custom-select" id="factor-custom-select">
+        <button type="button" class="sc-select-trigger" id="factor-select-trigger" aria-haspopup="listbox">
+          <span class="sc-select-val">{ui.factorLightClothes} (1.1)</span>
+          <svg class="sc-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="sc-select-dropdown" id="factor-select-dropdown" role="listbox">
+          <div class="sc-select-option" data-factor-val="1.0">{ui.factorNaked} (1.0)</div>
+          <div class="sc-select-option" data-factor-val="1.1">{ui.factorLightClothes} (1.1)</div>
+          <div class="sc-select-option" data-factor-val="1.2">{ui.factorStandardClothes} (1.2)</div>
+          <div class="sc-select-option" data-factor-val="1.4">{ui.factorHeavyWinter} (1.4)</div>
+          <div class="sc-select-option" data-factor-val="1.3">{ui.factorLightBlanket} (1.3)</div>
+          <div class="sc-select-option" data-factor-val="1.8">{ui.factorHeavyDuvet} (1.8)</div>
+          <div class="sc-select-option" data-factor-val="0.5">{ui.factorStillWater} (0.5)</div>
+          <div class="sc-select-option" data-factor-val="0.35">{ui.factorFlowingWater} (0.35)</div>
+          <div class="sc-select-option" data-factor-val="0.7">{ui.factorWetClothing} (0.7)</div>
+          <div class="sc-select-option" data-factor-val="0.75">{ui.factorMovingAir} (0.75)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc-input-group">
+      <label class="sc-label" for="input-time">{ui.measurementTimeLabel}</label>
+      <div class="sc-actions-row">
+        <div class="sc-time-wrap">
+          <input type="time" id="input-time" class="sc-time-input" value="14:00" />
+          <svg class="sc-time-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <button type="button" id="btn-now" class="sc-btn sc-btn-primary">{ui.nowBtn}</button>
+        <button type="button" id="btn-reset" class="sc-btn">{ui.resetBtn}</button>
+      </div>
+    </div>
+
+    <div class="sc-warning-card">
+      <div class="sc-warning-title">{ui.disclaimerTitle || ui.inputsHeader}</div>
+      <div class="sc-warning-text">{ui.disclaimer}</div>
+    </div>
+  </div>
+
+  <div class="sc-cockpit-stage">
+    <div id="telemetry-stage"></div>
+    <div class="sc-chart-stage">
+      <div class="sc-panel-title">{ui.chartHeader}</div>
+      <svg id="nomogram-svg" class="sc-nomogram-svg"></svg>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { AlgorMortisController } from './controller';
+  const root = document.getElementById('algor-cockpit-root');
+  if (root) {
+    new AlgorMortisController(root);
+  }
+</script>

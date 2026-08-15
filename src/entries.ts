@@ -28,6 +28,8 @@ export { firePatternOriginAnalyzer } from './tool/fire-pattern-origin-analyzer/e
 export type { FirePatternOriginAnalyzerUI, FirePatternOriginAnalyzerLocaleContent } from './tool/fire-pattern-origin-analyzer/entry';
 export { forensicToolmarkStriationMatcher } from './tool/forensic-toolmark-striation-matcher/entry';
 export type { ToolmarkStriationMatcherUI, ToolmarkStriationMatcherLocaleContent } from './tool/forensic-toolmark-striation-matcher/entry';
+export { timeOfDeathAlgorMortisCalculator } from './tool/time-of-death-algor-mortis-calculator/entry';
+export type { TimeOfDeathAlgorMortisUI, TimeOfDeathAlgorMortisLocaleContent } from './tool/time-of-death-algor-mortis-calculator/entry';
 
 import { forensicAgeEstimator } from './tool/forensic-age-estimator/entry';
 import { widmarkAlcoholSimulator } from './tool/widmark-alcohol-simulator/entry';
@@ -44,6 +46,7 @@ import { bloodstainPatternOriginAnalyzer } from './tool/bloodstain-pattern-origi
 import { forensicFingerprintMinutiaeIdentifier } from './tool/forensic-fingerprint-minutiae-identifier/entry';
 import { firePatternOriginAnalyzer } from './tool/fire-pattern-origin-analyzer/entry';
 import { forensicToolmarkStriationMatcher } from './tool/forensic-toolmark-striation-matcher/entry';
+import { timeOfDeathAlgorMortisCalculator } from './tool/time-of-death-algor-mortis-calculator/entry';
 
 export const ALL_ENTRIES = [
   forensicAgeEstimator,
@@ -60,5 +63,9 @@ export const ALL_ENTRIES = [
   bloodstainPatternOriginAnalyzer,
   forensicFingerprintMinutiaeIdentifier,
   firePatternOriginAnalyzer,
-  forensicToolmarkStriationMatcher
+  forensicToolmarkStriationMatcher,
+  timeOfDeathAlgorMortisCalculator
 ];
+
+
+
