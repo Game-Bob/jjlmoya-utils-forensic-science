@@ -86,7 +86,6 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
   seo: [
     { type: 'title', text: 'Ceset Sogumasinin Fiziksel Temelleri ve Olum Zamani Tahmini', level: 2 },
     { type: 'paragraph', html: 'Olumden sonra gecen surenin (Postmortem Interval veya PMI) belirlenmesi adli tip patolojisinin ve olay yeri inceleme ekiplerinin en temel gorevlerinden biridir. <strong>Algor Mortis</strong> dolasimin durmasindan ve hucresel metabolizmanin sona ermesinden sonra vucut isisinin cevre ortama isi aktarimiyla kademeli olarak sogumasini ve termal dengeye ulasmasini ifade eder. Derin rektal isi olcumu ve dogrulanmis termodinamik modeller kullanilarak olum saati bilimsel, kesin ve objektif olarak daraltilabilir.' },
-    { type: 'paragraph', html: 'Cesetten cevreye isi yayilimi isima, iletim, dogal hava konveksiyonu ve ter buharlasmasi gibi fiziksel yollarla gerceklesir. Ic organlar isisini once dis deri tabakasina aktardigi icin basit dogrusal formulasyonlarin aciklayamayacagi karmasik bir isi gradyani olusur.' },
     { type: 'diagnostic', variant: 'info', title: 'Cesedin Termodinamik Soguma Sureci', html: 'Isi kaybi ilk dakikadan itibaren dogrusal bir cizgi seklinde ilerlemez. Ilk saatlerde <em>sicaklik platosu</em> denilen bir gecikme evresi gozlenir, ardindan dik bir cift ustel dusus baslar ve ortam sicakligina asimptotik olarak yaklasir.' },
     { type: 'stats', columns: 3, items: [
       { value: '37.2°C', label: 'Normal rektal referans' },
@@ -97,9 +96,8 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
     { type: 'paragraph', html: 'Glaister kurali gibi basit dogrusal yaklasimlar saatte yaklasik 0.83 santigrat derece sabit isi kaybi varsayiyordu. Ancak bu yontem toplam vucut kutlesini, kumas katmanlarinin yalitimini ve baslangictaki felsefi isi platosunu hesaba katmiyordu.' },
     { type: 'code', ariaLabel: 'Henssge Denklemi', code: 'Q = (T_rektal - T_ortam) / (37.2 - T_ortam)\nQ = 1.25 * exp(-k * t) - 0.25 * exp(-5 * k * t)\nk = 1.2815 / (VucutAgirligi^0.625 * DuzeltmeKatsayisi) - 0.0284' },
     { type: 'paragraph', html: 'Profesor Claus Henssge vucut yuzeyinin isi iletimini ve derin ic organlarin termal ataletini ayni anda aciklayan cift ustel bir denklem formulu gelistirerek adli bilime kazandirmistir.' },
-    { type: 'paragraph', html: 'Boyutsuz termal Q katsayisi vucudun olum anindaki ortam sicakligina gore kalan isi payini temsil eder. Bu matematiksel yapi her turlu cevre kosulunda hesaplamanin yuksek dogrulukla yapilmasini saglar.' },
     { type: 'title', text: 'Cevre ve Giysi Duzeltme Katsayilari', level: 3 },
-    { type: 'paragraph', html: 'Isi transferi hizi vucut kutlesine, ceset etrafindaki hava akimina ve koruyucu tekstil katmanlarina dogrudan baglidir.' },
+    { type: 'paragraph', html: 'Isi transferi hizi vucut kutlesine, ceset etrafindaki hava akimina ve koruyucu tekstil katmanlarina dogrudan baglidir.' + " Güvenilir bir tahmin çevreyi, giysileri, vücut konumunu, hava hareketini ve her ölçümün güvenilirliğini de dikkate almalıdır. Farklılıklar nemden, ısı kaynaklarından, zeminden veya eksik belgelendirmeden kaynaklanabilir. Bu nedenle sonuç belirsizlik içeren bir aralık olarak değerlendirilmeli ve tek bir hesaplama sayısı yerine diğer adli bulgularla birlikte yorumlanmalıdır." + " Her değerlendirme görüntü kalitesini, ölçüm koşullarını, olası bozulmaları ve karşılaştırmanın eksiksiz belgelenmesini dikkate almalıdır. Güvenilir bir adli sonuç için birden fazla bağımsız özellik, konumsal ilişki, kayıtlı belirsizlik ve nitelikli uzman denetimi birlikte değerlendirilmelidir." + " Ölçüm sonuçları çevresel değişkenler, ısı kaynakları, nem, ışık ve hava akımıyla birlikte değerlendirilmelidir; güvenilirlik, belirsizlik ve adli bağlam açıkça belirtilmelidir." },
     { type: 'table', headers: ['Olay Yeri Durumu', 'Cf Katsayisi', 'Fiziksel Etki'], rows: [
       ['Durgun havada ciplak', '1.0', 'Standart radyasyon ve dogal konveksiyon'],
       ['Hafif giysi (1-2 kat)', '1.1', 'Deri konvektif isi kaybini hafif azaltma'],
@@ -115,7 +113,6 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
       { title: 'Hizli Ustel Dusus', description: 'Gradyan olustuktan sonra isi kaybi vucut kutlesine bagli olarak en yuksek hassasiyetle gerceklesir.', highlight: true, points: ['En yuksek analitik olcum duyarliligi', 'En dar istatistiksel hata marji', 'Termometrik yontem icin en ideal zaman araligi'] }
     ] },
     { type: 'title', text: 'Olay Yerinde Sicaklik Olcum Kurallari', level: 3 },
-    { type: 'paragraph', html: 'Sicaklik olcum protokollerine kesinlikle uyulmasi hazirlanan adli raporlarin mahkeme onunde gecerliligi acisindan buyuk onem tasir.' },
     { type: 'list', items: [
       '<strong>Derin rektal olcum:</strong> kalibre edilmis dijital probu en az 8-10 cm rektuma yerlestirin.',
       '<strong>Ceset yaninda ortam sicakligi:</strong> termometreyi cesede 10 cm den yakin mesafeye koyun.',

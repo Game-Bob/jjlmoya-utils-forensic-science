@@ -86,7 +86,6 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
   seo: [
     { type: 'title', text: 'Fysiska Principer for Kroppsavkylning och Uppskattning av Dostid', level: 2 },
     { type: 'paragraph', html: 'Faststallande av postmortalt intervall (PMI) ar en av rattsmedicinens och kriminalteknikens mest centrala uppgifter vid brottsplatsundersokningar. <strong>Algor Mortis</strong> beskriver den gradvisa forlusten av kroppsvarme efter cirkulationsstillestand och cellmetabolismens upphorande tills kroppen nar fullstandig termisk jamvikt med omgivningen. Genom matning av djup rektaltemperatur och tillampning av termodynamiska modeller kan tidpunkten for dodsfall avgransas vetenskapligt och objektivt.' },
-    { type: 'paragraph', html: 'Varmeavledningen fran den avlidnes kropp sker genom stralning, ledning, naturlig luftkonvektion och avdunstning av hudfukt. Eftersom inre organ forst overfor varme till det yttre vavnasskiktet bildas ett komplext termiskt gradientmonster som inte kan beskrivas med enkla linjara formler.' },
     { type: 'diagnostic', variant: 'info', title: 'Kroppens Termodynamiska Avkylningsforlopp', html: 'Avkylningen sker inte linjart fran forsta borjan efter hjartstoppet. Den uppvisar en fordröjningsfas kallad <em>temperaturplatan</em>, foljd av en brant dubbelexponentiell nedgang och en asymtotisk utplaning.' },
     { type: 'stats', columns: 3, items: [
       { value: '37.2°C', label: 'Rektal normoterm referens' },
@@ -97,9 +96,8 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
     { type: 'paragraph', html: 'Enkla tumregler som Glaisters formel antog en konstant nedgang pa 0.83 grader Celsius i timmen. Denna forenkling bortser dock fran den totala kroppsmassan, kladisoleringens egenskaper och den inledande fysiologiska platan.' },
     { type: 'code', ariaLabel: 'Henssges Ekvation', code: 'Q = (T_rektal - T_omgivning) / (37.2 - T_omgivning)\nQ = 1.25 * exp(-k * t) - 0.25 * exp(-5 * k * t)\nk = 1.2815 / (Kroppsvikt^0.625 * Korrektionsfaktor) - 0.0284' },
     { type: 'paragraph', html: 'Professor Claus Henssge utvecklade en avancerad matematisk modell med tva exponenter som samtidigt beskriver varmeavgivningen vid kroppsytan och den termiska kapaciteten hos inre organ for en palitlig rattsmedicinsk bedomning.' },
-    { type: 'paragraph', html: 'Den dimensionslosa kvoten Q anger andelen kvarvarande kroppsvarme i forhallande till omgivningens bastemperatur vid dodstillfallet. Detta matematiska samband garanterar en stabil och noggrann tidsbestamning.' },
     { type: 'title', text: 'Korrektionsfaktorer for Omgivning och Kladsel', level: 3 },
-    { type: 'paragraph', html: 'Varmeoverforingens hastighet paverkas i hog grad av den avlidnes kroppsvikt, luftstrommar i rummet samt isolerande textilier som skyddar balen.' },
+    { type: 'paragraph', html: 'Varmeoverforingens hastighet paverkas i hog grad av den avlidnes kroppsvikt, luftstrommar i rummet samt isolerande textilier som skyddar balen.' + " En noggrann uppskattning tar dessutom hänsyn till omgivningen, kläderna, kroppens läge, luftens rörelse och tillförlitligheten hos varje mätning. Skillnader kan bero på fukt, värmekällor, underlag eller ofullständig dokumentation. Resultatet bör därför förstås som ett osäkert intervall och vägas samman med andra rättsmedicinska fynd, inte behandlas som en exakt tidpunkt." + " Bedömningen bör ta hänsyn till bildkvalitet, mätförhållanden, möjliga förvrängningar och fullständig dokumentation. Ett tillförlitligt rättsmedicinskt resultat kräver flera oberoende kännetecken, deras rumsliga relationer, tydliga begränsningar och kontroll av en kvalificerad expert." },
     { type: 'table', headers: ['Situation pa Platsen', 'Faktorvarde Cf', 'Fysisk Effekt'], rows: [
       ['Avkladd i stilla luft', '1.0', 'Standard stralning och naturlig konvektion'],
       ['Latta klader (1-2 lager)', '1.1', 'Latt minskning av konvektiv varmeforlust'],
@@ -115,7 +113,6 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
       { title: 'Snabb Exponentiell Nedgang', description: 'Nar gradienten ar etablerad sker varmeavgivningen i jamn och forutsagbar takt.', highlight: true, points: ['Hogsta analytiska kanslighet', 'Snävaste statistiska felmarginal', 'Optimal period for temperaturmetoden'] }
     ] },
     { type: 'title', text: 'Praktiska Anvisningar for Temperaturmatning', level: 3 },
-    { type: 'paragraph', html: 'Strikt efterlevnad av matningsprotokoll ar avgorande for att det rattsmedicinska utlatandet ska ha fullt bevisvarde i domstol.' },
     { type: 'list', items: [
       '<strong>Mat djup rektaltemperatur:</strong> for in den kalibrerade digitala sonden minst 8 till 10 cm i rektum.',
       '<strong>Mat omgivningstemperaturen intill kroppen:</strong> placera sensorn inom 10 cm fran kroppen.',

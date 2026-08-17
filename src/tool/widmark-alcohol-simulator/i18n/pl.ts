@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'Po wniknięciu do krwi alkohol jest metabolizowany w wątrobie przez dehydrogenazę alkoholową (ADH). Enzym ten ulega całkowitemu nasyceniu przy bardzo niskich stężeniach (0,02 g/L), co wymusza kinetykę eliminacji rzędu zerowego. Wątroba rozkłada stałą ilość alkoholu na jednostkę czasu. Średnie tempo eliminacji (&beta;<sub>60</sub>) wynosi w sądownictwie 0,15 g/L na godzinę, co powoduje stały, liniowy spadek stężenia na wykresie.',
     },
-  ],
+
+  { type: 'paragraph', html: "Używaj wyniku do planowania i porównywania scenariuszy; nie zastępuje obliczeń urzędowych ani porady specjalisty." },
+  { type: 'paragraph', html: "Przed użyciem zinterpretuj wynik razem z założeniami pokazanymi przez kalkulator." },
+  { type: 'paragraph', html: "Sprawdź dane, jednostki, zaokrąglenie, datę i jurysdykcję, ponieważ każdy element może zmienić szacunek." },],
   faq,
   bibliography,
   howTo,

@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'Nach dem Eintritt in den Blutkreislauf wird Alkohol primär in der Leber durch das Enzym Alkoholdehydrogenase (ADH) abgebaut. Da dieses Enzym bereits bei sehr geringen Konzentrationen gesättigt ist, verläuft der Abbau nach einer Kinetik nullter Ordnung. Dies bedeutet, dass pro Zeiteinheit eine konstante Alkoholmenge eliminiert wird. Der forensisch etablierte Mittelwert (&beta;<sub>60</sub>) beträgt 0,15 g/L pro Stunde, was dem Abbau von etwa 10 g reinem Alkohol pro Stunde entspricht. Dieser lineare Abbau erzeugt den geradlinigen Abfall der Kurve.',
     },
-  ],
+
+  { type: 'paragraph', html: "Nutzen Sie das Ergebnis zur Planung und zum Szenarienvergleich; es ersetzt keine offizielle Berechnung oder Fachberatung." },
+  { type: 'paragraph', html: "Deuten Sie das Ergebnis gemeinsam mit den angezeigten Annahmen, bevor Sie es verwenden." },
+  { type: 'paragraph', html: "Prüfen Sie Eingaben, Einheiten, Rundung, Datum und Recht, weil jedes Element die Schätzung verändern kann." },],
   faq,
   bibliography,
   howTo,

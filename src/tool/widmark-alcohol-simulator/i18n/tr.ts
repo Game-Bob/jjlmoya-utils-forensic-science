@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'Kana karışan alkolün büyük kısmı karaciğerde alkol dehidrogenaz (ADH) enzimi tarafından parçalanır. Bu enzim çok düşük konsantrasyonlarda (0,02 g/L) bile tamamen doygunluğa ulaştığı için sıfırıncı derece kinetik devreye girer. Yani karaciğer, kandaki alkol miktarından bağımsız olarak zaman birimi başına sabit bir miktar alkolü yok eder. Yasal kabul gören ortalama eliminasyon hızı (&beta;<sub>60</sub>) saatte 0,15 g/L\'dir. Bu doğrusal düşüş grafikteki düz aşağı yönlü eğriyi oluşturur.',
     },
-  ],
+
+  { type: 'paragraph', html: "Sonucu planlama ve senaryo karşılaştırması için kullanın; resmî hesabın veya uzman görüşünün yerine geçmez." },
+  { type: 'paragraph', html: "Kullanmadan önce sonucu hesaplayıcının gösterdiği varsayımlarla birlikte yorumlayın." },
+  { type: 'paragraph', html: "Girdileri, birimleri, yuvarlamayı, tarihi ve yargı alanını kontrol edin; her biri tahmini değiştirebilir." },],
   faq,
   bibliography,
   howTo,

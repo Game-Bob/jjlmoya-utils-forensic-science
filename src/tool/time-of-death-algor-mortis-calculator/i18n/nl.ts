@@ -86,7 +86,6 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
   seo: [
     { type: 'title', text: 'Fysische Principes van Lijksafkoeling en Bepaling van het Tijdstip van Overlijden', level: 2 },
     { type: 'paragraph', html: 'Het bepalen van het postmortale interval (PMI) is een fundamentele opgave in de gerechtelijke geneeskunde en het strafrechtelijk sporenonderzoek. <strong>Algor Mortis</strong> beschrijft het geleidelijke verlies van lichaamswarmte na de circulatiestilstand totdat de temperatuur van de omgeving volledig is bereikt. Met behulp van diepe rectale temperatuurmeting en natuurkundige thermodynamische modellen kan het tijdstip van overlijden wetenschappelijk en objectief worden gereconstrueerd voor justitieel onderzoek.' },
-    { type: 'paragraph', html: 'Warmteoverdracht vindt plaats via thermische straling, geleiding, vrije luchtconvectie en verdamping. Doordat interne organen hun warmte eerst overdragen aan de buitenste huidlagen, ontstaat een complex temperatuurprofiel dat niet met eenvoudige lineaire vergelijkingen beschreven kan worden.' },
     { type: 'diagnostic', variant: 'info', title: 'Thermodynamisch Afkoelingsverloop', html: 'Het warmteverlies verloopt niet lineair vanaf de eerste minuut. Het vertoont een vertragingsfase genaamd het <em>temperatuurplateau</em>, gevolgd door een steile dubbel exponentiele daling en een geleidelijke nadering van het omgevingsevenwicht.' },
     { type: 'stats', columns: 3, items: [
       { value: '37.2°C', label: 'Normotherme referentietemperatuur' },
@@ -97,9 +96,8 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
     { type: 'paragraph', html: 'Eenvoudige lineaire benaderingen zoals de historische regel van Glaister gingen uit van een constante daling van ongeveer 0.83 graad Celsius per uur. Deze formules hielden echter geen rekening met de totale lichaamsmassa, kledingisolatie en het fysiologische plateaueffect in de vroege fase na het intreden van de dood.' },
     { type: 'code', ariaLabel: 'Henssge Formule', code: 'Q = (T_rectaal - T_omgeving) / (37.2 - T_omgeving)\nQ = 1.25 * exp(-k * t) - 0.25 * exp(-5 * k * t)\nk = 1.2815 / (Lichaamsgewicht^0.625 * Correctiefactor) - 0.0284' },
     { type: 'paragraph', html: 'Professor Claus Henssge ontwikkelde een geavanceerde wiskundige vergelijking met twee exponentiele termen die gelijktijdig de warmteafgifte aan het huidoppervlak en de interne warmtecapaciteit van de diepe organen modelleert voor betrouwbare tijdvensterberekening.' },
-    { type: 'paragraph', html: 'Het dimensieloze thermische quotient Q berekent het resterende warmtepercentage ten opzichte van de fysiologische uitgangswaarde. Hierdoor blijft de berekening uiterst robuust onder sterk variërende klimaatomstandigheden.' },
     { type: 'title', text: 'Omgevings en Kledingcorrectiefactoren', level: 3 },
-    { type: 'paragraph', html: 'De snelheid van warmteoverdracht is sterk afhankelijk van het totale lichaamsgewicht, de luchtstroming rond het lichaam en de thermische weerstand van de aanwezige kledinglagen.' },
+    { type: 'paragraph', html: 'De snelheid van warmteoverdracht is sterk afhankelijk van het totale lichaamsgewicht, de luchtstroming rond het lichaam en de thermische weerstand van de aanwezige kledinglagen.' + " Een zorgvuldige beoordeling moet rekening houden met beeldkwaliteit, vervorming, meetomstandigheden en de volledige documentatie van de vergelijking. Een betrouwbaar forensisch besluit vraagt meerdere onafhankelijke kenmerken, hun ruimtelijke relatie, beschreven beperkingen en controle door een deskundige." },
     { type: 'table', headers: ['Situatie op de Plaats Delict', 'Factorwaarde Cf', 'Fysisch Effect'], rows: [
       ['Ontkleed in stilstaande lucht', '1.0', 'Standaard warmtestraling en natuurlijke convectie'],
       ['Lichte kleding (1-2 lagen)', '1.1', 'Lichte vermindering van warmteverlies aan de huid'],
@@ -115,7 +113,6 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
       { title: 'De Snelle Exponentiele Daling', description: 'Zodra de gradient is gevormd vindt warmteverlies plaats met maximale analytische betrouwbaarheid.', highlight: true, points: ['Hoogste meetgevoeligheid', 'Smalste statistische foutmarge', 'Optimale periode voor thermometrie'] }
     ] },
     { type: 'title', text: 'Praktische Richtlijnen voor Temperatuurmeting', level: 3 },
-    { type: 'paragraph', html: 'Nauwkeurige naleving van forensische meetprotocollen is cruciaal om betrouwbare tijdschattingen te waarborgen in juridische procedures.' },
     { type: 'list', items: [
       '<strong>Meet de diepe rectale temperatuur:</strong> breng de geijkte digitale sensor minstens 8 tot 10 cm in het rectum in.',
       '<strong>Meet de omgevingstemperatuur vlakbij het lichaam:</strong> plaats de sensor binnen 10 cm van het stoffelijk overschot.',

@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'Efter att alkoholen nått blodet bryts den ner i levern av enzymet alkoholdehydrogenase (ADH). Detta enzym mättas vid mycket låga nivåer (0,02 g/L) vilket ger nollte ordningens kinetik. Det innebär att levern förbränner en fast mängd alkohol per timme oavsett berusningsgrad. Det standardiserade medelvärdet (&beta;<sub>60</sub>) är 0,15 g/L per timme vilket ger den linjära minskningen på grafen.',
     },
-  ],
+
+  { type: 'paragraph', html: "Använd resultatet för planering och scenariejämförelser; det ersätter inte en officiell beräkning eller professionell rådgivning." },
+  { type: 'paragraph', html: "Tolka resultatet tillsammans med kalkylatorns antaganden innan du använder det." },
+  { type: 'paragraph', html: "Kontrollera indata, enheter, avrundning, datum och rättsområde eftersom varje del kan ändra uppskattningen." },],
   faq,
   bibliography,
   howTo,

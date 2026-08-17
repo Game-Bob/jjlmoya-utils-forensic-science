@@ -182,11 +182,7 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Adliella undersökare måste dokumentera varje steg i fiberanalysprocessen. Detta inkluderar att ta detaljerade fotografier, registrera mätningar och upprätthålla en obruten kedja av förvaring för alla fysiska bevis. Simulatorn hjälper studenter att förstå vikten av systematisk dokumentation och objektiv jämförelse i adliellt arbete. Genom att interagera med olika inställningar kan användare lära sig hur ljusväg, provtjocklek och färgkoncentration påverkar spektralkurvorna och det fysiska utseendet.',
-    },
-    {
-      type: 'paragraph',
-      html: 'Adliella undersökare måste dokumentera varje steg i fiberanalysprocessen. Detta inkluderar att ta detaljerade fotografier, registrar mätningar och upprätthålla en obruten kedja av förvaring för alla fysiska bevis. Simulatorn hjälper studenter att förstå vikten av systematisk dokumentation och objektiv jämförelse i adliellt arbete. Genom att interagera med olika inställningar kan användare lära sig hur ljusväg, provtjocklek och färgkoncentration påverkar spektralkurvorna och det fysiska utseendet.',
+      html: 'Adliella undersökare måste dokumentera varje steg i fiberanalysprocessen. Detta inkluderar att ta detaljerade fotografier, registrera mätningar och upprätthålla en obruten kedja av förvaring för alla fysiska bevis. Simulatorn hjälper studenter att förstå vikten av systematisk dokumentation och objektiv jämförelse i adliellt arbete. Genom att interagera med olika inställningar kan användare lära sig hur ljusväg, provtjocklek och färgkoncentration påverkar spektralkurvorna och det fysiska utseendet.' + " Bedömningen bör ta hänsyn till bildkvalitet, mätförhållanden, möjliga förvrängningar och fullständig dokumentation. Ett tillförlitligt rättsmedicinskt resultat kräver flera oberoende kännetecken, deras rumsliga relationer, tydliga begränsningar och kontroll av en kvalificerad expert.",
     },
     {
       type: 'glossary',

@@ -242,7 +242,9 @@ export const content: ToolLocaleContent = {
       title: '学術教育目的の利用に限定',
       html: '本ツールは鑑識スキルや法科学の理解を深める目的で作成されており、司法ケースの鑑定意見書作成などの実務には適用できません。',
     },
-  ],
+
+  { type: 'paragraph', html: "入力値、単位、丸め、日付、地域を確認してください。どれも推定結果を変える可能性があります。" },
+  { type: 'paragraph', html: "結果は計画や条件比較に使えますが、公式計算や専門家の助言の代わりにはなりません。" },],
   faq,
   bibliography,
   howTo,

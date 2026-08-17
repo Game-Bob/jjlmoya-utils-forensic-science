@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'Une fois dans le sang, l\'éthanol est métabolisé par le foie, principalement par l\'alcool déshydrogénase (ADH). Cette enzyme se sature à des taux très bas (0,02 g/L), ce qui produit une cinétique d\'élimination d\'ordre zéro: le foie élimine une quantité fixe d\'alcool par heure, quelle que soit la quantité ingérée. La vitesse d\'élimination moyenne acceptée est de 0,15 g/L par heure, ce qui engendre la décroissance linéaire caractéristique sur le graphique.',
     },
-  ],
+
+  { type: 'paragraph', html: "Utilisez le résultat pour planifier et comparer des scénarios ; il ne remplace ni un calcul officiel ni un avis professionnel." },
+  { type: 'paragraph', html: "Interprétez le résultat avec les hypothèses affichées par le calculateur avant de l'utiliser." },
+  { type: 'paragraph', html: "Vérifiez les données, unités, arrondi, date et juridiction, car chacun de ces éléments peut modifier l'estimation." },],
   faq,
   bibliography,
   howTo,

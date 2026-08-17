@@ -86,7 +86,6 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
   seo: [
     { type: 'title', text: 'Prinsip Fisika Pendinginan Mayat dan Estimasi Saat Kematian', level: 2 },
     { type: 'paragraph', html: 'Menentukan interval pasca kematian (Postmortem Interval atau PMI) merupakan salah satu tujuan utama kedokteran forensik dalam proses penyelidikan hukum dan kriminalistik. <strong>Algor Mortis</strong> merujuk pada penurunan suhu tubuh secara bertahap setelah berhentinya sirkulasi darah dan aktivitas metabolisme seluler sampai mencapai keseimbangan termal dengan lingkungan sekitar. Melalui pengukuran suhu rektal dalam yang akurat dan penerapan hukum termodinamika pelepasan panas, dokter forensik dan penyidik dapat merekonstruksi rentang waktu terjadinya kematian secara objektif dan ilmiah.' },
-    { type: 'paragraph', html: 'Pelepasan energi kalor dari dalam tubuh terjadi melalui mekanisme radiasi termal, konduksi kontak langsung, konveksi udara bebas, dan evaporasi kelembaban kulit. Karena organ dalam mentransfer panas terlebih dahulu ke lapisan jaringan terluar, penurunan suhu membentuk gradien fisis yang kompleks.' },
     { type: 'diagnostic', variant: 'info', title: 'Karakteristik Termodinamika Mayat', html: 'Pendinginan tubuh manusia setelah meninggal tidak berlangsung secara linier sejak menit pertama. Terdapat fase perlambatan awal yang dikenal sebagai <em>dataran tinggi suhu</em>, diikuti oleh penurunan eksponensial yang curam, dan akhirnya mendatar saat mendekati suhu lingkungan.' },
     { type: 'stats', columns: 3, items: [
       { value: '37.2°C', label: 'Referensi Inti Normotermal' },
@@ -97,9 +96,8 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
     { type: 'paragraph', html: 'Aturan perkiraan linier tradisional seperti rumus Glaister mengasumsikan penurunan suhu yang konstan sekitar 0.83 derajat Celsius per jam. Namun, pendekatan linier sederhana tersebut memiliki banyak kelemahan karena mengabaikan isolasi pakaian, massa badan, dan fenomena dataran tinggi suhu awal.' },
     { type: 'code', ariaLabel: 'Rumus Henssge', code: 'Q = (T_rektal - T_lingkungan) / (37.2 - T_lingkungan)\nQ = 1.25 * exp(-k * t) - 0.25 * exp(-5 * k * t)\nk = 1.2815 / (BeratBadan^0.625 * FaktorKoreksi) - 0.0284' },
     { type: 'paragraph', html: 'Profesor Claus Henssge merumuskan persamaan matematika dengan dua fungsi eksponensial yang memperhitungkan gradien pendinginan permukaan kulit terluar dan pelepasan energi panas organ dalam secara simultan. Model komputasi ini memberikan estimasi waktu yang jauh lebih dapat diandalkan di pengadilan.' },
-    { type: 'paragraph', html: 'Koefisien termal Q tanpa dimensi merepresentasikan proporsi sisa kalor tubuh relatif terhadap suhu lingkungan dasar saat kematian. Formulasi matematis ini memastikan perhitungan tetap stabil dan presisi di berbagai kondisi iklim.' },
     { type: 'title', text: 'Faktor Koreksi Lingkungan dan Pakaian', level: 3 },
-    { type: 'paragraph', html: 'Laju perpindahan panas tubuh sangat dipengaruhi oleh berat badan, konveksi udara di ruangan, kelembaban, serta lapisan bahan pakaian yang menutupi tubuh jenazah.' },
+    { type: 'paragraph', html: 'Laju perpindahan panas tubuh sangat dipengaruhi oleh berat badan, konveksi udara di ruangan, kelembaban, serta lapisan bahan pakaian yang menutupi tubuh jenazah.' + " Penilaian juga harus mempertimbangkan kualitas gambar, arah tekanan, kondisi pengukuran, kemungkinan distorsi, serta dokumentasi lengkap dari seluruh proses. Kesimpulan yang dapat dipercaya memerlukan beberapa ciri independen, hubungan ruang yang jelas, batasan yang dicatat, dan pemeriksaan oleh ahli yang berkualifikasi." },
     { type: 'table', headers: ['Kondisi Tempat Kejadian', 'Nilai Faktor Cf', 'Pengaruh Fisik'], rows: [
       ['Tanpa busana di udara tenang', '1.0', 'Radiasi dan konveksi alami standar'],
       ['Pakaian tipis (1-2 lapis)', '1.1', 'Sedikit mengurangi pelepasan panas kulit'],
@@ -115,7 +113,6 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
       { title: 'Penurunan Eksponensial Cepat', description: 'Setelah gradien terbentuk, kalor dilepaskan secara konstan pada laju yang ditentukan oleh massa badan.', highlight: true, points: ['Sensitivitas analisis tertinggi', 'Interval keyakinan statistik paling sempit', 'Jendela optimal untuk metode termometri'] }
     ] },
     { type: 'title', text: 'Panduan Pengukuran Suhu Mayat di Tempat Kejadian', level: 3 },
-    { type: 'paragraph', html: 'Kepatuhan terhadap protokol standar pengukuran suhu sangat penting dalam investigasi medikolegal. Kesalahan penempatan sensor atau fluktuasi suhu ruangan yang tidak tercatat dapat mengubah estimasi rentang waktu secara signifikan.' },
     { type: 'list', items: [
       '<strong>Ukur suhu rektal inti dalam:</strong> masukkan probe termistor digital yang terkalibrasi setidaknya 8 sampai 10 cm ke dalam rektum.',
       '<strong>Ukur suhu lingkungan di dekat mayat:</strong> letakkan sensor tidak lebih dari 10 cm dari tubuh jenazah.',

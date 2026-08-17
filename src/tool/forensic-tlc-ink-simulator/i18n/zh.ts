@@ -196,7 +196,9 @@ export const content: ToolLocaleContent = {
       title: '切勿夸大墨水色谱分析的论证作用',
       html: '浏览器模拟无法检查纸张、墨水年龄、提取化学过程、薄层板质量、污染或进行仪器确证。使用它来学习测量逻辑和解释限制，而在处理实际案件证据时，请完全依赖经过验证的专业法医文书检验鉴定方法。',
     },
-  ],
+
+  { type: 'paragraph', html: "使用前请结合计算器显示的假设一起解读结果。" },
+  { type: 'paragraph', html: "请检查输入值、单位、四舍五入方式、日期和司法辖区，因为每项都可能改变估算。" },],
   faq,
   bibliography,
   howTo,

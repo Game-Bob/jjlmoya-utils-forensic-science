@@ -86,7 +86,6 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
   seo: [
     { type: 'title', text: 'Fizyczne Podstawy Oziębienia Pośmiertnego i Szacowanie Czasu Zgonu', level: 2 },
     { type: 'paragraph', html: 'Określenie czasu od momentu śmierci (Postmortem Interval, PMI) jest jednym z kluczowych zadań tanatologii sądowo-lekarskiej w ramach oględzin miejsca ujawnienia zwłok. <strong>Algor Mortis</strong> oznacza stopniową utratę energii cieplnej przez ciało po ustaniu krążenia krwi i metabolizmu komórkowego aż do osiągnięcia równowagi termicznej z otoczeniem. Pomiar głębokiej temperatury w odbytnicy w połączeniu z prawami termodynamiki pozwala naukowo i obiektywnie zrekonstruować ramy czasowe zgonu.' },
-    { type: 'paragraph', html: 'Oddawanie ciepła przez zwłoki zachodzi na drodze promieniowania termicznego, przewodzenia, swobodnej konwekcji powietrznej oraz parowania wilgoci ze skóry. Ponieważ narządy wewnętrzne przekazują energię najpierw do tkanek powierzchownych, powstaje złożony gradient termiczny, którego nie są w stanie opisać proste wzory liniowe.' },
     { type: 'diagnostic', variant: 'info', title: 'Przebieg Termodynamiczny Stygnięcia Zwłok', html: 'Utrata ciepła nie przebiega liniowo od pierwszej chwili po zgonie. Występuje początkowe opóźnienie zwane <em>plateau temperaturowym</em>, po którym następuje faza szybkiego spadku wykładniczego oraz końcowa asymptota wyrównawcza.' },
     { type: 'stats', columns: 3, items: [
       { value: '37.2°C', label: 'Rektalna norma wyjściowa' },
@@ -97,9 +96,8 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
     { type: 'paragraph', html: 'Uproszczone wzory liniowe, takie jak reguła Glaistera, zakładały stały spadek rzędu 0.83 stopnia Celsjusza na godzinę. Pomijały one jednak całkowitą masę ciała, właściwości izolacyjne odzieży oraz początkowe zjawisko opóźnienia stygnięcia rdzenia ciała.' },
     { type: 'code', ariaLabel: 'Wzór Henssge', code: 'Q = (T_rektalna - T_otoczenia) / (37.2 - T_otoczenia)\nQ = 1.25 * exp(-k * t) - 0.25 * exp(-5 * k * t)\nk = 1.2815 / (MasaCiala^0.625 * WspolczynnikKorekcyjny) - 0.0284' },
     { type: 'paragraph', html: 'Profesor Claus Henssge opracował równanie dwuwykładnicze opisujące jednocześnie powierzchniowy gradient oddawania ciepła oraz bezwładność termiczną narządów wewnętrznych, co stanowi podstawę nowoczesnej tanatometrii sądowej.' },
-    { type: 'paragraph', html: 'Bezwymiarowy iloraz cieplny Q określa ułamek ciepła pozostałego w ciele w odniesieniu do temperatury otoczenia. Dzięki temu równanie zachowuje stabilność matematyczną niezależnie od skrajnych temperatur otoczenia.' },
     { type: 'title', text: 'Współczynniki Korekcyjne Środowiska i Odzieży', level: 3 },
-    { type: 'paragraph', html: 'Szybkość wymiany ciepła zależy ściśle od masy ciała, ruchów powietrza wokół zwłok oraz warstw tkanin izolacyjnych zabezpieczających powłoki ciała.' },
+    { type: 'paragraph', html: 'Szybkość wymiany ciepła zależy ściśle od masy ciała, ruchów powietrza wokół zwłok oraz warstw tkanin izolacyjnych zabezpieczających powłoki ciała.' + " Rzetelne oszacowanie powinno uwzględniać także otoczenie, odzież, ułożenie ciała, ruch powietrza oraz wiarygodność każdego pomiaru. Różnice mogą wynikać z wilgotności, źródeł ciepła, podłoża albo niepełnej dokumentacji. Wynik należy więc traktować jako zakres obarczony niepewnością i zestawiać go z innymi ustaleniami kryminalistycznymi, a nie z pojedynczą liczbą." + " Ocena powinna uwzględniać jakość obrazu, kierunek nacisku, możliwe zniekształcenia oraz pełną dokumentację porównania. Wiarygodny wniosek wymaga wielu niezależnych cech, ich relacji przestrzennych, opisanych ograniczeń i kontroli wykonanej przez wykwalifikowanego biegłego." },
     { type: 'table', headers: ['Warunki na Miejscu', 'Wartość Cf', 'Efekt Fizyczny'], rows: [
       ['Nago w stojącym powietrzu', '1.0', 'Standardowe promieniowanie i konwekcja naturalna'],
       ['Lekkie ubranie (1-2 warstwy)', '1.1', 'Niewielkie ograniczenie konwekcyjnej utraty ciepła'],
@@ -115,7 +113,6 @@ export const content: TimeOfDeathAlgorMortisLocaleContent = {
       { title: 'Szybki Spadek Wykładniczy', description: 'Po uformowaniu gradientu ciepło ucieka z maksymalną regularnością zależną od masy.', highlight: true, points: ['Najwyższa czułość pomiarowa', 'Najwęższy margines błędu statystycznego', 'Optymalny czas dla termometrii'] }
     ] },
     { type: 'title', text: 'Zasady Pomiaru Temperatury na Miejscu Zdarzenia', level: 3 },
-    { type: 'paragraph', html: 'Ścisłe przestrzeganie metodyki pomiarowej jest niezbędne dla zachowania wartości dowodowej ekspertyzy. Nawet drobne błędy w kalibracji przyrządów mogą prowadzić do błędnych wniosków co do czasu zgonu.' },
     { type: 'list', items: [
       '<strong>Głęboki pomiar temperatury rektalnej:</strong> wprowadzić skalibrowaną sondę cyfrową na głębokość co najmniej 8 do 10 cm.',
       '<strong>Pomiar temperatury otoczenia przy ciele:</strong> umieścić termometr w odległości nie większej niż 10 cm od zwłok.',

@@ -185,10 +185,6 @@ export const content: ToolLocaleContent = {
       html: 'Biegli sądowi muszą dokumentować każdy krok procesu analizy włókien. Obejmuje to wykonywanie szczegółowych fotografii, rejestrowanie pomiarów i zachowanie łańcucha dowodowego dla wszystkich fizycznych dowodów. Symulator pomaga studentom zrozumieć znaczenie systematycznej dokumentacji i obiektywnego porównywania w pracy kryminalistycznej. Poprzez interakcję z różnymi ustawieniami użytkownicy mogą dowiedzieć się, jak droga światła, grubość próbki i stężenie barwnika wpływają na krzywe widmowe i wygląd fizyczny.',
     },
     {
-      type: 'paragraph',
-      html: 'Biegli sądowi muszą dokumentować każdy krok procesu analizy włókien. Obejmuje to wykonywanie szczegółowych fotografii, rejestrowanie pomiarów i zachowanie łańcucha dowodowego dla wszystkich fizycznych dowodów. Symulator pomaga studentom zrozumieć znaczenie systematycznej dokumentacji i obiektywnego porównywania w pracy kryminalistycznej. Poprzez interakcję z różnymi ustawieniami użytkownicy mogą dowiedzieć się, jak droga światła, grubość próbki i stężenie barwnika wpływają na krzywe widmowe i wygląd fizyczny.',
-    },
-    {
       type: 'glossary',
       items: [
         { term: 'Włókno dowodowe', definition: 'Włókno zabezpieczone na miejscu zdarzenia, ofierze, podejrzanym, narzędziu, pojeździe lub innym obiekcie, którego pochodzenie jest nieznane.' },

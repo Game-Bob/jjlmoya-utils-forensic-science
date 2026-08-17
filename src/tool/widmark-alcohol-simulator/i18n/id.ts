@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'Setelah masuk ke sirkulasi darah, alkohol dimetabolisme terutama di hati oleh enzim alkohol dehidrogenase (ADH). Enzim ini mengalami kejenuhan pada konsentrasi yang sangat rendah (0,02 g/L), sehingga metabolisme berlangsung dengan kecepatan konstan tanpa dipengaruhi kadar alkohol dalam darah. Rata-rata laju eliminasi forensik (&beta;<sub>60</sub>) ditetapkan sebesar 0,15 g/L per jam. Penurunan konstan ini menghasilkan kemiringan linier lurus pada kurva hingga mencapai angka nol.',
     },
-  ],
+
+  { type: 'paragraph', html: "Gunakan hasil untuk perencanaan dan perbandingan skenario; hasil ini bukan pengganti perhitungan resmi atau nasihat ahli." },
+  { type: 'paragraph', html: "Tafsirkan hasil bersama asumsi yang ditampilkan kalkulator sebelum menggunakannya." },
+  { type: 'paragraph', html: "Periksa input, satuan, pembulatan, tanggal, dan yurisdiksi karena semuanya dapat mengubah estimasi." },],
   faq,
   bibliography,
   howTo,

@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: '酒精在体内分布后，主要由肝脏中乙醇脱氢酶（ADH）代谢为乙醛。因为该酶系统极其高效，在血液酒精浓度达到极低值（0.02 g/L）时就已被彻底饱和。这导致了零级动力学代谢特征，即单位时间内清除固定质量的酒精。法医毒物化学中普遍采用的平均消除速率（&beta;<sub>60</sub>）为每小时 0.15 g/L，这产生了解酒过程中特征性的线性下降斜率。',
     },
-  ],
+
+  { type: 'paragraph', html: "结果可用于规划和比较方案，但不能替代官方计算或专业建议。" },
+  { type: 'paragraph', html: "使用前请结合计算器显示的假设一起解读结果。" },
+  { type: 'paragraph', html: "请检查输入值、单位、四舍五入方式、日期和司法辖区，因为每项都可能改变估算。" },],
   faq,
   bibliography,
   howTo,

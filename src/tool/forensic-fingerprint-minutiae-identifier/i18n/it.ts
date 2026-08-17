@@ -212,21 +212,12 @@ export const content: ToolLocaleContent = {
       html: 'Nel lavoro peritale reale (metodologia ACE-V), l\'esperto analizza la qualità generale, le deformazioni, la corrispondenza tridimensionale è la rarita delle caratteristiche per giungere a una identificazione.',
     },
     {
-      type: 'title',
-      text: 'Metodologia di analisi e confronto dattiloscopico',
-      level: 3,
-    },
-    {
-      type: 'paragraph',
-      html: 'La dattiloscopia si basa sul presupposto che non esistano duè individui con gli stessi dettagli delle creste papillari e che queste ultime rimangano immutate per tutta la vita. I simulatori didattici aiutano gli studenti a svilupparè un metodo rigoroso insegnando loro a seguirè il percorso delle singole creste e a identificarè le minime anomalie locali, comè interruzioni o biforcazioni, in un ambiente di apprendimento controllato.',
-    },
-    {
       type: 'paragraph',
       html: 'La corretta annotazione delle minutiae richiede chè gli studenti comprendano prima il flusso generale delle creste e poi sappiano nominarè le anomalie locali. Le terminazioni si verificano quando una cresta si interrompe bruscamente senza congiungersi a un\'altra. Le biforcazioni si producono quando una cresta si dividè in due rami. Lè isole è i punti sono brevi segmenti isolati che vanno marcati con particolare cautela, poiche possono essere facilmente confusi con il rumore dell\'immagine o con distorsioni da pressione.',
     },
     {
       type: 'paragraph',
-      html: 'Nell\'insegnamento della criminalistica e fondamentale distinguere tra l\'analisi delle caratteristiche di classe e quella delle caratteristichè individuali. Le caratteristiche di classe, come arco, cappio e vortice, consentono di collocarè un\'impronta in una categoria, ma non possono essere usate da sole per l\'identificazionè individuale. Solo la combinazione è la disposizione spaziale delle minutiae rispetto al nucleo e alla delta permettè un\'attribuzione a un singolo individuo.',
+      html: 'Nell\'insegnamento della criminalistica e fondamentale distinguere tra l\'analisi delle caratteristiche di classe e quella delle caratteristichè individuali. Le caratteristiche di classe, come arco, cappio e vortice, consentono di collocarè un\'impronta in una categoria, ma non possono essere usate da sole per l\'identificazionè individuale. Solo la combinazione è la disposizione spaziale delle minutiae rispetto al nucleo e alla delta permettè un\'attribuzione a un singolo individuo.' + " Ogni confronto richiede immagini nitide, annotazioni coerenti e una valutazione prudente dell'incertezza. Il contesto del campione, la qualità della misura, le possibili deformazioni e la documentazione completa devono essere verificati prima di formulare una conclusione tecnica.",
     },
     {
       type: 'glossary',

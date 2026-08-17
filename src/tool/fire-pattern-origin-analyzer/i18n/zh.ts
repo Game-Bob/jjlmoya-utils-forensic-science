@@ -207,7 +207,8 @@ export const content: ToolLocaleContent = {
       title: '不要将收敛变成确定性',
       html: '紧密的交点簇仅在观察有效时才有用。实际调查必须考虑通风、闪燃、燃料包、电气系统、电器证据、目击者陈述、灭火和现场扰动。',
     },
-  ],
+
+  { type: 'paragraph', html: "结果可用于规划和比较方案，但不能替代官方计算或专业建议。" },],
   faq,
   bibliography,
   howTo,

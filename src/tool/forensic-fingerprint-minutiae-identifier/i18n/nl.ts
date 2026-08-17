@@ -212,21 +212,12 @@ export const content: ToolLocaleContent = {
       html: 'In de forensische praktijk (ACE-V methode) beoordelen deskundigen de kwaliteit, eventuele vervormingen en de zeldzaamheid van kenmerken om tot een sluitende identificatie te komen.',
     },
     {
-      type: 'title',
-      text: 'Methodologie voor dactyloscopisch onderzoek en vergelijking',
-      level: 3,
-    },
-    {
-      type: 'paragraph',
-      html: 'Dactyloscopie is gebaseerd op het principe dat geen twee mensen dezelfde papillairäfdruk bezitten en dat dit patroon gedurende het hele leven onveranderd blijft. Didactische simulatoren helpen studenten een systematische observatiemethode te ontwikkelen door hen te leren de loop van individuele lijnen te volgen en minimale onderbrekingen zoals uiteinden of vertakkingen te herkennen in een gecontroleerde leeromgeving.',
-    },
-    {
       type: 'paragraph',
       html: 'De correcte annotatie van minutiae vereist dat studenten eerst de algehele lijnstroom begrijpen en vervolgens lokale afwijkingen kunnen benoemen. Uiteinden ontstaan wanneer een papillairlijn plotseling ophoudt zonder met een andere lijn te verbinden. Vertakkingen ontstaan wanneer een lijn zich splitst in twee takken. Eilanden en punten zijn korte ge\u00efsoleerde lijnsegmenten die bijzonder voorzichtig moeten worden gemarkeerd, omdat ze gemakkelijk verward kunnen worden met beeldruis of drukvervorming.',
     },
     {
       type: 'paragraph',
-      html: 'In het forensisch onderwijs is het essentieel onderscheid te maken tussen de analyse van klasse- en individuele kenmerken. Klassekenmerken zoals boog, lus en kring maken het mogelijk een vingerafdruk in een categorie in te delen, maar zijn op zichzelf niet voldoende voor individuele identificatie. Alleen de combinatie en ruimtelijke rangschikking van minutiae in relatie tot de kern en het delta maakt een persoonsgebonden toewijzing mogelijk.',
+      html: 'In het forensisch onderwijs is het essentieel onderscheid te maken tussen de analyse van klasse- en individuele kenmerken. Klassekenmerken zoals boog, lus en kring maken het mogelijk een vingerafdruk in een categorie in te delen, maar zijn op zichzelf niet voldoende voor individuele identificatie. Alleen de combinatie en ruimtelijke rangschikking van minutiae in relatie tot de kern en het delta maakt een persoonsgebonden toewijzing mogelijk.' + " De beoordeling moet bovendien rekening houden met de kwaliteit van de opname, het contrast, de scherpte en de schaal van de afbeelding. Een deskundige beschrijft welke kenmerken werkelijk zichtbaar zijn, welke kenmerken elkaar onafhankelijk ondersteunen en welke onzekerheden door beweging, druk of vervorming ontstaan. Zo blijft het verschil tussen een didactische simulatie en een formeel forensisch rapport duidelijk." + " Een zorgvuldige beoordeling moet rekening houden met beeldkwaliteit, vervorming, meetomstandigheden en de volledige documentatie van de vergelijking. Een betrouwbaar forensisch besluit vraagt meerdere onafhankelijke kenmerken, hun ruimtelijke relatie, beschreven beperkingen en controle door een deskundige.",
     },
     {
       type: 'glossary',

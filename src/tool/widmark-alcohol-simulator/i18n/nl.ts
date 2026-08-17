@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'Na opname in het bloed wordt alcohol hoofdzakelijk in de lever afgebroken door het enzym alcoholdehydrogenase (ADH). Dit enzym raakt al bij zeer lage concentraties (0,02 g/L) volledig verzadigd, wat leidt tot een nulde-orde kinetiek. Dit betekent dat de lever een constante hoeveelheid alcohol per uur verwerkt. Het gemiddelde forensische afbraaktempo (&beta;<sub>60</sub>) is vastgesteld op 0,15 g/L per uur. Dit lineaire verloop zorgt voor de rechte dalende lijn op het diagram.',
     },
-  ],
+
+  { type: 'paragraph', html: "Gebruik het resultaat voor planning en scenariokeuze; het vervangt geen officiële berekening of professioneel advies." },
+  { type: 'paragraph', html: "Interpreteer het resultaat samen met de aannames van de calculator voordat u het gebruikt." },
+  { type: 'paragraph', html: "Controleer invoer, eenheden, afronding, datum en jurisdictie, want elk onderdeel kan de schatting wijzigen." },],
   faq,
   bibliography,
   howTo,

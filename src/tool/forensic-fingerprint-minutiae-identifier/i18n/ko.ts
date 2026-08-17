@@ -242,7 +242,9 @@ export const content: ToolLocaleContent = {
       title: '학술 교육 실습 목적으로만 사용',
       html: '본 시뮬레이터는 철저히 학습 및 실무 기능 훈련용으로 제작되었으며, 민형사상 사건 판정을 위한 공식 의견서 제출에 적용될 수 없습니다.',
     },
-  ],
+
+  { type: 'paragraph', html: "입력값, 단위, 반올림, 날짜와 관할을 확인하세요. 모두 추정값을 바꿀 수 있습니다." },
+  { type: 'paragraph', html: "결과는 계획과 시나리오 비교에 사용할 수 있지만 공식 계산이나 전문가 조언을 대신하지 않습니다." },],
   faq,
   bibliography,
   howTo,

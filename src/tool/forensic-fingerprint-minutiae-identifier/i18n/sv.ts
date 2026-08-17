@@ -212,21 +212,12 @@ export const content: ToolLocaleContent = {
       html: 'I forensisk praxis (ACE-V-metoden) bedömer experter kvaliteten, eventuella förvrängningar och detaljernas sällsynthet för att nå en säker identifiering.',
     },
     {
-      type: 'title',
-      text: 'Metodologi för daktyloskopisk analys och jämförelse',
-      level: 3,
-    },
-    {
-      type: 'paragraph',
-      html: 'Daktyloskopi bygger på att inga två individer har samma papillära åsmönster och att dessa mönster kvarstår oförändrade under hela livet. Utbildningssimulatorer hjälper studenter att utveckla en systematisk observationsförmåga genom att lära dem att följa enskilda åsbanor och känna igen små lokala avvikelser som avslutningar eller bifurkationer i en kontrollerad inlärningsmiljö.',
-    },
-    {
       type: 'paragraph',
       html: 'Korrekt annotering av minuter kräver att studenter först förstår det allmänna åsflödet och sedan kan benämna lokala avvikelser. Avslutningar uppstår när en papillär ås plötsligt slutar utan att ansluta till en annan. Bifurkationer uppstår när en ås delar sig i två grenar. Öar och punkter är korta isolerade segment som bör markeras med extra försiktighet, eftersom de lätt kan förväxlas med bildbrus eller tryckförvrängning.',
     },
     {
       type: 'paragraph',
-      html: 'Inom rattsmedicinsk utbildning ar det avgorande att skilja mellan klassegenskapsanalys och individualegenskapsanalys. Klassegenskaper som bage, ogla och virvel gor det mojligt att placera ett avtryck i en kategori, men racker inte ensamma for individuell identifiering. Forst kombinationen och den rumsliga arrangemanget av minuter i forhallande till karnan och deltat mojliggor en personbunden tilldelning. Utbildningssimulatorer ar darfor viktiga verktyg for att hjalpa studenter att beharska bade allmant klassificeringsarbete och detaljerad minutanalys.',
+      html: 'Inom rattsmedicinsk utbildning ar det avgorande att skilja mellan klassegenskapsanalys och individualegenskapsanalys. Klassegenskaper som bage, ogla och virvel gor det mojligt att placera ett avtryck i en kategori, men racker inte ensamma for individuell identifiering. Forst kombinationen och den rumsliga arrangemanget av minuter i forhallande till karnan och deltat mojliggor en personbunden tilldelning. Utbildningssimulatorer ar darfor viktiga verktyg for att hjalpa studenter att beharska bade allmant klassificeringsarbete och detaljerad minutanalys.' + " Bedömningen bör också ta hänsyn till bildens kvalitet, kontrast, skärpa och skala. En sakkunnig beskriver vilka detaljer som faktiskt syns, vilka oberoende kännetecken som stöder varandra och vilka osäkerheter som beror på rörelse, tryck eller förvrängning. På så sätt hålls den pedagogiska simuleringen tydligt åtskild från ett formellt rättsmedicinskt utlåtande och resultatet överdrivs inte." + " Bedömningen bör ta hänsyn till bildkvalitet, mätförhållanden, möjliga förvrängningar och fullständig dokumentation. Ett tillförlitligt rättsmedicinskt resultat kräver flera oberoende kännetecken, deras rumsliga relationer, tydliga begränsningar och kontroll av en kvalificerad expert.",
     },
     {
       type: 'glossary',

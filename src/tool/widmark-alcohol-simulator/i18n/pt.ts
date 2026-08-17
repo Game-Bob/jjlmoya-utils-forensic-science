@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'O fígado processa a maior parte do álcool no sangue. Devido à rápida saturação da ADH, a taxa de eliminação independe da concentração no sangue. A média forense aceita internacionalmente (&beta;<sub>60</sub>) é de 0,15 g/L por hora. Esta eliminação constante produz a descida linear e reta característica da curva até a sobriedade.',
     },
-  ],
+
+  { type: 'paragraph', html: "Use o resultado para planear e comparar cenários; não substitui um cálculo oficial nem aconselhamento profissional." },
+  { type: 'paragraph', html: "Interprete o resultado juntamente com as premissas apresentadas pela calculadora antes de o utilizar." },
+  { type: 'paragraph', html: "Confirme dados, unidades, arredondamento, data e jurisdição, pois cada elemento pode alterar a estimativa." },],
   faq,
   bibliography,
   howTo,

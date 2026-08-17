@@ -112,12 +112,12 @@ export const content: ToolLocaleContent = {
   seo: [
   {
     "type": "title",
-    "text": "Guide Complet sur les Tests Presomptifs de Sang",
+    "text": "Guide complet sur les tests présomptifs de sang",
     "level": 2
   },
   {
     "type": "paragraph",
-    "html": "Les tests presomptifs de sang sont des analyses preliminaires tres sensibles utilisees sur les scenes de crime pour detecter la presence de sang. Avant d'effectuer des analyses complexes de sequençage d'ADN, les enqueteurs se fient a ces tests rapides sur les vetements, les armes ou d'autres surfaces suspectes. Comme ces analyses ciblent l'activite de type peroxydase de l'heme, qui est le groupe contenant le fer de l'hemoglobine, elles sont qualifiees de presomptives. Un resultat positif suggere la presence de sang mais doit imperativement etre valide par un test de confirmation secondaire pour exclure toute autre reaction biochimique similaire."
+    "html": "Les tests présomptifs de sang sont des analyses préliminaires très sensibles utilisées sur les scènes de crime pour détecter la présence de sang. Avant d'effectuer des analyses complexes de séquençage d'ADN, les enquêteurs se fient à ces tests rapides sur les vêtements, les armes ou d'autres surfaces suspectes. Comme ces analyses ciblent l'activité de type peroxydase de l'hème, qui est le groupe contenant le fer de l'hémoglobine, elles sont qualifiées de présomptives. Un résultat positif suggère la présence de sang mais doit impérativement être validé par un test de confirmation secondaire pour exclure toute autre réaction biochimique similaire."
   },
   {
     "type": "title",
@@ -126,16 +126,16 @@ export const content: ToolLocaleContent = {
   },
   {
     "type": "paragraph",
-    "html": "Le test de Kastle-Meyer (KM) est une reaction colorimetrique catalytique qui utilise la forme reduite et incolore de la phenolphtaleine, appelee la phenolphtaline. Le protocole experimental suit une sequence precise: on depose d'abord l'indicateur chimique sur le prelevement. En presence de sang, le groupe heme agit comme un catalyseur organique. Lors de l'ajout de peroxyde d'hydrogene, l'heme accelere la reduction du peroxyde d'hydrogene, ce qui oxyde immediatement la phenolphtaline en phenolphtaleine, provoquant un virage colore rose vif instantane. Un changement de couleur tardif ou lent apres une quinzaine de secondes est considere comme negatif."
+    "html": "Le test de Kastle-Meyer (KM) est une réaction colorimétrique catalytique qui utilise la forme réduite et incolore de la phénolphtaléine, appelée la phénolphtaline. Le protocole expérimental suit une séquence précise: on dépose d'abord l'indicateur chimique sur le prélèvement. En présence de sang, le groupe hème agit comme un catalyseur organique. Lors de l'ajout de peroxyde d'hydrogène, l'hème accélère la réaction, ce qui oxyde immédiatement la phénolphtaline en phénolphtaléine et provoque un virage coloré rose vif instantané. Un changement de couleur tardif ou lent après une quinzaine de secondes est considéré comme négatif."
   },
   {
     "type": "title",
-    "text": "Luminol et la Chimiluminescence Forensique",
+    "text": "Luminol et la chimiluminescence forensique",
     "level": 3
   },
   {
     "type": "paragraph",
-    "html": "Le luminol est un compose chimique qui emet une lueur bleue dans l'obscurite lorsqu'il est oxyde en presence d'un catalyseur metallique comme le fer de l'hemoglobine. Les techniciens de la police scientifique vaporisent une solution diluee de luminol sur de grandes zones suspectes. Lorsque le produit entre en contact avec des traces de sang, le fer contenu dans l'hemoglobine catalyse la reaction d'oxydation avec l'agent comburant. Cette reaction genere un ion aminophthalate excite qui libere de l'energie lumineuse en revenant a son etat fondamental. Pour photographier cette emission lumineuse de faible intensite, l'obscurite totale est requise."
+    "html": "Le luminol est un composé chimique qui émet une lueur bleue dans l'obscurité lorsqu'il est oxydé en présence d'un catalyseur métallique comme le fer de l'hémoglobine. Les techniciens de la police scientifique vaporisent une solution diluée de luminol sur de grandes zones suspectes. Lorsque le produit entre en contact avec des traces de sang, le fer contenu dans l'hémoglobine catalyse la réaction d'oxydation avec l'agent comburant. Cette réaction génère un ion aminophtalate excité qui libère de l'énergie lumineuse en revenant à son état fondamental. Pour photographier cette émission lumineuse de faible intensité, l'obscurité totale est requise."
   },
   {
     "type": "table",
@@ -148,38 +148,38 @@ export const content: ToolLocaleContent = {
     "rows": [
       [
         "Sang humain",
-        "Coloration rose vif immediate apres ajout de H2O2.",
+        "Coloration rose vif immédiate après ajout de H2O2.",
         "Lueur bleue intense et stable.",
         "Vrai Positif."
       ],
       [
         "Eau de Javel",
-        "Rose immediat avant meme l'ajout de H2O2.",
-        "Lueur intense et tres courte.",
+        "Rose immédiat avant même l'ajout de H2O2.",
+        "Lueur intense et très courte.",
         "Faux Positif."
       ],
       [
         "Rouille",
-        "Coloration brune lente et legere.",
+        "Coloration brune lente et légère.",
         "Lueur bleue faible.",
         "Faux Positif."
       ],
       [
         "Pomme de terre",
-        "Rose pale tardif apres delai.",
+        "Rose pâle tardif après délai.",
         "Aucune lueur dans le noir.",
-        "Faux Positif (KM) / Negatif (LUM)."
+        "Faux positif (KM) / négatif (LUM)."
       ]
     ]
   },
   {
     "type": "title",
-    "text": "Distinguer le Sang des Faux Positifs Courants",
+    "text": "Distinguer le sang des faux positifs courants",
     "level": 3
   },
   {
     "type": "paragraph",
-    "html": "La differenciation des faux positifs constitue une partie cruciale du travail d'analyse criminelle. Les agents nettoyants contenant de l'hypochlorite de sodium (eau de Javel) imitent la reaction du sang en oxydant directement les indicateurs. Cependant, les experts scientifiques analysent la dynamique temporelle: l'eau de Javel reagit sans peroxyde d'hydrogene dans le test de Kastle-Meyer et son emission lumineuse avec le luminol s'estompe presque instantanement. De plus, les peroxydases vegetales sont degradees par la chaleur, contrairement a l'hemoglobine qui demeure stable."
+    "html": "La différenciation des faux positifs constitue une partie cruciale du travail d'analyse criminelle. Les agents nettoyants contenant de l'hypochlorite de sodium (eau de Javel) imitent la réaction du sang en oxydant directement les indicateurs. Cependant, les experts scientifiques analysent la dynamique temporelle: l'eau de Javel réagit sans peroxyde d'hydrogène dans le test de Kastle-Meyer et son émission lumineuse avec le luminol s'estompe presque instantanément. De plus, les peroxydases végétales sont dégradées par la chaleur, contrairement à l'hémoglobine qui demeure stable."
   }
 ],
   faq,

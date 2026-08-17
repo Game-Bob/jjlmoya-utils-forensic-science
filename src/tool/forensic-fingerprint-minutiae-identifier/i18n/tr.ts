@@ -212,21 +212,12 @@ export const content: ToolLocaleContent = {
       html: 'Gerçek adli vakalarda (ACE-V metodolojisi), uzmanlar görüntünün kalitesini, deformasyonları ve karakteristiklerin nadirliğini analiz ederek sonuça ulaşırlar.',
     },
     {
-      type: 'title',
-      text: 'Daktiloskopik analiz ve karşılaştırma metodolojisi',
-      level: 3,
-    },
-    {
-      type: 'paragraph',
-      html: 'Daktiloskopi, hiçbir iki bireyin aynı papiller çıkıntı ayrıntılarına sahip olmadığı ve bu özelliklerin yaşam boyunca değişmediği prensibine dayanmaktadır. Eğitim simülatörleri, öğrencilerin bireysel çökrük çizgilerini takip etmeyi ve uçlar ile çatallar gibi küçük lokal anomalileri kontrollü bir öğrenme ortamında tanımlamayı öğrenmeleri yoluyla sistematik bir gözlem becerisi geliştirmelerine yardımcı olur.',
-    },
-    {
       type: 'paragraph',
       html: 'Minutiae\u2019n\u0131n do\u011fru \u015fekilde i\u015faretlenebilmesi i\u00e7in \u00f6\u011frencilerin \u00f6nce genel s\u0131rt \u00e7izgisi ak\u0131\u015f\u0131n\u0131 anlamalar\u0131, ard\u0131ndan yerel anomalileri adland\u0131rabilmeleri gerekmektedir. Sonlanmalar, bir papiller \u00e7izginin ba\u015fka bir \u00e7izgiyle birle\u015fmeden aniden durmas\u0131yla olu\u015fur. \u00c7atalla\u015fmalar ise bir \u00e7izginin iki kola ayr\u0131lmas\u0131yla meydana gelir. Adalar ve noktalar, g\u00f6r\u00fcnt\u00fc g\u00fcr\u00fclt\u00fcs\u00fc veya bask\u0131 bozulmas\u0131yla kar\u0131\u015ft\u0131r\u0131labilecekerinden \u00f6zellikle dikkatli i\u015faretlenmesi gereken k\u0131sa izole segmentlerdir.',
     },
     {
       type: 'paragraph',
-      html: 'Adli bilimler egitiminde sinif ozellikleri analizi ile bireysel ozellikler analizi arasindaki farki kavramak buyuk onem tasir. Kemer, ilmek ve sirmal gibi sinif ozellikleri, bir parmak izini bir kategoriye yerlestirmeye olanak tanir; ancak tek baslarına bireysel kimlik tespiti icin yeterli degildir. Minutiae karakteristiklerinin cekirdek ve deltaya gore kombine edilmesi ve uzaysal duzenlenmesi, kisisel atama yapabilmeyi mumkun kilar. Bu nedenle egitim simulatorleri, ogrencilerin hem genel siniflandirmayi hem de yerel minutiae analizini bir arada yapmayi ogrenmeleri acisindan vazgecilmez bir aractir.',
+      html: 'Adli bilimler egitiminde sinif ozellikleri analizi ile bireysel ozellikler analizi arasindaki farki kavramak buyuk onem tasir. Kemer, ilmek ve sirmal gibi sinif ozellikleri, bir parmak izini bir kategoriye yerlestirmeye olanak tanir; ancak tek baslarına bireysel kimlik tespiti icin yeterli degildir. Minutiae karakteristiklerinin cekirdek ve deltaya gore kombine edilmesi ve uzaysal duzenlenmesi, kisisel atama yapabilmeyi mumkun kilar. Bu nedenle egitim simulatorleri, ogrencilerin hem genel siniflandirmayi hem de yerel minutiae analizini bir arada yapmayi ogrenmeleri acisindan vazgecilmez bir aractir.' + " Değerlendirme ayrıca görüntünün kalitesini, kontrastını, netliğini ve ölçeğini dikkate almalıdır. Uzman, gerçekten görülen özellikleri, birbirini bağımsız olarak destekleyen bulguları ve hareket, basınç veya bozulmadan kaynaklanan belirsizlikleri açıkça belirtir. Böylece eğitim amaçlı simülasyon ile resmî adli rapor arasındaki fark korunur ve sonuçlar gereğinden fazla kesin sunulmaz." + " Her değerlendirme görüntü kalitesini, ölçüm koşullarını, olası bozulmaları ve karşılaştırmanın eksiksiz belgelenmesini dikkate almalıdır. Güvenilir bir adli sonuç için birden fazla bağımsız özellik, konumsal ilişki, kayıtlı belirsizlik ve nitelikli uzman denetimi birlikte değerlendirilmelidir.",
     },
     {
       type: 'glossary',

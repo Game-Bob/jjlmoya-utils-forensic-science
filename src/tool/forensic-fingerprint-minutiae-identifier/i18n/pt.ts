@@ -212,21 +212,12 @@ export const content: ToolLocaleContent = {
       html: 'Na prática real (metodologia ACE-V), o perito avalia a qualidade do suporte, as distorções, a concordância tridimensional e a raridade das minúcias para concluir uma identificação.',
     },
     {
-      type: 'title',
-      text: 'Metodologia de análise e comparação datiloscópica',
-      level: 3,
-    },
-    {
-      type: 'paragraph',
-      html: 'A datiloscopia baseia-se na premissa de que não existem dois indivíduos com os mesmos detalhes de cristas papilares, e que estas permanecem inalteradas ao longo de toda a vida. Os simuladores didáticos ajudam os estudantes a desenvolver um método rigoroso, ensinando-os a seguir o percurso de cada crista e a identificar pequenas anomalias locais, como interrupções ou bifurcações, num ambiente de aprendizagem controlado.',
-    },
-    {
       type: 'paragraph',
       html: 'A correta anota\u00e7\u00e3o das min\u00facias exige que os estudantes compreendam primeiro o fluxo geral das cristas e depois saibam nomear as anomalias locais. As termina\u00e7\u00f5es ocorrem quando uma crista parar abruptamente sem se ligar a outra. As bifurca\u00e7\u00f5es surgem quando uma crista se divide em dois ramos. Ilhas e pontos s\u00e3o pequenos segmentos isolados que devem ser marcados com precau\u00e7\u00e3o, pois podem confundir-se facilmente com ru\u00eddo de imagem ou distor\u00e7\u00f5es de press\u00e3o.',
     },
     {
       type: 'paragraph',
-      html: 'No ensino da criminalista \u00e9 fundamental distinguir entre a an\u00e1lise das caracter\u00edsticas de classe e a das caracter\u00edsticas individuais. As caracter\u00edsticas de classe, como arco, la\u00e7o e verticilo, permitem enquadrar uma impress\u00e3o numa categoria, mas n\u00e3o s\u00e3o suficientes por si s\u00f3 para a identifica\u00e7\u00e3o individual. S\u00f3 a combina\u00e7\u00e3o e a disposi\u00e7\u00e3o espacial das min\u00facias em rela\u00e7\u00e3o ao n\u00facleo e ao delta permite atribuir uma impress\u00e3o a um \u00fanico indiv\u00edduo.',
+      html: 'No ensino da criminalista \u00e9 fundamental distinguir entre a an\u00e1lise das caracter\u00edsticas de classe e a das caracter\u00edsticas individuais. As caracter\u00edsticas de classe, como arco, la\u00e7o e verticilo, permitem enquadrar uma impress\u00e3o numa categoria, mas n\u00e3o s\u00e3o suficientes por si s\u00f3 para a identifica\u00e7\u00e3o individual. S\u00f3 a combina\u00e7\u00e3o e a disposi\u00e7\u00e3o espacial das min\u00facias em rela\u00e7\u00e3o ao n\u00facleo e ao delta permite atribuir uma impress\u00e3o a um \u00fanico indiv\u00edduo.' + " A comparação deve considerar a qualidade da imagem, a deformação, as condições de medição e a documentação completa do exame. Uma conclusão confiável exige características independentes, relações espaciais claras, limitações registradas e revisão por um especialista qualificado.",
     },
     {
       type: 'glossary',

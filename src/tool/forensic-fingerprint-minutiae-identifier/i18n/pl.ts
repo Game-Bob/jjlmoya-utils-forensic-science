@@ -212,21 +212,12 @@ export const content: ToolLocaleContent = {
       html: 'W rzeczywistej daktyloskopii (metodologia ACE-V) biegły analizuje jakość podłoża, zniekształcenia, zgodność przestrzenną i rzadkość występowania cech, aby sformułować jednoznaczną opinię.',
     },
     {
-      type: 'title',
-      text: 'Metodologia analizy i porównania daktyloskopijnego',
-      level: 3,
-    },
-    {
-      type: 'paragraph',
-      html: 'Daktyloskopia opiera się na założeniu, że nie istnieją dwie osoby o identycznych liniach papilarnych i że wzory te pozostają niezmienione przez całe życie. Symulatory edukacyjne pomagają studentom rozwinąć systematyczną metodę obserwacji, ucząc ich śledzenia przebiegu poszczególnych linii i identyfikowania drobnych lokalnych anomalii, takich jak zakończenia lub rozwidlenia, w kontrolowanym środowisku edukacyjnym.',
-    },
-    {
       type: 'paragraph',
       html: 'Poprawna adnotacja minucji wymaga, aby studenci najpierw zrozumieli ogólny przepływ linii papilarnych, a następnie potrafili nazwać lokalne anomalie. Zakończenia linii powstają, gdy linia papilarna nagle się urywa bez połączenia z inną linią. Rozwidlenia tworzą się, gdy jedna linia dzieli się na dwie gałęzie. Wyspy i punkty to krótkie izolowane segmenty, które należy oznaczać ze szczególną ostrożnością, gdyż łatwo je pomylić z szumem obrazu lub zniekształceniami ciśnienia.',
     },
     {
       type: 'paragraph',
-      html: 'W nauczaniu kryminalistyki kluczowe jest rozróżnienie między analizą cech klasowych a analizą cech indywidualnych. Cechy klasowe, takie jak łuk, pętla i wir, pozwalają przyporządkować odcisk do kategorii, ale same w sobie nie wystarczają do identyfikacji indywidualnej. Dopiero kombinacja i przestrzenne rozmieszczenie minucji względem rdzenia i delty umożliwia przypisanie odcisku do konkretnej osoby.',
+      html: 'W nauczaniu kryminalistyki kluczowe jest rozróżnienie między analizą cech klasowych a analizą cech indywidualnych. Cechy klasowe, takie jak łuk, pętla i wir, pozwalają przyporządkować odcisk do kategorii, ale same w sobie nie wystarczają do identyfikacji indywidualnej. Dopiero kombinacja i przestrzenne rozmieszczenie minucji względem rdzenia i delty umożliwia przypisanie odcisku do konkretnej osoby.' + " Ocena powinna również uwzględniać jakość obrazu, kontrast, ostrość oraz skalę fotografii. Biegły opisuje cechy rzeczywiście widoczne, wskazuje niezależne wzajemne potwierdzenie obserwacji i zaznacza niepewność wynikającą z ruchu, nacisku lub zniekształcenia. Dzięki temu symulacja edukacyjna pozostaje odróżniona od formalnej opinii kryminalistycznej, a wynik nie jest przedstawiany jako nadmiernie pewny." + " Ocena powinna uwzględniać jakość obrazu, kierunek nacisku, możliwe zniekształcenia oraz pełną dokumentację porównania. Wiarygodny wniosek wymaga wielu niezależnych cech, ich relacji przestrzennych, opisanych ograniczeń i kontroli wykonanej przez wykwalifikowanego biegłego.",
     },
     {
       type: 'glossary',

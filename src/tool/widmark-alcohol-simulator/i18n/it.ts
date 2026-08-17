@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'Una volta assorbito, l\'etanolo viene metabolizzato per la quasi totalità dal fegato tramite l\'alcol deidrogenasi (ADH). Questo enzima si satura molto rapidamente a concentrazioni minime (0,02 g/L), instaurando una cinetica di eliminazione di ordine zero. Di conseguenza, il fegato smaltisce una quantità fissa e costante di alcol per unità di tempo. Il tasso di eliminazione forense standard (&beta;<sub>60</sub>) è fissato a 0,15 g/L all\'ora, generando la tipica discesa rettilinea visibile sul grafico.',
     },
-  ],
+
+  { type: 'paragraph', html: "Usa il risultato per pianificare e confrontare scenari; non sostituisce un calcolo ufficiale o una consulenza professionale." },
+  { type: 'paragraph', html: "Interpreta il risultato insieme alle ipotesi mostrate dal calcolatore prima di utilizzarlo." },
+  { type: 'paragraph', html: "Controlla dati, unità, arrotondamento, data e giurisdizione, perché ciascun elemento può cambiare la stima." },],
   faq,
   bibliography,
   howTo,

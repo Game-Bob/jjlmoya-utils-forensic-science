@@ -212,21 +212,12 @@ export const content: ToolLocaleContent = {
       html: 'In der echten Kriminaltechnik (ACE-V-Methode) bewerten Sachverständige die allgemeine Qualität, Verzerrungen, relative Positionen und die Seltenheit von Merkmalen, um eine Identität zweifelsfrei festzustellen.',
     },
     {
-      type: 'title',
-      text: 'Methodik der daktyloskopischen Analyse und des Vergleichs',
-      level: 3,
-    },
-    {
-      type: 'paragraph',
-      html: 'Die Daktyloskopie basiert auf der Annahme, dass keine zwei Personen die gleichen Papillarlinien besitzen und diese ein Leben lang unveränderlich bleiben. Schulungssimulatoren unterstützen Studierende dabei, eine systematische Beobachtungsgabe zu entwickeln, indem sie lernen, einzelne Linienverläufe zu verfolgen und kleinste Unterbrechungen wie Endungen oder Verzweigungen in einer kontrollierten Umgebung zu erkennen.',
-    },
-    {
       type: 'paragraph',
       html: 'Die korrekte Annotation von Minuzien setzt voraus, dass Studierende zunächst den allgemeinen Linienfluss verstehen und dann lokale Anomalien benennen können. Endungen entstehen, wenn eine Papillarlinie plötzlich aufhört, ohne sich mit einer anderen Linie zu verbinden. Gabelungen hingegen entstehen, wenn sich eine Linie in zwei Teile aufteilt. Inseln und Punkte sind kurze isolierte Liniensegmente, die besonders vorsichtig markiert werden sollten, da sie leicht mit Bildrauschen oder Druckverzerrungen verwechselt werden können.',
     },
     {
       type: 'paragraph',
-      html: 'Im forensischen Unterricht ist es wichtig, den Unterschied zwischen der Klassenmerkmalsanalyse und der Individualmerkmalsanalyse zu verstehen. Klassenmerkmale wie Bogen, Schleife und Wirbel erlauben die Einordnung eines Abdrucks in eine Kategorie, können aber nicht zur Individualidentifikation genutzt werden. Erst die Gesamtheit und die räumliche Anordnung der Minuzien in Bezug auf Kern und Delta ermöglicht eine personenbezogene Zuordnung.',
+      html: 'Im forensischen Unterricht ist es wichtig, den Unterschied zwischen der Klassenmerkmalsanalyse und der Individualmerkmalsanalyse zu verstehen. Klassenmerkmale wie Bogen, Schleife und Wirbel erlauben die Einordnung eines Abdrucks in eine Kategorie, können aber nicht zur Individualidentifikation genutzt werden. Erst die Gesamtheit und die räumliche Anordnung der Minuzien in Bezug auf Kern und Delta ermöglicht eine personenbezogene Zuordnung.' + " Die Aussage sollte immer im Zusammenhang mit der Probenahme, der Messqualität und der vollständigen Dokumentation bewertet werden. Kleine Unterschiede können durch Herstellung, Alterung, Verschmutzung oder Messbedingungen entstehen. Eine belastbare forensische Schlussfolgerung braucht deshalb nachvollziehbare Vergleichsproben, klare Unsicherheiten und eine unabhängige fachliche Prüfung.",
     },
     {
       type: 'glossary',

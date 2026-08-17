@@ -185,10 +185,6 @@ export const content: ToolLocaleContent = {
       html: 'Os peritos forenses devem documentar cada etapa do processo de análise de fibras. Isso inclui tirar fotografias detalhadas, registrar medições e manter uma cadeia de custódia para todas as evidências físicas. O simulador ajuda os estudantes a compreender a importância da documentação sistemática e da comparação objetiva no trabalho forense. Ao interagir com diferentes configurações, os usuários podem aprender como o caminho da luz, a espessura da amostra e a concentração do corante afetam as curvas espectrais e a aparência física.',
     },
     {
-      type: 'paragraph',
-      html: 'Os peritos forenses devem documentar cada etapa do processo de análise de fibras. Isso inclui tirar fotografias detalhadas, registrar medições e manter uma cadeia de custódia para todas as evidências físicas. O simulador ajuda os estudantes a compreender a importância da documentação sistemática e da comparação objetiva no trabalho forense. Ao interagir com diferentes configurações, os usuários podem aprender como o caminho da luz, a espessura da amostra e a concentração do corante afetam as curvas espectrais e a aparência física.',
-    },
-    {
       type: 'glossary',
       items: [
         { term: 'Fibra questionada', definition: 'Uma fibra recuperada de um local, vítima, suspeito, ferramenta, veículo ou outro item cuja origem é desconhecida.' },

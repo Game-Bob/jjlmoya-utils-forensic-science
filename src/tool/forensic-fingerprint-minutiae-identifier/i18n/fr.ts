@@ -212,15 +212,6 @@ export const content: ToolLocaleContent = {
       html: 'Dans la pratique réelle selon la méthode ACE-V, l\'expert dactyloscopiste evalue la qualité générale de l\'image, les deformations eventuelles, la concordance des positions relatives des minuties, et la rareté des caractéristiques observees pour formuler une conclusion d\'identification solide et juridiquement recevable.',
     },
     {
-      type: 'title',
-      text: 'Methodologie d\'analyse et de comparaison dactyloscopique',
-      level: 3,
-    },
-    {
-      type: 'paragraph',
-      html: 'La dactyloscopie repose sur le postulat qu\'il n\'existe pas deux individus partageant les memes details de crêtes papillaires, et que ces dessins restent immuables tout au long de la vie. Les simulateurs pédagogiques aident les étudiants a acquerir de la méthode en leur apprenant a suivre le cheminement individuel des crêtes et a repèrer les moindres anomalies locales, comme les arrets ou les divisions, dans un environnement d\'apprentissage structure et guide par un expert.',
-    },
-    {
       type: 'paragraph',
       html: 'La bonne annotation des minuties exige que les étudiants comprennent d\'abord le flux général des crêtes et qu\'ils sachent ensuite nommer les anomalies locales. Les arrets surviennent lorsqu\'une crête papillaire s\'interrompt brusquement sans rejoindre une autre crête. Les bifurcations apparaissent lorsqu\'une crête se divise en deux branches distinctes et nettes. Les iles et les points sont de courts segments isoles qu\'il faut marquer avec une prudence particuliere et documentee.',
     },

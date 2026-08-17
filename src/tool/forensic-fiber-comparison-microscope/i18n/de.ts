@@ -182,11 +182,7 @@ export const content: ToolLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: 'Forensische Gutachter müssen jeden Schritt des Faseranalyseprozesses dokumentieren. Dies umfasst detaillierte Fotoaufnahmen, das Protokollieren von Messungen und die Einhaltung der Asservatenkette für alle physischen Beweismittel. Der Simulator hilft Studierenden, die Bedeutung einer systematischen Dokumentation und eines objektiven Vergleichs in der forensischen Arbeit zu verstehen. Durch die Interaktion mit verschiedenen Einstellungen können Benutzer lernen, wie sich Lichtweg, Probendicke und Farbstoffkonzentration auf die Spektralkurven und das physische Erscheinungsbild auswirken.',
-    },
-    {
-      type: 'paragraph',
-      html: 'Forensische Gutachter müssen jeden Schritt des Faseranalyseprozesses dokumentieren. Dies umfasst detaillierte Fotoaufnahmen, das Protokollieren von Messungen und die Einhaltung der Asservatenkette für alle physischen Beweismittel. Der Simulator hilft Studierenden, die Bedeutung einer systematischen Dokumentation und eines objektiven Vergleichs in der forensischen Arbeit zu verstehen. Durch die Interaktion mit verschiedenen Einstellungen können Benutzer lernen, wie sich Lichtweg, Probendicke und Farbstoffkonzentration auf die Spektralkurven und das physische Erscheinungsbild auswirken.',
+      html: 'Forensische Gutachter müssen jeden Schritt des Faseranalyseprozesses dokumentieren. Dies umfasst detaillierte Fotoaufnahmen, das Protokollieren von Messungen und die Einhaltung der Asservatenkette für alle physischen Beweismittel. Der Simulator hilft Studierenden, die Bedeutung einer systematischen Dokumentation und eines objektiven Vergleichs in der forensischen Arbeit zu verstehen. Durch die Interaktion mit verschiedenen Einstellungen können Benutzer lernen, wie sich Lichtweg, Probendicke und Farbstoffkonzentration auf die Spektralkurven und das physische Erscheinungsbild auswirken.' + " Die Aussage sollte immer im Zusammenhang mit der Probenahme, der Messqualität und der vollständigen Dokumentation bewertet werden. Kleine Unterschiede können durch Herstellung, Alterung, Verschmutzung oder Messbedingungen entstehen. Eine belastbare forensische Schlussfolgerung braucht deshalb nachvollziehbare Vergleichsproben, klare Unsicherheiten und eine unabhängige fachliche Prüfung.",
     },
     {
       type: 'glossary',

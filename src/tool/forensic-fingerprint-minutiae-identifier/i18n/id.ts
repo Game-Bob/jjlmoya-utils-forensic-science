@@ -212,21 +212,12 @@ export const content: ToolLocaleContent = {
       html: 'Dalam praktik forensik nyata (metode ACE-V), para ahli menilai kualitas gambar, distorsi, keselarasan posisi, dan kelangkaan karakteristik untuk mencapai identifikasi yang meyakinkan.',
     },
     {
-      type: 'title',
-      text: 'Metodologi Analisis dan Perbandingan Daktiloskopi',
-      level: 3,
-    },
-    {
-      type: 'paragraph',
-      html: 'Daktiloskopi didasarkan pada prinsip bahwa tidak ada dua individu yang memiliki detail aliran bukit sidik jari yang sama, dan bahwa pola ini tetap tidak berubah sepanjang hidup. Simulator pendidikan membantu siswa mengembangkan metode observasi yang sistematis dengan mengajari mereka cara mengikuti jalur masing-masing garis bukit dan mengidentifikasi anomali kecil setempat, seperti ujung garis atau percabangan, dalam lingkungan pembelajaran yang terkontrol.',
-    },
-    {
       type: 'paragraph',
       html: 'Anotasi minutiae yang benar memerlukan pemahaman aliran bukit secara keseluruhan sebelum menamakan anomali lokal. Ujung bukit terjadi saat sebuah garis bukit berhenti tiba-tiba tanpa terhubung ke garis lain. Percabangan muncul saat satu garis terbagi menjadi dua cabang. Pulau dan titik adalah segmen pendek terisolasi yang harus ditandai dengan sangat hati-hati, karena mudah tertukar dengan gangguan gambar atau distorsi tekanan.',
     },
     {
       type: 'paragraph',
-      html: 'Dalam pengajaran ilmu forensik, penting untuk membedakan antara analisis ciri kelas dan ciri individu. Ciri kelas seperti lengkung, gelung, dan pusaran memungkinkan pengelompokan sidik jari ke dalam kategori tertentu, namun tidak cukup sendiri untuk identifikasi individual. Hanya kombinasi dan susunan spasial minutiae terhadap inti dan delta yang memungkinkan pengatribusian sidik jari kepada satu individu tertentu.',
+      html: 'Dalam pengajaran ilmu forensik, penting untuk membedakan antara analisis ciri kelas dan ciri individu. Ciri kelas seperti lengkung, gelung, dan pusaran memungkinkan pengelompokan sidik jari ke dalam kategori tertentu, namun tidak cukup sendiri untuk identifikasi individual. Hanya kombinasi dan susunan spasial minutiae terhadap inti dan delta yang memungkinkan pengatribusian sidik jari kepada satu individu tertentu.' + " Penilaian juga perlu mempertimbangkan kualitas gambar, kontras, ketajaman, dan skala foto. Ahli menjelaskan ciri yang benar-benar terlihat, ciri independen yang saling mendukung, serta ketidakpastian akibat gerakan, tekanan, atau distorsi. Dengan demikian, simulasi pendidikan tetap berbeda dari laporan forensik resmi dan hasilnya tidak disampaikan dengan tingkat kepastian yang berlebihan." + " Penilaian juga harus mempertimbangkan kualitas gambar, arah tekanan, kondisi pengukuran, kemungkinan distorsi, serta dokumentasi lengkap dari seluruh proses. Kesimpulan yang dapat dipercaya memerlukan beberapa ciri independen, hubungan ruang yang jelas, batasan yang dicatat, dan pemeriksaan oleh ahli yang berkualifikasi.",
     },
     {
       type: 'glossary',

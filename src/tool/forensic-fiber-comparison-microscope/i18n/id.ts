@@ -185,10 +185,6 @@ export const content: ToolLocaleContent = {
       html: 'Pemeriksa forensik harus mendokumentasikan setiap langkah proses analisis serat. Ini termasuk mengambil foto terperinci, mencatat pengukuran, dan menjaga rantai kepemilikan untuk semua bukti fisik. Simulator membantu siswa memahami pentingnya dokumentasi sistematis dan perbandingan objektif dalam pekerjaan kasus forensik. Dengan berinteraksi dengan pengaturan yang berbeda, pengguna dapat mempelajari bagaimana jalur cahaya, ketebalan sampel, dan konsentrasi zat warna memengaruhi kurva spektral dan penampilan fisik.',
     },
     {
-      type: 'paragraph',
-      html: 'Pemeriksa forensik harus mendokumentasikan setiap langkah proses analisis serat. Ini termasuk mengambil foto terperinci, mencatat pengukuran, dan menjaga rantai kepemilikan untuk semua bukti fisik. Simulator membantu siswa memahami pentingnya dokumentasi sistematis dan perbandingan objektif dalam pekerjaan kasus forensik. Dengan berinteraksi dengan pengaturan yang berbeda, pengguna dapat mempelajari bagaimana jalur cahaya, ketebalan sampel, dan konsentrasi zat warna memengaruhi kurva spektral dan penampilan fisik.',
-    },
-    {
       type: 'glossary',
       items: [
         { term: 'Serat dipertanyakan', definition: 'Serat yang ditemukan dari TKP, korban, tersangka, alat, kendaraan, atau barang lain yang sumbernya tidak diketahui.' },

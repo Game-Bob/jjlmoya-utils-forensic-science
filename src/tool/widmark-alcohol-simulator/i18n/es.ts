@@ -154,7 +154,10 @@ export const content: ToolLocaleContent = {
       type: 'paragraph',
       html: 'Una vez en la circulación, el alcohol es metabolizado principalmente en el hígado por el sistema enzimático de la alcohol deshidrogenasa (ADH), que lo transforma en acetaldehído. Este proceso se satura a concentraciones muy bajas, lo que da lugar a una cinética de orden cero. Esto significa que el hígado metaboliza una cantidad fija de alcohol por hora, sin importar el nivel de intoxicación. En el ámbito forense, esta tasa constante de aclaramiento (&beta;<sub>60</sub>) se fija de media en 0.15 g/L por hora, equivalente a eliminar unos 10 gramos de alcohol puro cada hora. Esta eliminación de orden cero es la que genera la característica pendiente de descenso lineal en los gráficos de alcoholemia.',
     },
-  ],
+
+  { type: 'paragraph', html: "Usa el resultado para planificar y comparar escenarios; no sustituye un cálculo oficial ni el asesoramiento profesional." },
+  { type: 'paragraph', html: "Interpreta el resultado junto con los supuestos que muestra la calculadora antes de utilizarlo." },
+  { type: 'paragraph', html: "Comprueba los datos, las unidades, el redondeo, la fecha y la jurisdicción, porque todos pueden cambiar la estimación." },],
   faq,
   bibliography,
   howTo,
