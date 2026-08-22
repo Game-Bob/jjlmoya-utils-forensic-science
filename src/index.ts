@@ -15,6 +15,7 @@ export { BLOODSTAIN_PATTERN_ORIGIN_ANALYZER_TOOL } from './tool/bloodstain-patte
 export { FORENSIC_FINGERPRINT_MINUTIAE_IDENTIFIER_TOOL } from './tool/forensic-fingerprint-minutiae-identifier/index';
 export { FIRE_PATTERN_ORIGIN_ANALYZER_TOOL } from './tool/fire-pattern-origin-analyzer/index';
 export { FORENSIC_TOOLMARK_STRIATION_MATCHER_TOOL } from './tool/forensic-toolmark-striation-matcher/index';
+export { VOICE_SPECTROGRAM_ANALYZER_TOOL } from './tool/voice-spectrogram-analyzer/index';
 
 export type {
   KnownLocale,

@@ -1,0 +1,116 @@
+---
+import './voice-spectrogram-analyzer.css';
+import type { VoiceSpectrogramUI } from './ui';
+
+interface Props {
+  ui: VoiceSpectrogramUI;
+}
+
+const { ui } = Astro.props;
+---
+
+<div class="voice-spectrogram" data-voice-spectrogram>
+  <div class="voice-spectrogram-privacy">
+    <span>{ui.privacyBadge}</span>
+    <p>{ui.privacyNote}</p>
+  </div>
+
+  <section class="voice-spectrogram-load" aria-labelledby="voice-load-heading">
+    <div class="voice-spectrogram-section-intro">
+      <p class="voice-spectrogram-kicker">{ui.loadHeading}</p>
+      <span>{ui.presetHint}</span>
+    </div>
+    <div class="voice-spectrogram-samples">
+      {(['a', 'b'] as const).map((key) => (
+        <article class={`voice-spectrogram-sample voice-spectrogram-sample-${key}`} data-card={key} data-state="ready">
+          <div class="voice-spectrogram-sample-index">{key === 'a' ? ui.sampleALabel : ui.sampleBLabel}</div>
+          <div class="voice-spectrogram-drop" data-drop={key}>
+            <div>
+              <strong data-name={key}>{key === 'a' ? ui.presetWarmLabel : ui.presetBrightLabel}</strong>
+              <span data-status={key}>{ui.readySampleLabel}</span>
+            </div>
+            <label class="voice-spectrogram-file">
+              <span>{ui.chooseFileLabel}</span>
+              <input type="file" accept="audio/*" data-file={key} />
+            </label>
+            <small>{ui.dropHint}</small>
+          </div>
+          <div class="voice-spectrogram-sample-foot">
+            <span data-duration={key}>{ui.durationLabel} 0:02</span>
+            <div class="voice-spectrogram-presets">
+              <button type="button" data-preset="warm" data-track={key}>{ui.presetWarmLabel}</button>
+              <button type="button" data-preset="bright" data-track={key}>{ui.presetBrightLabel}</button>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="voice-spectrogram-instrument" aria-label={ui.stageLabel}>
+    <div class="voice-spectrogram-instrument-head">
+      <div>
+        <span class="voice-spectrogram-live-dot"></span>
+        <strong data-stage-status>{ui.statusReadyLabel}</strong>
+      </div>
+      <div class="voice-spectrogram-control-clusters">
+        <div class="voice-spectrogram-segmented" aria-label={ui.ceilingHeading}>
+          <span>{ui.ceilingHeading}</span>
+          <button type="button" data-ceiling="4000">{ui.ceilingFourLabel}</button>
+          <button type="button" data-ceiling="6000" class="is-active">{ui.ceilingSixLabel}</button>
+          <button type="button" data-ceiling="8000">{ui.ceilingEightLabel}</button>
+        </div>
+        <div class="voice-spectrogram-segmented" aria-label={ui.stageLabel}>
+          <button type="button" data-view="mirror" class="is-active">{ui.mirrorViewLabel}</button>
+          <button type="button" data-view="split">{ui.splitViewLabel}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="voice-spectrogram-plate">
+      <canvas aria-label={`${ui.stageLabel}. ${ui.educationalNote}`}></canvas>
+      <div class="voice-spectrogram-plate-glow"></div>
+    </div>
+
+    <div class="voice-spectrogram-transport">
+      <button type="button" data-play="a"><span>A</span>{ui.playALabel}</button>
+      <button type="button" data-stop class="voice-spectrogram-stop">{ui.stopLabel}</button>
+      <button type="button" data-play="b"><span>B</span>{ui.playBLabel}</button>
+    </div>
+    <div class="voice-spectrogram-legend">
+      <span><i class="voice-spectrogram-swatch voice-spectrogram-swatch-a"></i>{ui.sampleALabel}</span>
+      <span><i class="voice-spectrogram-swatch voice-spectrogram-swatch-b"></i>{ui.sampleBLabel}</span>
+      <span><i class="voice-spectrogram-line"></i>{ui.formantLegendLabel}</span>
+      <span>{ui.intensityLegendLabel}</span>
+    </div>
+  </section>
+
+  <section class="voice-spectrogram-comparison" aria-labelledby="voice-comparison-heading">
+    <div class="voice-spectrogram-comparison-copy">
+      <p class="voice-spectrogram-kicker" id="voice-comparison-heading">{ui.comparisonHeading}</p>
+      <p>{ui.comparisonNote}</p>
+    </div>
+    <div class="voice-spectrogram-formants">
+      {[ui.formantOneLabel, ui.formantTwoLabel, ui.formantThreeLabel].map((label, index) => (
+        <article>
+          <span class="voice-spectrogram-formant-index">F{index + 1}</span>
+          <strong>{label}</strong>
+          <dl>
+            <div><dt>A</dt><dd data-value={`a-${index}`}>{ui.unavailableLabel}</dd></div>
+            <div><dt>B</dt><dd data-value={`b-${index}`}>{ui.unavailableLabel}</dd></div>
+            <div><dt>{ui.differenceLabel}</dt><dd data-value={`d-${index}`}>{ui.unavailableLabel}</dd></div>
+          </dl>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <p class="voice-spectrogram-educational">{ui.educationalNote}</p>
+  <script is:inline type="application/json" data-voice-content set:html={JSON.stringify(ui)}></script>
+</div>
+
+<script>
+  import { mountVoiceSpectrogram } from './controller';
+
+  document.querySelectorAll<HTMLElement>('[data-voice-spectrogram]').forEach(mountVoiceSpectrogram);
+</script>

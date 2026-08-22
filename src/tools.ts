@@ -16,6 +16,7 @@ import { FORENSIC_FINGERPRINT_MINUTIAE_IDENTIFIER_TOOL } from './tool/forensic-f
 import { FIRE_PATTERN_ORIGIN_ANALYZER_TOOL } from './tool/fire-pattern-origin-analyzer/index';
 import { FORENSIC_TOOLMARK_STRIATION_MATCHER_TOOL } from './tool/forensic-toolmark-striation-matcher/index';
 import { TIME_OF_DEATH_ALGOR_MORTIS_CALCULATOR_TOOL } from './tool/time-of-death-algor-mortis-calculator/index';
+import { VOICE_SPECTROGRAM_ANALYZER_TOOL } from './tool/voice-spectrogram-analyzer/index';
 
 export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_AGE_ESTIMATOR_TOOL,
@@ -33,5 +34,6 @@ export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_FINGERPRINT_MINUTIAE_IDENTIFIER_TOOL,
   FIRE_PATTERN_ORIGIN_ANALYZER_TOOL,
   FORENSIC_TOOLMARK_STRIATION_MATCHER_TOOL,
-  TIME_OF_DEATH_ALGOR_MORTIS_CALCULATOR_TOOL
+  TIME_OF_DEATH_ALGOR_MORTIS_CALCULATOR_TOOL,
+  VOICE_SPECTROGRAM_ANALYZER_TOOL
 ];

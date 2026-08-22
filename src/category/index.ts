@@ -15,6 +15,7 @@ import { forensicFingerprintMinutiaeIdentifier } from '../tool/forensic-fingerpr
 import { firePatternOriginAnalyzer } from '../tool/fire-pattern-origin-analyzer/entry';
 import { forensicToolmarkStriationMatcher } from '../tool/forensic-toolmark-striation-matcher/entry';
 import { timeOfDeathAlgorMortisCalculator } from '../tool/time-of-death-algor-mortis-calculator/entry';
+import { voiceSpectrogramAnalyzer } from '../tool/voice-spectrogram-analyzer/entry';
 
 export const forensicCategory: ScienceCategoryEntry = {
   icon: 'mdi:fingerprint',
@@ -34,7 +35,8 @@ export const forensicCategory: ScienceCategoryEntry = {
     forensicFingerprintMinutiaeIdentifier,
     firePatternOriginAnalyzer,
     forensicToolmarkStriationMatcher,
-    timeOfDeathAlgorMortisCalculator
+    timeOfDeathAlgorMortisCalculator,
+    voiceSpectrogramAnalyzer
   ],
 
 
