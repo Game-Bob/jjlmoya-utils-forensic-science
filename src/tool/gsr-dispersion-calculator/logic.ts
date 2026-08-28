@@ -113,7 +113,7 @@ function createParticles(config: ParticleFieldConfig): GsrParticle[] {
         y: Math.sin(angle) * radial,
         radius: isSoot ? 1.8 + random() * 4 : 0.9 + random() * 2.8,
         opacity: Math.max(0.16, Math.min(0.92, (densityScore / 100) * (0.45 + random() * 0.65))),
-        element: isSoot ? 'soot' : elements[Math.floor(random() * 3)],
+        element: isSoot ? 'soot' : (elements[Math.floor(random() * 3)] ?? 'lead'),
       });
   }
 

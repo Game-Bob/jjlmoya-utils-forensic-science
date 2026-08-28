@@ -90,7 +90,7 @@ const { ui } = content;
   <p class="fia-disclaimer">{ui.disclaimer}</p>
 </section>
 
-<script id="fia-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script is:inline id="fia-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
 <script>
   import { ExifExtractor, IntegrityChecker, createHexSegments } from './logic';
   import type { ExifMetadata, IntegrityFinding, IntegrityResult } from './logic';

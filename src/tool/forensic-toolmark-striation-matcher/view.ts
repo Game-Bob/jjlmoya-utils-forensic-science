@@ -15,6 +15,10 @@ function byId<T extends HTMLElement>(id: string): T | null {
   return document.getElementById(id) as T | null;
 }
 
+function uiText(ui: Ui, key: string, fallback = ''): string {
+  return ui[key] ?? fallback;
+}
+
 function isToolProfile(value: unknown): value is ToolProfile {
   return typeof value === 'string' && PROFILES.includes(value as ToolProfile);
 }
@@ -200,35 +204,35 @@ class ToolmarkView {
       brightnessPercent: readNumber(this.brightnessInput, DEFAULTS.brightness),
       gridEnabled: this.gridEnabled,
       dark: isDarkTheme(),
-      reliefGraphLabel: this.ui.reliefGraph,
+      reliefGraphLabel: uiText(this.ui, 'reliefGraph'),
     });
   }
 
   private updateLabels(result: ReturnType<StriationMatcher['compare']>): void {
     const visualMode = this.hasUploadedImages();
-    this.setText('toolmark-correlation', visualMode ? this.ui.visualMode : `${result.correlation}%`);
+    this.setText('toolmark-correlation', visualMode ? uiText(this.ui, 'visualMode') : `${result.correlation}%`);
     this.setText('toolmark-verdict', this.verdictLabel(result.correlation, visualMode));
     this.setText('toolmark-offset-label', this.offsetLabel(result));
-    this.setText('toolmark-rotation-label', `${result.rotationDegrees.toFixed(1)}${this.ui.degrees}`);
+    this.setText('toolmark-rotation-label', `${result.rotationDegrees.toFixed(1)}${uiText(this.ui, 'degrees')}`);
     this.setText('toolmark-zoom-label', `${readNumber(this.zoomInput, DEFAULTS.zoom)}%`);
-    this.setText('toolmark-interpretation', visualMode ? this.ui.visualInterpretation : '');
+    this.setText('toolmark-interpretation', visualMode ? uiText(this.ui, 'visualInterpretation') : '');
     this.setText('toolmark-phase-label', `${result.phaseScore}%`);
     this.setText('toolmark-rotation-fit-label', `${result.rotationScore}%`);
-    this.setText('toolmark-known-name', this.knownSample?.name ?? this.ui.noFile);
-    this.setText('toolmark-questioned-name', this.questionedSample?.name ?? this.ui.noFile);
+    this.setText('toolmark-known-name', this.knownSample?.name ?? uiText(this.ui, 'noFile'));
+    this.setText('toolmark-questioned-name', this.questionedSample?.name ?? uiText(this.ui, 'noFile'));
     this.updateMeters(result);
   }
 
   private verdictLabel(correlation: number, visualMode: boolean): string {
-    if (visualMode) return this.ui.visualVerdict;
-    if (correlation >= 82) return this.ui.verdictStrong;
-    if (correlation >= 58) return this.ui.verdictPartial;
-    return this.ui.verdictWeak;
+    if (visualMode) return uiText(this.ui, 'visualVerdict');
+    if (correlation >= 82) return uiText(this.ui, 'verdictStrong');
+    if (correlation >= 58) return uiText(this.ui, 'verdictPartial');
+    return uiText(this.ui, 'verdictWeak');
   }
 
   private offsetLabel(result: ReturnType<StriationMatcher['compare']>): string {
-    if (this.unitSystem === 'imperial') return `${result.offsetThousandths.toFixed(2)} ${this.ui.thousandths}`;
-    return `${result.offsetMicrons.toFixed(0)} ${this.ui.microns}`;
+    if (this.unitSystem === 'imperial') return `${result.offsetThousandths.toFixed(2)} ${uiText(this.ui, 'thousandths')}`;
+    return `${result.offsetMicrons.toFixed(0)} ${uiText(this.ui, 'microns')}`;
   }
 
   private updateMeters(result: ReturnType<StriationMatcher['compare']>): void {
@@ -275,17 +279,12 @@ class ToolmarkView {
   private exportCanvas(): void {
     if (!this.canvas) return;
     const link = document.createElement('a');
-    link.download = this.ui.exportFilename;
+    link.download = uiText(this.ui, 'exportFilename', 'toolmark-comparison.png');
     link.href = this.canvas.toDataURL('image/png');
     link.click();
   }
 
-  private offset(): number {
-    return readNumber(this.offsetInput, DEFAULTS.offset);
-  }
+  private offset(): number { return readNumber(this.offsetInput, DEFAULTS.offset); }
 
-  private rotation(): number {
-    return readNumber(this.rotationInput, DEFAULTS.rotation);
-  }
-
+  private rotation(): number { return readNumber(this.rotationInput, DEFAULTS.rotation); }
 }

@@ -42,7 +42,7 @@ export class StriationMatcher {
     const seed = PROFILE_SEEDS[profile] ?? PROFILE_SEEDS.screwdriver;
     const relief: number[] = [];
     for (let i = 0; i < 48; i += 1) {
-      const base = seed[i % seed.length];
+      const base = seed[i % seed.length] ?? 0;
       const wave = Math.sin((i * 0.72) + (offsetMicrons / 18)) * 0.18;
       const tilt = Math.sin((rotationDegrees * Math.PI / 180) + (i * 0.17)) * 0.08;
       relief.push(Number(clamp(base + wave + tilt, 0.04, 1).toFixed(3)));

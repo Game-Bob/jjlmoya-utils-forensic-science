@@ -188,7 +188,7 @@ const { ui } = Astro.props;
   </div>
 </section>
 
-<script id="fire-origin-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script is:inline id="fire-origin-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
 <script>
   import { initFirePatternOriginAnalyzer } from './view';
 

@@ -212,7 +212,7 @@ export function buildSpectrumChartMarkup(ui: Record<string, string>, left: Fiber
   return `${chartDefs(leftColor, rightColor)}
     <rect x="0" y="0" width="720" height="270" rx="8" fill="transparent"></rect>
     <g stroke="${theme.grid}" stroke-width="1">${gridLines}</g>
-    ${chartLabels(ui.uvVisTitle, theme.text)}
+    ${chartLabels(ui.uvVisTitle ?? '', theme.text)}
     <path d="${leftArea}" fill="url(#fiber-left-area)"></path>
     <path d="${rightArea}" fill="url(#fiber-right-area)"></path>
     <path d="${leftPath}" fill="none" stroke="${leftColor}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>

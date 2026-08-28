@@ -63,8 +63,8 @@ export interface ScienceCategoryEntry {
 
 export interface ToolDefinition {
   entry: ScienceToolEntry;
-  Component: unknown;
-  SEOComponent: unknown;
-  BibliographyComponent: unknown;
+  Component: (_props: Record<string, unknown>) => unknown;
+  SEOComponent: (_props: Record<string, unknown>) => unknown;
+  BibliographyComponent: (_props: Record<string, unknown>) => unknown;
 }
 

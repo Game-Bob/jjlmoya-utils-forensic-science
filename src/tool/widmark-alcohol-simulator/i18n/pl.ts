@@ -105,6 +105,9 @@ export const content: ToolLocaleContent = {
       text: 'Toksykologia Sądowa i Farmakokinetyka Etanolu',
       level: 2,
     },
+    { type: 'paragraph', html: "Interpretacja musi uwzględniać ograniczenia modelu: alkohol nie wchłania się i nie jest eliminowany w identyczny sposób u każdej osoby, a niepewna godzina spożycia może znacząco zmienić wynik. Zapisz, które dane zmierzono bezpośrednio, a które przyjęto. Wykres pomaga zbadać wrażliwość na masę ciała, współczynnik dystrybucji, wchłanianie i eliminację. Niski błąd modelu nie dowodzi prawdziwości danych wejściowych. Decyzje urzędowe wymagają zwalidowanej metody, wiarygodnych pomiarów i opinii specjalisty." },
+    { type: 'paragraph', html: "Pokazana wartość zależy od wybranego czasu i wprowadzonych parametrów. Zachowaj dane źródłowe, zaznacz informacje oszacowane i porównaj kilka scenariuszy, gdy godzina jest niepewna. Dzięki temu margines błędu pozostaje widoczny, a krzywa nie jest traktowana jako samodzielny dowód." },
+    { type: 'paragraph', html: "Przejrzysta estymacja oddziela dane zaobserwowane od założeń modelu. Zapisz oś czasu, możliwą fazę wchłaniania i niepewność eliminacji. Wykres służy do porównywania scenariuszy i sam nie ustala odpowiedzialności ani wniosku prawnego. Obok wartości pokazuj zakres oraz wszystkie przyjęte założenia." },
     {
       type: 'paragraph',
       html: 'Zrozumienie procesów <strong>wchłaniania, dystrybucji i eliminacji etanolu</strong> stanowi kluczowy wymóg w toksykologii sądowej oraz przy rekonstrukcji wypadków drogowych. Po spożyciu alkohol trafia do żołądka, skąd wchłania się jedynie niewielka część. Ponad 80% dawki wchłania się w dwunastnicy i jelicie cienkim ze względu na ich ogromną powierzchnię. Szybkość opróżniania żołądka jest głównym czynnikiem limitującym, co tłumaczy, dlaczego posiłek spłaszcza i opóźnia szczyt krzywej alcoholemia.',
@@ -157,7 +160,8 @@ export const content: ToolLocaleContent = {
 
   { type: 'paragraph', html: "Używaj wyniku do planowania i porównywania scenariuszy; nie zastępuje obliczeń urzędowych ani porady specjalisty." },
   { type: 'paragraph', html: "Przed użyciem zinterpretuj wynik razem z założeniami pokazanymi przez kalkulator." },
-  { type: 'paragraph', html: "Sprawdź dane, jednostki, zaokrąglenie, datę i jurysdykcję, ponieważ każdy element może zmienić szacunek." },],
+  { type: 'paragraph', html: "Sprawdź dane, jednostki, zaokrąglenie, datę i jurysdykcję, ponieważ każdy element może zmienić szacunek." },
+  { type: 'paragraph', html: "W obliczeniach wstecznych zapisz osobno czas ostatniego drinka, przyjęty okres wchłaniania, masę ciała, współczynnik dystrybucji oraz tempo eliminacji. Wchłanianie może trwać po zakończeniu picia, a posiłek, nawodnienie i różnice osobnicze zmieniają przebieg krzywej. Wynik służy do matematycznego porównania scenariuszy i nie jest bezpośrednim pomiarem ani samodzielną opinią sądowo-medyczną. Raport powinien pokazywać założenia, zakres niepewności i kontekst pomiaru." },],
   faq,
   bibliography,
   howTo,

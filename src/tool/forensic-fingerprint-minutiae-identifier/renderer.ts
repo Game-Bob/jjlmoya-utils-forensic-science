@@ -31,7 +31,6 @@ export function updateWorkflow(
 export function updateUIStates(
   activeMinutia: MinutiaType,
   activePattern: string,
-  limits: Record<MinutiaType, number>,
   canAdd: (type: MinutiaType) => boolean
 ): void {
   document.querySelectorAll<HTMLButtonElement>('[data-fp-pattern]').forEach((button) => {
@@ -54,7 +53,7 @@ export function updateActionButtons(
   const undo = document.getElementById('fp-undo') as HTMLButtonElement | null;
   if (deleteSelected) {
     deleteSelected.disabled = !selectedMark;
-    deleteSelected.title = selectedMark ? `${ui.deleteSelected}: ${ui[selectedMark.type] ?? selectedMark.type}` : ui.selectMarkToDelete;
+    deleteSelected.title = selectedMark ? `${ui.deleteSelected ?? 'Delete selected'}: ${ui[selectedMark.type] ?? selectedMark.type}` : (ui.selectMarkToDelete ?? 'Select a mark to delete');
   }
   if (undo) {
     undo.disabled = !hasLastMark;
@@ -86,7 +85,7 @@ export function updateMinutiaeLabels(
   (['ridgeEnding', 'bifurcation', 'island', 'dot'] as MinutiaType[]).forEach((type) => {
     setText(`fp-count-${type}`, `${summary.byType[type]}/${limits[type]}`);
   });
-  setText('fp-active-minutia-label', ui.activeMinutia);
+  setText('fp-active-minutia-label', ui.activeMinutia ?? 'Active minutia');
   setText('fp-active-minutia-title', ui[activeMinutia] ?? activeMinutia);
   setText('fp-active-minutia-copy', ui[`${activeMinutia}Help`] ?? '');
   setText('fp-score', `${summary.validationScore}%`);
@@ -104,13 +103,15 @@ interface RenderTableParams {
 }
 
 export function renderTable(p: RenderTableParams): void {
-  if (!p.tableBody) return;
-  p.tableBody.innerHTML = '';
+  const tableBody = p.tableBody;
+  if (!tableBody) return;
+  tableBody.innerHTML = '';
   p.marks.forEach((mark) => {
     const row = document.createElement('tr');
     const label = p.ui[mark.type] ?? mark.type;
-    const trashIcon = p.trashIconTemplate?.innerHTML || p.ui.remove;
-    row.innerHTML = `<td><span style="--dot:${p.colors[mark.type]}"></span>${label}</td><td>${mark.x.toFixed(1)}, ${mark.y.toFixed(1)}</td><td><button type="button" class="fp-icon-button" data-remove="${mark.id}" aria-label="${p.ui.remove} ${label}">${trashIcon}</button></td>`;
-    p.tableBody.append(row);
+    const removeLabel = p.ui.remove ?? 'Remove';
+    const trashIcon = p.trashIconTemplate?.innerHTML || removeLabel;
+    row.innerHTML = `<td><span style="--dot:${p.colors[mark.type]}"></span>${label}</td><td>${mark.x.toFixed(1)}, ${mark.y.toFixed(1)}</td><td><button type="button" class="fp-icon-button" data-remove="${mark.id}" aria-label="${removeLabel} ${label}">${trashIcon}</button></td>`;
+    tableBody.append(row);
   });
 }

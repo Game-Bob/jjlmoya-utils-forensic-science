@@ -129,7 +129,7 @@ const stageValues = Array.from({ length: 9 }, (_, stage) => stage);
   </section>
 </div>
 
-<script id="forensic-age-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script is:inline id="forensic-age-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
 
 <script>
   import { estimateForensicAge } from './logic';

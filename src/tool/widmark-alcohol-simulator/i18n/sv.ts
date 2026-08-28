@@ -105,6 +105,9 @@ export const content: ToolLocaleContent = {
       text: 'Rättstoxikologi och Etylalkoholens Farmakokinetik',
       level: 2,
     },
+    { type: 'paragraph', html: "Tolkningen måste också ta hänsyn till modellens begränsningar: alkohol absorberas och elimineras inte på samma sätt hos alla personer, och en osäker konsumtionstid kan ändra resultatet betydligt. Markera vilka uppgifter som är direkt uppmätta och vilka som är antagna. Diagrammet hjälper till att undersöka känslighet för vikt, fördelningsfaktor, absorption och eliminering. En liten matematisk felmarginal bevisar inte att indata är riktiga. Officiella beslut kräver validerad metod, tillförlitliga mätningar och professionell bedömning." },
+    { type: 'paragraph', html: "Det visade värdet beror på vald tidpunkt och angivna parametrar. Bevara ursprungsuppgifterna, markera vilka uppgifter som är uppskattade och jämför flera scenarier när tiden är osäker. Då förblir felmarginalen synlig och kurvan kan inte läsas som ett fristående bevis." },
+    { type: 'paragraph', html: "En transparent uppskattning skiljer observerade uppgifter från modellens antaganden. Dokumentera tidslinjen, den möjliga absorptionsfasen och osäkerheten i elimineringen. Diagrammet används för att jämföra scenarier och kan inte ensamt fastställa ansvar eller en juridisk slutsats. Visa alltid intervallet och antagandena tillsammans med värdet." },
     {
       type: 'paragraph',
       html: 'Förståelse för <strong>upptag, fördelning och förbränning av etanol</strong> är ett grundkrav inom rättsmedicin och trafikolycksrekonstruktion. Efter konsumtion förs alkohol via matstrupen till magsäcken där en liten andel tas upp direkt. Huvuddelen av upptaget sker dock i tunntarmen på grund av dess mycket stora yta. Magsäckstömningens hastighet är den begränsande faktorn vilket förklarar varför mat i magen dämpar promillekurvan avsevärt.',
@@ -157,7 +160,8 @@ export const content: ToolLocaleContent = {
 
   { type: 'paragraph', html: "Använd resultatet för planering och scenariejämförelser; det ersätter inte en officiell beräkning eller professionell rådgivning." },
   { type: 'paragraph', html: "Tolka resultatet tillsammans med kalkylatorns antaganden innan du använder det." },
-  { type: 'paragraph', html: "Kontrollera indata, enheter, avrundning, datum och rättsområde eftersom varje del kan ändra uppskattningen." },],
+  { type: 'paragraph', html: "Kontrollera indata, enheter, avrundning, datum och rättsområde eftersom varje del kan ändra uppskattningen." },
+  { type: 'paragraph', html: "Vid en bakåträkning ska tiden för den sista drycken, det antagna upptaget, kroppsvikten, fördelningsfaktorn och eliminationshastigheten dokumenteras var för sig. Upptaget kan fortsätta efter den sista drinken, och mat, vätskestatus samt individuella skillnader påverkar kurvan. Resultatet är en matematisk jämförelse av scenarier, inte en direkt mätning eller ett självständigt rättsmedicinskt utlåtande. Visa därför alltid antaganden, osäkerhetsintervall och mätningens sammanhang." },],
   faq,
   bibliography,
   howTo,

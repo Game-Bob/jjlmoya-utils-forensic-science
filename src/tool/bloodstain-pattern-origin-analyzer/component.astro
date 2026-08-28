@@ -104,7 +104,7 @@ const { ui } = Astro.props;
 <template id="bpa-delete-icon">
   <Icon name="mdi:trash-can-outline" aria-hidden="true" />
 </template>
-<script id="bpa-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script is:inline id="bpa-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
 
 <script>
   import * as THREE from 'three';
@@ -235,7 +235,7 @@ const { ui } = Astro.props;
   function syncFocusPanel() {
     const stain = selectedStain();
     if (!stain) return;
-    const color = palette[selectedIndex() % palette.length];
+    const color = palette[selectedIndex() % palette.length] ?? '#b3203f';
     if (focusNameEl) focusNameEl.textContent = `${ui.stainLabel} ${stain.id}`;
     if (focusSwatchEl) focusSwatchEl.style.background = color;
     configureFocusRanges();
@@ -251,13 +251,13 @@ const { ui } = Astro.props;
     const pointer = eventToSurface(event);
     if (!pointer) return null;
     let best: { stain: BloodstainInput; distance: number } | null = null;
-    stains.forEach((stain) => {
+    for (const stain of stains) {
       const point = stainScreenPoint(stain);
       const distance = Math.hypot(pointer.x - point.x, pointer.y - point.y);
       if (distance < 30 && (!best || distance < best.distance)) {
         best = { stain, distance };
       }
-    });
+    }
     return best?.stain ?? null;
   }
 
@@ -285,7 +285,7 @@ const { ui } = Astro.props;
   function clearDynamic3d() {
     for (let index = group.children.length - 1; index >= 0; index--) {
       const child = group.children[index];
-      if (child.userData.dynamic) group.remove(child);
+      if (child && child.userData.dynamic) group.remove(child);
     }
   }
 
@@ -356,7 +356,7 @@ const { ui } = Astro.props;
       const sx = cx + line.stain.xCm * scale;
       const sy = cy - line.stain.yCm * scale;
       const selected = line.stain.id === selectedStainId;
-      const color = palette[index % palette.length];
+      const color = palette[index % palette.length] ?? '#b3203f';
       ctx.globalAlpha = selected ? 0.22 : 0.1;
       ctx.strokeStyle = color;
       ctx.lineWidth = selected ? 3 : 2;
@@ -418,7 +418,7 @@ const { ui } = Astro.props;
     if (confidenceEl) confidenceEl.dataset.confidence = estimate.confidence;
     if (impactEl) impactEl.textContent = `${averageImpact.toFixed(1)} ${ui.degree}`;
     if (activeEl) activeEl.textContent = `${ui.stainLabel} ${selectedStainId}`;
-    if (activeDotEl) activeDotEl.style.background = palette[selectedIndex() % palette.length];
+    if (activeDotEl) activeDotEl.style.background = palette[selectedIndex() % palette.length] ?? '#b3203f';
     syncFocusPanel();
     drawSurface(estimate);
     render3d(estimate);
@@ -532,12 +532,12 @@ const { ui } = Astro.props;
     });
   });
 
-  renderer.domElement.addEventListener('pointerdown', (event) => {
+  renderer.domElement.addEventListener('pointerdown', (event: PointerEvent) => {
     dragging3d = true;
     lastX = event.clientX;
     renderer.domElement.setPointerCapture(event.pointerId);
   });
-  renderer.domElement.addEventListener('pointermove', (event) => {
+  renderer.domElement.addEventListener('pointermove', (event: PointerEvent) => {
     if (!dragging3d) return;
     group.rotation.z += (event.clientX - lastX) * 0.008;
     lastX = event.clientX;

@@ -28,7 +28,7 @@ const toolsWithContent = tools.length > 0
       tools.map(async ({ entry, Component }) => {
         const languages = Object.keys(entry.i18n) as KnownLocale[];
         const localeEntries = await Promise.all(
-          languages.map(async (l) => {
+        languages.map(async (l) => {
             const loader = entry.i18n[l];
             if (!loader) return null;
             const content = await loader();
@@ -36,7 +36,10 @@ const toolsWithContent = tools.length > 0
           })
         );
 
-        const localeContents = Object.fromEntries(localeEntries.filter(Boolean)) as Record<string, ToolLocaleContent<Record<string, string>>>;
+        const availableLocaleEntries = localeEntries.filter(
+          (localeEntry): localeEntry is readonly [KnownLocale, ToolLocaleContent<Record<string, string>>] => localeEntry !== null,
+        );
+        const localeContents = Object.fromEntries(availableLocaleEntries) as Record<string, ToolLocaleContent<Record<string, string>>>;
         const currentLocaleContent = localeContents[currentLocale] || localeContents.en;
         const availableLocales: Record<string, string> = {};
 

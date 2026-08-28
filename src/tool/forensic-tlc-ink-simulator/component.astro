@@ -92,7 +92,7 @@ const rulerMarks = (ui.rulerMarks ?? '').split(',');
   </div>
 </section>
 
-<script id="tlc-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script is:inline id="tlc-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
 <script>
   import { ChromatographyPhysics } from './logic';
   import type { InkSample, SolventSystem, TlcBand } from './logic';

@@ -12,7 +12,7 @@ const TWIST_VALUES: FiberTwist[] = ['S', 'Z', 'irregular'];
 const DYE_VALUES: DyePreset[] = ['indigo', 'crimson', 'navy', 'violet'];
 const DEFAULT_BUILDER: QuestionedFiberInput = { material: 'cotton', diameterMicrons: 18, twist: 'irregular', birefringence: 0.032, dyePreset: 'indigo' };
 
-function byId<T extends HTMLElement>(id: string): T | null {
+function byId<T extends Element>(id: string): T | null {
   return document.getElementById(id) as T | null;
 }
 

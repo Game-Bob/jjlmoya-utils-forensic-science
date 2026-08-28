@@ -57,7 +57,7 @@ function panelColor(known: boolean, dark: boolean, end = false): string {
   const subject = known ? 'known' : 'questioned';
   const theme = dark ? 'Dark' : 'Light';
   const side = end ? 'End' : 'Start';
-  return PANEL_COLORS[`${subject}${theme}${side}`];
+  return PANEL_COLORS[`${subject}${theme}${side}`] ?? '#17252d';
 }
 
 function roundRect(ctx: CanvasRenderingContext2D, rect: Rect): void {
@@ -130,14 +130,15 @@ function drawDemoStriations(ctx: CanvasRenderingContext2D, config: PanelConfig):
 function drawDemoLine(ctx: CanvasRenderingContext2D, config: DemoLineConfig): void {
   const seed = config.result.relief[(config.index + 48) % config.result.relief.length];
   const px = (config.index * 18) + config.lateral;
-  const depth = 72 + seed * 132;
+  const reliefSeed = seed ?? 0;
+  const depth = 72 + reliefSeed * 132;
   ctx.shadowColor = config.dark ? 'rgba(20,184,166,0.2)' : 'rgba(20,184,166,0.14)';
-  ctx.shadowBlur = seed > 0.72 ? 10 : 0;
-  ctx.strokeStyle = config.dark ? `rgba(226,232,240,${0.22 + seed * 0.52})` : `rgba(31,43,50,${0.24 + seed * 0.52})`;
-  ctx.lineWidth = 1.8 + seed * 4.8;
+  ctx.shadowBlur = reliefSeed > 0.72 ? 10 : 0;
+  ctx.strokeStyle = config.dark ? `rgba(226,232,240,${0.22 + reliefSeed * 0.52})` : `rgba(31,43,50,${0.24 + reliefSeed * 0.52})`;
+  ctx.lineWidth = 1.8 + reliefSeed * 4.8;
   ctx.beginPath();
   ctx.moveTo(px, -depth);
-  ctx.bezierCurveTo(px - 10 - seed * 8, -24, px + 12 + seed * 6, 32, px - 4, depth);
+  ctx.bezierCurveTo(px - 10 - reliefSeed * 8, -24, px + 12 + reliefSeed * 6, 32, px - 4, depth);
   ctx.stroke();
   ctx.shadowBlur = 0;
 }

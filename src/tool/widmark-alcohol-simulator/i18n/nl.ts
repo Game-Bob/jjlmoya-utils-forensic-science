@@ -105,6 +105,9 @@ export const content: ToolLocaleContent = {
       text: 'Forensische Toxicologie en Farmacokinetiek van Ethanol',
       level: 2,
     },
+    { type: 'paragraph', html: "Bij de beoordeling horen ook de beperkingen van het model: alcohol wordt niet bij iedereen even snel opgenomen of afgebroken en een geschatte drinktijd kan de uitkomst sterk beïnvloeden. Noteer welke gegevens rechtstreeks zijn gemeten en welke zijn ingevuld. Gebruik de grafiek om gevoeligheid voor gewicht, verdelingsfactor, absorptie en eliminatie te bekijken. Een scenario met een lage foutmarge is nog geen bewijs dat de onderliggende feiten juist zijn. Voor officiële beslissingen zijn een gevalideerde methode, betrouwbare meetgegevens en deskundige interpretatie nodig." },
+    { type: 'paragraph', html: "De getoonde waarde hangt af van het gekozen tijdstip en de ingevoerde parameters. Bewaar de oorspronkelijke gegevens, geef aan welke informatie is geschat en vergelijk meerdere scenario's wanneer het tijdstip onzeker is. Zo blijft de foutmarge zichtbaar en wordt de curve niet als afzonderlijk bewijs gelezen." },
+    { type: 'paragraph', html: "Een transparante schatting onderscheidt waargenomen gegevens van modelaannames. Leg de tijdlijn, mogelijke absorptiefase en onzekerheid in de eliminatie vast. De grafiek is bedoeld om scenario's te vergelijken en kan op zichzelf geen verantwoordelijkheid of juridische conclusie vaststellen. Toon altijd het bereik en de aannames naast de berekende waarde." },
     {
       type: 'paragraph',
       html: 'De absorptie, distributie en eliminatie van ethanol in het menselijk lichaam zijn cruciale concepten binnen de forensische wetenschap en verkeersongevallenreconstructie. Na consumptie wordt alcohol deels via de maag en hoofdzakelijk via de dunne darm opgenomen. Voedsel in de maag vertraagt de maaglediging en verlaagt daardoor de piekwaarde van de alcoholconcentratie in het bloed aanzienlijk.',
@@ -157,7 +160,8 @@ export const content: ToolLocaleContent = {
 
   { type: 'paragraph', html: "Gebruik het resultaat voor planning en scenariokeuze; het vervangt geen officiële berekening of professioneel advies." },
   { type: 'paragraph', html: "Interpreteer het resultaat samen met de aannames van de calculator voordat u het gebruikt." },
-  { type: 'paragraph', html: "Controleer invoer, eenheden, afronding, datum en jurisdictie, want elk onderdeel kan de schatting wijzigen." },],
+  { type: 'paragraph', html: "Controleer invoer, eenheden, afronding, datum en jurisdictie, want elk onderdeel kan de schatting wijzigen." },
+  { type: 'paragraph', html: "Leg voor een terugberekening afzonderlijk vast wanneer het laatste drankje is genuttigd, welke absorptieduur is aangenomen, welk gewicht en welke verdelingsfactor zijn gebruikt en welk eliminatietempo is gekozen. Alcohol kan na het laatste drankje nog worden opgenomen; voedsel, hydratatie en individuele variatie beïnvloeden de curve. De uitkomst is een wiskundige vergelijking van scenario's en geen directe meting of zelfstandig forensisch oordeel. Presenteer daarom altijd de aannames, het bereik en de onzekerheid naast de berekende waarde." },],
   faq,
   bibliography,
   howTo,

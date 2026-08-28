@@ -99,7 +99,7 @@ export const content: ToolLocaleContent = {
     { type: 'glossary', items: [
       { term: '撞击角度', definition: '血滴路径与承受体表面之间的估算角度，通常根据椭圆形血迹的宽长比计算。' },
       { term: '轨迹线', definition: '一条投影线，显示从血迹向三维空间反向延伸的可能飞行路径。' },
-      { term: '收敛区域', description: '在承受体平面上观察时，血迹方向交叉的大致区域。' },
+      { term: '收敛区域', definition: '在承受体平面上观察时，血迹方向交叉的大致区域。' },
       { term: '起点区域', definition: '根据多条投影轨迹确定的血液可能来源于的大致三维空间区域。' },
     ] },
     { type: 'summary', title: '最佳应用', items: [

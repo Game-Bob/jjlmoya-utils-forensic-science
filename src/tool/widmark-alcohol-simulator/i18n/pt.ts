@@ -105,6 +105,9 @@ export const content: ToolLocaleContent = {
       text: 'Toxicologia Forense e Farmacocinética do Etanol',
       level: 2,
     },
+    { type: 'paragraph', html: "A interpretação deve considerar os limites do modelo: a absorção e a eliminação do álcool variam entre pessoas e uma hora de consumo incerta pode alterar bastante o resultado. Registe quais dados foram medidos diretamente e quais foram assumidos. O gráfico ajuda a estudar a sensibilidade ao peso, ao fator de distribuição, à absorção e à eliminação. Uma pequena margem matemática não prova que os dados de entrada estejam corretos. Decisões oficiais exigem método validado, medições fiáveis e avaliação especializada." },
+    { type: 'paragraph', html: "O valor apresentado depende da hora escolhida e dos parâmetros introduzidos. Preserve os dados originais, indique que informações foram estimadas e compare vários cenários quando a hora for incerta. Assim, a margem de erro permanece visível e a curva não é interpretada como prova isolada." },
+    { type: 'paragraph', html: "Uma estimativa transparente distingue dados observados das premissas do modelo. Registe a linha temporal, a possível fase de absorção e a incerteza da eliminação. O gráfico serve para comparar cenários e não determina, por si só, responsabilidade ou uma conclusão jurídica. Apresente sempre o intervalo e as premissas junto do valor calculado." },
     {
       type: 'paragraph',
       html: 'A compreensão da <strong>absorção, distribuição e eliminação do etanol</strong> é essencial na ciência forense e reconstrução de acidentes de trânsito. Após a ingestão, o álcool desloca-se pelo esôfago até o estômago, onde ocorre uma pequena absorção direta. A maior parte do etanol é absorvida no duodeno devido à sua grande área de superfície. A taxa com que o estômago esvazia o seu conteúdo é o principal fator limitador da absorção de álcool, o que justifica a grande influência da comida no pico de alcoolemia.',
@@ -157,7 +160,8 @@ export const content: ToolLocaleContent = {
 
   { type: 'paragraph', html: "Use o resultado para planear e comparar cenários; não substitui um cálculo oficial nem aconselhamento profissional." },
   { type: 'paragraph', html: "Interprete o resultado juntamente com as premissas apresentadas pela calculadora antes de o utilizar." },
-  { type: 'paragraph', html: "Confirme dados, unidades, arredondamento, data e jurisdição, pois cada elemento pode alterar a estimativa." },],
+  { type: 'paragraph', html: "Confirme dados, unidades, arredondamento, data e jurisdição, pois cada elemento pode alterar a estimativa." },
+  { type: 'paragraph', html: "Numa retroestimativa, registe separadamente a hora da última bebida, o período de absorção assumido, o peso, o fator de distribuição e a taxa de eliminação. A absorção pode continuar depois do fim do consumo, enquanto a comida, a hidratação e as diferenças individuais alteram a curva. O valor apresentado é uma comparação matemática de cenários, não uma medição direta nem um parecer forense autónomo. Mostre sempre as premissas, o intervalo de incerteza e o contexto da medição." },],
   faq,
   bibliography,
   howTo,

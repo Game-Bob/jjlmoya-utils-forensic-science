@@ -208,7 +208,7 @@ const regions = [
   </div>
 </div>
 
-<script id="sex-ui-data" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script is:inline id="sex-ui-data" type="application/json" set:html={JSON.stringify(ui)}></script>
 
 <script>
   import { determineSex } from './logic';
@@ -392,7 +392,8 @@ const regions = [
   function applyStatusText(field: string, val: number) {
     const statusEl = document.getElementById(`status-${field}`);
     if (!statusEl) return;
-    statusEl.textContent = ui[scoreLabels[val]] ?? '';
+    const scoreLabel = scoreLabels[val];
+    statusEl.textContent = scoreLabel ? ui[scoreLabel] ?? '' : '';
   }
 
   function applySvgState(field: string, val: number) {

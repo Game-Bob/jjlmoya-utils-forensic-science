@@ -163,7 +163,7 @@ const { ui } = Astro.props;
   </main>
 </div>
 
-<script id="widmark-ui-data" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script is:inline id="widmark-ui-data" type="application/json" set:html={JSON.stringify(ui)}></script>
 
 <script>
   import { WidmarkEngine } from './logic';

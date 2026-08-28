@@ -105,6 +105,8 @@ export const content: ToolLocaleContent = {
       text: 'Tossicologia Forense e Cinetica dell\'Etanolo',
       level: 2,
     },
+    { type: 'paragraph', html: "Il valore visualizzato dipende dal momento scelto e dai parametri inseriti. Conserva i dati originali, indica quali informazioni sono state stimate e confronta più scenari quando l'orario non è certo. Questo uso didattico rende chiaro il margine di errore e impedisce di leggere la curva come una prova isolata." },
+    { type: 'paragraph', html: "Una stima trasparente distingue i dati osservati dalle ipotesi del modello. Documenta la sequenza temporale, la fase possibile di assorbimento e l'incertezza dell'eliminazione. Il grafico serve a confrontare scenari e non determina da solo responsabilità o conclusioni giudiziarie." },
     {
       type: 'paragraph',
       html: 'La comprensione dei processi di <strong>assorbimento, distribuzione ed eliminazione dell\'etanolo</strong> è un requisito essenziale in tossicologia forense e nella ricostruzione degli incidenti stradali. In seguito all\'assunzione, l\'alcol scende lungo l\'esofago fino allo stomaco, dove ha luogo un primo, modesto assorbimento. Tuttavia, la parte preponderante dell\'assorbimento dell\'etanolo avviene nel duodeno e nell\'intestino tenue per via dell\'enorme area superficiale disponibile. Lo svuotamento gastrico rappresenta il passaggio limitante, spiegando perché i pasti rallentino vistosamente la curva alcolemica.',
@@ -157,7 +159,8 @@ export const content: ToolLocaleContent = {
 
   { type: 'paragraph', html: "Usa il risultato per pianificare e confrontare scenari; non sostituisce un calcolo ufficiale o una consulenza professionale." },
   { type: 'paragraph', html: "Interpreta il risultato insieme alle ipotesi mostrate dal calcolatore prima di utilizzarlo." },
-  { type: 'paragraph', html: "Controlla dati, unità, arrotondamento, data e giurisdizione, perché ciascun elemento può cambiare la stima." },],
+  { type: 'paragraph', html: "Controlla dati, unità, arrotondamento, data e giurisdizione, perché ciascun elemento può cambiare la stima." },
+  { type: 'paragraph', html: "Per interpretare una retrostima documenta separatamente l'ora dell'ultimo drink, l'assorbimento ipotizzato, il peso, il fattore di distribuzione e la velocità di eliminazione. L'assorbimento può continuare dopo l'ultima bevanda e la disidratazione o il contenuto gastrico possono cambiare la curva. Il risultato è un confronto matematico tra scenari, non una misura diretta né un parere forense conclusivo." },],
   faq,
   bibliography,
   howTo,

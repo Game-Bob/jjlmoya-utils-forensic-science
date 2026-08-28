@@ -1,6 +1,10 @@
 import type { FireOriginEstimator, FirePoint, FireVector } from './logic';
 import { HEIGHT, TRANSITION_MS, WIDTH, clamp, ease, lerp, patternColor, toCanvas } from './render';
 
+function uiText(ui: Record<string, string>, key: string): string {
+  return ui[key] ?? '';
+}
+
 export type Pattern = FireVector['pattern'];
 type PatternState = Record<Pattern, boolean>;
 
@@ -191,7 +195,7 @@ export function openRadialMenu(refs: ViewRefs, state: ViewState, ui: Record<stri
   refs.radialMenu.style.left = `${canvasPoint.x}px`;
   refs.radialMenu.style.top = `${canvasPoint.y}px`;
   refs.radialMenu.hidden = false;
-  refs.modeLabel.textContent = ui.selectIndicator;
+  refs.modeLabel.textContent = uiText(ui, 'selectIndicator');
 }
 
 export function commitDraft(refs: ViewRefs, estimator: FireOriginEstimator, state: ViewState, ui: Record<string, string>): void {
@@ -200,7 +204,7 @@ export function commitDraft(refs: ViewRefs, estimator: FireOriginEstimator, stat
   state.draftVector = null;
   state.pendingStart = null;
   animateToState(refs, estimator, state);
-  refs.modeLabel.textContent = ui.awaitingVector;
+  refs.modeLabel.textContent = uiText(ui, 'awaitingVector');
 }
 
 export function loadPlanFile(refs: ViewRefs, estimator: FireOriginEstimator, state: ViewState, file: File): void {

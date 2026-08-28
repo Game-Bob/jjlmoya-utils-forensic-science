@@ -63,13 +63,20 @@ function usableVectors(vectors: FireVector[]): FireVector[] {
   return vectors.filter((vector) => distance(vector.start, vector.end) >= 4);
 }
 
+function isUsableIntersection(point: FirePoint | null): point is FirePoint {
+  return Boolean(point && point.x >= -20 && point.x <= 120 && point.y >= -20 && point.y <= 120);
+}
+
 function collectIntersections(vectors: FireVector[]): FirePoint[] {
   const intersections: FirePoint[] = [];
 
   for (let i = 0; i < vectors.length; i += 1) {
     for (let j = i + 1; j < vectors.length; j += 1) {
-      const point = lineIntersection(vectors[i], vectors[j]);
-      if (!point || point.x < -20 || point.x > 120 || point.y < -20 || point.y > 120) continue;
+      const first = vectors[i];
+      const second = vectors[j];
+      if (!first || !second) continue;
+      const point = lineIntersection(first, second);
+      if (!isUsableIntersection(point)) continue;
       intersections.push({
         x: clamp(point.x, 0, 100),
         y: clamp(point.y, 0, 100),

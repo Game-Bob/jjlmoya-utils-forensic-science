@@ -157,7 +157,8 @@ export const content: ToolLocaleContent = {
 
   { type: 'paragraph', html: "Utilisez le résultat pour planifier et comparer des scénarios ; il ne remplace ni un calcul officiel ni un avis professionnel." },
   { type: 'paragraph', html: "Interprétez le résultat avec les hypothèses affichées par le calculateur avant de l'utiliser." },
-  { type: 'paragraph', html: "Vérifiez les données, unités, arrondi, date et juridiction, car chacun de ces éléments peut modifier l'estimation." },],
+  { type: 'paragraph', html: "Vérifiez les données, unités, arrondi, date et juridiction, car chacun de ces éléments peut modifier l'estimation." },
+  { type: 'paragraph', html: "Pour une rétrogradation fiable, notez séparément l'heure du dernier verre, la durée d'absorption supposée, le poids, le facteur de distribution et le taux d'élimination. Une valeur calculée sert à comparer des scénarios et ne remplace pas une expertise médico-légale complète. L'absorption peut se poursuivre après le dernier verre et la mesure dépend de l'état d'hydratation, du contenu de l'estomac et de la cinétique retenue. Chaque hypothèse doit donc rester visible dans le rapport. Le résultat doit être présenté avec son incertitude et son contexte." },],
   faq,
   bibliography,
   howTo,

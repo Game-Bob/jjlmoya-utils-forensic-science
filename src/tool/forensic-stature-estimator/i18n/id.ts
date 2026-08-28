@@ -156,6 +156,10 @@ export const content: ToolLocaleContent = {
     {
       type: 'paragraph',
       html: 'Sampel referensi Trotter-Gleser lahir pada akhir abad ke-19 dan awal abad ke-20. Karena peningkatan gizi, populasi modern mengalami peningkatan tinggi rata-rata (tren sekuler). Antropolog modern saat ini sering melengkapi analisis menggunakan database baru seperti FORDISC.'
+    },
+    {
+      type: 'paragraph',
+      html: 'Gunakan estimasi ini sebagai rentang awal untuk rekonstruksi biologis. Catat tulang mana yang diukur, apakah epifisis atau maleolus termasuk, sisi tubuh, kondisi fragmentasi, populasi rujukan, dan galat standar yang dipakai. Perbedaan kecil dalam definisi pengukuran dapat mengubah hasil beberapa sentimeter, sehingga estimasi tinggi badan harus dibaca bersama pemeriksaan antropologis dan konteks identifikasi lainnya.'
     }
   ],
   faq,

@@ -156,6 +156,10 @@ export const content: ToolLocaleContent = {
     {
       type: 'paragraph',
       html: 'De referentiedata stammen van individuen geboren rond 1900. Door verbeterde voeding zijn moderne populaties gemiddeld langer geworden (seculaire trend). Hedendaagse forensisch onderzoekers vullen Trotter-Gleser daarom vaak aan met database-software zoals FORDISC.'
+    },
+    {
+      type: 'paragraph',
+      html: 'Gebruik de uitkomst als een eerste bereik voor biologische reconstructie. Noteer welk bot is gemeten, welke meetdefinitie is gebruikt, de referentiepopulatie en de standaardfout. Een verschil in meetprotocol kan de schatting met meerdere centimeters veranderen; combineer de uitkomst daarom altijd met antropologische beoordeling en andere identificatiegegevens.'
     }
   ],
   faq,

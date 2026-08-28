@@ -1,0 +1,121 @@
+---
+import './dna-profile-match-probability-lab.css';
+import { PROFILE_PRESETS, calculateProfile } from './logic';
+import type { DnaProfileMatchProbabilityUI } from './ui';
+
+interface Props {
+  ui: DnaProfileMatchProbabilityUI;
+}
+
+const { ui } = Astro.props;
+const initialPreset = PROFILE_PRESETS[0]!;
+const initialResult = calculateProfile(initialPreset.loci);
+---
+
+<div class="dna-match-tool" id="dna-profile-match-lab">
+  <section class="dna-match-controls" aria-label={ui.controls}>
+    <div class="dna-match-control-head">
+      <div>
+        <span class="dna-match-kicker">{ui.controlKicker}</span>
+        <p class="dna-match-helper">{ui.controlHelper}</p>
+      </div>
+      <span class="dna-match-locus-count" data-locus-count>{initialPreset.loci.length} {ui.loci}</span>
+    </div>
+
+    <div class="dna-match-presets" aria-label={ui.presets}>
+      {PROFILE_PRESETS.map((preset, index) => (
+        <button type="button" class:list={{ 'is-active': index === 0 }} data-preset={preset.id}>
+          <span>{ui[`preset${preset.id}`]}</span>
+          <small>{preset.loci.length} {ui.loci}</small>
+        </button>
+      ))}
+    </div>
+
+    <div class="dna-match-locus-list" data-locus-list>
+      {initialPreset.loci.map((locus, index) => (
+        <details class="dna-match-locus" data-locus-card open={index === 0}>
+          <summary>
+            <span data-locus-title>{locus.name}</span>
+            <span data-locus-summary>{locus.allele1} / {locus.allele2}</span>
+          </summary>
+          <div class="dna-match-locus-fields">
+            <label class="dna-match-field">
+              <span>{ui.locusName}</span>
+              <input data-field="name" type="text" value={locus.name} />
+            </label>
+            <label class="dna-match-field">
+              <span>{ui.alleleA}</span>
+              <input data-field="allele1" type="text" value={locus.allele1} />
+            </label>
+            <label class="dna-match-field">
+              <span>{ui.alleleB}</span>
+              <input data-field="allele2" type="text" value={locus.allele2} />
+            </label>
+            <label class="dna-match-field">
+              <span>{ui.frequencyA}</span>
+              <input data-field="frequency1" type="number" min="0.01" max="100" step="0.01" value={locus.frequency1 * 100} />
+            </label>
+            <label class="dna-match-field">
+              <span>{ui.frequencyB}</span>
+              <input data-field="frequency2" type="number" min="0.01" max="100" step="0.01" value={locus.frequency2 * 100} />
+            </label>
+            <button type="button" class="dna-match-remove" data-remove-locus>{ui.removeLocus}</button>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <button type="button" class="dna-match-add" data-add-locus>{ui.addLocus}</button>
+    <p class="dna-match-disclaimer">{ui.disclaimer}</p>
+  </section>
+
+  <section class="dna-match-scene" aria-label={ui.electropherogram}>
+    <div class="dna-match-scene-header">
+      <div>
+        <span class="dna-match-kicker">{ui.sceneKicker}</span>
+        <h2>{ui.electropherogram}</h2>
+      </div>
+      <span class="dna-match-scene-note">{ui.sceneNote}</span>
+    </div>
+    <div class="dna-match-electropherogram" data-electropherogram role="img" aria-label={ui.electropherogram}></div>
+    <div class="dna-match-legend">
+      <span><i class="dna-match-legend-dot dna-match-legend-dot-coral"></i>{ui.alleleA}</span>
+      <span><i class="dna-match-legend-dot dna-match-legend-dot-cyan"></i>{ui.alleleB}</span>
+      <span>{ui.peakHeight}</span>
+    </div>
+  </section>
+
+  <section class="dna-match-results" aria-label={ui.results}>
+    <div class="dna-match-result-lead">
+      <span class="dna-match-kicker">{ui.resultKicker}</span>
+      <output class="dna-match-combined" data-result="combined" aria-live="polite">-</output>
+      <p data-result="probability">-</p>
+      <span class="dna-match-badge" data-result="badge">-</span>
+      <p class="dna-match-result-detail" data-result="detail">-</p>
+    </div>
+    <div class="dna-match-table-wrap">
+      <table>
+        <caption>{ui.locusBreakdown}</caption>
+        <thead>
+          <tr><th scope="col">{ui.locus}</th><th scope="col">{ui.genotype}</th><th scope="col">{ui.rule}</th><th scope="col">{ui.frequency}</th></tr>
+        </thead>
+        <tbody data-result="table">
+          {initialResult.loci.map((locus) => (
+            <tr><td>{locus.name}</td><td>{locus.allele1} / {locus.allele2}</td><td>{locus.formula}</td><td>{(locus.genotypeFrequency * 100).toFixed(2)}%</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script is:inline id="dna-profile-match-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+
+<script>
+  import { startDnaProfileMatch } from './controller';
+
+  const root = document.getElementById('dna-profile-match-lab');
+  const uiElement = document.getElementById('dna-profile-match-ui');
+  const ui = JSON.parse(uiElement?.textContent ?? '{}') as Record<string, string>;
+  if (root) startDnaProfileMatch(root, ui);
+</script>

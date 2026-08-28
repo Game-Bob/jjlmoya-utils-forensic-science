@@ -74,7 +74,7 @@ const { ui } = Astro.props;
   </div>
 </section>
 
-<script id="gsr-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script is:inline id="gsr-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
 <script>
   import { GsrDispersionModel } from './logic';
   import type { AmmoType, GsrParticle } from './logic';

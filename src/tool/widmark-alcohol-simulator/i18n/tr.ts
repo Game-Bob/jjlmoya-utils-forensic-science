@@ -105,6 +105,8 @@ export const content: ToolLocaleContent = {
       text: 'Adli Toksikoloji ve Etanolün Farmakokinetiği',
       level: 2,
     },
+    { type: 'paragraph', html: "Gösterilen değer seçilen zamana ve girilen parametrelere bağlıdır. Kaynak verileri koruyun, tahmin edilen bilgileri belirtin ve saat kesin değilse birden fazla senaryoyu karşılaştırın. Böylece hata payı görünür kalır ve eğri tek başına kanıt gibi okunmaz." },
+    { type: 'paragraph', html: "Şeffaf bir tahmin, gözlenen verileri model varsayımlarından ayırır. Zaman çizelgesini, olası emilim aşamasını ve eliminasyon belirsizliğini kaydedin. Grafik senaryoları karşılaştırmak içindir; tek başına sorumluluk veya hukuki sonuç belirleyemez. Hesaplanan değerin yanında aralığı ve kullanılan tüm varsayımları gösterin." },
     {
       type: 'paragraph',
       html: 'Etanolün insan vücudundaki <strong>emilimi, dağılımı ve eliminasyonu</strong> adli tıp ve trafik kazası analizlerinin en temel konularından biridir. Tüketilen alkolün küçük bir kısmı mideden emilirken, büyük kısmı geniş yüzey alanı nedeniyle ince bağırsakta kana karışır. Mide boşalma hızı alkol emilimini sınırlayan en önemli faktördür; bu nedenle midede besin bulunması emilim hızını ve kandaki alkol konsantrasyonunun tepe noktasını önemli ölçüde düşürür.',
@@ -157,7 +159,8 @@ export const content: ToolLocaleContent = {
 
   { type: 'paragraph', html: "Sonucu planlama ve senaryo karşılaştırması için kullanın; resmî hesabın veya uzman görüşünün yerine geçmez." },
   { type: 'paragraph', html: "Kullanmadan önce sonucu hesaplayıcının gösterdiği varsayımlarla birlikte yorumlayın." },
-  { type: 'paragraph', html: "Girdileri, birimleri, yuvarlamayı, tarihi ve yargı alanını kontrol edin; her biri tahmini değiştirebilir." },],
+  { type: 'paragraph', html: "Girdileri, birimleri, yuvarlamayı, tarihi ve yargı alanını kontrol edin; her biri tahmini değiştirebilir." },
+  { type: 'paragraph', html: "Geriye dönük hesaplamada son içkinin saatini, varsayılan emilim süresini, vücut ağırlığını, dağılım katsayısını ve eliminasyon hızını ayrı ayrı kaydedin. Emilim son içkiden sonra da sürebilir; yemek, hidrasyon ve kişisel farklılıklar eğriyi etkiler. Gösterilen değer senaryoları matematiksel olarak karşılaştırmak içindir; doğrudan ölçüm veya tek başına adli görüş değildir. Varsayımları, belirsizlik aralığını ve ölçüm bağlamını raporda açıkça belirtin." },],
   faq,
   bibliography,
   howTo,

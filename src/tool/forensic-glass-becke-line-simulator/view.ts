@@ -5,12 +5,14 @@ type Ui = Record<string, string>;
 type Theme = { center: string; background: string; glass: string; halo: string; grain: string; text: string };
 type Result = ReturnType<RefractiveIndexCalculator['simulate']>;
 
+function uiText(ui: Ui, key: string, fallback = ''): string { return ui[key] ?? fallback; }
+
 const STORAGE_KEY = 'forensic-glass-becke-line-simulator-state';
 const GLASS_VALUES: GlassReference[] = ['sodaLime', 'borosilicate', 'leadCrystal', 'tempered'];
 const GLASS_TINTS: Record<GlassReference, string> = { sodaLime: '#b9d7d3', borosilicate: '#c8dff2', leadCrystal: '#d6ccf4', tempered: '#cfe4bd' };
 const HALO_SCALE: Record<GlassReference, number> = { sodaLime: 1, borosilicate: 0.42, leadCrystal: 1, tempered: 1 };
 
-function byId<T extends HTMLElement>(id: string): T | null { return document.getElementById(id) as T | null; }
+function byId<T extends Element>(id: string): T | null { return document.getElementById(id) as T | null; }
 
 function isGlassReference(value: unknown): value is GlassReference { return typeof value === 'string' && GLASS_VALUES.includes(value as GlassReference); }
 
@@ -29,7 +31,7 @@ function drawBorosilicate(ctx: CanvasRenderingContext2D, radius: number): void {
 
 function drawLeadCrystal(ctx: CanvasRenderingContext2D, radius: number): void { drawPolygon(ctx, radius, [[0, -0.68], [0.28, -0.24], [0.74, -0.12], [0.34, 0.18], [0.42, 0.62], [0, 0.36], [-0.46, 0.58], [-0.34, 0.14], [-0.74, -0.16], [-0.26, -0.28]]); }
 
-function drawPolygon(ctx: CanvasRenderingContext2D, radius: number, points: number[][]): void { points.forEach(([x, y], index) => index === 0 ? ctx.moveTo(radius * x, radius * y) : ctx.lineTo(radius * x, radius * y)); }
+function drawPolygon(ctx: CanvasRenderingContext2D, radius: number, points: number[][]): void { points.forEach((point, index) => { const x = point[0] ?? 0; const y = point[1] ?? 0; if (index === 0) ctx.moveTo(radius * x, radius * y); else ctx.lineTo(radius * x, radius * y); }); }
 
 function drawGlassPath(ctx: CanvasRenderingContext2D, glass: GlassReference, radius: number): void {
   if (glass === 'borosilicate') drawBorosilicate(ctx, radius);
@@ -64,11 +66,11 @@ class BeckeLineView {
     new MutationObserver(() => this.render()).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
   }
 
-  private labels(): Record<GlassReference, string> { return { sodaLime: this.ui.sodaLime, borosilicate: this.ui.borosilicate, leadCrystal: this.ui.leadCrystal, tempered: this.ui.tempered }; }
+  private labels(): Record<GlassReference, string> { return { sodaLime: this.ui.sodaLime ?? 'Soda-lime glass', borosilicate: this.ui.borosilicate ?? 'Borosilicate glass', leadCrystal: this.ui.leadCrystal ?? 'Lead crystal', tempered: this.ui.tempered ?? 'Tempered glass' }; }
 
   private setText(id: string, value: string): void { const element = byId(id); if (element) element.textContent = value; }
 
-  private formatTemperature(celsius: number, fahrenheit: number): string { return this.unitSystem === 'metric' ? `${celsius.toFixed(1)}\u00b0${this.ui.unitCelsius}` : `${fahrenheit.toFixed(1)}\u00b0${this.ui.unitFahrenheit}`; }
+  private formatTemperature(celsius: number, fahrenheit: number): string { return this.unitSystem === 'metric' ? `${celsius.toFixed(1)}\u00b0${this.ui.unitCelsius ?? 'C'}` : `${fahrenheit.toFixed(1)}\u00b0${this.ui.unitFahrenheit ?? 'F'}`; }
 
   private updateButtons(): void {
     document.querySelectorAll<HTMLButtonElement>('[data-becke-unit]').forEach((button) => { button.dataset.active = button.dataset.beckeUnit === this.unitSystem ? 'true' : 'false'; });
@@ -257,8 +259,8 @@ class BeckeLineView {
 
   private drawCanvasLabel(result: Result, height: number, textColor: string): void {
     if (!this.context) return;
-    const focusLabel = this.focusDirection === 'raised' ? this.ui.focusRaised : this.ui.focusLowered;
-    const label = result.lineDirection === 'matched' ? this.ui.canvasMatched : `${this.ui.canvasHalo}${this.ui.canvasFocusSeparator}${focusLabel}`;
+    const focusLabel = this.focusDirection === 'raised' ? uiText(this.ui, 'focusRaised') : uiText(this.ui, 'focusLowered');
+    const label = result.lineDirection === 'matched' ? uiText(this.ui, 'canvasMatched') : `${uiText(this.ui, 'canvasHalo')}${uiText(this.ui, 'canvasFocusSeparator')}${focusLabel}`;
     this.context.fillStyle = textColor;
     this.context.font = '600 24px system-ui, sans-serif';
     this.context.fillText(label, 28, height - 34);

@@ -85,7 +85,7 @@ const { ui } = Astro.props;
   </div>
 </section>
 
-<script id="microcrystal-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script is:inline id="microcrystal-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
 <script>
   import { CrystallographyEngine } from './logic';
   import type { CrystalHabit, CrystalReagent, CrystalSeed, DrugSample } from './logic';

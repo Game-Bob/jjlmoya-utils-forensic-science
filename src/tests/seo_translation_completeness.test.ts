@@ -33,7 +33,7 @@ function checkLocaleSeoLength(toolId: string, locale: string, localeLen: number,
   const minLength = Math.floor(enLen * (isAsian ? 0.25 : 0.70));
   const msgType = isAsian ? 'suspiciously short' : 'truncated/lazy';
 
-  expect(
+  expect.soft(
     localeLen,
     `[LAZY SEO TRANSLATION] Tool "${toolId}" locale "${locale}" SEO text is ${msgType} (${localeLen} chars vs EN ${enLen} chars, expected min ${minLength})`,
   ).toBeGreaterThanOrEqual(minLength);
@@ -66,4 +66,3 @@ describe('SEO Translation Completeness & Laziness Audit', () => {
     });
   });
 });
-

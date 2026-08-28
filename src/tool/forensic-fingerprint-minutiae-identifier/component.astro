@@ -176,7 +176,7 @@ const { ui } = Astro.props;
 <template id="fp-trash-icon">
   <Icon name="mdi:trash-can-outline" aria-hidden="true" />
 </template>
-<script id="fp-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script is:inline id="fp-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
 <script>
   import { FingerprintClassifier, MinutiaeState, colors, limits } from './logic';
   import type { FingerprintPattern, MinutiaType } from './logic';
@@ -252,7 +252,7 @@ const { ui } = Astro.props;
     const classification = classifier.classify(activePattern, coreVal, deltaVal);
     const summary = state.summarize();
     const selectedMark = state.list().find((mark) => mark.id === selectedMarkId);
-    updateUIStates(activeMinutia(), activePattern, limits, (type) => state.canAdd(type));
+    updateUIStates(activeMinutia(), activePattern, (type) => state.canAdd(type));
     updateActionButtons(selectedMark, ui, state.lastMark() !== null);
     updateClassifierLabels(classification, String(coreVal), String(deltaVal), ui);
     updateMinutiaeLabels(summary, activeMinutia(), ui, limits);

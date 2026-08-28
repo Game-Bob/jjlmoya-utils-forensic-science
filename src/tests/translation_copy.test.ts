@@ -91,34 +91,33 @@ function copySimilarity(left: string, right: string): number {
   return (2 * shared) / (leftTotal + rightTotal);
 }
 
+async function loadLocaleCorpora(entry: typeof ALL_ENTRIES[number]): Promise<Map<string, string>> {
+  const corpora = new Map<string, string>();
+  for (const [locale, loader] of Object.entries(entry.i18n)) {
+    if (loader) corpora.set(locale, localeCorpus(await loader()));
+  }
+  return corpora;
+}
+
+function findCopyViolations(corpora: Map<string, string>): string[] {
+  const locales = [...corpora.keys()];
+  const violations: string[] = [];
+  for (let leftIndex = 0; leftIndex < locales.length; leftIndex += 1) {
+    for (let rightIndex = leftIndex + 1; rightIndex < locales.length; rightIndex += 1) {
+      const left = locales[leftIndex] ?? '';
+      const right = locales[rightIndex] ?? '';
+      const similarity = copySimilarity(corpora.get(left) ?? '', corpora.get(right) ?? '');
+      if (similarity >= COPY_THRESHOLD) violations.push(`${left} ↔ ${right}: ${(similarity * 100).toFixed(1)}%`);
+    }
+  }
+  return violations;
+}
+
 describe('Locales must not copy another locale wholesale', () => {
   ALL_ENTRIES.forEach((entry) => {
     it(`${entry.id} is not at least ${COPY_THRESHOLD * 100}% identical to another locale`, async () => {
-      const corpora = new Map<string, string>();
-
-      for (const [locale, loader] of Object.entries(entry.i18n)) {
-        if (!loader) continue;
-        corpora.set(locale, localeCorpus(await loader()));
-      }
-
-      const locales = [...corpora.keys()];
-      const violations: string[] = [];
-
-      for (let leftIndex = 0; leftIndex < locales.length; leftIndex += 1) {
-        for (let rightIndex = leftIndex + 1; rightIndex < locales.length; rightIndex += 1) {
-          const left = locales[leftIndex];
-          const right = locales[rightIndex];
-          const similarity = copySimilarity(corpora.get(left) ?? '', corpora.get(right) ?? '');
-
-          if (similarity >= COPY_THRESHOLD) {
-            violations.push(`${left} ↔ ${right}: ${(similarity * 100).toFixed(1)}%`);
-          }
-        }
-      }
-
+      const violations = findCopyViolations(await loadLocaleCorpora(entry));
       expect(violations, `Locale copy threshold exceeded in ${entry.id}`).toEqual([]);
     });
   });
 });
-
-

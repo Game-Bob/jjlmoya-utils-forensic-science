@@ -1,6 +1,8 @@
 import type { ScienceToolEntry, ToolLocaleContent } from '../../types';
 import type { TimeOfDeathAlgorMortisUI } from './ui';
 
+export type { TimeOfDeathAlgorMortisUI } from './ui';
+
 export type TimeOfDeathAlgorMortisLocaleContent = ToolLocaleContent<TimeOfDeathAlgorMortisUI>;
 
 export const timeOfDeathAlgorMortisCalculator: ScienceToolEntry<TimeOfDeathAlgorMortisUI> = {

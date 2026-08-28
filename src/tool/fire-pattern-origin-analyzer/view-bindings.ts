@@ -17,6 +17,10 @@ import {
   updatePointerOverlay,
 } from './view-model';
 
+function uiText(ui: Record<string, string>, key: string, fallback = ''): string {
+  return ui[key] ?? fallback;
+}
+
 export function bindLayerToggles(refs: ViewRefs, estimator: FireOriginEstimator, state: ViewState): void {
   refs.root.querySelectorAll<HTMLButtonElement>('[data-fire-layer-toggle]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -41,7 +45,7 @@ export function bindRadialMenu(refs: ViewRefs, state: ViewState, ui: Record<stri
         confidence: 78,
       };
       closeRadialMenu(refs);
-      refs.modeLabel.textContent = `${ui.refiningVector}: ${ui[state.currentPattern] || state.currentPattern}`;
+      refs.modeLabel.textContent = `${uiText(ui, 'refiningVector')}: ${uiText(ui, state.currentPattern, state.currentPattern)}`;
     });
   });
 }
@@ -90,7 +94,7 @@ export function bindShortcuts(refs: ViewRefs, estimator: FireOriginEstimator, st
       state.draftVector = null;
       state.pendingStart = null;
       closeRadialMenu(refs);
-      refs.modeLabel.textContent = ui.awaitingVector;
+      refs.modeLabel.textContent = uiText(ui, 'awaitingVector');
       return;
     }
     const pattern = shortcutMap[event.key.toLowerCase()];
@@ -132,7 +136,7 @@ export function bindAuxiliaryActions(refs: ViewRefs, estimator: FireOriginEstima
     const target = event.target as Node;
     if (!refs.radialMenu.hidden && !refs.radialMenu.contains(target) && !refs.svg.contains(target)) {
       closeRadialMenu(refs);
-      if (!state.draftVector) refs.modeLabel.textContent = ui.awaitingVector;
+      if (!state.draftVector) refs.modeLabel.textContent = uiText(ui, 'awaitingVector');
     }
   });
   refs.exportButton.addEventListener('click', () => {
@@ -143,7 +147,7 @@ export function bindAuxiliaryActions(refs: ViewRefs, estimator: FireOriginEstima
     state.draftVector = null;
     state.pendingStart = null;
     animateToState(refs, estimator, state);
-    refs.modeLabel.textContent = ui.awaitingVector;
+    refs.modeLabel.textContent = uiText(ui, 'awaitingVector');
   });
 }
 
