@@ -39,14 +39,14 @@ export const content: CategoryLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: "Every forensic calculation involves error rates and confidence limits. A calculator should never replace a qualified expert witness or a validated laboratory protocol. Instead, these web utilities are best used to explore scenarios, explain concepts to non-specialists, and check the sensitivity of measurements before writing final reports. This helps prevent misunderstandings in the courtroom regarding scientific precision.",
+      html: "Every forensic calculation involves error rates and confidence limits. A calculator should never replace a qualified expert witness or a laboratory protocol documented by the relevant authority. Instead, these web utilities are best used to explore scenarios, explain concepts to non-specialists, and check the sensitivity of measurements before writing final reports.",
     },
     {
       type: 'table',
       headers: ['Appropriate Use', 'Inappropriate Use', 'Importance'],
       rows: [
-        ["Screening case files before formal specialist examination.", "Using a calculator output as a final expert opinion.", "Forensic evidence must meet strict standards of scientific validation."],
-        ["Explaining measurement uncertainty and ranges to investigators.", "Reporting a single exact number without explaining limitations.", "False precision can lead to incorrect decisions in judicial systems."],
+        ["Screening case files before formal specialist examination.", "Using a calculator output as a final expert opinion.", "Forensic evidence must meet strict scientific quality standards."],
+        ["Explaining measurement uncertainty and ranges to investigators.", "Reporting a single number without explaining limitations.", "False precision can lead to incorrect decisions in judicial systems."],
         ["Checking how input assumptions affect the estimated outcome.", "Hiding initial parameters or calculations from the case record.", "Transparency allows results to be audited and reproduced by others."],
         ["Determining if data quality is sufficient for calculation.", "Running formulas with poor or incomplete scale measurements.", "Weak input parameters make any mathematical reconstruction unreliable."],
       ],

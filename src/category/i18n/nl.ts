@@ -45,7 +45,7 @@ export const content: CategoryLocaleContent = {
       type: 'table',
       headers: ['Juist Gebruik', 'Onjuist Gebruik', 'Belang'],
       rows: [
-        ["Casusdossiers screenen voorafgaand aan formeel specialistisch onderzoek.", "De uitkomst van een calculator gebruiken als definitief deskundigenoordeel.", "Forensisch bewijs moet voldoen aan strenge normen van wetenschappelijke validatie."],
+        ["Casusdossiers screenen voorafgaand aan formeel specialistisch onderzoek.", "De uitkomst van een calculator gebruiken als definitief deskundigenoordeel.", "Forensisch bewijs moet voldoen aan strenge normen voor wetenschappelijke kwaliteit."],
         ["Meetonzekerheid en bereiken uitleggen aan rechercheurs.", "Een enkel exact cijfer rapporteren zonder de beperkingen uit te leggen.", "Schijnprecisie kan leiden tot onjuiste beslissingen in rechtssystemen."],
         ["Controleren hoe invoeraannames de geschatte uitkomst beïnvloeden.", "Eerste parameters of berekeningen verbergen in het casusdossier.", "Transparantie maakt het mogelijk om resultaten te controleren en door anderen te reproduceren."],
         ["Bepalen of de datakwaliteit voldoende is voor de berekening.", "Formules uitvoeren met slechte of onvolledige schaalmetingen.", "Zwakke invoerparameters maken elke wiskundige reconstructie onbetrouwbaar."],

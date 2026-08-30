@@ -39,14 +39,14 @@ export const content: CategoryLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: "Cada cálculo forense implica tasas de error y límites de confianza. Una calculadora nunca debe reemplazar a un perito cualificado o un protocolo de laboratorio validado. En su lugar, estas utilidades web se utilizan mejor para explorar escenarios, explicar conceptos a no especialistas y comprobar la sensibilidad de las mediciones antes de redactar los informes finales. Esto ayuda a evitar malentendidos en los tribunales con respecto a la precisión científica.",
+      html: "Cada cálculo forense implica tasas de error y límites de confianza. Una calculadora nunca debe reemplazar a un perito cualificado ni a un protocolo de laboratorio documentado. Estas utilidades sirven para explorar escenarios, explicar conceptos a no especialistas y comprobar la sensibilidad de las mediciones antes de redactar un informe.",
     },
     {
       type: 'table',
       headers: ['Uso adecuado', 'Uso inadecuado', 'Importancia'],
       rows: [
         ["Examinar expedientes de casos antes del examen formal de un especialista.", "Utilizar el resultado de una calculadora como una opinión pericial final.", "La evidencia forense debe cumplir con estrictos estándares de validación científica."],
-        ["Explicar la incertidumbre de la medición y los rangos a los investigadores.", "Informar un único número exacto sin explicar las limitaciones.", "La falsa precisión puede conducir a decisiones incorrectas en los sistemas judiciales."],
+        ["Explicar la incertidumbre de la medición y los rangos a los investigadores.", "Informar un único número sin explicar las limitaciones.", "La falsa precisión puede conducir a decisiones incorrectas en los sistemas judiciales."],
         ["Comprobar cómo influyen los supuestos de entrada en el resultado estimado.", "Ocultar parámetros iniciales o cálculos del registro del caso.", "La transparencia permite que los resultados sean auditados y reproducidos por otros."],
         ["Determinar si la calidad de los datos es suficiente para el cálculo.", "Ejecutar fórmulas con mediciones de escala deficientes o incompletas.", "Los parámetros de entrada débiles hacen que cualquier reconstrucción matemática no sea confiable."],
       ],

@@ -39,7 +39,7 @@ export const content: CategoryLocaleContent = {
     },
     {
       type: 'paragraph',
-      html: "Cada cálculo forense envolve taxas de erro e limites de confiança. Uma calculadora nunca deve substituir uma testemunha pericial qualificada ou um protocolo laboratorial validado. Em vez disso, esses utilitários web são mais bem usados para explorar cenários, explicar conceitos para não especialistas e verificar a sensibilidade das medições antes de redigir os relatórios finais. Isso ajuda a evitar mal-entendidos no tribunal em relação à precisão científica.",
+      html: "Cada cálculo forense envolve taxas de erro e limites de confiança. Uma calculadora nunca deve substituir uma testemunha pericial qualificada ou um protocolo laboratorial documentado pela autoridade competente. Em vez disso, esses utilitários web são mais bem usados para explorar cenários, explicar conceitos para não especialistas e verificar a sensibilidade das medições antes de redigir os relatórios finais.",
     },
     {
       type: 'table',

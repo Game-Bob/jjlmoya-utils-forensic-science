@@ -45,7 +45,7 @@ export const content: CategoryLocaleContent = {
       type: 'table',
       headers: ['Usage approprie', 'Usage inapproprie', 'Importance'],
       rows: [
-        ["Examiner les dossiers de cas avant un examen formel par un spécialiste.", "Utiliser le résultat d'un calculateur comme opinion d'expert finale.", "Les preuves forensiques doivent répondre à des normes strictes de validation scientifique."],
+        ["Examiner les dossiers de cas avant un examen formel par un spécialiste.", "Utiliser le résultat d'un calculateur comme opinion d'expert finale.", "Les preuves forensiques doivent répondre à des normes strictes de qualité scientifique."],
         ["Expliquer l'incertitude de mesure et les plages de valeurs aux enquêteurs.", "Rapporter un seul chiffre exact sans expliquer les limites.", "La fausse précision peut conduire à des décisions incorrectes dans les systèmes judiciaires."],
         ["Vérifier comment les hypothèses d'entrée affectent le résultat estimé.", "Masquer les paramètres initiaux ou les calculs du dossier de cas.", "La transparence permet d'auditer et de reproduire les résultats par d'autres."],
         ["Déterminer si la qualité des données est suffisante pour le calcul.", "Exécuter des formules avec des mesures d'échelle médiocres ou incomplètes.", "Des paramètres d'entrée faibles rendent toute reconstruction mathématique peu fiable."],
