@@ -1,0 +1,1146 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-04T11:10:51.909Z",
+  "pages": {
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/altersschatzung-zahn-skelett-weisheitszahn/": {
+      "hash": "f552f15a30c161de53cc14da513cea8e120f91142f2619323e5d30d3f4dee404",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/altersschatzung-zahn-skelett-weisheitszahn/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/analysator-ursprung-blutspurenmuster/": {
+      "hash": "41c49494c897768e1afd30b5a18f817afa5dfeddba87a9ab521124ef8b977060",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/analysator-ursprung-blutspurenmuster/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/becke-linien-glas-brechungsindex-simulator/": {
+      "hash": "6dbe42a708df77ba7414442eefcd00ec844b491fd7ffc92c88ba71136168ed32",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/becke-linien-glas-brechungsindex-simulator/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/brandmuster-ursprungsanalysator/": {
+      "hash": "2cf49502ef37f0a2ec22d1fbb9ea55429d18c92f736a71223f7d49bbbe4246fc",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/brandmuster-ursprungsanalysator/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/dna-profil-uebereinstimmungswahrscheinlichkeit-labor/": {
+      "hash": "96414292ac2de56ccab30932411fbd26fafec5d8f0860edebc9f56e019192c70",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/dna-profil-uebereinstimmungswahrscheinlichkeit-labor/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/fingerabdruck-minuzien-identifikator/": {
+      "hash": "8c545597f1dfb0c2cf77449afb3dd4fd245528297e2e0901bd0436371c4de348",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/fingerabdruck-minuzien-identifikator/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/forensische-geschlechtsbestimmung-anthropologische-morphologieanalyse/": {
+      "hash": "71eb845b81e7a69b67dffa03c8afd6edaa16e6aad2d798ef4a0d2cbbe9c2c017",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/forensische-geschlechtsbestimmung-anthropologische-morphologieanalyse/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-bildmetadata-authentizitaets-analysator/": {
+      "hash": "afbd8ca63421c9496e3a06497404019e46cb79f188d505ea8d198e04e3cb3882",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-bildmetadata-authentizitaets-analysator/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-duennschichtchromatographie-tintensimulator/": {
+      "hash": "6bcbb798a3b37f13ce827cbd23b4bfa8ea829ad54ba38365cb9c2a3427368cc5",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-duennschichtchromatographie-tintensimulator/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-faservergleich-mikroskop/": {
+      "hash": "72e852fba4f621c1a92a2e0d75ce333489dd4e4319488f82df213c0f10e6bc60",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-faservergleich-mikroskop/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-koerperhoehenrechner-trotter-gleser-methode/": {
+      "hash": "225f08230c475d5c09fb7e23c4b47408b505a933b202d66c4b9ae14be146090c",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-koerperhoehenrechner-trotter-gleser-methode/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-vortest-blut-simulator/": {
+      "hash": "a8117596fd03371c2db3254f4f5de817113e64c039e0a48f5005920d6120a122",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-vortest-blut-simulator/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-werkzeugspuren-riefen-vergleicher/": {
+      "hash": "b2f026e047442f0e297bef9bb33a89079a9f40c60c17ccdac27e623bcb4665f4",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/forensischer-werkzeugspuren-riefen-vergleicher/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/": {
+      "hash": "fa4ceb378e6e47523158333a984040c7cdd9a3700608c77570e2f48908b1f65f",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/mikrokristalline-drogenanalyse-simulator/": {
+      "hash": "95269bb2d26ed7a933857b0134f3f02b7c1e7bc76d337e54301f980ff0e8c5ef",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/mikrokristalline-drogenanalyse-simulator/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/schiessrueckstand-verteilung-abstand-rechner-gsr/": {
+      "hash": "912fff5a6eaa3c88c9d1ceae2c6ff839f0069848a9decd459fb00e8c85f8b048",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/schiessrueckstand-verteilung-abstand-rechner-gsr/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/stimmen-spektrogramm-analysator-online/": {
+      "hash": "6ca45c4072ca267a711f7ce214efc5ba76455b0c36be79d95e1273a0e0848491",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/stimmen-spektrogramm-analysator-online/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/todeszeitpunkt-berechnen-algor-mortis/": {
+      "hash": "68522e413216b45373fab2c1cfcd5b20574fcc2d59bc67f135c073698e3f45e4",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/todeszeitpunkt-berechnen-algor-mortis/"
+    },
+    "https://www.gamebob.dev/de/werkzeuge/kategorien/forensische-wissenschaft/widmark-blutalkohol-simulator/": {
+      "hash": "4cde1cb8094a36894cdb061a41d618e4398a04ec87b7b7a15d77dd42f7614483",
+      "route": "/de/werkzeuge/kategorien/forensische-wissenschaft/widmark-blutalkohol-simulator/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/bloodstain-pattern-origin-analyzer/": {
+      "hash": "194473e01f094dc736c2de2ba2c5e93e3618d08fc5ef84ee61c66043d220a1a1",
+      "route": "/en/utilities/categories/forensic-science/bloodstain-pattern-origin-analyzer/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/dental-skeletal-third-molar-age-estimator/": {
+      "hash": "43ddad4214d4459a5190895a219b0c57cfe22588d916956df8ac387f1056fde4",
+      "route": "/en/utilities/categories/forensic-science/dental-skeletal-third-molar-age-estimator/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/dna-profile-match-probability-lab/": {
+      "hash": "9c3b9dd084e8fe2ae83c8ace637f596cea165710a75a7dd2482c40e5f21cf7b1",
+      "route": "/en/utilities/categories/forensic-science/dna-profile-match-probability-lab/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/fire-pattern-origin-analyzer/": {
+      "hash": "e02a1aa1bfb914b0e1e2ae774a1ba5313cc48db567e2424c9db7b0a07eb22169",
+      "route": "/en/utilities/categories/forensic-science/fire-pattern-origin-analyzer/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/forensic-anthropology-sex-determination-cranial-pelvic-morphology-bayesian/": {
+      "hash": "2621f83370b209c6eaea3c0dd0543e1d70a65b75871442d601292852bafd8e1d",
+      "route": "/en/utilities/categories/forensic-science/forensic-anthropology-sex-determination-cranial-pelvic-morphology-bayesian/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/forensic-fiber-comparison-microscope/": {
+      "hash": "e62eac8203dde79005afad0cd5dbbbd9ac1e970c69a2c22dca05e73e00af5fc4",
+      "route": "/en/utilities/categories/forensic-science/forensic-fiber-comparison-microscope/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/forensic-fingerprint-minutiae-identifier/": {
+      "hash": "484939f1958c538379d14b04600978e732c99093561900f1c961459aee2a2d3b",
+      "route": "/en/utilities/categories/forensic-science/forensic-fingerprint-minutiae-identifier/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/forensic-glass-becke-line-simulator/": {
+      "hash": "fcd101852e635d8cf4ce394925412a66ad1fff7fa40c01b5c27d5c575bb757ac",
+      "route": "/en/utilities/categories/forensic-science/forensic-glass-becke-line-simulator/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/forensic-image-metadata-authenticity-analyzer/": {
+      "hash": "b6e6c4461f6e41ca43fbc45dc74079626675320ccf881a6aa3329238dbc4acb0",
+      "route": "/en/utilities/categories/forensic-science/forensic-image-metadata-authenticity-analyzer/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/forensic-microcrystal-drug-simulator/": {
+      "hash": "557c8619f1f57539ee5bee4b6b51312664d85ebfd380f82dea450556ad541d59",
+      "route": "/en/utilities/categories/forensic-science/forensic-microcrystal-drug-simulator/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/forensic-presumptive-blood-testing-luminol-kastle-meyer-simulator/": {
+      "hash": "44c4e8c3350ffa148b94a542c922a57c15d8cd982173a7d019d6490112043313",
+      "route": "/en/utilities/categories/forensic-science/forensic-presumptive-blood-testing-luminol-kastle-meyer-simulator/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/forensic-stature-estimation-skeletal-remains-trotter-gleser-calculator/": {
+      "hash": "8e44a76e51d96e7f5f1c60ac15fcacaeea37d1ac6bc518b88e1d3d44b4d4cd25",
+      "route": "/en/utilities/categories/forensic-science/forensic-stature-estimation-skeletal-remains-trotter-gleser-calculator/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/forensic-tlc-ink-simulator/": {
+      "hash": "91674e924700fb200ba38962a6e314c0a7e71d733f77104fdc1f2f58411e0e8f",
+      "route": "/en/utilities/categories/forensic-science/forensic-tlc-ink-simulator/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/forensic-toolmark-striation-matcher/": {
+      "hash": "52505b22eaa147b6d1cdfd20a2ede591b7223031809332c36a3a08b35ea48d9e",
+      "route": "/en/utilities/categories/forensic-science/forensic-toolmark-striation-matcher/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/gsr-dispersion-calculator/": {
+      "hash": "79e1aa237df9eea31650908136d6d08cee003400e359723b828e5b89eb931258",
+      "route": "/en/utilities/categories/forensic-science/gsr-dispersion-calculator/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/": {
+      "hash": "3fc915ada109f2c3aa281359bdeb6b42995e8607ac25d5972e10a843cbd4605a",
+      "route": "/en/utilities/categories/forensic-science/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/time-of-death-algor-mortis-calculator/": {
+      "hash": "1e5759b961de18b4248ed623c155f11fdc0fe9cb8fe8e860e0bee5e494162460",
+      "route": "/en/utilities/categories/forensic-science/time-of-death-algor-mortis-calculator/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/voice-spectrogram-analyzer-online/": {
+      "hash": "cb80c37bed1fb6ccaab26079ef038f52c8f1b2e02b6107362b8cf70c07421392",
+      "route": "/en/utilities/categories/forensic-science/voice-spectrogram-analyzer-online/"
+    },
+    "https://www.gamebob.dev/en/utilities/categories/forensic-science/widmark-blood-alcohol-simulator/": {
+      "hash": "d590c4a6e9d033d3e9ddbe23df88bd513ce1cacf20a8ce4a89ab351f28ece78b",
+      "route": "/en/utilities/categories/forensic-science/widmark-blood-alcohol-simulator/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/analyseur-medico-legal-metadonnees-authenticite-image/": {
+      "hash": "7413b75eb2908ecad96940e4f5fe247e74d85eb4cbac43528e273bc43018bfb1",
+      "route": "/fr/utilitaires/categories/science-forensique/analyseur-medico-legal-metadonnees-authenticite-image/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/analyseur-origine-motifs-incendie/": {
+      "hash": "b4e0f39d8a704480c7948fc8f37015fa0033f273271605524f7103b2e1fe0271",
+      "route": "/fr/utilitaires/categories/science-forensique/analyseur-origine-motifs-incendie/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/analyseur-spectrogramme-voix-en-ligne/": {
+      "hash": "726d94f0992ea7b76ff2a60d531363061d80930ef7a206327cfbeebab408459a",
+      "route": "/fr/utilitaires/categories/science-forensique/analyseur-spectrogramme-voix-en-ligne/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/calculateur-distance-tir-dispersion-gsr/": {
+      "hash": "03cd695e1cafc2179d4d5431fb2a1b8cb539f86a20eab0a81911e44b6b8b2e05",
+      "route": "/fr/utilitaires/categories/science-forensique/calculateur-distance-tir-dispersion-gsr/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/calculateur-heure-deces-algor-mortis/": {
+      "hash": "3534e1cd57c08e9e8b38adf7fb2b6b8905f6a7ace0ea922dd688b19d84d1e63c",
+      "route": "/fr/utilitaires/categories/science-forensique/calculateur-heure-deces-algor-mortis/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/comparateur-ries-marques-outils-forensique/": {
+      "hash": "d4ea00adda5629532105fac1e67f55944e8951ef760e12a51176e1895a9f5f33",
+      "route": "/fr/utilitaires/categories/science-forensique/comparateur-ries-marques-outils-forensique/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/determination-sexe-biologique-anthropologie-medicolegale-bayesien/": {
+      "hash": "7950204c5114c25896b248c50656599a3b434dba8aa1bc0bdf900bbf88f57850",
+      "route": "/fr/utilitaires/categories/science-forensique/determination-sexe-biologique-anthropologie-medicolegale-bayesien/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/estimateur-age-dentaire-squelettique-troisieme-molaire/": {
+      "hash": "143d9154088ad97fa77ed69e6b82acd9e6199adc94695f121f0bf5f938c17cfd",
+      "route": "/fr/utilitaires/categories/science-forensique/estimateur-age-dentaire-squelettique-troisieme-molaire/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/estimateur-de-stature-legale-calculateur-trotter-gleser/": {
+      "hash": "3753982ab03b42c07acf72a435ba63566c3b1e7e59c23ceb14fcec6558126677",
+      "route": "/fr/utilitaires/categories/science-forensique/estimateur-de-stature-legale-calculateur-trotter-gleser/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/identificateur-minuties-dactyloscopiques/": {
+      "hash": "ac07523f209ccc07d6b3406a9568bfef3a02f39630821aa834c65eb3dd817f3f",
+      "route": "/fr/utilitaires/categories/science-forensique/identificateur-minuties-dactyloscopiques/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/": {
+      "hash": "04ff1bd269a31d41db4c31e428d573c05b1c3c9e1b5bbeea370c1ea4d75d285c",
+      "route": "/fr/utilitaires/categories/science-forensique/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/laboratoire-probabilite-correspondance-profil-adn/": {
+      "hash": "6d399226bcc344fd479adc9cd2dac035e2dbdfd22c0e6a1c8c681fce2c04f74e",
+      "route": "/fr/utilitaires/categories/science-forensique/laboratoire-probabilite-correspondance-profil-adn/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/microscope-comparaison-fibres-forensiques/": {
+      "hash": "39f74a233c8a9fccd4eacd817a8481f953731dfc94eed49b4c2ff7c711abe5e0",
+      "route": "/fr/utilitaires/categories/science-forensique/microscope-comparaison-fibres-forensiques/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/simulateur-alcoholemie-widmark/": {
+      "hash": "090d8fd216903b16d58b3423146411750183d83d63dded7aad67e1c58f5d45e2",
+      "route": "/fr/utilitaires/categories/science-forensique/simulateur-alcoholemie-widmark/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/simulateur-chromatographie-couche-mince-ccm-encre/": {
+      "hash": "96c9700909baabfb1d73eb31a8f35042c911e2b69c4721133cc163078805c3af",
+      "route": "/fr/utilitaires/categories/science-forensique/simulateur-chromatographie-couche-mince-ccm-encre/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/simulateur-ligne-becke-indice-refraction-verre/": {
+      "hash": "1a7ab067f4bd9ec9a306eb0d63866feb5d779a3c4e7daab04fcb7ed47cda9c90",
+      "route": "/fr/utilitaires/categories/science-forensique/simulateur-ligne-becke-indice-refraction-verre/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/simulateur-origine-traces-sang/": {
+      "hash": "d3a8f0f7da97328718ef211cea3d22963024e1abb6f556ac34bb2a4dee779671",
+      "route": "/fr/utilitaires/categories/science-forensique/simulateur-origine-traces-sang/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/simulateur-test-drogue-microcristallin/": {
+      "hash": "89c289877385a6e62c1cf8dae50600107a480d50ba89a376626de7a422303c56",
+      "route": "/fr/utilitaires/categories/science-forensique/simulateur-test-drogue-microcristallin/"
+    },
+    "https://www.gamebob.dev/fr/utilitaires/categories/science-forensique/simulateur-test-presomptif-sang-medecine-legale/": {
+      "hash": "6f03a27a40d9f88fe7402aaac17f4c93722512e518f0eff3b2c9feadcacb8d1e",
+      "route": "/fr/utilitaires/categories/science-forensique/simulateur-test-presomptif-sang-medecine-legale/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/alat-analisis-asal-pola-bercak-darah/": {
+      "hash": "4b3032277363fb8e7ea25ea1b50ae1904e0405019ae40bc59e0e5e9ebf33e429",
+      "route": "/id/utilitas/kategori/ilmu-forensik/alat-analisis-asal-pola-bercak-darah/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/estimator-usia-gigi-skelet-molar-ketiga/": {
+      "hash": "1b2d61eaf15bc3b89bbb15625620705cc025d67cc050bef4bc0bbc7d6cc01e2a",
+      "route": "/id/utilitas/kategori/ilmu-forensik/estimator-usia-gigi-skelet-molar-ketiga/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/identifikator-minutiae-sidik-jari/": {
+      "hash": "cd97feb5a3e8e87ef6d3a5ced2aa3236b51f70b5c62aeef1600bfb33165dcec3",
+      "route": "/id/utilitas/kategori/ilmu-forensik/identifikator-minutiae-sidik-jari/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/": {
+      "hash": "4d4a110b3fd3d1ec8901beccc63d4f6bfa05442f980acf81327332eab6f25c65",
+      "route": "/id/utilitas/kategori/ilmu-forensik/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/kalkulator-estimasi-tinggi-badan-forensik-trotter-gleser/": {
+      "hash": "6c571536482f2f4e588d3fb634d90549e73e79ab9b4560716eb063c52f978aee",
+      "route": "/id/utilitas/kategori/ilmu-forensik/kalkulator-estimasi-tinggi-badan-forensik-trotter-gleser/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/kalkulator-jarak-tembak-sebaran-gsr-sisa-mesiu/": {
+      "hash": "0c0003e6671187165fbc37535f1c31c485b5b99972a320f3127c5d6daad2f424",
+      "route": "/id/utilitas/kategori/ilmu-forensik/kalkulator-jarak-tembak-sebaran-gsr-sisa-mesiu/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/kalkulator-kadar-alkohol-widmark/": {
+      "hash": "fc1eb0377519f0e819fad8a9a510bf0741b7e9cc267e8e4d0cc8e1ae6fc80077",
+      "route": "/id/utilitas/kategori/ilmu-forensik/kalkulator-kadar-alkohol-widmark/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/kalkulator-waktu-kematian-algor-mortis/": {
+      "hash": "2d2baf3fa8e4c38019e2961932a7213ab042f7c07afd931755d8549aa40a08fb",
+      "route": "/id/utilitas/kategori/ilmu-forensik/kalkulator-waktu-kematian-algor-mortis/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/lab-probabilitas-kecocokan-profil-dna/": {
+      "hash": "0a05c6c4408f00348e35a03225a6d101ba0204a6ea91e072a9f43aa18a282eda",
+      "route": "/id/utilitas/kategori/ilmu-forensik/lab-probabilitas-kecocokan-profil-dna/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/mikroskop-perbandingan-serat-forensik/": {
+      "hash": "c663e05c79f26266b88c7bac88123e0bbfe8f91ae7087e70c887d3b67fbdcc59",
+      "route": "/id/utilitas/kategori/ilmu-forensik/mikroskop-perbandingan-serat-forensik/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/pembanding-goresan-tanda-alat-forensik/": {
+      "hash": "59b383216a3ea9b831913f42794530fcba56db31b4644dbe938241294c691d02",
+      "route": "/id/utilitas/kategori/ilmu-forensik/pembanding-goresan-tanda-alat-forensik/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/penentuan-jenis-kelamin-biologis-morfologi-kerangka-antropologi-forensik/": {
+      "hash": "2a3c629919a57dc848cda4b919534672c3e375da9cfc5f70f4ae5ae0dffcb05f",
+      "route": "/id/utilitas/kategori/ilmu-forensik/penentuan-jenis-kelamin-biologis-morfologi-kerangka-antropologi-forensik/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/penganalisis-asal-pola-kebakaran/": {
+      "hash": "54000f2218ddcf89f6c74d636f2359c6e65c342d1054417af3d9acf41ea50749",
+      "route": "/id/utilitas/kategori/ilmu-forensik/penganalisis-asal-pola-kebakaran/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/penganalisis-forensik-metadata-dan-keaslian-gambar/": {
+      "hash": "4ed920848a679bdea56ebccd785c44de94bb947aca8605b11849491a11cf0f86",
+      "route": "/id/utilitas/kategori/ilmu-forensik/penganalisis-forensik-metadata-dan-keaslian-gambar/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/penganalisis-spektrogram-suara-online/": {
+      "hash": "7c59d0d1362130a13bd886651deef8428491aa907445ed4073a0f518615d8d7f",
+      "route": "/id/utilitas/kategori/ilmu-forensik/penganalisis-spektrogram-suara-online/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/simulator-garis-becke-indeks-bias-kaca/": {
+      "hash": "a213b4ffc07dc0890b596c6627218ff204e50149a1e15395fedc15951a4404a2",
+      "route": "/id/utilitas/kategori/ilmu-forensik/simulator-garis-becke-indeks-bias-kaca/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/simulator-kromatografi-lapis-tipis-tlc-tinta/": {
+      "hash": "debe16b1d4ad3bcfa4b756da834aebe8790276c421f76b3dca425a0e084e9b99",
+      "route": "/id/utilitas/kategori/ilmu-forensik/simulator-kromatografi-lapis-tipis-tlc-tinta/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/simulator-uji-dugaan-darah-forensik/": {
+      "hash": "c9515f051da6a15edcdf9da06404530389937afdaf368d89d47af8ed5350815c",
+      "route": "/id/utilitas/kategori/ilmu-forensik/simulator-uji-dugaan-darah-forensik/"
+    },
+    "https://www.gamebob.dev/id/utilitas/kategori/ilmu-forensik/simulator-uji-narkoba-mikrokristal-forensik/": {
+      "hash": "3becdb8f8b6a19109ae8bebb1fe4ddceae9dc46964149a2ce22c8a6c38f9b450",
+      "route": "/id/utilitas/kategori/ilmu-forensik/simulator-uji-narkoba-mikrokristal-forensik/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/analizzatore-forense-metadati-autenticita-immagini/": {
+      "hash": "5f14a83f23f2dae570fdcc71153e46e15c7d4e816a852dfcd59d81b3881eaa70",
+      "route": "/it/utilita/categorie/scienze-forensi/analizzatore-forense-metadati-autenticita-immagini/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/analizzatore-origine-modelli-incendio/": {
+      "hash": "d9fe2c48f0b0abad5f28646f563a7ab9f2a6dc1b10ae79090793f1ea4ed01557",
+      "route": "/it/utilita/categorie/scienze-forensi/analizzatore-origine-modelli-incendio/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/analizzatore-spettrogramma-voce-online/": {
+      "hash": "7ca688d74e5b58685cc9fa963ccac452f406d8f5720a990c6cdafe73e9491a80",
+      "route": "/it/utilita/categorie/scienze-forensi/analizzatore-spettrogramma-voce-online/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/calcolatore-alcolemia-widmark/": {
+      "hash": "52e3d27f44d6b044626eb235ea385b393969efdcf369ce92ff4b96a847280c1c",
+      "route": "/it/utilita/categorie/scienze-forensi/calcolatore-alcolemia-widmark/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/calcolatore-dispersione-residui-sparo-gsr/": {
+      "hash": "4422879d12b7039b893308ad25bc08cf82f6f02e61f86b7a65b70c345acd15da",
+      "route": "/it/utilita/categorie/scienze-forensi/calcolatore-dispersione-residui-sparo-gsr/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/calcolatore-ora-del-decesso-algor-mortis/": {
+      "hash": "7cccb8f6384b1c88fe2e9cc35d317d17d5404b41df151f7b3cbaac1e2980db2e",
+      "route": "/it/utilita/categorie/scienze-forensi/calcolatore-ora-del-decesso-algor-mortis/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/comparatore-estrie-impronte-utensili-forense/": {
+      "hash": "841e929c8f134f411bd45577689b55a8fbc8ac2f4db9222c219409a326e6ed0e",
+      "route": "/it/utilita/categorie/scienze-forensi/comparatore-estrie-impronte-utensili-forense/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/determinazione-sesso-biologico-morfologia-cranio-bacino-antropologia-forense/": {
+      "hash": "9b9c02ff9f929ae42c1bad3d56bfb5e37f07e5745a77b155dc3848d4cde888d8",
+      "route": "/it/utilita/categorie/scienze-forensi/determinazione-sesso-biologico-morfologia-cranio-bacino-antropologia-forense/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/estimatore-statura-forense-ossa-lunghe-trotter-gleser/": {
+      "hash": "3565cc2cff89c409a8fdbf7e4cdee5c397d071f80b50ee7fd62d73209003024b",
+      "route": "/it/utilita/categorie/scienze-forensi/estimatore-statura-forense-ossa-lunghe-trotter-gleser/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/identificatore-minuzie-impronte-digitali/": {
+      "hash": "04b456243a8bc0ffeebabf55ff78b52799fc1bc8ee8ad5f99dc65d653fbfde6c",
+      "route": "/it/utilita/categorie/scienze-forensi/identificatore-minuzie-impronte-digitali/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/": {
+      "hash": "a6dfdb4786188d4face7a55666c6f7992c7e6670197c70226900a0f6517fb2cf",
+      "route": "/it/utilita/categorie/scienze-forensi/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/laboratorio-probabilita-corrispondenza-profilo-dna/": {
+      "hash": "6e08a6d671f964e41da0adce5b4ee761345c466c6da381b50f408f4db6b65051",
+      "route": "/it/utilita/categorie/scienze-forensi/laboratorio-probabilita-corrispondenza-profilo-dna/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/microscopio-confronto-fibre-forense/": {
+      "hash": "a53003ceed0a9c63fc42d052cdb27f377f279794daee5005a130bdea3c03aa33",
+      "route": "/it/utilita/categorie/scienze-forensi/microscopio-confronto-fibre-forense/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/simulatore-cromatografia-strato-sottile-tlc-inchiostro/": {
+      "hash": "62cc2771c6720e881918957e8178c9c554cd3b4fa036efbd669ec6981f2f5e79",
+      "route": "/it/utilita/categorie/scienze-forensi/simulatore-cromatografia-strato-sottile-tlc-inchiostro/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/simulatore-linea-becke-indice-rifrazione-vetro/": {
+      "hash": "b02f0752267995294547001a3a5daaeb9899e5a863fdb40c8d6c01c94fcb80e8",
+      "route": "/it/utilita/categorie/scienze-forensi/simulatore-linea-becke-indice-rifrazione-vetro/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/simulatore-origine-traiettoria-macchie-sangue/": {
+      "hash": "3b4bdb3dc137bd7a195e7799cdf1ae41c739458a0a42dfdeb40f98099cf6423d",
+      "route": "/it/utilita/categorie/scienze-forensi/simulatore-origine-traiettoria-macchie-sangue/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/simulatore-test-microcristallino-droghe/": {
+      "hash": "1b2ed39575e596145de88c99ebb41eb0218bf15e61e0158f065c891daaf35bbb",
+      "route": "/it/utilita/categorie/scienze-forensi/simulatore-test-microcristallino-droghe/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/simulatore-test-presuntivo-sangue-forense/": {
+      "hash": "194f3e3697af9e59f486ca392c3aefe7c8a8407621effe7c29d291a5df6fa0ae",
+      "route": "/it/utilita/categorie/scienze-forensi/simulatore-test-presuntivo-sangue-forense/"
+    },
+    "https://www.gamebob.dev/it/utilita/categorie/scienze-forensi/stimatore-eta-dentale-scheletrica-terzo-molare/": {
+      "hash": "c03729414bf81372710ddf465e76d190a5ecaa3c8c76167c12e81c34f96f5ba0",
+      "route": "/it/utilita/categorie/scienze-forensi/stimatore-eta-dentale-scheletrica-terzo-molare/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/bloodstain-pattern-origin-analyzer/": {
+      "hash": "aa51e36f8967ab09cc2d3c919ccf22db90434fb3ba642f8221d28516484cdd47",
+      "route": "/ja/utilities/categories/forensic-science/bloodstain-pattern-origin-analyzer/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/dental-skeletal-third-molar-age-estimator/": {
+      "hash": "38027b08ed708dcb825b733034f27f22b6afa308400bc641482fbcbe24358d3e",
+      "route": "/ja/utilities/categories/forensic-science/dental-skeletal-third-molar-age-estimator/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/dna-profile-match-probability-lab/": {
+      "hash": "3ccb124f9571edd3c1c021d91455207697e424a5111f54515c4b344d95dc4014",
+      "route": "/ja/utilities/categories/forensic-science/dna-profile-match-probability-lab/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/fire-pattern-origin-analyzer/": {
+      "hash": "09a976f8269084e111ee0683836870728af7187964c2b241090d7fcee011a874",
+      "route": "/ja/utilities/categories/forensic-science/fire-pattern-origin-analyzer/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/forensic-anthropology-sex-determination-cranial-pelvic-morphology-bayesian/": {
+      "hash": "f792722df7e4b713bbdfab336c9c9df12089c00e5dfc5f8e2582cb5862016ba5",
+      "route": "/ja/utilities/categories/forensic-science/forensic-anthropology-sex-determination-cranial-pelvic-morphology-bayesian/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/forensic-fiber-comparison-microscope/": {
+      "hash": "a776e45b2000e91924eae834eb1d25abec28baba2d6061d6e6e98e3a36da54af",
+      "route": "/ja/utilities/categories/forensic-science/forensic-fiber-comparison-microscope/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/forensic-fingerprint-minutiae-identifier/": {
+      "hash": "67fe0ea87c825460242fe9ad308fa62fb33cf95a9bc45c68c2d00859b7b8329f",
+      "route": "/ja/utilities/categories/forensic-science/forensic-fingerprint-minutiae-identifier/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/forensic-glass-becke-line-simulator/": {
+      "hash": "18130ecfb72185092e3ec694fa122065ac259f7a4f5d3317fe4d5e29681b1079",
+      "route": "/ja/utilities/categories/forensic-science/forensic-glass-becke-line-simulator/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/forensic-image-metadata-authenticity-analyzer/": {
+      "hash": "405d962ac2c1bb1650dada78d9996a0d5a3fc61727725da11cc525907d32b7a7",
+      "route": "/ja/utilities/categories/forensic-science/forensic-image-metadata-authenticity-analyzer/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/forensic-microcrystal-drug-simulator/": {
+      "hash": "b8717c9093c80c6568af4d43412f2e84f2025804a46d83a7a41c9d17cf2e97f6",
+      "route": "/ja/utilities/categories/forensic-science/forensic-microcrystal-drug-simulator/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/forensic-presumptive-blood-testing-luminol-kastle-meyer-simulator/": {
+      "hash": "7d5d783bdf9eaa358b38130404fb34e3d93506318992b56a88a0a54cca642de8",
+      "route": "/ja/utilities/categories/forensic-science/forensic-presumptive-blood-testing-luminol-kastle-meyer-simulator/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/forensic-stature-estimation-skeletal-remains-trotter-gleser-calculator/": {
+      "hash": "309ed7f94c9fd6435a087ac28aa7824b557cce5f1df88535b45fc4e7a9fd2e82",
+      "route": "/ja/utilities/categories/forensic-science/forensic-stature-estimation-skeletal-remains-trotter-gleser-calculator/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/forensic-tlc-ink-simulator/": {
+      "hash": "d4dedb4f0c2a69a4fc051dd3b7858cf22aec7b870fd8d711730bd12bddf87199",
+      "route": "/ja/utilities/categories/forensic-science/forensic-tlc-ink-simulator/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/forensic-toolmark-striation-matcher/": {
+      "hash": "1ebb50e81b516f30858630011589c9e9cc0e7d95ef5103731023dbf1457b9502",
+      "route": "/ja/utilities/categories/forensic-science/forensic-toolmark-striation-matcher/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/gsr-dispersion-calculator/": {
+      "hash": "024c813c4410eec6a1d43d915fe4264ec529d4d4674221a805b65d268134a9a0",
+      "route": "/ja/utilities/categories/forensic-science/gsr-dispersion-calculator/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/": {
+      "hash": "48bf42b67ff2c57f75c5da686886f316379036f3a968c8a7dcb6e0e7ac19073f",
+      "route": "/ja/utilities/categories/forensic-science/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/time-of-death-algor-mortis-calculator/": {
+      "hash": "1f8ff90b75feca9e172d2d774c5152c2f41920a97952e0909d03f9c1f89eae59",
+      "route": "/ja/utilities/categories/forensic-science/time-of-death-algor-mortis-calculator/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/voice-spectrogram-analyzer-online/": {
+      "hash": "f87f88be580e9c6c307a07dfb4a0a4f8cf2afee01f0f6f21d5a88094367d4c24",
+      "route": "/ja/utilities/categories/forensic-science/voice-spectrogram-analyzer-online/"
+    },
+    "https://www.gamebob.dev/ja/utilities/categories/forensic-science/widmark-blood-alcohol-simulator/": {
+      "hash": "ce1c708f7fdf1d86daba1ba91734d9952639a1c87463bc197ef4d168094b5da6",
+      "route": "/ja/utilities/categories/forensic-science/widmark-blood-alcohol-simulator/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/bloodstain-pattern-origin-analyzer/": {
+      "hash": "8f1dd63d7f4fe231c531a82c8dfac5c1397fff76c32b0033f012afaf61697a26",
+      "route": "/ko/utilities/categories/forensic-science/bloodstain-pattern-origin-analyzer/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/dental-skeletal-third-molar-age-estimator/": {
+      "hash": "101a60eb228d7bd8bdb02ea0d2b183453d87835e784ee75f878ad81a1122f82b",
+      "route": "/ko/utilities/categories/forensic-science/dental-skeletal-third-molar-age-estimator/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/dna-profile-match-probability-lab/": {
+      "hash": "7af15ab293bdfe2bfa2c3f917be1cbcd188a143557c096f890ec161b34885132",
+      "route": "/ko/utilities/categories/forensic-science/dna-profile-match-probability-lab/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/fire-pattern-origin-analyzer/": {
+      "hash": "23a7ec1fb8ad0774d22b8ab019980cfa916e3353a4ddaa968a8655a2bd3a7786",
+      "route": "/ko/utilities/categories/forensic-science/fire-pattern-origin-analyzer/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/forensic-anthropology-sex-determination-cranial-pelvic-morphology-bayesian/": {
+      "hash": "9a8f2ca7772faaf69c1c8879a9fba69a42834a24a95a3c66c00221db75ffcce3",
+      "route": "/ko/utilities/categories/forensic-science/forensic-anthropology-sex-determination-cranial-pelvic-morphology-bayesian/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/forensic-fiber-comparison-microscope/": {
+      "hash": "c37f1a6bb6208177ae114bba2a5a2af5ba16b02df3bff22fce5b2b7a985950da",
+      "route": "/ko/utilities/categories/forensic-science/forensic-fiber-comparison-microscope/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/forensic-fingerprint-minutiae-identifier/": {
+      "hash": "1956732a249f7436b9a25ac57b0730da23349a1ea778df5a8df40da9e20acc50",
+      "route": "/ko/utilities/categories/forensic-science/forensic-fingerprint-minutiae-identifier/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/forensic-glass-becke-line-simulator/": {
+      "hash": "3187309ca30ae851eb79cdc4d2ff86cc1445f29c4d3e348e9d5d8ef88af5c73f",
+      "route": "/ko/utilities/categories/forensic-science/forensic-glass-becke-line-simulator/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/forensic-image-metadata-authenticity-analyzer/": {
+      "hash": "ba246cb2a5d89b74d1a5e83110bd3e23ba42d926282981cd97dd1a3640f03ad7",
+      "route": "/ko/utilities/categories/forensic-science/forensic-image-metadata-authenticity-analyzer/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/forensic-microcrystal-drug-simulator/": {
+      "hash": "42adc88f4b0016c7488eb832c123606b86874480af945f4c392711ceafcef860",
+      "route": "/ko/utilities/categories/forensic-science/forensic-microcrystal-drug-simulator/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/forensic-presumptive-blood-testing-luminol-kastle-meyer-simulator/": {
+      "hash": "40c57dc20f7f824f1cc2b2cc35f306744d33749b58ad466e204f1d7badaf8d82",
+      "route": "/ko/utilities/categories/forensic-science/forensic-presumptive-blood-testing-luminol-kastle-meyer-simulator/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/forensic-stature-estimation-skeletal-remains-trotter-gleser-calculator/": {
+      "hash": "216a73ac8b35d236d7f1be1a7e19569e3805be2305051a89a59383a87a549f2b",
+      "route": "/ko/utilities/categories/forensic-science/forensic-stature-estimation-skeletal-remains-trotter-gleser-calculator/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/forensic-tlc-ink-simulator/": {
+      "hash": "b9a6545e4eff95f41de0af4120b4f2a19039c142c0bb08e4daeeb7a37241aff3",
+      "route": "/ko/utilities/categories/forensic-science/forensic-tlc-ink-simulator/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/forensic-toolmark-striation-matcher/": {
+      "hash": "3b018c0a581f05321392fbc87e1c64b2667b6f112b32b03073d42bafc1f7267d",
+      "route": "/ko/utilities/categories/forensic-science/forensic-toolmark-striation-matcher/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/gsr-dispersion-calculator/": {
+      "hash": "01a2b3d76e9174862cce340712edf481f26b657211b9a9e2ffc33720907773d7",
+      "route": "/ko/utilities/categories/forensic-science/gsr-dispersion-calculator/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/": {
+      "hash": "d85d1a16f1e81ffa60d44c069ed23dcf5a649346c9d9b09ed3cd863ad4231981",
+      "route": "/ko/utilities/categories/forensic-science/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/time-of-death-algor-mortis-calculator/": {
+      "hash": "d2e68c97328fcf73d2b6006c8d914e92b61fa7e878ccb610c75b516f3497a296",
+      "route": "/ko/utilities/categories/forensic-science/time-of-death-algor-mortis-calculator/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/voice-spectrogram-analyzer-online/": {
+      "hash": "d20bd5a09738bf2b096b05a241598d2dc19aeb0879ee0e0ca2ed4b3eafff6272",
+      "route": "/ko/utilities/categories/forensic-science/voice-spectrogram-analyzer-online/"
+    },
+    "https://www.gamebob.dev/ko/utilities/categories/forensic-science/widmark-blood-alcohol-simulator/": {
+      "hash": "5e6cebe77c938590816317a95778b86c852b938de789d8b95480e7b97f86e5d6",
+      "route": "/ko/utilities/categories/forensic-science/widmark-blood-alcohol-simulator/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/analysator-herkomst-bloedspatpatronen/": {
+      "hash": "1266b1e0670b8883cf91d2ad12145acd653662f925dd1d94b151f595b4c6d333",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/analysator-herkomst-bloedspatpatronen/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/becke-lijn-glas-brekingsindex-simulator/": {
+      "hash": "6d35229cddcc2e638f66e0bb77bf07b75ffa324d0ed91b7893135e398d64c716",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/becke-lijn-glas-brekingsindex-simulator/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/brandspoor-oorsprong-analysator/": {
+      "hash": "24605651e93e426926d21dc8712530b362a16e4008b4da4f7154bc776f4a3a84",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/brandspoor-oorsprong-analysator/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/dna-profiel-toevalsovereenkomst-kans-lab/": {
+      "hash": "86a2e52b08782bb111a7d9b65659566de30a601d144d52e25f3f289c88c4cf34",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/dna-profiel-toevalsovereenkomst-kans-lab/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-afbeelding-metadata-authenticiteits-analyzer/": {
+      "hash": "fc6b8e3f3afa8396b4e250d941448bd48f7c1045ee9934d92d26ffc9575ae096",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-afbeelding-metadata-authenticiteits-analyzer/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-gereedschapssporen-krassen-vergelijker/": {
+      "hash": "a05b6f9c5837f041eac446da8e5a4d9df7003b00c800df4d866e31983b83cc78",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-gereedschapssporen-krassen-vergelijker/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-geslachtsbepaling-schedel-bekken-morfologie-bayesiaans-model/": {
+      "hash": "1b5f58b74bc515531f934e700194b01470a0e3e0094445ad5a87f20092fd6b16",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-geslachtsbepaling-schedel-bekken-morfologie-bayesiaans-model/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-lengteschatting-trotter-gleser-calculator/": {
+      "hash": "5dd594e1ecdb83c5382a866359aba457d08dcdd446b616d7535739eba2bbfbef",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-lengteschatting-trotter-gleser-calculator/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-microkristallijne-drugstest-simulator/": {
+      "hash": "0aa7beddefd4990fe048ccaa6a1f48068f2f490dab88f579ad56724a35d9bf25",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-microkristallijne-drugstest-simulator/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-presumptieve-bloedtest-simulator/": {
+      "hash": "78295467cb666321b43cf137c11f60c1372d39c8c9630085667d789a460e39d6",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-presumptieve-bloedtest-simulator/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-tlc-inkt-chromatografie-simulator/": {
+      "hash": "e7294cbed7f5ad0eac09a06c5a11104104db32097debf339b9d9f1b41b6a3823",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-tlc-inkt-chromatografie-simulator/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-vezelvergelijking-microscoop/": {
+      "hash": "a56389ee65b96eae22fe4da099fa715e120f842379c3aacc62b6a9c73912bb26",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/forensische-vezelvergelijking-microscoop/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/": {
+      "hash": "066605aad6faf6743c99b28c495d2f626f2ff35300e2dadfefd18fb7960fbbcb",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/leeftijdsschatter-gebit-skelet-verstandskies/": {
+      "hash": "f6fdf586d39be7a5ef2594fa7579a36e1b2c67d043fb34a9d8fcb37b69f52901",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/leeftijdsschatter-gebit-skelet-verstandskies/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/satschot-afstand-berekenen-gsr-kruitsporen/": {
+      "hash": "734a58c536b521af6aaf002c0971e7648988ebba1445dd9a0e225babba3eefd2",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/satschot-afstand-berekenen-gsr-kruitsporen/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/stem-spectrogram-analysator-online/": {
+      "hash": "4ffe888ff925b86c7fe676e3c1e1b9ce1fed1e157ab95cb9f2de04e7a72fcd7e",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/stem-spectrogram-analysator-online/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/tijdstip-van-overlijden-rekenmachine-algor-mortis/": {
+      "hash": "fbd1671091f740bcb90cfa9683ab54831e89537047e69856db9d2c26fa4e3c71",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/tijdstip-van-overlijden-rekenmachine-algor-mortis/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/vingerafdruk-minutiae-identificatie/": {
+      "hash": "7b8bc5202dc2251517a95bb22864e628ac3677a171e4f3c7cc09cecb569a1046",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/vingerafdruk-minutiae-identificatie/"
+    },
+    "https://www.gamebob.dev/nl/hulpmiddelen/categorieen/forensische-wetenschap/widmark-promillage-calculator/": {
+      "hash": "53cad7c66733df353187992470c52020cdd197545e53f171e27d9d5c72bb5606",
+      "route": "/nl/hulpmiddelen/categorieen/forensische-wetenschap/widmark-promillage-calculator/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/analizator-pochodzenia-plam-krwi/": {
+      "hash": "5ae7c2ebdacfdf1345f7ebc24912baa3e839946bcfda3e23589d051fab4ddd71",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/analizator-pochodzenia-plam-krwi/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/analizator-spektrogramu-glosu-online/": {
+      "hash": "be4a39da6ac9f0d0a2a6be82a3cc9134eb92cb1edcde5a399183d820af163ff9",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/analizator-spektrogramu-glosu-online/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/analizator-zrodla-wzorcow-pozarowych/": {
+      "hash": "854034dfa6a84e15144375885e54ec439d5c7d68cde0c548d2f4e453f3541200",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/analizator-zrodla-wzorcow-pozarowych/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/estymator-wieku-zebow-szkieletu-trzeciego-trzonowca/": {
+      "hash": "592d0f0e066289e45b6b308ff8731ed2e164bc4c7f07ded43cc41a7e83526374",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/estymator-wieku-zebow-szkieletu-trzeciego-trzonowca/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/forensyczny-analizator-metadanych-i-autentycznosci-obrazu/": {
+      "hash": "2fd5d8f9ab0f5576ce480351defb313daca6eec052dda7db3a540fd5935b046d",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/forensyczny-analizator-metadanych-i-autentycznosci-obrazu/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/forensyczny-symulator-chromatografii-cienkowarstwowej-tlc-atramentu/": {
+      "hash": "c311633be712b1bb42170dab026d8d4852fb956caa88480eaa50e0e6d896d820",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/forensyczny-symulator-chromatografii-cienkowarstwowej-tlc-atramentu/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/identyfikator-minucji-linii-papilarnych/": {
+      "hash": "fd10fb4471bad5a5d68e103e364495a15812fd0b8d75ce137b0a95791d2fab6d",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/identyfikator-minucji-linii-papilarnych/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/": {
+      "hash": "ec479f20c07297ae0b3bc9748ccd09de54c1f2dfb3bf37fb4b4203100b082f8d",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/kalkulator-alkoholu-widmarka/": {
+      "hash": "5bb4c18f21d44d1cbae34dee563e9db6d4f55365d3b3112d6af0d4a36caada6c",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/kalkulator-alkoholu-widmarka/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/kalkulator-czasu-zgonu-algor-mortis/": {
+      "hash": "6bd048dfdc45d38bd7cef647a1260479b2ddfbc414e8539c32ae2216c63d2aaa",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/kalkulator-czasu-zgonu-algor-mortis/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/kalkulator-odleglosci-strzalu-rozrzut-gsr/": {
+      "hash": "f09ac6cd57cf9a3f8cec068f9b758b591c259dd8ade1c7de86e4230f16ade398",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/kalkulator-odleglosci-strzalu-rozrzut-gsr/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/kalkulator-szacowania-wzrostu-trotter-gleser-antropologia-sadowa/": {
+      "hash": "4fd096bb0d268639f684231ad420fa0d134c73055783bfd34429520b5a0d4f5c",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/kalkulator-szacowania-wzrostu-trotter-gleser-antropologia-sadowa/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/laboratorium-prawdopodobienstwa-zgodnosci-profilu-dna/": {
+      "hash": "b57153209a0b28d0e1cf3b6a380820ea8ec0674e75e5f9474da06a6c1da0f74e",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/laboratorium-prawdopodobienstwa-zgodnosci-profilu-dna/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/mikroskop-porownawczy-wlokien-kryminalistycznych/": {
+      "hash": "d415659706f723b3c9b22a0da323fd292531b5e2ca70b3a9fdbbdad869f926fc",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/mikroskop-porownawczy-wlokien-kryminalistycznych/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/porownywarka-strychow-sladow-narzedzi-kryminalistyka/": {
+      "hash": "d49f54d9043026711fefe3bea3c137714d326ff412592fa475363989d4010c42",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/porownywarka-strychow-sladow-narzedzi-kryminalistyka/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/symulator-linii-beckego-wspolczynnika-zalamania-szkla/": {
+      "hash": "44034479b54a350e71d7440f2f201b01e5a79d144ec9bfbfe8726dba577e44d8",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/symulator-linii-beckego-wspolczynnika-zalamania-szkla/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/symulator-mikrokrystalicznych-testow-narkotykowych/": {
+      "hash": "a2ff4ace3cc40923d38a6dd573938a49d50d0914286fba31dffedaff88868e40",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/symulator-mikrokrystalicznych-testow-narkotykowych/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/symulator-wstepnego-badania-krwi-medycyna-sadowa/": {
+      "hash": "9a9ab4155310e14a8ec97d61a16c5d653e3f5260a88b02ad36499d45a201e071",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/symulator-wstepnego-badania-krwi-medycyna-sadowa/"
+    },
+    "https://www.gamebob.dev/pl/narzedzia/kategorie/kryminalistyka/wyznacznik-plci-biologicznej-morfologia-czaszki-miednicy-antropologia-sadowa/": {
+      "hash": "93d125b5c910423b892176b5f9e48c6b19ddd283216c9ba538465d5b703c23ba",
+      "route": "/pl/narzedzia/kategorie/kryminalistyka/wyznacznik-plci-biologicznej-morfologia-czaszki-miednicy-antropologia-sadowa/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/analisador-espectrograma-voz-online/": {
+      "hash": "bec767eed407681ce31120cf91507fea2becf383687ab042189cd550fe953a5e",
+      "route": "/pt/utilidades/categorias/ciencia-forense/analisador-espectrograma-voz-online/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/analisador-forense-metadados-autenticidade-imagens/": {
+      "hash": "eed26ec7b83a083fb83c54b7d448b91d991bf6e11bb96b7e136fa34f44030795",
+      "route": "/pt/utilidades/categorias/ciencia-forense/analisador-forense-metadados-autenticidade-imagens/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/analisador-origem-padroes-incendio/": {
+      "hash": "eed18fc71c0d9a70e6451c089c6035e015ff6a1389efc07ce1ac03d0f2a3dfb8",
+      "route": "/pt/utilidades/categorias/ciencia-forense/analisador-origem-padroes-incendio/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/calculadora-dispersao-residuos-disparo-gsr/": {
+      "hash": "0bcc4cafe19c9cb413b182ba9d9d1174f8b22934bc28fedd5dbcc7c5687fbd26",
+      "route": "/pt/utilidades/categorias/ciencia-forense/calculadora-dispersao-residuos-disparo-gsr/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/calculadora-hora-da-morte-algor-mortis/": {
+      "hash": "d5cacff4979e2f116d4ec084100e8665a313a0f3aab6e475ac6086b150ba9099",
+      "route": "/pt/utilidades/categorias/ciencia-forense/calculadora-hora-da-morte-algor-mortis/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/comparador-estrias-marcas-ferramentas-forense/": {
+      "hash": "1ef7b086ea59c50730350057845e489ee4933e33bcd590436a0783404ef089dc",
+      "route": "/pt/utilidades/categorias/ciencia-forense/comparador-estrias-marcas-ferramentas-forense/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/determinacao-sexo-biologico-morfologia-cranio-pelve-antropologia-forense/": {
+      "hash": "40fef7fdb6db08038e9a804bbdea43cc0ebc1c8a932dfa2928e361c4e1eada84",
+      "route": "/pt/utilidades/categorias/ciencia-forense/determinacao-sexo-biologico-morfologia-cranio-pelve-antropologia-forense/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/estimador-de-estatura-forense-restos-esqueleticos-calculadora-trotter-gleser/": {
+      "hash": "8dddc347b0c37f652aec03ecdbe91d34c06a5c499fa70e4fb31ace4077968e24",
+      "route": "/pt/utilidades/categorias/ciencia-forense/estimador-de-estatura-forense-restos-esqueleticos-calculadora-trotter-gleser/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/estimador-idade-dentaria-esqueletica-terceiro-molar/": {
+      "hash": "b136df0770498ea6efbb33f7b50da4fa0288d47e9d80b5c55a3de12862f63023",
+      "route": "/pt/utilidades/categorias/ciencia-forense/estimador-idade-dentaria-esqueletica-terceiro-molar/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/identificador-minucias-impressao-digital/": {
+      "hash": "780f2d41bc184567ad6276b04b476ec062890ffee2944b8190cfcd51f66fc7c9",
+      "route": "/pt/utilidades/categorias/ciencia-forense/identificador-minucias-impressao-digital/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/": {
+      "hash": "cedb01df8950a14821ed1261697b38c478671fbfa715360215feff3ae5da172e",
+      "route": "/pt/utilidades/categorias/ciencia-forense/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/laboratorio-probabilidade-correspondencia-perfil-dna/": {
+      "hash": "2c53159c1e0f644da6baedfc444ee864cc2e6a5f79bc43a1a624ee1a9fe8e6ce",
+      "route": "/pt/utilidades/categorias/ciencia-forense/laboratorio-probabilidade-correspondencia-perfil-dna/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/microscopio-comparacao-fibras-forense/": {
+      "hash": "fb31efff3911ef8cdff9d7fbe1402ef34cd92fefdc3a9cc34f74997a24f80e48",
+      "route": "/pt/utilidades/categorias/ciencia-forense/microscopio-comparacao-fibras-forense/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/simulador-alcoolemia-widmark/": {
+      "hash": "10999737440491a678d2f2b299447bc7f41db374f61884184f715755b5bc48d9",
+      "route": "/pt/utilidades/categorias/ciencia-forense/simulador-alcoolemia-widmark/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/simulador-forense-cromatografia-camada-delgada-tlc-tintas/": {
+      "hash": "dcb042c851c796a92caed7169c57569c2206b5462fb5433aacf112abb69b657a",
+      "route": "/pt/utilidades/categorias/ciencia-forense/simulador-forense-cromatografia-camada-delgada-tlc-tintas/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/simulador-linha-becke-indice-refracao-vidro/": {
+      "hash": "d8549f9da9e3b2be0cade2e89bcaff5bc1ba8fb89c74388b5edbfcc0fd16b86d",
+      "route": "/pt/utilidades/categorias/ciencia-forense/simulador-linha-becke-indice-refracao-vidro/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/simulador-origem-padroes-manchas-sangue/": {
+      "hash": "7fed07be91b83ba6e9f66fbfd6a62b022b4240200a5573d35ea38e0aa26169b9",
+      "route": "/pt/utilidades/categorias/ciencia-forense/simulador-origem-padroes-manchas-sangue/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/simulador-teste-microcristalino-drogas/": {
+      "hash": "b51d8349fac553c5a1e1f7a213f01dc4eb4b3e1732a35a48a141cf0733b96ece",
+      "route": "/pt/utilidades/categorias/ciencia-forense/simulador-teste-microcristalino-drogas/"
+    },
+    "https://www.gamebob.dev/pt/utilidades/categorias/ciencia-forense/simulador-teste-presuntivo-sangue-forense/": {
+      "hash": "2a3d9e6a214ce22e8cb2be087c1b352aaff953b647b4d0d3b36a50d8060c2c53",
+      "route": "/pt/utilidades/categorias/ciencia-forense/simulador-teste-presuntivo-sangue-forense/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/analizator-ochaga-pozhara-po-termicheskim-uzoram/": {
+      "hash": "465649c0038867dbffa0b08ee1213d37c509cbc4aec38a44046b8afe1a9bde0f",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/analizator-ochaga-pozhara-po-termicheskim-uzoram/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/analizator-spektrogrammy-golosa-onlajn/": {
+      "hash": "ee3113bcd4a0701a837e06d33aa669fcf99d2dc4b1357d5c58d634ed8b832a54",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/analizator-spektrogrammy-golosa-onlajn/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/forenzicheskiy-analizator-metadannyh-i-podlinnosti-izobrazheniy/": {
+      "hash": "2fe6ca72a1b61070feb8c1423b5dec1657c388a6c8ea90c50c424abf5ed8282b",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/forenzicheskiy-analizator-metadannyh-i-podlinnosti-izobrazheniy/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/": {
+      "hash": "228b83ae235a132b0d3462b8a3f0e6df0ce6fcc6ab3f5e72f9601de1b975f041",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/kalkulyator-alkogolya-vidmarka/": {
+      "hash": "6875dc722dbbf1f166576f32d9728830e8cce7e32c18874b4896c7769cff574a",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/kalkulyator-alkogolya-vidmarka/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/kalkulyator-rasstoyaniya-vystrela-raspredelenie-gsr/": {
+      "hash": "cc519e9a6878bec080cbf800a41a2480ec3b8d9c47f732f7862a3e99b3ca0704",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/kalkulyator-rasstoyaniya-vystrela-raspredelenie-gsr/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/kalkulyator-vremeni-smerti-algor-mortis/": {
+      "hash": "2cec33f83da7250038d55d711a95d12649e7827cf9ea13c9faedb1527a67cac8",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/kalkulyator-vremeni-smerti-algor-mortis/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/kriminalisticheskiy-simulyator-khromatografii-chernil-tskh/": {
+      "hash": "c9d743f111f4bda3277b80d7eec48e6609c8b0f1fde190f9514ad05562d5d5b5",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/kriminalisticheskiy-simulyator-khromatografii-chernil-tskh/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/kriminalisticheskiy-sravnitelny-mikroskop-volokon/": {
+      "hash": "5215e3443e480add4e2d503394c9d9042b06050c997bcc34e61582d81b6d80df",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/kriminalisticheskiy-sravnitelny-mikroskop-volokon/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/laboratoriya-veroyatnosti-sovpadeniya-dnk-profilya/": {
+      "hash": "2c6c9ced0fd4d376818b9403a1c073a4cf9a01caa9d1fabecd8b017eda46ac08",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/laboratoriya-veroyatnosti-sovpadeniya-dnk-profilya/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/ocenka-rosta-cheloveka-po-kostyam-kalkulyator-trotter-gleser/": {
+      "hash": "457ee670d33bb219ffd4656ab537e3e2beefb78448747313d427fb2001ab109d",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/ocenka-rosta-cheloveka-po-kostyam-kalkulyator-trotter-gleser/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/ocenka-vozrasta-po-zubam-skeletu-i-tretemu-molyaru/": {
+      "hash": "c62884f8a205fc87f8dfbcccf8b4db97d5df8b447cb87ab5c2e02d204f7e7399",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/ocenka-vozrasta-po-zubam-skeletu-i-tretemu-molyaru/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/opredelenie-biologicheskogo-pola-sudebno-antropologicheskiy-bayesovskiy-analiz/": {
+      "hash": "ea54ca8c4b300623f121d698c191ad58e6196ac27fec229c909766f3bc787815",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/opredelenie-biologicheskogo-pola-sudebno-antropologicheskiy-bayesovskiy-analiz/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/otpechatki-paltsev-minutsii-identifikator/": {
+      "hash": "bed77784ce4a5475874ce5befa7ac53a04065a839fc263cc2b34b7f11f01ce46",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/otpechatki-paltsev-minutsii-identifikator/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/simulyator-istochnika-bryzg-krovi/": {
+      "hash": "456325b9394e1d154251b21d7596386c84a6d73c09eb194d708f0fb252da59c5",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/simulyator-istochnika-bryzg-krovi/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/simulyator-linii-bekke-pokazatelya-prelomleniya-stekla/": {
+      "hash": "2ffeb45fb6402a90a24f3f148ab543c738fb3d2415f9b310310208eb4e3c7ad8",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/simulyator-linii-bekke-pokazatelya-prelomleniya-stekla/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/simulyator-mikrokristallicheskih-testov-na-narkotiki/": {
+      "hash": "38842b0db209e1beb97f8dd2696e02eecc2ba59acdf484acf134f230d273df17",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/simulyator-mikrokristallicheskih-testov-na-narkotiki/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/simulyator-predvaritelnogo-testa-na-krov-kriminalistika/": {
+      "hash": "fd5aa87b036cea36f27af07a388d0ad2a3b127aaa44cfcc69d88d0a054dd8b9c",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/simulyator-predvaritelnogo-testa-na-krov-kriminalistika/"
+    },
+    "https://www.gamebob.dev/ru/instrumenty/kategorii/sudebnaya-ekspertiza/sravnenie-estriy-sledov-instrumentov-kriminalistika/": {
+      "hash": "30fd69a0d24f172c44890b9feec66d084c5d4fa6467915292b2fca082e214397",
+      "route": "/ru/instrumenty/kategorii/sudebnaya-ekspertiza/sravnenie-estriy-sledov-instrumentov-kriminalistika/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/adliell-fiberjamforelse-mikroskop/": {
+      "hash": "eb54aa113b2f659a72a545e41d0380fa029c445651ffad370db49ec6db87399a",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/adliell-fiberjamforelse-mikroskop/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/aldersskattare-tander-skelett-visdomstand/": {
+      "hash": "ba4e536cc64a75eb109a63ae207e31c3d9be5ecfc566ab9ceca632e01826b328",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/aldersskattare-tander-skelett-visdomstand/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/becke-linje-glas-brytningsindex-simulator/": {
+      "hash": "5acba6a2baf2c93a4d64def3af76d816c0dc3157bed813b81117773a0a1e69b8",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/becke-linje-glas-brytningsindex-simulator/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/brandmonster-ursprungsanalysator/": {
+      "hash": "c402b0a96a269a58328dbfb1bb81989ffcb8840f660896b6a946503ab6b6bcaa",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/brandmonster-ursprungsanalysator/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/dostid-kalkylator-algor-mortis/": {
+      "hash": "cb05037ecff9b1f870feb1744d9b8b2e176147abfcdf959bce29e5969606c6f1",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/dostid-kalkylator-algor-mortis/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/fingeravtryck-minuter-identifierare/": {
+      "hash": "aba8edaf1d300ee4e3429ae2e665077b763f44d10062112d0863f2842aebf301",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/fingeravtryck-minuter-identifierare/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/forensisk-bildmetadata-och-autenticitetsanalysator/": {
+      "hash": "5287e4173fc1f1ad6021d6838933b0be8fef2f2aae1cf3d4ace2fa5bea2c05bd",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/forensisk-bildmetadata-och-autenticitetsanalysator/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/forensisk-biologisk-konsbestamning-morfologi-skalle-baechen-bayesiansk-modell/": {
+      "hash": "93530c46cb8e992fa93680317f978decb4552d219b1ea775ae64bbf9e34c7984",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/forensisk-biologisk-konsbestamning-morfologi-skalle-baechen-bayesiansk-modell/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/forensisk-kroppslangdsbedamning-trotter-gleser-kalkylator/": {
+      "hash": "72b03ccc85f69eb0a8fec2ba3cb96918144233c633166ead945971c4366329c6",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/forensisk-kroppslangdsbedamning-trotter-gleser-kalkylator/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/forensisk-mikrokristallin-drogtest-simulator/": {
+      "hash": "364f005af5140914da0421a9523bfb723e8a36aaa1c678d93b763ebdefac9ce8",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/forensisk-mikrokristallin-drogtest-simulator/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/forensisk-presumtivt-blodtest-simulator/": {
+      "hash": "18b69793b2da0681d0dfdf69c72303cd0cc0b131d3a6ea97b0c631441ef7cc02",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/forensisk-presumtivt-blodtest-simulator/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/forensisk-tlc-kromatografisimulator-blaeck/": {
+      "hash": "9799dbb40fe5ef0b22d98da98e746219568d7bcbbc1e9660e9dd42f0a445cc9e",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/forensisk-tlc-kromatografisimulator-blaeck/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/forensisk-verktygsspar-reffling-jamforare/": {
+      "hash": "6b527c3d1bdeed56e57576f0e4c442d953cc03884f3fe838f9c53911fbe91d34",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/forensisk-verktygsspar-reffling-jamforare/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/": {
+      "hash": "56e6615fc18630059a5722db488db54bb0e321481b1b0b92f3a61314c46701fc",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/kalkylator-alkoholkoncentration-widmark/": {
+      "hash": "298d337257870172ed1f29286a3e2f6ac157dc05e5379b1b149b32041e00fbb9",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/kalkylator-alkoholkoncentration-widmark/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/kalkylator-skjutavstand-gsr-partikelspridning/": {
+      "hash": "ee7a0fa0224f915f9f0b72c75fa07010ffab5d00000c072dadba99ecd34ded49",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/kalkylator-skjutavstand-gsr-partikelspridning/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/laboratorium-sannolikhet-dna-profilmatchning/": {
+      "hash": "a0c48a6ff36bc093287194465e7d0aec08067eb5c775869bd865a1ad1b04a4b2",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/laboratorium-sannolikhet-dna-profilmatchning/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/rost-spektrogram-analysator-online/": {
+      "hash": "5066357f8171761e68bf7498aaefc8760264fc2b6600d11128f803144ef42cb9",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/rost-spektrogram-analysator-online/"
+    },
+    "https://www.gamebob.dev/sv/verktyg/kategorier/kriminalteknik/simulator-ursprung-blodstanksmuster/": {
+      "hash": "ed3e7636fa8e1c2bc283c380d282c7c59616c427ec708cc3cc7e248cd57a0492",
+      "route": "/sv/verktyg/kategorier/kriminalteknik/simulator-ursprung-blodstanksmuster/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/adli-alet-izi-yiv-karsilastirici/": {
+      "hash": "ec5995f4f42ff6d521b68f2e7025406e41ff9b1ac4a23f92f7122821d823f68e",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/adli-alet-izi-yiv-karsilastirici/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/adli-antropoloji-biyolojik-cinsiyet-belirleme-kafatasi-pelvis-morfolojisi/": {
+      "hash": "f6c783b2579d8615761ee62b5dfeafb730223a3985aac68a9e45f9dc61c52dbe",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/adli-antropoloji-biyolojik-cinsiyet-belirleme-kafatasi-pelvis-morfolojisi/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/adli-boy-uzunlugu-tahmin-edici-trotter-gleser-hesaplayici/": {
+      "hash": "409428275882346e914ac158e46a8a4afb18c154a0f991f260463e14e9c3feb0",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/adli-boy-uzunlugu-tahmin-edici-trotter-gleser-hesaplayici/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/adli-cam-kirilma-indisi-becke-cizgisi-simulatoru/": {
+      "hash": "e7eb7d6e949c1e687284bee5fff547bd99067315a35d2f163673fc0ebde7a812",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/adli-cam-kirilma-indisi-becke-cizgisi-simulatoru/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/adli-goruntu-metadata-ve-ozgunluk-analizoru/": {
+      "hash": "5c6baf6e97b8382642f2c4d57c85001907eb55c56c3acc0b81bc25d9f27730ea",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/adli-goruntu-metadata-ve-ozgunluk-analizoru/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/adli-lif-karsilastirma-mikroskobu/": {
+      "hash": "b2dc282ddf7253def372a681a589b7f5aa5e69733a9ffb9e51723638ab84e5dc",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/adli-lif-karsilastirma-mikroskobu/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/adli-tlc-murekkep-kromatografisi-simulatoru/": {
+      "hash": "1150cc9a2f7bbebfb0b1961b8492f4f4fcb40d4de920462c0cfccfdcd050d5de",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/adli-tlc-murekkep-kromatografisi-simulatoru/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/ates-mesafesi-tayini-gsr-barut-artigi-hesaplama/": {
+      "hash": "f4ab2032d6b6a2cb3d3df214106cb1073a38089951dfac4c5425b52ce70995af",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/ates-mesafesi-tayini-gsr-barut-artigi-hesaplama/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/dis-iskelet-ucuncu-azi-yasi-tahmin-edici/": {
+      "hash": "4ff3b508ede75eb1f838970f0e3fa84446904e4d0d946e8ad65ee03f8f7443b1",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/dis-iskelet-ucuncu-azi-yasi-tahmin-edici/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/dna-profili-eslesme-olasiligi-laboratuvari/": {
+      "hash": "ef0267a3eb4fca6f351baab74ca705f8921309ba4051bd1c370226d367fefd4b",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/dna-profili-eslesme-olasiligi-laboratuvari/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/forensik-varsayimsal-kan-testi-simulasyonu/": {
+      "hash": "3ec0679a1c0fee3dbdf6510fa38863c9fe26355eef09e54b807774ccb932ec28",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/forensik-varsayimsal-kan-testi-simulasyonu/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/": {
+      "hash": "862a7b8f209aa1a136d41a26e7bbbe73d2bb2dfc32f0399f945f3b5495974175",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/kan-lekesi-modeli-koken-analizoru/": {
+      "hash": "3f480dd04c639aeba7f816a0365fbbbe77398b608d29be3310859a3179331765",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/kan-lekesi-modeli-koken-analizoru/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/mikrokristal-uyusturucu-testi-simulatoru/": {
+      "hash": "3a547020d41a58c0ec876b090219459e722b25530b6146ca8ad19f9a4c28ec2d",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/mikrokristal-uyusturucu-testi-simulatoru/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/olum-zamani-hesaplama-algor-mortis/": {
+      "hash": "6d3e655e1ceb6d3f61497fc6128acb0da1172f1d5dde1bc576b4969ad21fdc66",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/olum-zamani-hesaplama-algor-mortis/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/parmak-izi-minutiae-tanimlayici/": {
+      "hash": "5682b85357a4b41057d1e621fd395ecc1f8349aa865545292e400e59f5d5afff",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/parmak-izi-minutiae-tanimlayici/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/ses-spektrogram-analizoru-online/": {
+      "hash": "bdec13afe3800f01227b8697c543b0f6a707802bdb7825eca2a5f692b73153b1",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/ses-spektrogram-analizoru-online/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/widmark-kan-alkolu-hesaplayici/": {
+      "hash": "b9c579f02251ffe59ae08428bf020a0aba77622020e97698fb75b2e1a81c99c6",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/widmark-kan-alkolu-hesaplayici/"
+    },
+    "https://www.gamebob.dev/tr/araclar/kategoriler/adli-bilimler/yangin-izi-koken-analizoru/": {
+      "hash": "5b666f32007934e8f569784ac47c9c69d5d796103f29ab34b7a88b8de19de62f",
+      "route": "/tr/araclar/kategoriler/adli-bilimler/yangin-izi-koken-analizoru/"
+    },
+    "https://www.jjlmoya.es/utilidades/analizador-espectrograma-voz-online/": {
+      "hash": "eaa621e9974f95880b2b9745c39e2298d13b0550d43e9e10f8d5bdca67ef0e05",
+      "route": "/utilidades/analizador-espectrograma-voz-online/"
+    },
+    "https://www.jjlmoya.es/utilidades/analizador-forense-metadatos-autenticidad-imagenes/": {
+      "hash": "776d6548ec6fdd821bd703183d0eec58f3e5374d7961f39c4247f903d5569771",
+      "route": "/utilidades/analizador-forense-metadatos-autenticidad-imagenes/"
+    },
+    "https://www.jjlmoya.es/utilidades/analizador-origen-patrones-incendio/": {
+      "hash": "4755b6b7ae1dd1dfdd59e2ceaf924748a099a4035acd6f783012a5563899df45",
+      "route": "/utilidades/analizador-origen-patrones-incendio/"
+    },
+    "https://www.jjlmoya.es/utilidades/analizador-origen-patrones-manchas-sangre/": {
+      "hash": "ce1357041d96dc80da236a6a01646a291bc7fc22675cf292637f73ab52df8e32",
+      "route": "/utilidades/analizador-origen-patrones-manchas-sangre/"
+    },
+    "https://www.jjlmoya.es/utilidades/calculador-alcoholemia-widmark-espanol/": {
+      "hash": "3d13ec120dd8c5e837fa606a0a95ab66de893060137784e5e600484c96865c33",
+      "route": "/utilidades/calculador-alcoholemia-widmark-espanol/"
+    },
+    "https://www.jjlmoya.es/utilidades/calculadora-dispersion-residuos-disparo-gsr/": {
+      "hash": "834f328b605834e42b85c3bbe60caeca88e683f14e3cbca54f9a4069ed1f8b53",
+      "route": "/utilidades/calculadora-dispersion-residuos-disparo-gsr/"
+    },
+    "https://www.jjlmoya.es/utilidades/calculadora-hora-muerte-algor-mortis/": {
+      "hash": "e345a6c7bf22ee263e7ad3adee4b1073707dbc16b51c5ee7bc3b704136c95a6c",
+      "route": "/utilidades/calculadora-hora-muerte-algor-mortis/"
+    },
+    "https://www.jjlmoya.es/utilidades/categorias/ciencia-forense/": {
+      "hash": "a575c6f6f85bd4d3009417c4b92e3e11fd833fd2bbfa4b8b971ab05b6e925e92",
+      "route": "/utilidades/categorias/ciencia-forense/"
+    },
+    "https://www.jjlmoya.es/utilidades/comparador-estrias-marcas-herramienta-forense/": {
+      "hash": "cdc53c836eec2b092c203a4a9dbfddc1e77baeb5b90dc8d6da3e27e24bef913b",
+      "route": "/utilidades/comparador-estrias-marcas-herramienta-forense/"
+    },
+    "https://www.jjlmoya.es/utilidades/determinacion-biologica-sexo-restos-oseos-morfologia-craneal-pelvica/": {
+      "hash": "fefbaaba8ec08ef740779f5737267192a1c87cbd69a08c195f8c991ee000c49e",
+      "route": "/utilidades/determinacion-biologica-sexo-restos-oseos-morfologia-craneal-pelvica/"
+    },
+    "https://www.jjlmoya.es/utilidades/estimador-de-estatura-forense-restos-oseos-calculadora-trotter-gleser/": {
+      "hash": "df8e25472544b63f17781aa7512e72d00a246681b640427b6224df7ebf0c2f3c",
+      "route": "/utilidades/estimador-de-estatura-forense-restos-oseos-calculadora-trotter-gleser/"
+    },
+    "https://www.jjlmoya.es/utilidades/estimador-edad-dental-esqueletica-tercer-molar/": {
+      "hash": "062a97048aa18e7aa89359471a4ccd30d51f570e2589201c13cf40ceb58d0203",
+      "route": "/utilidades/estimador-edad-dental-esqueletica-tercer-molar/"
+    },
+    "https://www.jjlmoya.es/utilidades/identificador-minucias-huellas-dactilares/": {
+      "hash": "245e64970c460f722f74edd4dbcc63a13a253f227e2ea065a77c27d1602b5315",
+      "route": "/utilidades/identificador-minucias-huellas-dactilares/"
+    },
+    "https://www.jjlmoya.es/utilidades/laboratorio-probabilidad-coincidencia-perfil-adn/": {
+      "hash": "c882abb837f336112aae93435c52821cd2d4d1c4c0e0a23a76a11e2a84c52bfd",
+      "route": "/utilidades/laboratorio-probabilidad-coincidencia-perfil-adn/"
+    },
+    "https://www.jjlmoya.es/utilidades/microscopio-comparacion-fibras-forense/": {
+      "hash": "b1430d1388b574ffac311ec4792e920279b61a152b5c74f2c0624ff2662e9e4c",
+      "route": "/utilidades/microscopio-comparacion-fibras-forense/"
+    },
+    "https://www.jjlmoya.es/utilidades/simulador-analisis-drogas-microcristalinas/": {
+      "hash": "77572e2e055d2d8665c7c3dbca952003fb396c1d9c9db4f766688fd9f3ab6023",
+      "route": "/utilidades/simulador-analisis-drogas-microcristalinas/"
+    },
+    "https://www.jjlmoya.es/utilidades/simulador-cromatografia-capa-fina-tlc-tintas/": {
+      "hash": "dbb1e05397eb9a143098dcc6eb8a55eb5445e8522f1adc0f38457d44c16188bc",
+      "route": "/utilidades/simulador-cromatografia-capa-fina-tlc-tintas/"
+    },
+    "https://www.jjlmoya.es/utilidades/simulador-linea-becke-indice-refraccion-vidrio/": {
+      "hash": "8b48feb59bf60490f174f9742fae4adf5564bac400727697dc0bf2dea191b8db",
+      "route": "/utilidades/simulador-linea-becke-indice-refraccion-vidrio/"
+    },
+    "https://www.jjlmoya.es/utilidades/simulador-prueba-presuntiva-sangre-forense/": {
+      "hash": "ddd2e73c5b852c00935c06752d66df584574da689641aa8c2553f80c954b3a14",
+      "route": "/utilidades/simulador-prueba-presuntiva-sangre-forense/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/bloodstain-pattern-origin-analyzer/": {
+      "hash": "a47a9dbdb990eef0063457581793d010e9bd5bb72619171d8b71a0b85697a84b",
+      "route": "/zh/utilities/categories/forensic-science/bloodstain-pattern-origin-analyzer/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/dental-skeletal-third-molar-age-estimator/": {
+      "hash": "dba89c7fed7ea44ed23a6908ef5f941162323490a7f10399a6dc3e3a118e098c",
+      "route": "/zh/utilities/categories/forensic-science/dental-skeletal-third-molar-age-estimator/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/dna-profile-match-probability-lab/": {
+      "hash": "5d166861c6373692bf303d688e70ca8497e5d879dc53c8abab0ee17e4fc161cc",
+      "route": "/zh/utilities/categories/forensic-science/dna-profile-match-probability-lab/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/fire-pattern-origin-analyzer/": {
+      "hash": "e18c396e83af817ed3f40984925ddf2109c2998082e20e08d47e4ead7a81c0a9",
+      "route": "/zh/utilities/categories/forensic-science/fire-pattern-origin-analyzer/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/forensic-anthropology-sex-determination-cranial-pelvic-morphology-bayesian/": {
+      "hash": "23a296aea44d069007a8790f69b86df5b26e757dfe22d4eb32abaab824f63db4",
+      "route": "/zh/utilities/categories/forensic-science/forensic-anthropology-sex-determination-cranial-pelvic-morphology-bayesian/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/forensic-fiber-comparison-microscope/": {
+      "hash": "f2bf14282d8aa4901d1196a21657ed72abba0139d28e0165cc92748a703a6a19",
+      "route": "/zh/utilities/categories/forensic-science/forensic-fiber-comparison-microscope/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/forensic-fingerprint-minutiae-identifier/": {
+      "hash": "70c48e4ca992b706c8cf2e957a27179ee0c02c9df465bb2f551954957a756270",
+      "route": "/zh/utilities/categories/forensic-science/forensic-fingerprint-minutiae-identifier/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/forensic-glass-becke-line-simulator/": {
+      "hash": "7916f74fc2557622443b00b953de304e942ff84a88beb2342c80a06ae38e1809",
+      "route": "/zh/utilities/categories/forensic-science/forensic-glass-becke-line-simulator/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/forensic-image-metadata-authenticity-analyzer/": {
+      "hash": "328e3f10d08dac67f36360840147d4911aa7afea5be7df4cf558717483112a07",
+      "route": "/zh/utilities/categories/forensic-science/forensic-image-metadata-authenticity-analyzer/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/forensic-microcrystal-drug-simulator/": {
+      "hash": "8788204808d5829fa9c92da4de572452f2cea15e6b420ece9561d5bde72dfc54",
+      "route": "/zh/utilities/categories/forensic-science/forensic-microcrystal-drug-simulator/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/forensic-presumptive-blood-testing-luminol-kastle-meyer-simulator/": {
+      "hash": "0f5ca43684f8879ce37060548e8be7b3b46c4813ac2c808979a1a534e66bbd7c",
+      "route": "/zh/utilities/categories/forensic-science/forensic-presumptive-blood-testing-luminol-kastle-meyer-simulator/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/forensic-stature-estimation-skeletal-remains-trotter-gleser-calculator/": {
+      "hash": "b6567fb3be32a5624e5ba3fbabf031294540ac3b6e704a56e1623162e91b8437",
+      "route": "/zh/utilities/categories/forensic-science/forensic-stature-estimation-skeletal-remains-trotter-gleser-calculator/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/forensic-tlc-ink-simulator/": {
+      "hash": "e41c945853d25ac7149e34a3808aaa14d54dea6ee8e3910cfc1a2cb709297d87",
+      "route": "/zh/utilities/categories/forensic-science/forensic-tlc-ink-simulator/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/forensic-toolmark-striation-matcher/": {
+      "hash": "063689f39a39588793bb086c2b5c9d93e2f3da54b562fa4b3ff67a7870b904bd",
+      "route": "/zh/utilities/categories/forensic-science/forensic-toolmark-striation-matcher/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/gsr-dispersion-calculator/": {
+      "hash": "e6b7ca1ee549082da0293f859661fd8d734efe6025f1df8c48a37f93979856f5",
+      "route": "/zh/utilities/categories/forensic-science/gsr-dispersion-calculator/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/": {
+      "hash": "708a7a81121e3c0a7877bce68ea4e0b723d51a6c2565585a2303c85c39928cca",
+      "route": "/zh/utilities/categories/forensic-science/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/time-of-death-algor-mortis-calculator/": {
+      "hash": "07936dd13f993d674d0260f06979d35f48f5b01f3b8d5f2741c10f3e1d727269",
+      "route": "/zh/utilities/categories/forensic-science/time-of-death-algor-mortis-calculator/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/voice-spectrogram-analyzer-online/": {
+      "hash": "e22580b898f97cd1103d235159a142fd0e5450a095276c7baa397295f696efc8",
+      "route": "/zh/utilities/categories/forensic-science/voice-spectrogram-analyzer-online/"
+    },
+    "https://www.gamebob.dev/zh/utilities/categories/forensic-science/widmark-blood-alcohol-simulator/": {
+      "hash": "6d4b2deed5c76a26b4dccabe590e8d842b1ef4264e28482eef26b9534f7d0fd0",
+      "route": "/zh/utilities/categories/forensic-science/widmark-blood-alcohol-simulator/"
+    }
+  }
+}
