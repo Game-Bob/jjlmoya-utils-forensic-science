@@ -32,6 +32,8 @@ export { timeOfDeathAlgorMortisCalculator } from './tool/time-of-death-algor-mor
 export type { TimeOfDeathAlgorMortisUI, TimeOfDeathAlgorMortisLocaleContent } from './tool/time-of-death-algor-mortis-calculator/entry';
 export { voiceSpectrogramAnalyzer } from './tool/voice-spectrogram-analyzer/entry';
 export type { VoiceSpectrogramUI, VoiceSpectrogramLocaleContent } from './tool/voice-spectrogram-analyzer/entry';
+export { forensicEvidenceScaleCalculator } from './tool/forensic-evidence-scale-calculator/entry';
+export type { ForensicEvidenceScaleUI, ForensicEvidenceScaleLocaleContent } from './tool/forensic-evidence-scale-calculator/entry';
 
 import { forensicAgeEstimator } from './tool/forensic-age-estimator/entry';
 import { widmarkAlcoholSimulator } from './tool/widmark-alcohol-simulator/entry';
@@ -51,6 +53,7 @@ import { forensicToolmarkStriationMatcher } from './tool/forensic-toolmark-stria
 import { timeOfDeathAlgorMortisCalculator } from './tool/time-of-death-algor-mortis-calculator/entry';
 import { voiceSpectrogramAnalyzer } from './tool/voice-spectrogram-analyzer/entry';
 import { dnaProfileMatchProbabilityLab } from './tool/dna-profile-match-probability-lab/entry';
+import { forensicEvidenceScaleCalculator } from './tool/forensic-evidence-scale-calculator/entry';
 
 export const ALL_ENTRIES = [
   forensicAgeEstimator,
@@ -70,8 +73,6 @@ export const ALL_ENTRIES = [
   forensicToolmarkStriationMatcher,
   timeOfDeathAlgorMortisCalculator,
   voiceSpectrogramAnalyzer,
-  dnaProfileMatchProbabilityLab
+  dnaProfileMatchProbabilityLab,
+  forensicEvidenceScaleCalculator
 ];
-
-
-

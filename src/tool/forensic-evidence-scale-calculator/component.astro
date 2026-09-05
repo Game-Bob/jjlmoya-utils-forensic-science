@@ -1,0 +1,154 @@
+---
+import './forensic-evidence-scale-calculator.css';
+import { calculateEvidenceScale, formatMeasurement } from './logic';
+import type { ForensicEvidenceScaleUI } from './ui';
+
+interface Props {
+  ui: ForensicEvidenceScaleUI;
+}
+
+const { ui } = Astro.props;
+const initialInput = {
+  referenceRealSize: 25,
+  referencePixelLength: 200,
+  evidencePixelLength: 80,
+  uncertaintyPercent: 5,
+  unit: 'mm' as const,
+  samePlane: true,
+};
+const initialResult = calculateEvidenceScale(initialInput);
+---
+
+<div class="evidence-scale-tool" id="forensic-evidence-scale-calculator" data-ready="true">
+  <section class="evidence-scale-scene" data-scene data-warning="false" aria-label={ui.sceneAria}>
+    <div class="evidence-scale-scene-head">
+      <div>
+        <span class="evidence-scale-kicker">{ui.sceneKicker}</span>
+        <h2>{ui.sceneTitle}</h2>
+      </div>
+      <span class="evidence-scale-scene-note">{ui.sceneNote}</span>
+    </div>
+
+    <div class="evidence-scale-illustration">
+      <svg viewBox="0 0 640 410" role="img" aria-label={ui.sceneAria}>
+        <defs>
+          <linearGradient id="evidence-surface" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="var(--evidence-svg-surface-start)" />
+            <stop offset="1" stop-color="var(--evidence-svg-surface-end)" />
+          </linearGradient>
+          <filter id="evidence-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="8" />
+          </filter>
+        </defs>
+        <rect width="640" height="410" rx="22" fill="url(#evidence-surface)" />
+        <path d="M18 350 C138 305 218 366 327 330 S516 296 622 344" fill="none" stroke="var(--evidence-svg-wash)" stroke-width="26" opacity=".4" />
+        <path d="M40 54 L606 54 M40 92 L606 92 M40 130 L606 130 M40 168 L606 168 M40 206 L606 206 M40 244 L606 244 M40 54 L40 244 M134 54 L134 244 M228 54 L228 244 M322 54 L322 244 M416 54 L416 244 M510 54 L510 244 M604 54 L604 244" stroke="var(--evidence-svg-grid)" stroke-width="1" opacity=".4" />
+        <path d="M172 202 C176 157 207 122 253 119 C287 116 319 132 340 156 C369 119 417 116 446 140 C480 168 472 222 443 248 C406 281 356 269 327 249 C293 284 236 280 201 252 C183 238 172 221 172 202Z" fill="var(--evidence-svg-silhouette)" filter="url(#evidence-shadow)" />
+        <path d="M166 190 C172 145 207 111 250 111 C286 110 315 126 336 150 C366 114 414 111 444 135 C476 161 468 214 439 239 C405 269 357 259 325 239 C291 273 235 267 200 241 C179 225 165 208 166 190Z" fill="var(--evidence-svg-object)" stroke="var(--evidence-svg-object-border)" stroke-width="4" />
+        <path d="M191 184 C221 150 256 139 299 153 M204 220 C245 188 292 183 334 197 M350 167 C374 153 410 157 441 180 M355 221 C387 210 416 210 438 218" fill="none" stroke="var(--evidence-svg-object-mark)" stroke-width="8" opacity=".7" />
+        <path d="M218 143 L249 238 M272 128 L293 247 M382 130 L359 245 M423 148 L395 246" stroke="var(--evidence-svg-object-shadow)" stroke-width="5" opacity=".75" />
+        <line x1="220" y1="296" x2="390" y2="296" stroke="#db5d55" stroke-width="4" stroke-linecap="round" data-scene="evidence-line" />
+        <path d="M220 282 L220 310 M390 282 L390 310" stroke="#db5d55" stroke-width="4" />
+        <line x1="220" y1="318" x2="380" y2="318" stroke="#39c2d2" stroke-width="4" stroke-dasharray="10 9" stroke-linecap="round" data-scene="reference-line" />
+        <path d="M220 306 L220 330 M380 306 L380 330" stroke="#39c2d2" stroke-width="4" />
+        <rect x="62" y="342" width="516" height="34" rx="7" fill="var(--evidence-svg-ruler)" stroke="var(--evidence-svg-ruler-ink)" stroke-width="4" />
+        <path d="M78 342 V362 M90 342 V354 M102 342 V362 M114 342 V354 M126 342 V362 M138 342 V354 M150 342 V362 M162 342 V354 M174 342 V362 M186 342 V354 M198 342 V362 M210 342 V354 M222 342 V362 M234 342 V354 M246 342 V362 M258 342 V354 M270 342 V362 M282 342 V354 M294 342 V362 M306 342 V354 M318 342 V362 M330 342 V354 M342 342 V362 M354 342 V354 M366 342 V362 M378 342 V354 M390 342 V362 M402 342 V354 M414 342 V362 M426 342 V354 M438 342 V362 M450 342 V354 M462 342 V362 M474 342 V354 M486 342 V362 M498 342 V354 M510 342 V362 M522 342 V354 M534 342 V362 M546 342 V354 M558 342 V362" stroke="var(--evidence-svg-ruler-ink)" stroke-width="2" />
+      </svg>
+    </div>
+
+    <div class="evidence-scale-scene-rail" aria-label={ui.sceneTitle}>
+      <div class="evidence-scale-rail-item">
+        <span class="evidence-scale-rail-number">01</span>
+        <span class="evidence-scale-rail-dot legend-cyan"></span>
+        <span><strong>{ui.referenceLength}</strong><small>{ui.referencePixelLength}</small></span>
+      </div>
+      <div class="evidence-scale-rail-item">
+        <span class="evidence-scale-rail-number">02</span>
+        <span class="evidence-scale-rail-dot legend-coral"></span>
+        <span><strong>{ui.evidenceLength}</strong><small>{ui.evidencePixelLength}</small></span>
+      </div>
+      <div class="evidence-scale-rail-item">
+        <span class="evidence-scale-rail-number">03</span>
+        <span class="evidence-scale-rail-mark">≈</span>
+        <span><strong>{ui.results}</strong><small>{ui.interval}</small></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="evidence-scale-side">
+    <section class="evidence-scale-controls" aria-label={ui.controls}>
+      <div class="evidence-scale-control-head">
+        <span class="evidence-scale-kicker">{ui.controlKicker}</span>
+        <p>{ui.controlHelper}</p>
+      </div>
+
+      <form class="evidence-scale-form">
+        <div class="evidence-scale-field-grid">
+          <label class="evidence-scale-field">
+            <span>{ui.referenceRealSize}</span>
+            <input name="referenceRealSize" type="number" min="0.001" step="any" value={initialInput.referenceRealSize} inputmode="decimal" />
+            <small>{ui.referenceRealHelp}</small>
+          </label>
+          <label class="evidence-scale-field">
+            <span>{ui.referencePixelLength}</span>
+            <input name="referencePixelLength" type="number" min="0.001" step="any" value={initialInput.referencePixelLength} inputmode="decimal" />
+            <small>{ui.pixelHelp}</small>
+          </label>
+          <label class="evidence-scale-field">
+            <span>{ui.evidencePixelLength}</span>
+            <input name="evidencePixelLength" type="number" min="0.001" step="any" value={initialInput.evidencePixelLength} inputmode="decimal" />
+            <small>{ui.pixelHelp}</small>
+          </label>
+          <label class="evidence-scale-field">
+            <span>{ui.uncertaintyPercent}</span>
+            <input name="uncertaintyPercent" type="number" min="0" max="100" step="0.1" value={initialInput.uncertaintyPercent} inputmode="decimal" />
+            <small>{ui.uncertaintyHelp}</small>
+          </label>
+        </div>
+
+        <div class="evidence-scale-field evidence-scale-unit" data-unit-choice>
+          <span>{ui.unit}</span>
+          <input name="unit" type="hidden" value={initialInput.unit} />
+          <button class="evidence-scale-choice-trigger" type="button" data-unit-trigger aria-haspopup="listbox" aria-expanded="false" aria-label={ui.unit} aria-controls="evidence-scale-unit-menu">
+            <span data-unit-label>{ui.millimetres}</span>
+            <span class="evidence-scale-choice-chevron" aria-hidden="true">⌄</span>
+          </button>
+          <div class="evidence-scale-choice-menu" id="evidence-scale-unit-menu" data-unit-menu role="listbox" aria-label={ui.unit} hidden>
+            <button type="button" role="option" data-unit-option="mm" aria-selected="true">{ui.millimetres}</button>
+            <button type="button" role="option" data-unit-option="cm" aria-selected="false">{ui.centimetres}</button>
+            <button type="button" role="option" data-unit-option="in" aria-selected="false">{ui.inches}</button>
+          </div>
+        </div>
+
+        <label class="evidence-scale-plane">
+          <input name="samePlane" type="checkbox" checked={initialInput.samePlane} />
+          <span><strong>{ui.samePlane}</strong><small>{ui.samePlaneHelp}</small></span>
+        </label>
+      </form>
+      <p class="evidence-scale-disclaimer">{ui.disclaimer}</p>
+    </section>
+
+    <section class="evidence-scale-results" aria-label={ui.results}>
+      <div class="evidence-scale-result-lead">
+        <span class="evidence-scale-kicker">{ui.resultKicker}</span>
+        <output data-result="size" aria-live="polite">{formatMeasurement(initialResult.evidenceSize, initialResult.unit)}</output>
+        <p data-result="message">{ui.calculatedMessage}</p>
+      </div>
+      <div class="evidence-scale-readouts">
+        <div><span>{ui.interval}</span><strong data-result="interval">{formatMeasurement(initialResult.lowerBound, initialResult.unit)} - {formatMeasurement(initialResult.upperBound, initialResult.unit)}</strong></div>
+        <div><span>{ui.scaleFactor}</span><strong data-result="scale">{initialResult.scalePerPixel} mm/px</strong></div>
+        <div><span>{ui.margin}</span><strong data-result="margin">{initialInput.uncertaintyPercent}%</strong></div>
+      </div>
+      <div class="evidence-scale-trace"><span>{ui.traceLabel}</span><code data-result="formula">{initialResult.formula}</code></div>
+      <p class="evidence-scale-warning" data-result="warning" data-visible="false">{ui.samePlaneMessage}</p>
+    </section>
+  </div>
+</div>
+
+<script is:inline id="forensic-evidence-scale-ui" type="application/json" set:html={JSON.stringify(ui)}></script>
+<script>
+  import { initForensicEvidenceScale } from './view';
+  const root = document.getElementById('forensic-evidence-scale-calculator');
+  const uiElement = document.getElementById('forensic-evidence-scale-ui');
+  if (root) initForensicEvidenceScale(root, JSON.parse(uiElement?.textContent ?? '{}'));
+</script>

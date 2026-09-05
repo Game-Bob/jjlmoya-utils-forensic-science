@@ -18,6 +18,7 @@ import { FORENSIC_TOOLMARK_STRIATION_MATCHER_TOOL } from './tool/forensic-toolma
 import { TIME_OF_DEATH_ALGOR_MORTIS_CALCULATOR_TOOL } from './tool/time-of-death-algor-mortis-calculator/index';
 import { VOICE_SPECTROGRAM_ANALYZER_TOOL } from './tool/voice-spectrogram-analyzer/index';
 import { DNA_PROFILE_MATCH_PROBABILITY_LAB_TOOL } from './tool/dna-profile-match-probability-lab/index';
+import { FORENSIC_EVIDENCE_SCALE_CALCULATOR_TOOL } from './tool/forensic-evidence-scale-calculator/index';
 
 export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_AGE_ESTIMATOR_TOOL,
@@ -37,5 +38,6 @@ export const ALL_TOOLS: ToolDefinition[] = [
   FORENSIC_TOOLMARK_STRIATION_MATCHER_TOOL,
   TIME_OF_DEATH_ALGOR_MORTIS_CALCULATOR_TOOL,
   VOICE_SPECTROGRAM_ANALYZER_TOOL,
-  DNA_PROFILE_MATCH_PROBABILITY_LAB_TOOL
+  DNA_PROFILE_MATCH_PROBABILITY_LAB_TOOL,
+  FORENSIC_EVIDENCE_SCALE_CALCULATOR_TOOL
 ];

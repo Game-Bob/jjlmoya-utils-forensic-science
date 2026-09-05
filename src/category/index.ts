@@ -17,6 +17,7 @@ import { forensicToolmarkStriationMatcher } from '../tool/forensic-toolmark-stri
 import { timeOfDeathAlgorMortisCalculator } from '../tool/time-of-death-algor-mortis-calculator/entry';
 import { voiceSpectrogramAnalyzer } from '../tool/voice-spectrogram-analyzer/entry';
 import { dnaProfileMatchProbabilityLab } from '../tool/dna-profile-match-probability-lab/entry';
+import { forensicEvidenceScaleCalculator } from '../tool/forensic-evidence-scale-calculator/entry';
 
 export const forensicCategory: ScienceCategoryEntry = {
   icon: 'mdi:fingerprint',
@@ -38,10 +39,9 @@ export const forensicCategory: ScienceCategoryEntry = {
     forensicToolmarkStriationMatcher,
     timeOfDeathAlgorMortisCalculator,
     voiceSpectrogramAnalyzer,
-    dnaProfileMatchProbabilityLab
+    dnaProfileMatchProbabilityLab,
+    forensicEvidenceScaleCalculator
   ],
-
-
 
   i18n: {
     de: () => import('./i18n/de').then((m) => m.content),
